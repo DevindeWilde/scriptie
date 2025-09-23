@@ -10,29 +10,12 @@
 # Load necessary modules
 module load 2022
 module load Python/3.10.4-GCCcore-11.3.0
-# load CUDA module if needed, or specific GPU-enable module
-module load CUDA/XX.X         # <-- replace XX.X with correct CUDA version if needed
 
 # Activate virtual environment if you have one
 source $HOME/venvs/ednet_env/bin/activate   # or however your env is set up
 
-# Change directory to where EDNet is cloned
-cd $HOME/path/to/EDNet
-
-# Copy data to scratch (if large) to speed up
-# Assume you have dataset in $HOME/datasets/visdrone
-cp -r $HOME/datasets/visdrone $TMPDIR/visdrone
-
-# Optional: change visdrone-det.yaml data paths to point to scratch
-# Either modify a copy in scratch or set env var if EDNet supports
-
 # Run training
-python train.py --cfg configs/ednet-s.yaml \
-                --data data/visdrone-det.yaml \
-                --epochs 200 \
+python train.py --data MVRSD.yaml \
+                --epochs 50 \
                 --imgsz 640 \
                 --weights pretrained/small.pt   # or whatever variant you want
-
-# After training, copy results back
-mkdir -p $HOME/results/ednet_visdrone_run1
-cp -r $TMPDIR/runs/* $HOME/results/ednet_visdrone_run1
