@@ -18,5 +18,6 @@ pip install mmcv --use-pep517
 # Run training
 python $HOME/scriptie/train.py --data MVRSD.yaml \
                 --epochs 50 \
+                --cfg 'ednet-s.yaml' \
                 --imgsz 640 \
                 --weights pretrained/small.pt   # or whatever variant you want
