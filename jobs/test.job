@@ -1,21 +1,53 @@
 #!/bin/bash
 #SBATCH --job-name=ednet_train
-#SBATCH --partition=gpu        # or the GPU partition available
+#SBATCH --partition=gpu_a100        # or the GPU partition available
 #SBATCH --gres=gpu:1           # request 1 GPU (adjust if you want more)
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8      # or more, depending on data loading
 #SBATCH --mem=32G              # adjust to your needs
 #SBATCH --time=10:00:00        # hh:mm:ss – adjust based on how long training takes
-
+#SBATCH --output=logs/test.out
+#SBATCH --error=logs/test.err
+# Load necessary modules
+module purge
+module load 2025
+(ednet_env) (base) [ddwilde@int6 jobs]$ cat test.job
+#!/bin/bash
+#SBATCH --job-name=ednet_train
+#SBATCH --partition=gpu_a100        # or the GPU partition available
+#SBATCH --gres=gpu:1           # request 1 GPU (adjust if you want more)
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8      # or more, depending on data loading
+#SBATCH --mem=32G              # adjust to your needs
+#SBATCH --time=10:00:00        # hh:mm:ss – adjust based on how long training takes
+#SBATCH --output=logs/test.out
+#SBATCH --error=logs/test.err
 # Load necessary modules
 module load 2022
 module load Python/3.10.4-GCCcore-11.3.0
 
 # Activate virtual environment if you have one
-source $HOME/venvs/ednet_env/bin/activate   # or however your env is set up
+source $HOME/ednet_env/bin/activate   # or however your env is set up
+module load CUDA/12.8.0
+export CUDA_HOME=$CUDA_HOME
+export PATH=$CUDA_HOME/bin:$PATH
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 
 # Run training
-python train.py --data MVRSD.yaml \
+python $HOME/scriptie/train.py --data MVRSD.yaml \
+                --epochs 50 \
+                --imgsz 640 \
+                --weights pretrained/small.pt   # or whatever variant you want
+module load Python/3.10.4-GCCcore-11.3.0
+
+# Activate virtual environment if you have one
+source $HOME/ednet_env/bin/activate   # or however your env is set up
+export CUDA_HOME=$CUDA_HOME
+export PATH=$CUDA_HOME/bin:$PATH
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+
+# Run training
+python $HOME/scriptie/train.py --data MVRSD.yaml \
                 --epochs 50 \
                 --imgsz 640 \
                 --weights pretrained/small.pt   # or whatever variant you want
