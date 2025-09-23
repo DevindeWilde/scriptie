@@ -4,9 +4,10 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
-#SBATCH --partition=rome     # or gpu if you want to test GPU install
-#SBATCH --output=$HOME/logs/setup_%j.out
-#SBATCH --error=$HOME/logs/setup_%j.err
+#SBATCH --partition=gpu_a100     # or gpu if you want to test GPU install
+#SBATCH --gpus-per-node=1
+#SBATCH --output=logs/setup_%j.out
+#SBATCH --error=logs/setup_%j.err
 
 # Load modules
 module load 2022
