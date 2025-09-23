@@ -1,4 +1,7 @@
 # Ignore Python cache directories
+datasets/
+*.jpg
+*.png
 __pycache__/
 *.py[cod]
 

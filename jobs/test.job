@@ -1,0 +1,38 @@
+#!/bin/bash
+#SBATCH --job-name=ednet_train
+#SBATCH --partition=gpu        # or the GPU partition available
+#SBATCH --gres=gpu:1           # request 1 GPU (adjust if you want more)
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8      # or more, depending on data loading
+#SBATCH --mem=32G              # adjust to your needs
+#SBATCH --time=10:00:00        # hh:mm:ss – adjust based on how long training takes
+
+# Load necessary modules
+module load 2022
+module load Python/3.10.4-GCCcore-11.3.0
+# load CUDA module if needed, or specific GPU-enable module
+module load CUDA/XX.X         # <-- replace XX.X with correct CUDA version if needed
+
+# Activate virtual environment if you have one
+source $HOME/venvs/ednet_env/bin/activate   # or however your env is set up
+
+# Change directory to where EDNet is cloned
+cd $HOME/path/to/EDNet
+
+# Copy data to scratch (if large) to speed up
+# Assume you have dataset in $HOME/datasets/visdrone
+cp -r $HOME/datasets/visdrone $TMPDIR/visdrone
+
+# Optional: change visdrone-det.yaml data paths to point to scratch
+# Either modify a copy in scratch or set env var if EDNet supports
+
+# Run training
+python train.py --cfg configs/ednet-s.yaml \
+                --data data/visdrone-det.yaml \
+                --epochs 200 \
+                --imgsz 640 \
+                --weights pretrained/small.pt   # or whatever variant you want
+
+# After training, copy results back
+mkdir -p $HOME/results/ednet_visdrone_run1
+cp -r $TMPDIR/runs/* $HOME/results/ednet_visdrone_run1

@@ -1,0 +1,31 @@
+#!/bin/bash
+#SBATCH --job-name=ednet_setup
+#SBATCH --time=01:00:00       # 1 hour should be enough
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=16G
+#SBATCH --partition=genoa     # or gpu if you want to test GPU install
+#SBATCH --output=$HOME/logs/setup_%j.out
+#SBATCH --error=$HOME/logs/setup_%j.err
+
+# Load modules
+module load 2022
+module load Python/3.10.4-GCCcore-11.3.0
+
+# Create a virtual environment (only once)
+python -m venv $HOME/ednet_env
+
+# Activate it
+source $HOME/ednet_env/bin/activate
+
+# Upgrade pip
+pip install --upgrade pip setuptools wheel
+
+# Go to EDNet repo
+cd $HOME/EDNet
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Optional: install additional tools
+pip install jupyter tensorboard matplotlib
