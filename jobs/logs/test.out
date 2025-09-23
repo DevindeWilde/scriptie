@@ -1,15 +1,63 @@
+Collecting mmcv
+  Using cached mmcv-2.2.0.tar.gz (479 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting addict (from mmcv)
+  Using cached addict-2.4.0-py3-none-any.whl.metadata (1.0 kB)
+Collecting mmengine>=0.3.0 (from mmcv)
+  Using cached mmengine-0.10.7-py3-none-any.whl.metadata (20 kB)
+Requirement already satisfied: numpy in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from mmcv) (2.2.6)
+Requirement already satisfied: packaging in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from mmcv) (24.2)
+Requirement already satisfied: Pillow in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from mmcv) (11.3.0)
+Requirement already satisfied: pyyaml in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from mmcv) (6.0.2)
+Collecting yapf (from mmcv)
+  Using cached yapf-0.43.0-py3-none-any.whl.metadata (46 kB)
+Requirement already satisfied: opencv-python>=3 in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from mmcv) (4.12.0.88)
+Requirement already satisfied: matplotlib in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from mmengine>=0.3.0->mmcv) (3.10.6)
+Requirement already satisfied: rich in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from mmengine>=0.3.0->mmcv) (13.4.2)
+Collecting termcolor (from mmengine>=0.3.0->mmcv)
+  Using cached termcolor-3.1.0-py3-none-any.whl.metadata (6.4 kB)
+Requirement already satisfied: contourpy>=1.0.1 in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from matplotlib->mmengine>=0.3.0->mmcv) (1.3.2)
+Requirement already satisfied: cycler>=0.10 in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from matplotlib->mmengine>=0.3.0->mmcv) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from matplotlib->mmengine>=0.3.0->mmcv) (4.60.0)
+Requirement already satisfied: kiwisolver>=1.3.1 in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from matplotlib->mmengine>=0.3.0->mmcv) (1.4.9)
+Requirement already satisfied: pyparsing>=2.3.1 in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from matplotlib->mmengine>=0.3.0->mmcv) (3.2.5)
+Requirement already satisfied: python-dateutil>=2.7 in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from matplotlib->mmengine>=0.3.0->mmcv) (2.9.0.post0)
+Requirement already satisfied: six>=1.5 in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from python-dateutil>=2.7->matplotlib->mmengine>=0.3.0->mmcv) (1.17.0)
+Requirement already satisfied: markdown-it-py>=2.2.0 in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from rich->mmengine>=0.3.0->mmcv) (4.0.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from rich->mmengine>=0.3.0->mmcv) (2.19.2)
+Requirement already satisfied: mdurl~=0.1 in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from markdown-it-py>=2.2.0->rich->mmengine>=0.3.0->mmcv) (0.1.2)
+Requirement already satisfied: platformdirs>=3.5.1 in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from yapf->mmcv) (4.4.0)
+Requirement already satisfied: tomli>=2.0.1 in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from yapf->mmcv) (2.2.1)
+Using cached mmengine-0.10.7-py3-none-any.whl (452 kB)
+Using cached addict-2.4.0-py3-none-any.whl (3.8 kB)
+Using cached termcolor-3.1.0-py3-none-any.whl (7.7 kB)
+Using cached yapf-0.43.0-py3-none-any.whl (256 kB)
+Building wheels for collected packages: mmcv
+  Building wheel for mmcv (pyproject.toml): started
+  Building wheel for mmcv (pyproject.toml): finished with status 'done'
+  Created wheel for mmcv: filename=mmcv-2.2.0-py2.py3-none-any.whl size=732175 sha256=d8240967c96a13f4446653f7fc9f27c390139c879c0b7c4897a3769e6a5c7534
+  Stored in directory: /gpfs/home6/ddwilde/.cache/pip/wheels/dd/50/9f/4e0c45c952bddd25de1cae1b310bd1b20dd69967b5202ca1af
+Successfully built mmcv
+Installing collected packages: addict, yapf, termcolor, mmengine, mmcv
+
+Successfully installed addict-2.4.0 mmcv-2.2.0 mmengine-0.10.7 termcolor-3.1.0 yapf-0.43.0
 
 JOB STATISTICS
 ==============
-Job ID: 14852769
+Job ID: 14854317
 Cluster: snellius
 User/Group: ddwilde/ddwilde
 State: RUNNING
 Nodes: 1
 Cores per node: 18
 CPU Utilized: 00:00:00
-CPU Efficiency: 0.00% of 00:03:54 core-walltime
-Job Wall-clock time: 00:00:13
+CPU Efficiency: 0.00% of 00:06:54 core-walltime
+Job Wall-clock time: 00:00:23
 Memory Utilized: 0.00 MB
 Memory Efficiency: 0.00% of 32.00 GB (32.00 GB/node)
 WARNING: Efficiency statistics can only be obtained after the job has ended as seff tool is based on the accounting database data.
