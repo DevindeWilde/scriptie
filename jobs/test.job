@@ -13,11 +13,10 @@ module purge
 module load 2025
 module load CUDA/12.8.0
 source $HOME/ednet_env/bin/activate   # or however your env is set up
-pip install mmcv --use-pep517
 
 # Run training
 python $HOME/scriptie/train.py --data MVRSD.yaml \
                 --epochs 50 \
                 --cfg 'ednet-s.yaml' \
                 --imgsz 640 \
-                --weights pretrained/small.pt   # or whatever variant you want
+                --weights /home/ddwilde/scriptie/pretrained/small.pt   # or whatever variant you want
