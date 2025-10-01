@@ -1,0 +1,21 @@
+#!/bin/bash
+#SBATCH --job-name=ednet_train
+#SBATCH --partition=gpu_a100        # or the GPU partition available
+#SBATCH --gres=gpu:1           # request 1 GPU (adjust if you want more)
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8      # or more, depending on data loading
+#SBATCH --mem=32G              # adjust to your needs
+#SBATCH --time=10:00:00        # hh:mm:ss – adjust based on how long training takes
+#SBATCH --output=logs/test.out
+#SBATCH --error=logs/test.err
+# Load necessary modules
+module purge
+module load 2025
+module load CUDA/12.8.0
+source $HOME/ednet_env/bin/activate   # or however your env is set up
+
+# Run training
+python $HOME/scriptie/val.py --data MVRSD.yaml \
+                --weights /home/ddwilde/scriptie/runs/train4/weights/best.pt \
+                --imgsz 640 \
+                --split val
