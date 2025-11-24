@@ -1,4 +1,5 @@
 import os
+import time
 from pathlib import Path
 
 import numpy as np
@@ -203,6 +204,49 @@ class DetectionValidator(BaseValidator):
                 self.confusion_matrix.plot(
                     save_dir=self.save_dir, names=self.names.values(), normalize=normalize, on_plot=self.on_plot
                 )
+
+        self._save_class_metrics()
+
+    def _save_class_metrics(self):
+        try:
+            import json
+        except ImportError:
+            return
+
+        if not len(self.names):
+            return
+        file = self.save_dir / "per_class_metrics.json"
+        entries = []
+        if file.exists():
+            try:
+                entries = json.loads(file.read_text())
+            except Exception:
+                entries = []
+        epoch = None
+        if self.training and hasattr(self, "trainer") and getattr(self.trainer, "epoch", None) is not None:
+            epoch = int(self.trainer.epoch) + 1
+        per_class = {}
+        ap_idx = {c: idx for idx, c in enumerate(self.metrics.ap_class_index)}
+        for class_id, name in self.names.items():
+            if class_id in ap_idx:
+                prec, rec, ap50, ap = (float(x) for x in self.metrics.class_result(ap_idx[class_id]))
+            else:
+                prec = rec = ap50 = ap = 0.0
+            per_class[name] = {
+                "precision": prec,
+                "recall": rec,
+                "map50": ap50,
+                "map": ap,
+                "num_targets": int(self.nt_per_class[class_id]) if self.nt_per_class is not None else 0,
+            }
+        entry = {
+            "epoch": epoch,
+            "timestamp": time.time(),
+            "training": bool(self.training),
+            "metrics": per_class,
+        }
+        entries.append(entry)
+        file.write_text(json.dumps(entries, indent=2))
 
     def _process_batch(self, detections, gt_bboxes, gt_cls):
         """

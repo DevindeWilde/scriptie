@@ -1,32 +1,30 @@
-import argparse
-import os
+import matplotlib.pyplot as plt
 from ednet import EDNet
+from pathlib import Path
 
-def parse_args():
-    parser = argparse.ArgumentParser(description="Run inference with EDNet")
-    parser.add_argument("--weights", type=str, required=True, help="Path to trained weights (.pt)")
-    parser.add_argument("--source", type=str, nargs="+", required=True, help="Paths to input images")
-    parser.add_argument("--imgsz", type=int, default=640, help="Inference image size")
-    parser.add_argument("--outdir", type=str, default="inference_results", help="Folder to save detections")
-    return parser.parse_args()
+def main():
+    # Load your trained model
+    model = EDNet("runs/detect/train4/weights/best.pt")
 
-def main(opt):
-    os.makedirs(opt.outdir, exist_ok=True)
+    # List of images to test
+    images = [
+        "datasets/MVRSD_dataset/data/val/images/AUAU030334.jpg",
+        "datasets/MVRSD_dataset/data/val/images/AUAU030336.jpg",
+        "datasets/MVRSD_dataset/data/val/images/AUAU030340.jpg",
+        "datasets/MVRSD_dataset/data/val/images/AUAU030350.jpg",
+    ]
 
-    # Load trained model
-    model = EDNet(opt.weights)
+    # Run inference, save annotated images in runs/predict/exp/
+    results = model(images, save=True, imgsz=640)
 
-    # Run inference
-    results = model.predict(
-        source=opt.source,
-        imgsz=opt.imgsz,
-        save=True,          # save images with bboxes
-        project=opt.outdir,
-        name="exp"
-    )
-
-    print(f"✅ Inference done. Check results in {opt.outdir}/exp")
+    # Plot results inline (optional, only works in notebooks/local Python)
+    for i, result in enumerate(results):
+        im = result.plot()   # get numpy array with bboxes
+        plt.figure(figsize=(8, 8))
+        plt.imshow(im)
+        plt.axis("off")
+        plt.title(f"Prediction {i+1}")
+        plt.show()
 
 if __name__ == "__main__":
-    opt = parse_args()
-    main(opt)
+    main()

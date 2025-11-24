@@ -34,6 +34,32 @@ fraction: 1.0 # (float) dataset fraction to train on (default is 1.0, all images
 profile: False # (bool) profile ONNX and TensorRT speeds during training for loggers
 freeze: None # (int | list, optional) freeze first n layers, or freeze list of layer indices during training
 multi_scale: False # (bool) Whether to use multiscale during training
+lora: # (dict) Low-Rank Adapter (LoRA) configuration for parameter-efficient fine-tuning
+  enable: False # (bool) enable LoRA adapters on the detection model
+  rank: 8 # (int) intrinsic rank of the LoRA update
+  alpha: 16.0 # (float) scaling factor applied to LoRA updates
+  dropout: 0.0 # (float) dropout probability between LoRA projections
+  feature_pyramid_indices: [16, 22, 25] # (list[int]) layer indices (P3–P4) to target with adapters
+  include_detection_head: True # (bool) apply LoRA to detection head convolutions
+  freeze_backbone: True # (bool) freeze backbone weights so only adapters update
+  adapter_dir: adapters # (str) relative directory (under run folder) to store adapter checkpoints
+  init_adapter: # (str, optional) path to existing adapter weights to warm-start from
+continual: # (dict) Continual-learning orchestration settings
+  enable: False # (bool) enable continual learning loop
+  batches: [] # (list[dict]) sequence of dataset overrides to stream through
+  adapter_strategy: last # (str) which adapter checkpoint to pass between batches, choices=[last, best]
+  save_history: True # (bool) keep per-batch adapter checkpoints instead of overwriting
+replay: # (dict) Tiny object replay configuration (SA-AB)
+  enable: False # (bool) enable feature replay sampling
+  tap_layers: # (dict[str,int]) layer indices tapped for replay (P3-P4 default)
+    P3: 16
+    P4: 25
+  tiny_max_pixels: 32 # (int) max edge size for an object to be considered tiny
+  context_scale: 1.5 # (float) scale factor for contextual crop around tiny object
+  buffer_per_class: 64 # (int) maximum stored feature patches per class
+  sample_per_batch: 16 # (int) maximum replay samples per class during training
+  loss_weight: 1.0 # (float) scaling factor for replay consistency loss
+  scale_weighting: stride # (str) weighting scheme for replay loss (uniform|stride|level)
 # Segmentation
 overlap_mask: True # (bool) masks should overlap during training (segment train only)
 mask_ratio: 4 # (int) mask downsample ratio (segment train only)

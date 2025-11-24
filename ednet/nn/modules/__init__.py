@@ -49,6 +49,7 @@ from .conv import (
     SpatialAttention,
 )
 from .head import Classify, Detect, Segment, v10Detect
+from .lora import LoRAConv2d
 
 
 __all__ = (
@@ -119,4 +120,5 @@ __all__ = (
     "PSA",
     "SCDown",
     "C2f_FCA",
+    "LoRAConv2d",
 )

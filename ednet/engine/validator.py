@@ -107,6 +107,7 @@ class BaseValidator:
         gets priority).
         """
         self.training = trainer is not None
+        self.trainer = trainer
         augment = self.args.augment and (not self.training)
         if self.training:
             self.device = trainer.device

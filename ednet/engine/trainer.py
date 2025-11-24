@@ -45,6 +45,7 @@ from ednet.utils.torch_utils import (
     ModelEMA,
     autocast,
     convert_optimizer_state_dict_to_fp16,
+    de_parallel,
     init_seeds,
     one_cycle,
     select_device,
@@ -145,6 +146,7 @@ class BaseTrainer:
         self.loss_names = ["Loss"]
         self.csv = self.save_dir / "results.csv"
         self.plot_idx = [0, 1, 2]
+        self.auxiliary_info = {}
 
         # HUB
         self.hub_session = None
@@ -157,6 +159,14 @@ class BaseTrainer:
     def add_callback(self, event: str, callback):
         """Appends the given callback."""
         self.callbacks[event].append(callback)
+
+    def _before_checkpoint(self):
+        """Hook for subclasses to run logic before checkpoints are saved."""
+        return None
+
+    def _after_checkpoint(self, ctx=None):
+        """Hook for subclasses to run logic after checkpoints are saved."""
+        return None
 
     def set_callback(self, event: str, callback):
         """Overrides the existing callbacks with the given callback."""
@@ -316,6 +326,7 @@ class BaseTrainer:
         self.resume_training(ckpt)
         self.scheduler.last_epoch = self.start_epoch - 1  # do not move
         self.run_callbacks("on_pretrain_routine_end")
+        self.auxiliary_info = {}
 
     def _do_train(self, world_size=1):
         """Train completed, evaluate and plot if specified by arguments."""
@@ -382,6 +393,10 @@ class BaseTrainer:
                     self.loss, self.loss_items = self.model(batch)
                     if RANK != -1:
                         self.loss *= world_size
+                    aux_loss = self.compute_auxiliary_loss(batch)
+                    if aux_loss is not None:
+                        self.loss = self.loss + aux_loss
+                        self.auxiliary_info = {"replay_loss": float(aux_loss.detach())}
                     self.tloss = (
                         (self.tloss * i + self.loss_items) / (i + 1) if self.tloss is not None else self.loss_items
                     )
@@ -428,7 +443,8 @@ class BaseTrainer:
                 # Validation
                 if self.args.val or final_epoch or self.stopper.possible_stop or self.stop:
                     self.metrics, self.fitness = self.validate()
-                self.save_metrics(metrics={**self.label_loss_items(self.tloss), **self.metrics, **self.lr})
+                aux_metrics = getattr(self, "auxiliary_info", {})
+                self.save_metrics(metrics={**self.label_loss_items(self.tloss), **self.metrics, **aux_metrics, **self.lr})
                 self.stop |= self.stopper(epoch + 1, self.fitness) or final_epoch
                 if self.args.time:
                     self.stop |= (time.time() - self.train_time_start) > (self.args.time * 3600)
@@ -483,6 +499,9 @@ class BaseTrainer:
 
         # Serialize ckpt to a byte buffer once (faster than repeated torch.save() calls)
         buffer = io.BytesIO()
+        ctx = self._before_checkpoint()
+        if ctx is None:
+            ctx = {}
         torch.save(
             {
                 "epoch": self.epoch,
@@ -509,6 +528,32 @@ class BaseTrainer:
             self.best.write_bytes(serialized_ckpt)  # save best.pt
         if (self.save_period > 0) and (self.epoch % self.save_period == 0):
             (self.wdir / f"epoch{self.epoch}.pt").write_bytes(serialized_ckpt)  # save epoch, i.e. 'epoch3.pt'
+
+        lora_args = getattr(self.args, "lora", None)
+        if isinstance(lora_args, dict) and lora_args.get("enable"):
+            source_model = de_parallel(self.ema.ema if self.ema else self.model)
+            if hasattr(source_model, "lora_state_dict"):
+                adapter_state = source_model.lora_state_dict()
+                if adapter_state:
+                    adapter_state = {
+                        name: {k: tensor.detach().cpu() for k, tensor in weights.items()}
+                        for name, weights in adapter_state.items()
+                    }
+                    adapters_dir = lora_args.get("adapter_dir") or "adapters"
+                    adapters_dir = Path(adapters_dir)
+                    if not adapters_dir.is_absolute():
+                        adapters_dir = self.save_dir / adapters_dir
+                    adapters_dir.mkdir(parents=True, exist_ok=True)
+                    torch.save(adapter_state, adapters_dir / "last-adapter.pt")
+                    if self.best_fitness == self.fitness:
+                        torch.save(adapter_state, adapters_dir / "best-adapter.pt")
+                    continual_args = getattr(self.args, "continual", None)
+                    save_history = True
+                    if isinstance(continual_args, dict):
+                        save_history = continual_args.get("save_history", True)
+                    if self.save_period > 0 and (self.epoch % self.save_period == 0) and save_history:
+                        torch.save(adapter_state, adapters_dir / f"epoch{self.epoch}-adapter.pt")
+        self._after_checkpoint(ctx)
 
     def get_dataset(self):
         """
@@ -561,6 +606,10 @@ class BaseTrainer:
     def preprocess_batch(self, batch):
         """Allows custom preprocessing model inputs and ground truths depending on task type."""
         return batch
+
+    def compute_auxiliary_loss(self, batch):
+        """Optional hook for trainers needing to add auxiliary losses."""
+        return None
 
     def validate(self):
         """
