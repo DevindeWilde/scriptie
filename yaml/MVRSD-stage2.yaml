@@ -1,4 +1,4 @@
-path: /Users/devindewilde/Documents/GitHub.nosync/EDNet/datasets/MVRSD_dataset/data
+path: $HOME/scriptie/datasets/MVRSD-stage2
 train: train/images
 val: val/images
 test: test/images
