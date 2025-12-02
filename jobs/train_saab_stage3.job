@@ -20,7 +20,7 @@ source $HOME/ednet_env/bin/activate
 cd $HOME/scriptie
 
 python train.py \
-  --cfg cfg/models/ednet/ednet-t.yaml \
+  --cfg cfg/models/ednet/ednet-s.yaml \
   --data datasets/yaml/MVRSD-stage3.yaml \
   --epochs 50 \
   --imgsz 640 \
