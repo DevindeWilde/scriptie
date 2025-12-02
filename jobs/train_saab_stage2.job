@@ -1,0 +1,21 @@
+#!/bin/bash
+#SBATCH --job-name=saab-stage2
+#SBATCH --time=24:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --partition=gpu
+#SBATCH --gres=gpu:1
+#SBATCH --output=logs/saab-stage2-%j.out
+#SBATCH --error=logs/saab-stage2-%j.err
+
+module purge
+module load 2023
+module load Python/3.11.3-GCCcore-12.3.0
+module load CUDA/11.8.0
+
+source $HOME/ednet_env/bin/activate
+cd $HOME/scriptie
+
+python train.py   --cfg cfg/models/ednet/ednet-t.yaml   --data datasets/yaml/MVRSD-stage2.yaml   --epochs 50   --imgsz 640   --batch-size 32   --project runs/mvrsd_saab   --name stage2-saab   --workers 8   --weights pretrained/ednet-small.pt   --override lora.enable=True   --override lora.freeze_backbone=True   --override replay.enable=True   --override replay.buffer_per_class=128   --override replay.sample_per_batch=16   --override replay.loss_weight=0.5

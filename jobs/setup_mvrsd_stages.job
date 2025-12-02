@@ -1,0 +1,23 @@
+#!/bin/bash
+#SBATCH --job-name=mvrsd-setup
+#SBATCH --time=02:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=16G
+#SBATCH --partition=standard
+#SBATCH --output=logs/mvrsd-setup-%j.out
+#SBATCH --error=logs/mvrsd-setup-%j.err
+
+module purge
+module load 2023
+module load Python/3.11.3-GCCcore-12.3.0
+
+source $HOME/ednet_env/bin/activate
+cd $HOME/scriptie
+
+# Step 1: carve validation set from train (10%)
+python MVRSD_val.py
+
+# Step 2: build stage-specific datasets
+python MVRSD_split.py
