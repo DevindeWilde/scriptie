@@ -5,7 +5,7 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=64G
-#SBATCH --partition=gpu
+#SBATCH --partition=gpu_a100 
 #SBATCH --gres=gpu:1
 #SBATCH --output=logs/saab-stage3-%j.out
 #SBATCH --error=logs/saab-stage3-%j.err
