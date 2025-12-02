@@ -28,4 +28,4 @@ python train.py \
   --project runs/mvrsd_lower \
   --name stage2-lower \
   --workers 8 \
-  --weights pretrained/ednet-small.pt
+  --weights pretrained/small.pt
