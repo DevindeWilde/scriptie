@@ -20,12 +20,12 @@ source $HOME/ednet_env/bin/activate
 cd $HOME/scriptie
 
 python train.py \
-  --cfg cfg/models/ednet/ednet-t.yaml \
-  --data datasets/yaml/MVRSD-stage3.yaml \
+  --cfg $HOME/scriptie/cfg/models/ednet/ednet-t.yaml \
+  --data $HOME/scriptie/datasets/yaml/MVRSD-stage3.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 32 \
-  --project runs/mvrsd_lower \
+  --project $HOME/scriptie/runs/mvrsd_lower \
   --name stage3-lower \
   --workers 8 \
-  --weights runs/mvrsd_lower/stage2-lower/weights/best.pt
+  --weights $HOME/scriptie/runs/mvrsd_lower/stage2-lower5/weights/best.pt
