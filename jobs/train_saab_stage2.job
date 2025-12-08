@@ -19,4 +19,4 @@ module load CUDA/11.8.0
 source $HOME/ednet_env/bin/activate
 cd $HOME/scriptie
 
-python train.py   --cfg cfg/models/ednet/ednet-t.yaml   --data datasets/yaml/MVRSD-stage2.yaml   --epochs 50   --imgsz 640   --batch-size 32   --project runs/mvrsd_saab   --name stage2-saab   --workers 8   --weights pretrained/ednet-small.pt   --override lora.enable=True   --override lora.freeze_backbone=True   --override replay.enable=True   --override replay.buffer_per_class=128   --override replay.sample_per_batch=16   --override replay.loss_weight=0.5
+python train.py   --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml   --data /home/ddwilde/scriptie/yaml/MVRSD-stage2.yaml   --epochs 50   --imgsz 640   --batch-size 32   --project /home/ddwilde/scriptie/runs/mvrsd_saab   --name stage2-saab   --workers 8   --weights /home/ddwilde/scriptie/pretrained/small.pt   --override lora.enable=True   --override lora.freeze_backbone=True   --override replay.enable=True   --override replay.buffer_per_class=128   --override replay.sample_per_batch=16   --override replay.loss_weight=0.5

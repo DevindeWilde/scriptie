@@ -28,4 +28,4 @@ python train.py \
   --project $HOME/scriptie/runs/mvrsd_lower \
   --name stage3-lower \
   --workers 8 \
-  --weights $HOME/scriptie/runs/mvrsd_lower/stage2-lower5/weights/best.pt
+  --weights $HOME/scriptie/runs/mvrsd_lower/stage2-lower/weights/best.pt

@@ -1,0 +1,5357 @@
+[
+  {
+    "epoch": 1,
+    "timestamp": 1765190880.4863527,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.35361834232716816,
+        "recall": 0.5547850208044383,
+        "map50": 0.4379171193415173,
+        "map": 0.3184709576362974,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.20140840630748025,
+        "recall": 0.24457362051915757,
+        "map50": 0.14843403370975766,
+        "map": 0.10100533513147847,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.1390228111534799,
+        "recall": 0.1625806451612903,
+        "map50": 0.08716066433973199,
+        "map": 0.054814154121916904,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "map50": 0.008844959968609682,
+        "map": 0.006468305408196611,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 2,
+    "timestamp": 1765190899.0313761,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.70116986070647,
+        "recall": 0.27336540027247375,
+        "map50": 0.50382785321884,
+        "map": 0.35630300831542183,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.40325497030454066,
+        "recall": 0.7049924357034796,
+        "map50": 0.5294545560375725,
+        "map": 0.35514783698243985,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.32067607729921976,
+        "recall": 0.6232258064516129,
+        "map50": 0.3628896516606407,
+        "map": 0.2454406380553446,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "map50": 0.0196885376302483,
+        "map": 0.011368939964683205,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 3,
+    "timestamp": 1765190917.0630329,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.6007720628520792,
+        "recall": 0.5644937586685159,
+        "map50": 0.5759150560976237,
+        "map": 0.4032026063506032,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.5281624265775209,
+        "recall": 0.6989409984871406,
+        "map50": 0.6188478717962664,
+        "map": 0.41214342551168615,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.517722027906055,
+        "recall": 0.3870967741935484,
+        "map50": 0.47071419985604385,
+        "map": 0.3163174161087289,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "map50": 0.07451683551040203,
+        "map": 0.04117207211959942,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 4,
+    "timestamp": 1765190935.0505333,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.6608427310942776,
+        "recall": 0.5090152565880721,
+        "map50": 0.5912035640344099,
+        "map": 0.39572103486458093,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.550740260266025,
+        "recall": 0.7362722446770186,
+        "map50": 0.6620095938437168,
+        "map": 0.4105022806784689,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.31946799958893685,
+        "recall": 0.7070967741935484,
+        "map50": 0.43333639678089697,
+        "map": 0.2583063780579565,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5748356165022833,
+        "recall": 0.03492608389515607,
+        "map50": 0.12271642645100604,
+        "map": 0.06379025104803704,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 5,
+    "timestamp": 1765190953.0810685,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.6517867146358767,
+        "recall": 0.6464342289585008,
+        "map50": 0.6710524042360259,
+        "map": 0.47218066691187666,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.6478964370237421,
+        "recall": 0.7390915878056574,
+        "map50": 0.7458137412858269,
+        "map": 0.48508584566311663,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.5950807405459535,
+        "recall": 0.6941935483870968,
+        "map50": 0.6272008794852427,
+        "map": 0.42157577297860166,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.375281620651991,
+        "recall": 0.015484821326745722,
+        "map50": 0.1665068314251705,
+        "map": 0.0969131709025343,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 6,
+    "timestamp": 1765190971.295942,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.7318397558143042,
+        "recall": 0.6865464632454924,
+        "map50": 0.7486679038623794,
+        "map": 0.5274698362792736,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.6590454175190686,
+        "recall": 0.7360060514372163,
+        "map50": 0.751463771156083,
+        "map": 0.4949742489979892,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.6305803523478141,
+        "recall": 0.6585521591973205,
+        "map50": 0.7104836664202078,
+        "map": 0.4742047890754679,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.4211778131318361,
+        "recall": 0.06380372875218235,
+        "map50": 0.17227144846085335,
+        "map": 0.08574030549658462,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 7,
+    "timestamp": 1765190989.5223913,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.6682743313528586,
+        "recall": 0.7669902912621359,
+        "map50": 0.7695053314960821,
+        "map": 0.5367093532126871,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.5852483644296538,
+        "recall": 0.8373676248108926,
+        "map50": 0.7624987661197378,
+        "map": 0.48739294914323616,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.617146062364045,
+        "recall": 0.7290322580645161,
+        "map50": 0.7534966695784218,
+        "map": 0.5058226716067032,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.48425478483335893,
+        "recall": 0.11855670103092783,
+        "map50": 0.20964425893264335,
+        "map": 0.11448034526179855,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 8,
+    "timestamp": 1765191007.7087157,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.6517811100169335,
+        "recall": 0.5477680970052676,
+        "map50": 0.6236470956130752,
+        "map": 0.4497779992264732,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.5372303473751349,
+        "recall": 0.8411497730711044,
+        "map50": 0.7261077878537999,
+        "map": 0.48040278176355933,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.5524195360290461,
+        "recall": 0.7419354838709677,
+        "map50": 0.645470182282102,
+        "map": 0.44827849468219066,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5160125342734039,
+        "recall": 0.061855670103092786,
+        "map50": 0.14593084827500197,
+        "map": 0.08965708253866919,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 9,
+    "timestamp": 1765191025.7641585,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.6593054618678579,
+        "recall": 0.5492371705963939,
+        "map50": 0.6467173331003362,
+        "map": 0.45854941903067753,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.5903268319164666,
+        "recall": 0.7745839636913767,
+        "map50": 0.708962386946258,
+        "map": 0.4724147501902379,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.5958184225487992,
+        "recall": 0.7316129032258064,
+        "map50": 0.6800646046568056,
+        "map": 0.4500260672078995,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.3314510397843731,
+        "recall": 0.19072164948453607,
+        "map50": 0.17255295309281796,
+        "map": 0.09167410429995554,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 10,
+    "timestamp": 1765191043.7816172,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.6606869829274119,
+        "recall": 0.6282940360610264,
+        "map50": 0.6911181982957988,
+        "map": 0.4938547182497287,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7338026853682547,
+        "recall": 0.7569215481469641,
+        "map50": 0.799655526631759,
+        "map": 0.5312734581337603,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.6665561007552403,
+        "recall": 0.7780645161290323,
+        "map50": 0.7648778441350678,
+        "map": 0.51692034369033,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.49479759262367956,
+        "recall": 0.15979381443298968,
+        "map50": 0.2341865354118816,
+        "map": 0.13595856893329816,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 11,
+    "timestamp": 1765191061.8611708,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.6213948221180947,
+        "recall": 0.698850549578705,
+        "map50": 0.7222466308483848,
+        "map": 0.521185608309535,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.6235486938615893,
+        "recall": 0.8281930758292332,
+        "map50": 0.7748619385965564,
+        "map": 0.5106631133903645,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.745131464456137,
+        "recall": 0.746930640317737,
+        "map50": 0.7943326973384064,
+        "map": 0.5588586647325287,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.4294394808635315,
+        "recall": 0.17459405281570228,
+        "map50": 0.2570910267541762,
+        "map": 0.14830074721108183,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 12,
+    "timestamp": 1765191079.9705236,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.5789981544049,
+        "recall": 0.6380027739251041,
+        "map50": 0.6331558242086406,
+        "map": 0.43908158105954065,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7325768607141362,
+        "recall": 0.6951588502269289,
+        "map50": 0.7700232895205752,
+        "map": 0.4979163905216555,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.5948754984116766,
+        "recall": 0.8516129032258064,
+        "map50": 0.8064671678583397,
+        "map": 0.5526456603125967,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.4673836555487932,
+        "recall": 0.26288659793814434,
+        "map50": 0.2948635933761949,
+        "map": 0.16792599542720696,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 13,
+    "timestamp": 1765191097.8713288,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.6834568804961677,
+        "recall": 0.608876560332871,
+        "map50": 0.686378803055062,
+        "map": 0.4849232653095483,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7064919430059748,
+        "recall": 0.7798789712556732,
+        "map50": 0.7694782324318434,
+        "map": 0.5072589408720691,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.6648913443736736,
+        "recall": 0.7483870967741936,
+        "map50": 0.7458158385947197,
+        "map": 0.5285598521452097,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.39995798173263386,
+        "recall": 0.33671769238779553,
+        "map50": 0.35869469170639345,
+        "map": 0.2012667635257826,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 14,
+    "timestamp": 1765191116.0818894,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.5905464324577877,
+        "recall": 0.7115117891816921,
+        "map50": 0.696240441793266,
+        "map": 0.4906216137855429,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.6941211228918721,
+        "recall": 0.8199697428139183,
+        "map50": 0.8191477897323036,
+        "map": 0.53454496082474,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.7207540287517942,
+        "recall": 0.8292738486286874,
+        "map50": 0.835332157851346,
+        "map": 0.5704981875942219,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.6102486547198086,
+        "recall": 0.2017802894091554,
+        "map50": 0.3164400091468541,
+        "map": 0.18290213750773424,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 15,
+    "timestamp": 1765191133.9665296,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.6666023436089535,
+        "recall": 0.651872399445215,
+        "map50": 0.708374976963341,
+        "map": 0.5118537944313005,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.5952419136849572,
+        "recall": 0.8843693163662906,
+        "map50": 0.8073663691373414,
+        "map": 0.5288250228671465,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8141655278448295,
+        "recall": 0.7187096774193549,
+        "map50": 0.8103371809224519,
+        "map": 0.5689270175485162,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.4211275704006401,
+        "recall": 0.27319587628865977,
+        "map50": 0.3062453818875569,
+        "map": 0.1802135977853127,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 16,
+    "timestamp": 1765191152.156843,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.640266677533445,
+        "recall": 0.5866851595006934,
+        "map50": 0.6717215522145377,
+        "map": 0.47655641772351476,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.5313773091062218,
+        "recall": 0.8817417181848178,
+        "map50": 0.7707475719928814,
+        "map": 0.5189592660991019,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.6725393820416613,
+        "recall": 0.8064516129032258,
+        "map50": 0.7816537106851951,
+        "map": 0.5526169140952691,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.37177045257703206,
+        "recall": 0.16778580927176734,
+        "map50": 0.2618207335212234,
+        "map": 0.15000840101611337,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 17,
+    "timestamp": 1765191170.4114883,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.6778858835267201,
+        "recall": 0.7087378640776699,
+        "map50": 0.7422555957562136,
+        "map": 0.5270482040367546,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.6826423459819594,
+        "recall": 0.8207261724659607,
+        "map50": 0.7982828523444008,
+        "map": 0.5353928804233312,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.7531345748969553,
+        "recall": 0.8069835426824674,
+        "map50": 0.8398077109013069,
+        "map": 0.5781780596185505,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.46769011963871004,
+        "recall": 0.3247422680412371,
+        "map50": 0.3579833432642499,
+        "map": 0.21660328074136811,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 18,
+    "timestamp": 1765191188.553907,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.5914224292393189,
+        "recall": 0.7281553398058253,
+        "map50": 0.6916535157361062,
+        "map": 0.48836734273849186,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.6677342693403348,
+        "recall": 0.8260211800302572,
+        "map50": 0.8059634657883162,
+        "map": 0.5408546817663709,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.7843470769768233,
+        "recall": 0.824516129032258,
+        "map50": 0.8627295013326893,
+        "map": 0.6020052952464594,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5756885481498217,
+        "recall": 0.24742268041237114,
+        "map50": 0.32973334249512404,
+        "map": 0.18689729243681247,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 19,
+    "timestamp": 1765191206.6189559,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.6546321819545864,
+        "recall": 0.7198335644937587,
+        "map50": 0.7343431316152021,
+        "map": 0.5200283324579703,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.6297752970191514,
+        "recall": 0.8721633888048411,
+        "map50": 0.8258225478173328,
+        "map": 0.5558458289436827,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.729817179970122,
+        "recall": 0.8412903225806452,
+        "map50": 0.8544599076057564,
+        "map": 0.601133243004519,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5603559657218194,
+        "recall": 0.11826568836878117,
+        "map50": 0.3302262991263062,
+        "map": 0.18930237148767426,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 20,
+    "timestamp": 1765191224.8398743,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.7390576483530006,
+        "recall": 0.5656674936610211,
+        "map50": 0.6926323094545119,
+        "map": 0.493646422666015,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.6767139913628889,
+        "recall": 0.8373676248108926,
+        "map50": 0.8239209173358558,
+        "map": 0.5494243903780907,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.797512003062167,
+        "recall": 0.7572209844252855,
+        "map50": 0.8243762303344965,
+        "map": 0.5772663770932858,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.44341314378045743,
+        "recall": 0.3402061855670103,
+        "map50": 0.3758276357345228,
+        "map": 0.21467886844642986,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 21,
+    "timestamp": 1765191242.7408223,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.6903787433425648,
+        "recall": 0.6803687645111594,
+        "map50": 0.7369195314280546,
+        "map": 0.5233817671562685,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.6939338105718122,
+        "recall": 0.846444780635401,
+        "map50": 0.8380892556268252,
+        "map": 0.5600557642641537,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8591465382885672,
+        "recall": 0.6925975063422468,
+        "map50": 0.8372757750117245,
+        "map": 0.5904787122354975,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.4600510948796853,
+        "recall": 0.4381443298969072,
+        "map50": 0.4088964691803266,
+        "map": 0.22262037904774945,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 22,
+    "timestamp": 1765191260.7527518,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.6620841292585312,
+        "recall": 0.7378640776699029,
+        "map50": 0.7403947794535305,
+        "map": 0.5190251475112421,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7325583310066153,
+        "recall": 0.846444780635401,
+        "map50": 0.8428594089506338,
+        "map": 0.5659681744071954,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.809411995847597,
+        "recall": 0.8141935483870968,
+        "map50": 0.8616530698894413,
+        "map": 0.5927222655567495,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5026342841157656,
+        "recall": 0.34902709644977686,
+        "map50": 0.39391821331584026,
+        "map": 0.23252976093640884,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 23,
+    "timestamp": 1765191278.9938443,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.7132411495001718,
+        "recall": 0.6761463266317636,
+        "map50": 0.7365350888313242,
+        "map": 0.5292060183821587,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.6990449530789747,
+        "recall": 0.8574166244362916,
+        "map50": 0.8502965625452517,
+        "map": 0.5635735286349258,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.7812257645690701,
+        "recall": 0.7948387096774193,
+        "map50": 0.8325009532407629,
+        "map": 0.5957996588250596,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5226474095922593,
+        "recall": 0.4020618556701031,
+        "map50": 0.4096590626616491,
+        "map": 0.23221380047071846,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 24,
+    "timestamp": 1765191296.8637776,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.7958426336964984,
+        "recall": 0.6352288488210819,
+        "map50": 0.7571220909502422,
+        "map": 0.5346121165227395,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.8075755277510226,
+        "recall": 0.7587335822963659,
+        "map50": 0.84715518240496,
+        "map": 0.5729305822196717,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.7856902674174263,
+        "recall": 0.8090322580645162,
+        "map50": 0.8360600258184038,
+        "map": 0.5846300315634806,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.48603483477342846,
+        "recall": 0.40459325304686133,
+        "map50": 0.40350485724453883,
+        "map": 0.23208093292734938,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 25,
+    "timestamp": 1765191314.9294772,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.6874609081615948,
+        "recall": 0.7628294036061026,
+        "map50": 0.7732262554771264,
+        "map": 0.5456407554232912,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.77783291899895,
+        "recall": 0.8078668683812406,
+        "map50": 0.8583068215124776,
+        "map": 0.5718264146701623,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.7113778666618945,
+        "recall": 0.8619354838709677,
+        "map50": 0.8657077682799024,
+        "map": 0.6228710451003806,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.6130799247815089,
+        "recall": 0.32671548379633025,
+        "map50": 0.4309449678200233,
+        "map": 0.24234251797953466,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 26,
+    "timestamp": 1765191332.921824,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.7262037705125595,
+        "recall": 0.6823855755894591,
+        "map50": 0.7545774223139682,
+        "map": 0.5406147252246061,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7544999320293679,
+        "recall": 0.840393343419062,
+        "map50": 0.8632101730832591,
+        "map": 0.5753695380328491,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.7997400304183089,
+        "recall": 0.7806451612903226,
+        "map50": 0.8410658340811519,
+        "map": 0.5982108811416841,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.3832846822832517,
+        "recall": 0.46132042695616576,
+        "map50": 0.3821352743192276,
+        "map": 0.22717949402377116,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 27,
+    "timestamp": 1765191350.5656698,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.7330177047886768,
+        "recall": 0.7628294036061026,
+        "map50": 0.802135252246941,
+        "map": 0.5755364805431962,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7397398941317673,
+        "recall": 0.8585476550680786,
+        "map50": 0.8586593457581618,
+        "map": 0.5737885456731028,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.7631106247483362,
+        "recall": 0.8479504724666015,
+        "map50": 0.8852207991913693,
+        "map": 0.6234820767719806,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.6001971201971202,
+        "recall": 0.3404881487355714,
+        "map50": 0.4436067037340302,
+        "map": 0.26383438193061626,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 28,
+    "timestamp": 1765191368.648981,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.7784940520309477,
+        "recall": 0.7068104363527387,
+        "map50": 0.7864165645291197,
+        "map": 0.5643386017607767,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7533243247211336,
+        "recall": 0.8214826021180031,
+        "map50": 0.837874114349482,
+        "map": 0.5666467490003031,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.7965630381984168,
+        "recall": 0.8167741935483871,
+        "map50": 0.8654545064721003,
+        "map": 0.608494784836386,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.4294846061339117,
+        "recall": 0.4793814432989691,
+        "map50": 0.4253638845220893,
+        "map": 0.25691942451888433,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 29,
+    "timestamp": 1765191386.785713,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.7784658177331819,
+        "recall": 0.7115680539288102,
+        "map50": 0.791313681248131,
+        "map": 0.5652799372659608,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7888214823708841,
+        "recall": 0.8420033750341365,
+        "map50": 0.8734045075815758,
+        "map": 0.5828726506106112,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8474688296741214,
+        "recall": 0.8172755335981142,
+        "map50": 0.8905220087331799,
+        "map": 0.6296610069315918,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5712539863635441,
+        "recall": 0.5082358329781009,
+        "map50": 0.4745345841670971,
+        "map": 0.2923811224157614,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 30,
+    "timestamp": 1765191404.8842025,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.777058542543322,
+        "recall": 0.7059639389736477,
+        "map50": 0.7865707726994917,
+        "map": 0.5594886230846629,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7484903780337144,
+        "recall": 0.8374195953621066,
+        "map50": 0.8581810364757588,
+        "map": 0.5767758006841995,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8289074660716914,
+        "recall": 0.8193548387096774,
+        "map50": 0.8857716887734152,
+        "map": 0.6174357638603815,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5111378419237311,
+        "recall": 0.4690721649484536,
+        "map50": 0.40962329368253675,
+        "map": 0.24758507076908587,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 31,
+    "timestamp": 1765191422.8440259,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.7481237696985941,
+        "recall": 0.7250432124218532,
+        "map50": 0.8022676105417387,
+        "map": 0.5657265333896839,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.6923624430607753,
+        "recall": 0.8797276853252648,
+        "map50": 0.844407371471882,
+        "map": 0.5667165954058853,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.7295700359756442,
+        "recall": 0.8667821369756854,
+        "map50": 0.8754143550305222,
+        "map": 0.6209057205066768,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5306320662554759,
+        "recall": 0.36082474226804123,
+        "map50": 0.4165891241433988,
+        "map": 0.24345447629632364,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 32,
+    "timestamp": 1765191440.854562,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.7788674938989285,
+        "recall": 0.782246879334258,
+        "map50": 0.8286224620477961,
+        "map": 0.589998536523705,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7676784575092256,
+        "recall": 0.8426626323751891,
+        "map50": 0.862263219896482,
+        "map": 0.5788897667290664,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8525152006298917,
+        "recall": 0.8129797291087614,
+        "map50": 0.8914646415502525,
+        "map": 0.6309617096397273,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5708168485946264,
+        "recall": 0.35051546391752575,
+        "map50": 0.46813365615230124,
+        "map": 0.2870350537142087,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 33,
+    "timestamp": 1765191458.678304,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.7894900757863195,
+        "recall": 0.7461858529819695,
+        "map50": 0.8114100028940622,
+        "map": 0.5808143034525426,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7960002549073677,
+        "recall": 0.8293894715982462,
+        "map50": 0.8691200873199331,
+        "map": 0.5932000962452296,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8865638498020201,
+        "recall": 0.7948387096774193,
+        "map50": 0.8878175879493148,
+        "map": 0.6299536455749017,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5907378339939432,
+        "recall": 0.4175257731958763,
+        "map50": 0.501544840445748,
+        "map": 0.30552405823771617,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 34,
+    "timestamp": 1765191476.6719441,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.836950637128635,
+        "recall": 0.6977046394522123,
+        "map50": 0.8217175077326598,
+        "map": 0.5811260018808514,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7535356260719628,
+        "recall": 0.8812405446293494,
+        "map50": 0.8772916820077267,
+        "map": 0.5911517305680485,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8324016350255957,
+        "recall": 0.8348387096774194,
+        "map50": 0.8903269713272526,
+        "map": 0.6365896073973791,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5696899774290598,
+        "recall": 0.39581333911230815,
+        "map50": 0.4698446824218478,
+        "map": 0.2846213099631662,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 35,
+    "timestamp": 1765191494.684773,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.801809449223702,
+        "recall": 0.7364771151178918,
+        "map50": 0.8185350718119764,
+        "map": 0.5791701269759295,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7500396515510339,
+        "recall": 0.869894099848714,
+        "map50": 0.8712368480521536,
+        "map": 0.5867716505261609,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8458965898518569,
+        "recall": 0.81451921968051,
+        "map50": 0.8848407128355422,
+        "map": 0.6215449843380615,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.549212512941164,
+        "recall": 0.42783505154639173,
+        "map50": 0.45806287512751515,
+        "map": 0.27201669713076054,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 36,
+    "timestamp": 1765191512.7751255,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.7856861555135625,
+        "recall": 0.7475728155339806,
+        "map50": 0.8248195938707139,
+        "map": 0.5878920604951207,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.8067872604106797,
+        "recall": 0.8290468986384266,
+        "map50": 0.867390774330669,
+        "map": 0.5846503066187458,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8588561030907406,
+        "recall": 0.8322666090408026,
+        "map50": 0.8985844515226711,
+        "map": 0.6376069946264512,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5601989606065693,
+        "recall": 0.4639175257731959,
+        "map50": 0.47804947671576514,
+        "map": 0.295598500755893,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 37,
+    "timestamp": 1765191530.846001,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.7900391785933955,
+        "recall": 0.7281553398058253,
+        "map50": 0.8055670184763637,
+        "map": 0.5739170780071301,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7967834836927917,
+        "recall": 0.8423028604571722,
+        "map50": 0.8738272417964338,
+        "map": 0.5840584006381275,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8103412336091158,
+        "recall": 0.8425806451612903,
+        "map50": 0.8782312351275179,
+        "map": 0.6211858157515163,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5081035082339147,
+        "recall": 0.5618556701030928,
+        "map50": 0.493901206502874,
+        "map": 0.2910398284967489,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 38,
+    "timestamp": 1765191548.7677972,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.7913564810876312,
+        "recall": 0.7461858529819695,
+        "map50": 0.8287905164339762,
+        "map": 0.5912838584202856,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7718751929119387,
+        "recall": 0.8623298033282905,
+        "map50": 0.8721402989969533,
+        "map": 0.5855431371406732,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8624205726795292,
+        "recall": 0.8250196598583696,
+        "map50": 0.8953353699106511,
+        "map": 0.6333558370471052,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5959834882212769,
+        "recall": 0.42783505154639173,
+        "map50": 0.4923815841126051,
+        "map": 0.3038129671789613,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 39,
+    "timestamp": 1765191566.7959242,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.7658788758040586,
+        "recall": 0.7794729542302358,
+        "map50": 0.8350214957243253,
+        "map": 0.5919211437806935,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.763396417932485,
+        "recall": 0.8751891074130106,
+        "map50": 0.8772312944754285,
+        "map": 0.5915809755302555,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.7949782355648387,
+        "recall": 0.8619354838709677,
+        "map50": 0.9013245837074326,
+        "map": 0.6231438704081245,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.6202448778784656,
+        "recall": 0.4175257731958763,
+        "map50": 0.48291938363478976,
+        "map": 0.28789742519189454,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 40,
+    "timestamp": 1765191584.6830237,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.7917464809039162,
+        "recall": 0.7276757416994741,
+        "map50": 0.8178357785478796,
+        "map": 0.5800093504065775,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7227523264280636,
+        "recall": 0.8872919818456884,
+        "map50": 0.8725748995289094,
+        "map": 0.5915506490867709,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.7814507855935473,
+        "recall": 0.8580645161290322,
+        "map50": 0.878388387201255,
+        "map": 0.6203978480137009,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5667859805341177,
+        "recall": 0.3556701030927835,
+        "map50": 0.44243688890454147,
+        "map": 0.26298730517482366,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 41,
+    "timestamp": 1765191603.3548107,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.8445610478780688,
+        "recall": 0.7234482622832138,
+        "map50": 0.8192630086017403,
+        "map": 0.5799200226362375,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7820375945172766,
+        "recall": 0.8691376701966718,
+        "map50": 0.8778212475775142,
+        "map": 0.5875010547702192,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8244365688139967,
+        "recall": 0.8543595704886028,
+        "map50": 0.8863476029946872,
+        "map": 0.6245329227967223,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5959802783033503,
+        "recall": 0.422680412371134,
+        "map50": 0.4937407844036512,
+        "map": 0.3042059371180058,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 42,
+    "timestamp": 1765191621.0013633,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.7548839595907416,
+        "recall": 0.7669902912621359,
+        "map50": 0.8239903698157613,
+        "map": 0.5919907205291317,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7581911874070097,
+        "recall": 0.9016641452344932,
+        "map50": 0.8818491866400163,
+        "map": 0.5920322871161582,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8455510911804064,
+        "recall": 0.8194290305485751,
+        "map50": 0.8903032675107835,
+        "map": 0.6368311235329124,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5651870265518356,
+        "recall": 0.44329896907216493,
+        "map50": 0.44459672541191037,
+        "map": 0.2687494211836576,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 43,
+    "timestamp": 1765191638.5794058,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.8161551415975417,
+        "recall": 0.72039741604959,
+        "map50": 0.815327158005006,
+        "map": 0.5835285846658496,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.770437654679659,
+        "recall": 0.8729198184568835,
+        "map50": 0.8737238457740505,
+        "map": 0.5884566223181686,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8252840287431956,
+        "recall": 0.8289116606087154,
+        "map50": 0.8797395753970106,
+        "map": 0.6355760380237914,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.6084683989665609,
+        "recall": 0.3865979381443299,
+        "map50": 0.4787014545926555,
+        "map": 0.29093464560772764,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 44,
+    "timestamp": 1765191656.505177,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.810490522433156,
+        "recall": 0.7296034965937879,
+        "map50": 0.8203728842537871,
+        "map": 0.5908508669830207,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7892042717012998,
+        "recall": 0.8668683812405447,
+        "map50": 0.8785486954561487,
+        "map": 0.5934399657768963,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8057266723876982,
+        "recall": 0.864516129032258,
+        "map50": 0.8796278190555096,
+        "map": 0.6276978373118165,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.6157591475023001,
+        "recall": 0.4708555544149684,
+        "map50": 0.5426742310094426,
+        "map": 0.3283125009215613,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 45,
+    "timestamp": 1765191674.1636043,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.808734721093222,
+        "recall": 0.7565274474659588,
+        "map50": 0.8308329518251945,
+        "map": 0.5940013210501968,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.749723299041363,
+        "recall": 0.8903177004538578,
+        "map50": 0.8816378283030958,
+        "map": 0.5993518412481363,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8294511849057895,
+        "recall": 0.8529032258064516,
+        "map50": 0.8910566849331977,
+        "map": 0.6373208303758978,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.6182047184318518,
+        "recall": 0.45071543265010844,
+        "map50": 0.4928520765447407,
+        "map": 0.29878997736561796,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 46,
+    "timestamp": 1765191691.8531988,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.8249137205246998,
+        "recall": 0.7517337031900139,
+        "map50": 0.8338714739670883,
+        "map": 0.6010566189716859,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7922332222363853,
+        "recall": 0.8653555219364599,
+        "map50": 0.8841640284474532,
+        "map": 0.5974652002231062,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8405217620721497,
+        "recall": 0.84,
+        "map50": 0.8945159252914205,
+        "map": 0.6344065783679181,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.643168670970656,
+        "recall": 0.4484536082474227,
+        "map50": 0.533574287677534,
+        "map": 0.32995946420679545,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 47,
+    "timestamp": 1765191709.423969,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.8115108092397287,
+        "recall": 0.7583619217923425,
+        "map50": 0.8283046797673572,
+        "map": 0.5956796872944718,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.797151503407645,
+        "recall": 0.8561111540183654,
+        "map50": 0.8786413449646453,
+        "map": 0.5959687662368132,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.7965397139982389,
+        "recall": 0.8735483870967742,
+        "map50": 0.8998609287198971,
+        "map": 0.6399535176352686,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5859890156838672,
+        "recall": 0.520618556701031,
+        "map50": 0.5252211810502376,
+        "map": 0.3257560807168549,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 48,
+    "timestamp": 1765191727.065867,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.827052416712831,
+        "recall": 0.742850802721353,
+        "map50": 0.8259557871012849,
+        "map": 0.5971064443223809,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.7707089480897399,
+        "recall": 0.8812405446293494,
+        "map50": 0.8796957861355992,
+        "map": 0.5950439666052002,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.836776798692052,
+        "recall": 0.8374193548387097,
+        "map50": 0.8842447528177275,
+        "map": 0.6331693996511939,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5730616078100355,
+        "recall": 0.470488728220687,
+        "map50": 0.5165168690787384,
+        "map": 0.3164031088140403,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 49,
+    "timestamp": 1765191744.7318277,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.8409926656770976,
+        "recall": 0.723994452149792,
+        "map50": 0.8276317665301308,
+        "map": 0.5930042200762988,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.8049219448947086,
+        "recall": 0.8562783661119516,
+        "map50": 0.877179154451928,
+        "map": 0.5949147205817237,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8332321680560402,
+        "recall": 0.8425806451612903,
+        "map50": 0.884816905219053,
+        "map": 0.6306806467653894,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.6411703493736935,
+        "recall": 0.4421110359254689,
+        "map50": 0.5246628853044951,
+        "map": 0.324178479761998,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": 50,
+    "timestamp": 1765191762.433934,
+    "training": true,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.8537860141315732,
+        "recall": 0.7128987517337032,
+        "map50": 0.8261978860865209,
+        "map": 0.5962208901788049,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.804134459103485,
+        "recall": 0.8540275525146932,
+        "map50": 0.8752967547737135,
+        "map": 0.5954275673322506,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8492112145275216,
+        "recall": 0.8284186121605477,
+        "map50": 0.879583716678203,
+        "map": 0.6259274484784189,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.5942890955629808,
+        "recall": 0.4793814432989691,
+        "map50": 0.5126384419496923,
+        "map": 0.31289181298690455,
+        "num_targets": 194
+      }
+    }
+  },
+  {
+    "epoch": null,
+    "timestamp": 1765191771.2117178,
+    "training": false,
+    "metrics": {
+      "pedestrian": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "people": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bicycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "car": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "van": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "awning-tricycle": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "bus": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "motor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 0
+      },
+      "SMV": {
+        "precision": 0.8229280017427297,
+        "recall": 0.7517337031900139,
+        "map50": 0.8332666190168037,
+        "map": 0.6007526925467225,
+        "num_targets": 721
+      },
+      "LMV": {
+        "precision": 0.792882361928555,
+        "recall": 0.8658276820152766,
+        "map50": 0.8843677257408883,
+        "map": 0.5977827578926351,
+        "num_targets": 1322
+      },
+      "AFV": {
+        "precision": 0.8377985715684239,
+        "recall": 0.8397575455639972,
+        "map50": 0.8943940117175625,
+        "map": 0.633721396228544,
+        "num_targets": 775
+      },
+      "MCV": {
+        "precision": 0.6429655495831966,
+        "recall": 0.4484536082474227,
+        "map50": 0.5323329980020034,
+        "map": 0.329312133455565,
+        "num_targets": 194
+      }
+    }
+  }
+]
