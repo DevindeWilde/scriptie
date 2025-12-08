@@ -1,7 +1,7 @@
 task: detect
 mode: train
-model: /home/ddwilde/scriptie/pretrained/small.pt
-data: /home/ddwilde/scriptie/datasets/yaml/MVRSD-stage2.yaml
+model: /home/ddwilde/scriptie/runs/mvrsd_saab/stage2-saab2/weights/best.pt
+data: /home/ddwilde/scriptie/yaml/MVRSD-stage3.yaml
 epochs: 50
 time: null
 patience: 100
@@ -13,7 +13,7 @@ cache: false
 device: null
 workers: 8
 project: /home/ddwilde/scriptie/runs/mvrsd_saab
-name: stage2-saab
+name: stage3-saab
 exist_ok: false
 pretrained: true
 optimizer: auto
@@ -116,4 +116,4 @@ erasing: 0.4
 crop_fraction: 1.0
 cfg: null
 tracker: botsort.yaml
-save_dir: /home/ddwilde/scriptie/runs/mvrsd_saab/stage2-saab
+save_dir: /home/ddwilde/scriptie/runs/mvrsd_saab/stage3-saab
