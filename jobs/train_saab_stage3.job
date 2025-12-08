@@ -20,15 +20,15 @@ source $HOME/ednet_env/bin/activate
 cd $HOME/scriptie
 
 python train.py \
-  --cfg cfg/models/ednet/ednet-s.yaml \
-  --data datasets/yaml/MVRSD-stage3.yaml \
+  --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/ddwilde/scriptie/yaml/MVRSD-stage3.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 32 \
-  --project runs/mvrsd_saab \
+  --project /home/ddwilde/scriptie/runs/mvrsd_saab \
   --name stage3-saab \
   --workers 8 \
-  --weights runs/mvrsd_saab/stage2-saab/weights/best.pt \
+  --weights /home/ddwilde/scriptie/runs/mvrsd_saab/stage2-saab2/weights/best.pt \
   --override lora.enable=True \
   --override lora.freeze_backbone=True \
   --override replay.enable=True \
