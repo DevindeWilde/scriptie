@@ -13,7 +13,7 @@ cache: false
 device: null
 workers: 8
 project: /home/ddwilde/scriptie/runs/mvrsd_lower
-name: stage2-lower5
+name: stage2-lower
 exist_ok: false
 pretrained: true
 optimizer: auto
@@ -132,4 +132,4 @@ erasing: 0.4
 crop_fraction: 1.0
 cfg: null
 tracker: botsort.yaml
-save_dir: /home/ddwilde/scriptie/runs/mvrsd_lower/stage2-lower5
+save_dir: /home/ddwilde/scriptie/runs/mvrsd_lower/stage2-lower

@@ -1,5 +1,12 @@
+Collecting scipy
+  Downloading scipy-1.15.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+Requirement already satisfied: numpy<2.5,>=1.23.5 in /gpfs/home6/ddwilde/ednet_env/lib/python3.10/site-packages (from scipy) (2.2.6)
+Downloading scipy-1.15.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.7/37.7 MB 174.3 MB/s  0:00:00
+Installing collected packages: scipy
+Successfully installed scipy-1.15.3
 EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
-[34m[1mengine/trainer: [0mtask=detect, mode=train, model=pretrained/small.pt, data=/home/ddwilde/scriptie/yaml/MVRSD-stage2.yaml, epochs=50, time=None, patience=100, batch=32, imgsz=640, save=True, save_period=-1, cache=False, device=None, workers=8, project=/home/ddwilde/scriptie/runs/mvrsd_lower, name=stage2-lower5, exist_ok=False, pretrained=True, optimizer=auto, verbose=True, seed=0, deterministic=True, single_cls=False, rect=False, cos_lr=False, close_mosaic=10, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, lora={'enable': False, 'rank': 8, 'alpha': 16.0, 'dropout': 0.0, 'feature_pyramid_indices': [16, 22, 25], 'include_detection_head': True, 'freeze_backbone': True, 'adapter_dir': 'adapters', 'init_adapter': None}, continual={'enable': False, 'batches': [], 'adapter_strategy': 'last', 'save_history': True}, replay={'enable': False, 'tap_layers': {'P3': 16, 'P4': 25}, 'tiny_max_pixels': 32, 'context_scale': 1.5, 'buffer_per_class': 64, 'sample_per_batch': 16, 'loss_weight': 1.0, 'scale_weighting': 'stride'}, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=None, iou=0.7, max_det=300, half=False, dnn=False, plots=True, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.0, copy_paste=0.0, auto_augment=randaugment, erasing=0.4, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=/home/ddwilde/scriptie/runs/mvrsd_lower/stage2-lower5
+[34m[1mengine/trainer: [0mtask=detect, mode=train, model=pretrained/small.pt, data=/home/ddwilde/scriptie/yaml/MVRSD-stage2.yaml, epochs=50, time=None, patience=100, batch=32, imgsz=640, save=True, save_period=-1, cache=False, device=None, workers=8, project=/home/ddwilde/scriptie/runs/mvrsd_lower, name=stage2-lower, exist_ok=False, pretrained=True, optimizer=auto, verbose=True, seed=0, deterministic=True, single_cls=False, rect=False, cos_lr=False, close_mosaic=10, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, lora={'enable': False, 'rank': 8, 'alpha': 16.0, 'dropout': 0.0, 'feature_pyramid_indices': [16, 22, 25], 'include_detection_head': True, 'freeze_backbone': True, 'adapter_dir': 'adapters', 'init_adapter': None}, continual={'enable': False, 'batches': [], 'adapter_strategy': 'last', 'save_history': True}, replay={'enable': False, 'tap_layers': {'P3': 16, 'P4': 25}, 'tiny_max_pixels': 32, 'context_scale': 1.5, 'buffer_per_class': 64, 'sample_per_batch': 16, 'loss_weight': 1.0, 'scale_weighting': 'stride'}, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=None, iou=0.7, max_det=300, half=False, dnn=False, plots=True, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.0, copy_paste=0.0, auto_augment=randaugment, erasing=0.4, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=/home/ddwilde/scriptie/runs/mvrsd_lower/stage2-lower
 Overriding model.yaml nc=10 with nc=12
 
                    from  n    params  module                                       arguments                     
@@ -36,19 +43,17 @@ Overriding model.yaml nc=10 with nc=12
 ednet-s summary: 510 layers, 9,324,176 parameters, 9,324,160 gradients
 
 Transferred 737/753 items from pretrained weights
-[34m[1mTensorBoard: [0mStart with 'tensorboard --logdir /home/ddwilde/scriptie/runs/mvrsd_lower/stage2-lower5', view at http://localhost:6006/
+[34m[1mTensorBoard: [0mStart with 'tensorboard --logdir /home/ddwilde/scriptie/runs/mvrsd_lower/stage2-lower', view at http://localhost:6006/
 Freezing layer 'model.29.dfl.conv.weight'
 [34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks with YOLOv8n...
 [34m[1mAMP: [0mchecks passed ✅
-[34m[1mtrain: [0mNew cache created: /gpfs/home6/ddwilde/scriptie/datasets/MVRSD-stage2/train/labels.cache
-[34m[1mval: [0mNew cache created: /gpfs/home6/ddwilde/scriptie/datasets/MVRSD-stage2/val/labels.cache
 No module named 'seaborn'
 [34m[1moptimizer:[0m 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
 [34m[1moptimizer:[0m AdamW(lr=0.000625, momentum=0.9) with parameter groups 117 weight(decay=0.0), 146 weight(decay=0.0005), 139 bias(decay=0.0)
 [34m[1mTensorBoard: [0mmodel graph visualization added ✅
 Image sizes 640 train, 640 val
 Using 8 dataloader workers
-Logging results to [1m/home/ddwilde/scriptie/runs/mvrsd_lower/stage2-lower5[0m
+Logging results to [1m/home/ddwilde/scriptie/runs/mvrsd_lower/stage2-lower[0m
 Starting training for 50 epochs...
 
       Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
@@ -202,11 +207,11 @@ Closing dataloader mosaic
       Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
                    all        295       2043      0.837      0.805      0.874      0.611
 
-50 epochs completed in 0.228 hours.
-Optimizer stripped from /home/ddwilde/scriptie/runs/mvrsd_lower/stage2-lower5/weights/last.pt, 19.3MB
-Optimizer stripped from /home/ddwilde/scriptie/runs/mvrsd_lower/stage2-lower5/weights/best.pt, 19.3MB
+50 epochs completed in 0.226 hours.
+Optimizer stripped from /home/ddwilde/scriptie/runs/mvrsd_lower/stage2-lower/weights/last.pt, 19.3MB
+Optimizer stripped from /home/ddwilde/scriptie/runs/mvrsd_lower/stage2-lower/weights/best.pt, 19.3MB
 
-Validating /home/ddwilde/scriptie/runs/mvrsd_lower/stage2-lower5/weights/best.pt...
+Validating /home/ddwilde/scriptie/runs/mvrsd_lower/stage2-lower/weights/best.pt...
 EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
 ednet-s summary (fused): 394 layers, 9,300,208 parameters, 0 gradients
                    all        295       2043      0.837      0.804      0.874      0.611
@@ -214,5 +219,6 @@ ednet-s summary (fused): 394 layers, 9,300,208 parameters, 0 gradients
                    LMV        249       1322      0.798      0.856      0.881        0.6
 WARNING ⚠️ ConfusionMatrix plot failure: No module named 'seaborn'
 WARNING ⚠️ ConfusionMatrix plot failure: No module named 'seaborn'
-Speed: 0.2ms preprocess, 2.0ms inference, 0.0ms loss, 0.4ms postprocess per image
-Results saved to [1m/home/ddwilde/scriptie/runs/mvrsd_lower/stage2-lower5[0m
+Speed: 0.1ms preprocess, 2.0ms inference, 0.0ms loss, 0.2ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/mvrsd_lower/stage2-lower[0m
+Training finished. Results saved in: /home/ddwilde/scriptie/runs/mvrsd_lower/stage2-lower
