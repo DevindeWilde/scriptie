@@ -1,0 +1,9 @@
+path: /home/ddwilde/scriptie/datasets/dota-stage1
+train: train/images
+val: val/images
+test: test/images
+names:
+  9: large-vehicle
+ 10: small-vehicle
+ 11: helicopter
+ 12: roundabout

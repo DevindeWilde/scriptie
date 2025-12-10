@@ -17,17 +17,16 @@ module load Python/3.11.3-GCCcore-12.3.0
 source $HOME/ednet_env/bin/activate
 cd $HOME/scriptie
 
-python convert_dota_to_yolo.py \
-  --src /home/ddwilde/scriptie/datasets/DOTA/ \
-  --dst /home/ddwilde/scriptie/datasets/dota-yolo \
-  --splits train val \
-  --image-subdir images \
-  --label-subdir labels
+#python convert_dota_to_yolo.py \
+#  --src /home/ddwilde/scriptie/datasets/DOTA/ \
+#  --dst /home/ddwilde/scriptie/datasets/dota-yolo \
+#  --splits train val \
+#  --image-subdir images \
+#  --label-subdir labels
 
-python split_val_test.py --root /home/ddwilde/scriptie/datasets/dota-yolo
+#python split_val_test.py --root /home/ddwilde/scriptie/datasets/dota-yolo
 
-python split_dota_stages.py \
-  --labels-root /home/ddwilde/scriptie/datasets/dota-yolo/labels \
-  --splits train val test
+python split_dota_stages.py --root /home/ddwilde/scriptie/datasets/dota-yolo
+
 
 

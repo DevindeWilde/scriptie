@@ -1,0 +1,11 @@
+path: /home/ddwilde/scriptie/datasets/dota-yolo/dota-stage2
+train: train/images
+val: val/images
+test: test/images
+names:
+  3: baseball-diamond
+  4: tennis-court
+  5: basketball-court
+  6: ground-track-field
+ 13: soccer-ball-field
+ 14: swimming-pool

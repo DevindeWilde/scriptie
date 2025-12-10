@@ -1,0 +1,10 @@
+path: /path/to/dota-stage3
+train: train/images
+val: val/images
+test: test/images
+names:
+  0: plane
+  1: ship
+  2: storage-tank
+  7: harbor
+  8: bridge
