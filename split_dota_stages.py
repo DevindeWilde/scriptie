@@ -10,9 +10,9 @@ from pathlib import Path
 from typing import Dict, List, Set
 
 STAGE_CLASSES: Dict[str, Set[int]] = {
-    "stage1": {10, 9, 11, 12, 16, 17},
+    "stage1": {10, 9, 11, 12},
     "stage2": {3, 4, 5, 6, 13, 14},
-    "stage3": {0, 1, 2, 7, 8, 15},
+    "stage3": {0, 1, 2, 7, 8},
 }
 
 
