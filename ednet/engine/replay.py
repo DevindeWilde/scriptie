@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+import math
 import random
 from collections import defaultdict
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
 import torch
@@ -127,10 +129,12 @@ class TinyReplayBuffer:
         per_class_capacity: int = 64,
         dtype: torch.dtype = torch.float16,
         device: torch.device | str = torch.device("cpu"),
+        carryover_growth: float = 1.5,
     ) -> None:
         self.capacity = per_class_capacity
         self.dtype = dtype
         self.device = torch.device(device)
+        self.carryover_growth = float(max(carryover_growth, 1.0))
         self._storage: Dict[int, List[TinyReplayItem]] = defaultdict(list)
 
     def __len__(self) -> int:
@@ -175,6 +179,65 @@ class TinyReplayBuffer:
 
     def clear(self) -> None:
         self._storage.clear()
+
+    # ------------------------------------------------------------------ Persistence helpers
+    def state_dict(self) -> Dict:
+        storage = {
+            int(cls): [
+                {
+                    "level": item.level,
+                    "tiny": item.tiny.cpu(),
+                    "context": item.context.cpu(),
+                    "metadata": item.metadata,
+                }
+                for item in items
+            ]
+            for cls, items in self._storage.items()
+        }
+        return {
+            "capacity": self.capacity,
+            "dtype": str(self.dtype),
+            "storage": storage,
+        }
+
+    def load_state_dict(self, state: Dict) -> int:
+        self._storage.clear()
+        storage = state.get("storage", {})
+        total = 0
+        for cls, entries in storage.items():
+            cls_id = int(cls)
+            bucket = self._storage[cls_id]
+            for entry in entries:
+                bucket.append(
+                    TinyReplayItem(
+                        cls=cls_id,
+                        level=entry.get("level", "P3"),
+                        tiny=entry.get("tiny", torch.empty(0)).to(self.device, dtype=self.dtype),
+                        context=entry.get("context", torch.empty(0)).to(self.device, dtype=self.dtype),
+                        metadata=entry.get("metadata", {}),
+                    )
+                )
+                total += 1
+        return total
+
+    def save(self, path: str | Path) -> int:
+        target = Path(path)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        state = self.state_dict()
+        torch.save(state, target)
+        return len(self)
+
+    def load(self, path: str | Path, allow_growth: bool = True) -> int:
+        source = Path(path)
+        if not source.exists():
+            raise FileNotFoundError(source)
+        state = torch.load(source, map_location="cpu")
+        storage = state.get("storage", {})
+        if allow_growth and storage:
+            max_bucket = max(len(entries) for entries in storage.values())
+            growth_limit = int(math.ceil(max_bucket * self.carryover_growth))
+            self.capacity = max(self.capacity, growth_limit)
+        return self.load_state_dict(state)
 
 
 def build_replay_batch(

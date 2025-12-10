@@ -2,6 +2,7 @@ import math
 import random
 from copy import copy
 from pathlib import Path
+from typing import Optional
 
 import numpy as np
 import torch
@@ -127,6 +128,9 @@ class DetectionTrainer(BaseTrainer):
         self.replay_max_edge = 32.0
         self.replay_context_scale = 1.5
         self.replay_scale_weight = "uniform"
+        self.replay_save_path: Optional[Path] = None
+        self.replay_init_buffer: Optional[Path] = None
+        self.replay_capacity_growth = 1.5
         self._feature_tapper_needs_activation = False
         if self.replay_enabled:
             tap_layers = replay_args.get("tap_layers") or {}
@@ -136,7 +140,13 @@ class DetectionTrainer(BaseTrainer):
             self._feature_tapper_needs_activation = True
             LOGGER.info(f"Replay feature tapper initialized for layers: {list(tap_config.layers.keys())}")
             capacity = int(replay_args.get("buffer_per_class", 64))
-            self.replay_buffer = TinyReplayBuffer(per_class_capacity=capacity, dtype=torch.float16, device="cpu")
+            self.replay_capacity_growth = float(replay_args.get("carryover_growth", 1.5))
+            self.replay_buffer = TinyReplayBuffer(
+                per_class_capacity=capacity,
+                dtype=torch.float16,
+                device="cpu",
+                carryover_growth=self.replay_capacity_growth,
+            )
             default_stride_map = {"P2": 4, "P3": 8, "P4": 16, "P5": 32, "P6": 64}
             stride_overrides = replay_args.get("strides") or {}
             self.replay_strides = {
@@ -149,6 +159,17 @@ class DetectionTrainer(BaseTrainer):
             self.replay_max_edge = float(replay_args.get("tiny_max_pixels", 32))
             self.replay_context_scale = float(replay_args.get("context_scale", 1.5))
             self.replay_scale_weight = replay_args.get("scale_weighting", "uniform")
+            store_dir = replay_args.get("store_dir", "replay")
+            buffer_file = replay_args.get("buffer_file", "buffer.pt")
+            if store_dir:
+                store_root = Path(self.save_dir) / store_dir
+                store_root.mkdir(parents=True, exist_ok=True)
+                fname = buffer_file or "buffer.pt"
+                self.replay_save_path = store_root / fname
+            init_buffer = replay_args.get("init_buffer")
+            if init_buffer:
+                self.replay_init_buffer = Path(init_buffer)
+                self._load_replay_memory(self.replay_init_buffer)
         return model
 
     def _load_adapter_weights(self, model, adapter_path):
@@ -227,6 +248,8 @@ class DetectionTrainer(BaseTrainer):
     def _after_checkpoint(self, ctx):
         if getattr(self, "feature_tapper", None):
             self.feature_tapper.activate()
+        if self.replay_enabled:
+            self._maybe_save_replay_buffer(ctx)
         super()._after_checkpoint(ctx)
 
     def compute_auxiliary_loss(self, batch):
@@ -319,3 +342,31 @@ class DetectionTrainer(BaseTrainer):
             mapping = {lvl: idx + 1 for idx, lvl in enumerate(sorted(self.replay_levels))}
             return 1.0 / mapping.get(level, 1)
         return 1.0
+
+    def _load_replay_memory(self, path: Path):
+        if not self.replay_buffer:
+            return
+        try:
+            count = self.replay_buffer.load(path, allow_growth=True)
+        except FileNotFoundError:
+            LOGGER.warning(f"Replay init buffer not found at {path}")
+            return
+        except Exception as exc:  # noqa: BLE001
+            LOGGER.warning(f"Failed to load replay buffer from {path}: {exc}")
+            return
+        if count > 0:
+            LOGGER.info(f"Loaded {count} replay embeddings from {path}")
+
+    def _maybe_save_replay_buffer(self, ctx=None):
+        if not (self.replay_buffer and self.replay_save_path):
+            return
+        if len(self.replay_buffer) == 0:
+            return
+        try:
+            saved = self.replay_buffer.save(self.replay_save_path)
+        except Exception as exc:  # noqa: BLE001
+            LOGGER.warning(f"Failed to save replay buffer to {self.replay_save_path}: {exc}")
+            return
+        tag = ctx.get("type") if isinstance(ctx, dict) else None
+        suffix = f" ({tag})" if tag else ""
+        LOGGER.info(f"Saved {saved} replay embeddings to {self.replay_save_path}{suffix}")

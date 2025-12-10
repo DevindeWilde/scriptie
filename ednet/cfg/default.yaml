@@ -60,6 +60,10 @@ replay: # (dict) Tiny object replay configuration (SA-AB)
   sample_per_batch: 16 # (int) maximum replay samples per class during training
   loss_weight: 1.0 # (float) scaling factor for replay consistency loss
   scale_weighting: stride # (str) weighting scheme for replay loss (uniform|stride|level)
+  store_dir: replay # (str) relative folder under run dir to store replay buffers
+  buffer_file: buffer.pt # (str) filename for saved replay buffer
+  init_buffer: # (str, optional) path to a saved replay buffer to warm-start from
+  carryover_growth: 1.5 # (float) factor to expand capacity when loading persisted buffers
 # Segmentation
 overlap_mask: True # (bool) masks should overlap during training (segment train only)
 mask_ratio: 4 # (int) mask downsample ratio (segment train only)
