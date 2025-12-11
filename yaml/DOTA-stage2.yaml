@@ -1,4 +1,4 @@
-path: /home/ddwilde/scriptie/datasets/dota-stage2
+path: /home/ddwilde/scriptie/datasets/dota-yolo-stage2
 train: train/images
 val: val/images
 test: test/images
