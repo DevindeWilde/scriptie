@@ -13,19 +13,19 @@
 
 module purge
 module load 2023
+module load CUDA/12.8.0
 module load Python/3.11.3-GCCcore-12.3.0
-module load CUDA/11.8.0
 
 source $HOME/ednet_env/bin/activate
 cd $HOME/scriptie
 
 python train.py \
   --cfg $HOME/scriptie/cfg/models/ednet/ednet-s.yaml \
-  --data $HOME/scriptie/yaml/MVRSD-stage3.yaml \
+  --data $HOME/scriptie/yaml/DOTA-stage3.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 32 \
-  --project $HOME/scriptie/runs/mvrsd_lower \
+  --project $HOME/scriptie/runs/dota_lower \
   --name stage3-lower \
   --workers 8 \
-  --weights $HOME/scriptie/runs/mvrsd_lower/stage2-lower/weights/best.pt
+  --weights $HOME/scriptie/runs/dota_lower/stage2-lower/weights/best.pt

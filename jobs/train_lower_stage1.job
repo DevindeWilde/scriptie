@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=lower-stage2
+#SBATCH --job-name=lower-stage1
 #SBATCH --time=24:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
@@ -8,8 +8,8 @@
 #SBATCH --partition=gpu_a100 
 #SBATCH --gpus-per-node=1
 #SBATCH --gres=gpu:1
-#SBATCH --output=logs/lower-stage2-%j.out
-#SBATCH --error=logs/lower-stage2-%j.err
+#SBATCH --output=logs/lower-stage1-%j.out
+#SBATCH --error=logs/lower-stage1-%j.err
 
 module purge
 module load 2023
@@ -21,11 +21,11 @@ cd $HOME/scriptie
 
 python train.py \
   --cfg $HOME/scriptie/cfg/models/ednet/ednet-s.yaml \
-  --data $HOME/scriptie/yaml/DOTA-stage2.yaml \
+  --data $HOME/scriptie/yaml/DOTA-stage1.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 32 \
   --project $HOME/scriptie/runs/dota_lower \
-  --name stage2-lower \
+  --name stage1-lower \
   --workers 8 \
-  --weights $HOME/scriptie/runs/dota_lower/stage1-lower/weights/best.pt
+  --weights pretrained/small.pt
