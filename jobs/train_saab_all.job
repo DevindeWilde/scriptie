@@ -19,7 +19,7 @@ module load Python/3.11.3-GCCcore-12.3.0
 source $HOME/ednet_env/bin/activate
 cd $HOME/scriptie
 
-python train.py   
+python train.py \
     --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \ 
     --data /home/ddwilde/scriptie/yaml/DOTA-stage1.yaml \  
     --epochs 15 \
@@ -56,6 +56,9 @@ python train.py \
   --override replay.memory_dir=/home/ddwilde/scriptie/datasets/memory/stage1 \
   --override replay.memory_ratio=0.25
 
+mv /home/ddwilde/scriptie/datasets/dota-yolo-stage2/test/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage3/test/
+mv /home/ddwilde/scriptie/datasets/dota-yolo-stage2/train/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage3/train/
+mv /home/ddwilde/scriptie/datasets/dota-yolo-stage2/val/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage3/val/
 
 python train.py \
   --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
