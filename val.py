@@ -29,8 +29,7 @@ def main(opt):
         data=opt.data,
         imgsz=opt.imgsz,
         split=opt.split,
-        project=opt.outdir,   # save logs, plots
-        name=opt.name         # experiment name inside outdir
+        project=opt.outdir,   # save logs, plots 
     )
 
     # Save metrics to a file
