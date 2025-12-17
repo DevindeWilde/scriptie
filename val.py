@@ -19,6 +19,8 @@ def main(opt):
     model = EDNet(opt.weights)
     # Disable Conv+BN fusion for LoRA checkpoints to avoid attribute errors
     try:
+        if hasattr(model, "args"):
+            model.args.fuse = False
         if hasattr(model, "model") and hasattr(model.model, "args"):
             model.model.args.fuse = False
     except AttributeError:
@@ -29,12 +31,11 @@ def main(opt):
         data=opt.data,
         imgsz=opt.imgsz,
         split=opt.split,
-        project=opt.outdir,
-        fuse=False   # save logs, plots, etc. here
+        project=opt.outdir
     )
 
     # Save metrics to a file
-    results_file = os.path.join(opt.outdir, "metrics.txt")
+    results_file = os.path.join(opt.outdir "metrics.txt")
     os.makedirs(os.path.dirname(results_file), exist_ok=True)
     metrics_attr = getattr(results, "results_dict", {})
     metrics_dict = metrics_attr() if callable(metrics_attr) else (metrics_attr or {})
