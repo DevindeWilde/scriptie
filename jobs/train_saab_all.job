@@ -36,6 +36,10 @@ python train.py \
     --override replay.sample_per_batch=16 \
     --override replay.loss_weight=0.5
 
+mv /home/ddwilde/scriptie/datasets/dota-yolo-stage1/test/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage2/test/
+mv /home/ddwilde/scriptie/datasets/dota-yolo-stage1/train/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage2/train/
+mv /home/ddwilde/scriptie/datasets/dota-yolo-stage1/val/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage2/val/
+
 python train.py \
   --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
   --data /home/ddwilde/scriptie/yaml/DOTA-stage2.yaml \
