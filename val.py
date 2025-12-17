@@ -17,6 +17,12 @@ def main(opt):
 
     # Load trained model
     model = EDNet(opt.weights)
+    # Disable Conv+BN fusion for LoRA checkpoints to avoid attribute errors
+    try:
+        if hasattr(model, "model") and hasattr(model.model, "args"):
+            model.model.args.fuse = False
+    except AttributeError:
+        pass
 
     # Run validation
     results = model.val(
@@ -24,13 +30,15 @@ def main(opt):
         imgsz=opt.imgsz,
         split=opt.split,
         project=opt.outdir,   # save logs, plots
-        name="exp"            # experiment name inside outdir
+        name=opt.name         # experiment name inside outdir
     )
 
     # Save metrics to a file
     results_file = os.path.join(opt.outdir, "metrics.txt")
+    os.makedirs(os.path.dirname(results_file), exist_ok=True)
+    metrics_dict = results.results_dict() if hasattr(results, "results_dict") else {}
     with open(results_file, "w") as f:
-        for k, v in results.items():
+        for k, v in metrics_dict.items():
             f.write(f"{k}: {v}\n")
 
     print(f"✅ Validation finished. Results saved to {opt.outdir}")
