@@ -64,6 +64,8 @@ replay: # (dict) Tiny object replay configuration (SA-AB)
   buffer_file: buffer.pt # (str) filename for saved replay buffer
   init_buffer: # (str, optional) path to a saved replay buffer to warm-start from
   carryover_growth: 1.5 # (float) factor to expand capacity when loading persisted buffers
+  memory_dir: # (str, optional) path to exemplar dataset (expects images/ and labels/ subdirs)
+  memory_ratio: 0.25 # (float) fraction of each batch drawn from memory dataset (0 disables)
 # Segmentation
 overlap_mask: True # (bool) masks should overlap during training (segment train only)
 mask_ratio: 4 # (int) mask downsample ratio (segment train only)

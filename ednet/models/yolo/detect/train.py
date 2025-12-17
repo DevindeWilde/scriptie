@@ -66,6 +66,10 @@ class DetectionTrainer(BaseTrainer):
 
     def preprocess_batch(self, batch):
         """Preprocesses a batch of images by scaling and converting to float."""
+        if self.memory_loader:
+            memory_batch = self._next_memory_batch()
+            if memory_batch:
+                batch = self._merge_memory_batch(batch, memory_batch)
         batch["img"] = batch["img"].to(self.device, non_blocking=True).float() / 255
         if self.args.multi_scale:
             imgs = batch["img"]
@@ -131,6 +135,11 @@ class DetectionTrainer(BaseTrainer):
         self.replay_save_path: Optional[Path] = None
         self.replay_init_buffer: Optional[Path] = None
         self.replay_capacity_growth = 1.5
+        self.replay_memory_dir: Optional[Path] = None
+        self.replay_memory_ratio = 0.0
+        self.memory_batch_size = 0
+        self.memory_loader = None
+        self._memory_iter = None
         self._feature_tapper_needs_activation = False
         if self.replay_enabled:
             tap_layers = replay_args.get("tap_layers") or {}
@@ -170,6 +179,15 @@ class DetectionTrainer(BaseTrainer):
             if init_buffer:
                 self.replay_init_buffer = Path(init_buffer)
                 self._load_replay_memory(self.replay_init_buffer)
+            memory_dir = replay_args.get("memory_dir")
+            memory_ratio = float(replay_args.get("memory_ratio", 0.0) or 0.0)
+            if memory_dir and memory_ratio > 0:
+                self.replay_memory_dir = Path(memory_dir)
+                self.replay_memory_ratio = max(0.0, min(memory_ratio, 1.0))
+                self.memory_batch_size = max(1, int(self.args.batch * self.replay_memory_ratio))
+            else:
+                self.replay_memory_dir = None
+                self.replay_memory_ratio = 0.0
         return model
 
     def _load_adapter_weights(self, model, adapter_path):
@@ -194,6 +212,54 @@ class DetectionTrainer(BaseTrainer):
         if self.replay_enabled and getattr(self, "feature_tapper", None) and self._feature_tapper_needs_activation:
             self.feature_tapper.activate()
             self._feature_tapper_needs_activation = False
+        if self.replay_memory_dir and self.replay_memory_ratio > 0:
+            self._build_memory_loader()
+        else:
+            self.memory_loader = None
+            self._memory_iter = None
+
+    def _build_memory_loader(self):
+        images_dir = self.replay_memory_dir / "images" if self.replay_memory_dir else None
+        if images_dir is None or not images_dir.exists():
+            LOGGER.warning(f"Replay memory directory missing or invalid: {images_dir}")
+            self.memory_loader = None
+            self._memory_iter = None
+            return
+        batch_size = max(1, int(self.args.batch * self.replay_memory_ratio))
+        self.memory_loader = self.get_dataloader(str(images_dir), batch_size=batch_size, rank=RANK, mode="train")
+        self._memory_iter = iter(self.memory_loader)
+        LOGGER.info(
+            f"Memory replay enabled from {images_dir} with batch size {batch_size} "
+            f"({self.replay_memory_ratio * 100:.1f}% of primary batch)."
+        )
+
+    def _next_memory_batch(self):
+        if not self.memory_loader:
+            return None
+        try:
+            return next(self._memory_iter)
+        except StopIteration:
+            self._memory_iter = iter(self.memory_loader)
+            return next(self._memory_iter)
+
+    def _merge_memory_batch(self, batch, memory_batch):
+        if not memory_batch:
+            return batch
+        merged = batch
+        main_imgs = merged["img"].shape[0]
+        for key in ("img", "cls", "bboxes"):
+            if key in merged and key in memory_batch:
+                merged[key] = torch.cat((merged[key], memory_batch[key]), 0)
+        if "batch_idx" in merged and "batch_idx" in memory_batch:
+            merged["batch_idx"] = torch.cat(
+                (merged["batch_idx"], memory_batch["batch_idx"] + main_imgs), 0
+            )
+        if "im_file" in merged and "im_file" in memory_batch:
+            merged["im_file"] = merged["im_file"] + memory_batch["im_file"]
+        for key in ("ori_shape", "resized_shape", "ratio_pad"):
+            if key in merged and key in memory_batch:
+                merged[key] = torch.cat((merged[key], memory_batch[key]), 0)
+        return merged
 
     def label_loss_items(self, loss_items=None, prefix="train"):
         """
