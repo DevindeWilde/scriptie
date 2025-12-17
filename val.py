@@ -29,13 +29,15 @@ def main(opt):
         data=opt.data,
         imgsz=opt.imgsz,
         split=opt.split,
-        project=opt.outdir,   # save logs, plots 
+        project=opt.outdir,
+        fuse=False   # save logs, plots, etc. here
     )
 
     # Save metrics to a file
     results_file = os.path.join(opt.outdir, "metrics.txt")
     os.makedirs(os.path.dirname(results_file), exist_ok=True)
-    metrics_dict = results.results_dict() if hasattr(results, "results_dict") else {}
+    metrics_attr = getattr(results, "results_dict", {})
+    metrics_dict = metrics_attr() if callable(metrics_attr) else (metrics_attr or {})
     with open(results_file, "w") as f:
         for k, v in metrics_dict.items():
             f.write(f"{k}: {v}\n")
