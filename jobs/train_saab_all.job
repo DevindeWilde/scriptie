@@ -19,9 +19,9 @@ module load Python/3.11.3-GCCcore-12.3.0
 source $HOME/ednet_env/bin/activate
 cd $HOME/scriptie
 
-python train.py   
-    --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \ 
-    --data /home/ddwilde/scriptie/yaml/DOTA-stage1.yaml \  
+python train.py \
+    --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
+    --data /home/ddwilde/scriptie/yaml/DOTA-stage1.yaml \
     --epochs 15 \
     --imgsz 640 \
     --batch-size 8 \
