@@ -24,7 +24,7 @@ python train.py \
   --data /home/ddwilde/scriptie/yaml/DOTA-stage3.yaml \
   --epochs 50 \
   --imgsz 640 \
-  --batch-size 32 \
+  --batch-size 8 \
   --project /home/ddwilde/scriptie/runs/dota_saab \
   --name stage3-saab \
   --workers 8 \
