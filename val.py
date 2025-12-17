@@ -7,7 +7,7 @@ def parse_args():
     parser.add_argument("--weights", type=str, required=True, help="Path to trained weights (.pt)")
     parser.add_argument("--data", type=str, required=True, help="Path to dataset yaml")
     parser.add_argument("--imgsz", type=int, default=640, help="Image size for inference")
-    parser.add_argument("--split", type=str, default="val", choices=["train", "val", "test"], help="Dataset split to validate on")
+    parser.add_argument("--split", type=str, default="test", choices=["train", "val", "test"], help="Dataset split to validate on")
     parser.add_argument("--outdir", type=str, default="validation_results", help="Folder to save validation results")
     return parser.parse_args()
 
