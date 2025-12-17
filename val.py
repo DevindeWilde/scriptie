@@ -1,6 +1,7 @@
 import argparse
 import os
 from ednet import EDNet
+from types import MethodType
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Validate EDNet model")
@@ -18,19 +19,16 @@ def main(opt):
     # Load trained model
     model = EDNet(opt.weights)
     # Disable Conv+BN fusion for LoRA checkpoints to avoid attribute errors
-    try:
-        if hasattr(model, "args"):
-            model.args.fuse = False
-        if hasattr(model, "model") and hasattr(model.model, "args"):
-            model.model.args.fuse = False
-        # Monkey-patch fuse() to no-op on the inner model so AutoBackend skip fusion
-        if hasattr(model, "model") and hasattr(model.model, "fuse"):
-            print("⚠️ Disabling model.fuse() to avoid issues with LoRA weights.")
-            def no_fuse(verbose=False, *args, **kwargs):
-                return model.model
-            model.model.fuse = no_fuse
-    except AttributeError:
-        pass
+
+    model = EDNet(opt.weights)
+
+    def no_fuse(self, verbose=False):
+        return self
+
+    if hasattr(model, "model") and any(m.__class__.__name__ == "LoRAConv2d" for m in model.model.modules()):
+        print("⚠️ Detected LoRA layers; disabling Conv+BN fusion to avoid errors.")
+        model.model.fuse = MethodType(no_fuse, model.model)
+
 
     # Run validation
     results = model.val(
