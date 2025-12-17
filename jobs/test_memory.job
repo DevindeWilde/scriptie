@@ -19,9 +19,9 @@ cd $HOME/scriptie
 
 
 # Build Stage 1 memory (ex: 25 images per Stage 1 class)
-python scripts/build_memory_dataset.py \
-  --images /home/ddwilde/scriptie/datasets/dota-yolo-stage1/train/images \
-  --labels /home/ddwilde/scriptie/datasets/dota-yolo-stage1/train/labels \
-  --dest /home/ddwilde/scriptie/datasets/memory/stage1 \
-  --classes 10 9 11 12 \
+python build_memory_dataset.py \
+  --images /home/ddwilde/scriptie/datasets/dota-yolo-stage2/train/images \
+  --labels /home/ddwilde/scriptie/datasets/dota-yolo-stage2/train/labels \
+  --dest /home/ddwilde/scriptie/datasets/memory/stage2 \
+  --classes 3 4 5 6 13 14 \
   --per-class 25
