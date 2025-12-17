@@ -22,35 +22,29 @@ cd $HOME/scriptie
 python val.py --weights /home/ddwilde/scriptie/runs/dota_saab/stage1-saab/weights/best.pt \
               --data /home/ddwilde/scriptie/yaml/DOTA-stage1.yaml \
               --split test \
-              --project /home/ddwilde/scriptie/runs/test_results \
-              --name stage1-saab
+              --outdir /home/ddwilde/scriptie/results/test_stage1_saab
 
 python val.py --weights /home/ddwilde/scriptie/runs/dota_lower/stage1-lower/weights/best.pt \
               --data /home/ddwilde/scriptie/yaml/DOTA-stage1.yaml \
               --split test \
-              --project /home/ddwilde/scriptie/runs/test_results \
-              --name stage1-lower
+              --outdir /home/ddwilde/scriptie/results/test_stage1_lower
 
 python val.py --weights /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/weights/best.pt \
               --data /home/ddwilde/scriptie/yaml/DOTA-stage2.yaml \
               --split test \
-              --project /home/ddwilde/scriptie/runs/test_results \
-              --name stage2-saab
+              --outdir /home/ddwilde/scriptie/results/test_stage2_saab
 
 python val.py --weights /home/ddwilde/scriptie/runs/dota_lower/stage2-lower/weights/best.pt \
               --data /home/ddwilde/scriptie/yaml/DOTA-stage2.yaml \
               --split test \
-              --project /home/ddwilde/scriptie/runs/test_results \
-              --name stage2-lower
+              --outdir /home/ddwilde/scriptie/results/test_stage2_lower
 
 python val.py --weights /home/ddwilde/scriptie/runs/dota_saab/stage3-saab/weights/best.pt \
               --data /home/ddwilde/scriptie/yaml/DOTA-stage3.yaml \
               --split test \
-              --project /home/ddwilde/scriptie/runs/test_results \
-              --name stage3-saab
+              --outdir /home/ddwilde/scriptie/results/test_stage3_saab
 
 python val.py --weights /home/ddwilde/scriptie/runs/dota_lower/stage3-lower/weights/best.pt \
               --data /home/ddwilde/scriptie/yaml/DOTA-stage3.yaml \
               --split test \
-              --project /home/ddwilde/scriptie/runs/test_results \
-              --name stage3-lower
+              --outdir /home/ddwilde/scriptie/results/test_stage3_lower
