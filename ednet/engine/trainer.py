@@ -445,6 +445,12 @@ class BaseTrainer:
                     self.metrics, self.fitness = self.validate()
                 aux_metrics = getattr(self, "auxiliary_info", {})
                 self.save_metrics(metrics={**self.label_loss_items(self.tloss), **self.metrics, **aux_metrics, **self.lr})
+                if getattr(self, "replay_enabled", False) and getattr(self, "replay_buffer", None):
+                    total = len(self.replay_buffer)
+                    counts = self.replay_buffer.counts() if hasattr(self.replay_buffer, "counts") else {}
+                    LOGGER.info(
+                        f"Replay buffer size after epoch {epoch + 1}: {total} embeddings across {len(counts)} classes."
+                    )
                 self.stop |= self.stopper(epoch + 1, self.fitness) or final_epoch
                 if self.args.time:
                     self.stop |= (time.time() - self.train_time_start) > (self.args.time * 3600)

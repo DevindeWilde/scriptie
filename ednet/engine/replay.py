@@ -180,6 +180,10 @@ class TinyReplayBuffer:
     def clear(self) -> None:
         self._storage.clear()
 
+    def counts(self) -> Dict[int, int]:
+        """Return number of samples stored per class."""
+        return {cls: len(items) for cls, items in self._storage.items()}
+
     # ------------------------------------------------------------------ Persistence helpers
     def state_dict(self) -> Dict:
         storage = {

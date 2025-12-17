@@ -54,7 +54,7 @@ replay: # (dict) Tiny object replay configuration (SA-AB)
   tap_layers: # (dict[str,int]) layer indices tapped for replay (P3-P4 default)
     P3: 16
     P4: 25
-  tiny_max_pixels: 32 # (int) max edge size for an object to be considered tiny
+  tiny_max_pixels: 128 # (int) max edge size for an object to be considered tiny
   context_scale: 1.5 # (float) scale factor for contextual crop around tiny object
   buffer_per_class: 64 # (int) maximum stored feature patches per class
   sample_per_batch: 16 # (int) maximum replay samples per class during training
