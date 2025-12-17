@@ -1,0 +1,100 @@
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/val.py", line 50, in <module>
+    main(opt)
+  File "/gpfs/home6/ddwilde/scriptie/val.py", line 30, in main
+    results = model.val(
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 600, in val
+    validator(model=self.model)
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/validator.py", line 124, in __call__
+    model = AutoBackend(
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/autobackend.py", line 142, in __init__
+    model = model.fuse(verbose=verbose)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/tasks.py", line 232, in fuse
+    m.conv = fuse_conv_and_bn(m.conv, m.bn)  # update conv
+  File "/gpfs/home6/ddwilde/scriptie/ednet/utils/torch_utils.py", line 228, in fuse_conv_and_bn
+    conv.in_channels,
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1962, in __getattr__
+    raise AttributeError(
+AttributeError: 'LoRAConv2d' object has no attribute 'in_channels'
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/val.py", line 50, in <module>
+    main(opt)
+  File "/gpfs/home6/ddwilde/scriptie/val.py", line 30, in main
+    results = model.val(
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 600, in val
+    validator(model=self.model)
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/validator.py", line 143, in __call__
+    self.data = check_det_dataset(self.args.data)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/data/utils.py", line 327, in check_det_dataset
+    raise FileNotFoundError(m)
+FileNotFoundError: 
+Dataset '/home/ddwilde/scriptie/yaml/DOTA-stage1.yaml' images not found ⚠️, missing path '/gpfs/home6/ddwilde/scriptie/datasets/dota-yolo-stage1/val/images'
+Note dataset download directory is '/gpfs/home6/ddwilde/datasets'. You can update this in '/home/ddwilde/.config/Ultralytics/settings.yaml'
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/val.py", line 50, in <module>
+    main(opt)
+  File "/gpfs/home6/ddwilde/scriptie/val.py", line 30, in main
+    results = model.val(
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 600, in val
+    validator(model=self.model)
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/validator.py", line 124, in __call__
+    model = AutoBackend(
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/autobackend.py", line 142, in __init__
+    model = model.fuse(verbose=verbose)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/tasks.py", line 232, in fuse
+    m.conv = fuse_conv_and_bn(m.conv, m.bn)  # update conv
+  File "/gpfs/home6/ddwilde/scriptie/ednet/utils/torch_utils.py", line 228, in fuse_conv_and_bn
+    conv.in_channels,
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1962, in __getattr__
+    raise AttributeError(
+AttributeError: 'LoRAConv2d' object has no attribute 'in_channels'
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/val.py", line 50, in <module>
+    main(opt)
+  File "/gpfs/home6/ddwilde/scriptie/val.py", line 30, in main
+    results = model.val(
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 600, in val
+    validator(model=self.model)
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/validator.py", line 143, in __call__
+    self.data = check_det_dataset(self.args.data)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/data/utils.py", line 327, in check_det_dataset
+    raise FileNotFoundError(m)
+FileNotFoundError: 
+Dataset '/home/ddwilde/scriptie/yaml/DOTA-stage2.yaml' images not found ⚠️, missing path '/gpfs/home6/ddwilde/scriptie/datasets/dota-yolo-stage2/val/images'
+Note dataset download directory is '/gpfs/home6/ddwilde/datasets'. You can update this in '/home/ddwilde/.config/Ultralytics/settings.yaml'
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/val.py", line 50, in <module>
+    main(opt)
+  File "/gpfs/home6/ddwilde/scriptie/val.py", line 30, in main
+    results = model.val(
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 600, in val
+    validator(model=self.model)
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/validator.py", line 124, in __call__
+    model = AutoBackend(
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/autobackend.py", line 142, in __init__
+    model = model.fuse(verbose=verbose)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/tasks.py", line 232, in fuse
+    m.conv = fuse_conv_and_bn(m.conv, m.bn)  # update conv
+  File "/gpfs/home6/ddwilde/scriptie/ednet/utils/torch_utils.py", line 228, in fuse_conv_and_bn
+    conv.in_channels,
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1962, in __getattr__
+    raise AttributeError(
+AttributeError: 'LoRAConv2d' object has no attribute 'in_channels'
+[34m[1mval: [0mScanning /gpfs/home6/ddwilde/scriptie/datasets/dota-yolo-stage3/test/labels.cache... 91 images, 0 backgrounds, 0 corrupt: 100%|██████████| 91/91 [00:00<?, ?it/s][34m[1mval: [0mScanning /gpfs/home6/ddwilde/scriptie/datasets/dota-yolo-stage3/test/labels.cache... 91 images, 0 backgrounds, 0 corrupt: 100%|██████████| 91/91 [00:00<?, ?it/s]
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):   0%|          | 0/6 [00:00<?, ?it/s]                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  17%|█▋        | 1/6 [00:02<00:10,  2.07s/it]                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  33%|███▎      | 2/6 [00:02<00:05,  1.31s/it]                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  50%|█████     | 3/6 [00:05<00:05,  1.71s/it]                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  67%|██████▋   | 4/6 [00:05<00:02,  1.34s/it]                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  83%|████████▎ | 5/6 [00:05<00:00,  1.11it/s]                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 6/6 [00:06<00:00,  1.54it/s]                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 6/6 [00:06<00:00,  1.01s/it]

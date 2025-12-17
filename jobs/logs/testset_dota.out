@@ -1,0 +1,28 @@
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,301,768 parameters, 0 gradients
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,301,768 parameters, 0 gradients
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,301,768 parameters, 0 gradients
+                   all         91       4413      0.334      0.152      0.169     0.0925
+                 plane         21        748      0.743      0.678      0.703      0.384
+                  ship         24        575      0.822      0.645      0.714      0.447
+          storage-tank         12        543      0.724      0.455      0.529      0.307
+      baseball-diamond          7         29          0          0          0          0
+          tennis-court         19        121          0          0          0          0
+      basketball-court          7         22          1          0          0          0
+    ground-track-field         12         25          0          0          0          0
+                harbor         24        406      0.723      0.496      0.575      0.247
+                bridge         14         58          1          0     0.0107     0.0038
+         large-vehicle         27        860          0          0          0          0
+         small-vehicle         37        889          0          0          0          0
+            helicopter          7         31          0          0          0          0
+            roundabout         12         37          0          0          0          0
+     soccer-ball-field         11         26          0          0          0          0
+         swimming-pool          7         43          0          0          0          0
+Speed: 0.4ms preprocess, 10.8ms inference, 0.0ms loss, 0.5ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/results/test_stage3_lower/val2[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/results/test_stage3_lower

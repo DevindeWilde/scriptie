@@ -35,7 +35,7 @@ def main(opt):
     )
 
     # Save metrics to a file
-    results_file = os.path.join(opt.outdir "metrics.txt")
+    results_file = os.path.join(opt.outdir, "metrics.txt")
     os.makedirs(os.path.dirname(results_file), exist_ok=True)
     metrics_attr = getattr(results, "results_dict", {})
     metrics_dict = metrics_attr() if callable(metrics_attr) else (metrics_attr or {})
