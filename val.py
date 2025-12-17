@@ -23,6 +23,12 @@ def main(opt):
             model.args.fuse = False
         if hasattr(model, "model") and hasattr(model.model, "args"):
             model.model.args.fuse = False
+        # Monkey-patch fuse() to no-op on the inner model so AutoBackend skip fusion
+        if hasattr(model, "model") and hasattr(model.model, "fuse"):
+            print("⚠️ Disabling model.fuse() to avoid issues with LoRA weights.")
+            def no_fuse(verbose=False, *args, **kwargs):
+                return model.model
+            model.model.fuse = no_fuse
     except AttributeError:
         pass
 
