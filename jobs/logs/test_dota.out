@@ -1,0 +1,35 @@
+=== /home/ddwilde/scriptie/datasets/dota-yolo-stage1/test/labels ===
+Total objects: 1817
+  class  9   large-vehicle: 860
+  class 10   small-vehicle: 889
+  class 11      helicopter: 31
+  class 12      roundabout: 37
+=== /home/ddwilde/scriptie/datasets/dota-yolo-stage2/test/labels ===
+Total objects: 2083
+  class  3 baseball-diamond: 29
+  class  4    tennis-court: 121
+  class  5 basketball-court: 22
+  class  6 ground-track-field: 25
+  class  9   large-vehicle: 860
+  class 10   small-vehicle: 889
+  class 11      helicopter: 31
+  class 12      roundabout: 37
+  class 13 soccer-ball-field: 26
+  class 14   swimming-pool: 43
+=== /home/ddwilde/scriptie/datasets/dota-yolo-stage3/test/labels ===
+Total objects: 4413
+  class  0           plane: 748
+  class  1            ship: 575
+  class  2    storage-tank: 543
+  class  3 baseball-diamond: 29
+  class  4    tennis-court: 121
+  class  5 basketball-court: 22
+  class  6 ground-track-field: 25
+  class  7          harbor: 406
+  class  8          bridge: 58
+  class  9   large-vehicle: 860
+  class 10   small-vehicle: 889
+  class 11      helicopter: 31
+  class 12      roundabout: 37
+  class 13 soccer-ball-field: 26
+  class 14   swimming-pool: 43
