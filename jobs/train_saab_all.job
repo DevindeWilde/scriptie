@@ -5,7 +5,7 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=64G
-#SBATCH --partition=gpu_h100 
+#SBATCH --partition=gpu_a100 
 #SBATCH --gpus-per-node=1
 #SBATCH --gres=gpu:1
 #SBATCH --output=logs/saab-stage-all-%j.out
@@ -22,7 +22,7 @@ cd $HOME/scriptie
 python train.py   
     --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \ 
     --data /home/ddwilde/scriptie/yaml/DOTA-stage1.yaml \  
-    --epochs 50 \
+    --epochs 15 \
     --imgsz 640 \
     --batch-size 8 \
     --project /home/ddwilde/scriptie/runs/dota_saab \
@@ -39,7 +39,7 @@ python train.py
 python train.py \
   --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
   --data /home/ddwilde/scriptie/yaml/DOTA-stage2.yaml \
-  --epochs 50 \
+  --epochs 15 \
   --imgsz 640 \
   --batch-size 8 \
   --project /home/ddwilde/scriptie/runs/dota_saab \
@@ -60,7 +60,7 @@ python train.py \
 python train.py \
   --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
   --data /home/ddwilde/scriptie/yaml/DOTA-stage3.yaml \
-  --epochs 50 \
+  --epochs 15 \
   --imgsz 640 \
   --batch-size 8 \
   --project /home/ddwilde/scriptie/runs/dota_saab \
