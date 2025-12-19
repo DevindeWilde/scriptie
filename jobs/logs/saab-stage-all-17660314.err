@@ -1,0 +1,45 @@
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 5, in <module>
+    from ednet import EDNet
+  File "/gpfs/home6/ddwilde/scriptie/ednet/__init__.py", line 6, in <module>
+    from ednet.models import YOLO, EDNet
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/__init__.py", line 1, in <module>
+    from .yolo import YOLO, EDNet
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/__init__.py", line 1, in <module>
+    from ednet.models.yolo import classify, detect, segment
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/classify/__init__.py", line 1, in <module>
+    from ednet.models.yolo.classify.predict import ClassificationPredictor
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/classify/predict.py", line 1, in <module>
+    import cv2
+ModuleNotFoundError: No module named 'cv2'
+/var/spool/slurm/slurmd/job17660314/slurm_script: line 23: --cfg: command not found
+/var/spool/slurm/slurmd/job17660314/slurm_script: line 24: --data: command not found
+/var/spool/slurm/slurmd/job17660314/slurm_script: line 25: --epochs: command not found
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 5, in <module>
+    from ednet import EDNet
+  File "/gpfs/home6/ddwilde/scriptie/ednet/__init__.py", line 6, in <module>
+    from ednet.models import YOLO, EDNet
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/__init__.py", line 1, in <module>
+    from .yolo import YOLO, EDNet
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/__init__.py", line 1, in <module>
+    from ednet.models.yolo import classify, detect, segment
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/classify/__init__.py", line 1, in <module>
+    from ednet.models.yolo.classify.predict import ClassificationPredictor
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/classify/predict.py", line 1, in <module>
+    import cv2
+ModuleNotFoundError: No module named 'cv2'
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 5, in <module>
+    from ednet import EDNet
+  File "/gpfs/home6/ddwilde/scriptie/ednet/__init__.py", line 6, in <module>
+    from ednet.models import YOLO, EDNet
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/__init__.py", line 1, in <module>
+    from .yolo import YOLO, EDNet
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/__init__.py", line 1, in <module>
+    from ednet.models.yolo import classify, detect, segment
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/classify/__init__.py", line 1, in <module>
+    from ednet.models.yolo.classify.predict import ClassificationPredictor
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/classify/predict.py", line 1, in <module>
+    import cv2
+ModuleNotFoundError: No module named 'cv2'

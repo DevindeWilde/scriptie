@@ -1,0 +1,90 @@
+/gpfs/home6/ddwilde/scriptie/ednet/engine/trainer.py:278: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  self.scaler = torch.cuda.amp.GradScaler(enabled=self.amp)
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/ednet/data/base.py", line 113, in get_img_files
+    raise FileNotFoundError(f"{self.prefix}{p} does not exist")
+FileNotFoundError: [34m[1mtrain: [0m/gpfs/home6/ddwilde/scriptie/datasets/dota-yolo-stage1/train/images does not exist
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 87, in <module>
+    main(opt)
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 78, in main
+    results = model.train(**train_params)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 767, in train
+    self.trainer.train()
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/trainer.py", line 215, in train
+    self._do_train(world_size)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/trainer.py", line 335, in _do_train
+    self._setup_train(world_size)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/detect/train.py", line 211, in _setup_train
+    super()._setup_train(world_size)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/trainer.py", line 298, in _setup_train
+    self.train_loader = self.get_dataloader(self.trainset, batch_size=batch_size, rank=LOCAL_RANK, mode="train")
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/detect/train.py", line 59, in get_dataloader
+    dataset = self.build_dataset(dataset_path, mode, batch_size)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/detect/train.py", line 53, in build_dataset
+    return build_yolo_dataset(self.args, img_path, batch, self.data, mode=mode, rect=mode == "val", stride=gs)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/data/build.py", line 85, in build_yolo_dataset
+    return dataset(
+  File "/gpfs/home6/ddwilde/scriptie/ednet/data/dataset.py", line 63, in __init__
+    super().__init__(*args, **kwargs)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/data/base.py", line 71, in __init__
+    self.im_files = self.get_img_files(self.img_path)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/data/base.py", line 118, in get_img_files
+    raise FileNotFoundError(f"{self.prefix}Error loading data from {img_path}\n{HELP_URL}") from e
+FileNotFoundError: [34m[1mtrain: [0mError loading data from /gpfs/home6/ddwilde/scriptie/datasets/dota-yolo-stage1/train/images
+See https://docs.ultralytics.com/datasets for dataset formatting guidance.
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 87, in <module>
+    main(opt)
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 63, in main
+    model = EDNet(opt.weights)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/model.py", line 47, in __init__
+    super().__init__(model=model or fixed_model_path, task=task, verbose=verbose)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/model.py", line 14, in __init__
+    super().__init__(model=model, task=task, verbose=verbose)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 132, in __init__
+    self._load(model, task=task)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 251, in _load
+    self.model, self.ckpt = attempt_load_one_weight(weights)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/tasks.py", line 659, in attempt_load_one_weight
+    ckpt, weight = torch_safe_load(weight)  # load ckpt
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/tasks.py", line 580, in torch_safe_load
+    ckpt = torch.load(file, map_location="cpu")
+  File "/gpfs/home6/ddwilde/scriptie/ednet/utils/patches.py", line 85, in torch_load
+    return _torch_load(*args, **kwargs)
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 1484, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/ddwilde/scriptie/runs/dota_saab/stage1-saab2/weights/best.pt'
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 87, in <module>
+    main(opt)
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 63, in main
+    model = EDNet(opt.weights)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/model.py", line 47, in __init__
+    super().__init__(model=model or fixed_model_path, task=task, verbose=verbose)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/model.py", line 14, in __init__
+    super().__init__(model=model, task=task, verbose=verbose)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 132, in __init__
+    self._load(model, task=task)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 251, in _load
+    self.model, self.ckpt = attempt_load_one_weight(weights)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/tasks.py", line 659, in attempt_load_one_weight
+    ckpt, weight = torch_safe_load(weight)  # load ckpt
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/tasks.py", line 580, in torch_safe_load
+    ckpt = torch.load(file, map_location="cpu")
+  File "/gpfs/home6/ddwilde/scriptie/ednet/utils/patches.py", line 85, in torch_load
+    return _torch_load(*args, **kwargs)
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 1484, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/ddwilde/scriptie/runs/dota_saab/stage2-saab2/weights/best.pt'
