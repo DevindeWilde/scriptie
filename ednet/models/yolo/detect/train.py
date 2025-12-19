@@ -249,7 +249,17 @@ class DetectionTrainer(BaseTrainer):
         main_imgs = merged["img"].shape[0]
         for key in ("img", "cls", "bboxes"):
             if key in merged and key in memory_batch:
-                merged[key] = torch.cat((merged[key], memory_batch[key]), 0)
+                mem_val = memory_batch[key]
+                if isinstance(mem_val, (list, tuple)):
+                    if len(mem_val) == 0:
+                        mem_val = torch.empty_like(merged[key][:0])
+                    elif torch.is_tensor(mem_val[0]):
+                        mem_val = torch.stack(mem_val, dim=0)
+                    else:
+                        mem_val = torch.tensor(mem_val, dtype=merged[key].dtype)
+                if not torch.is_tensor(mem_val):
+                    mem_val = torch.tensor(mem_val, dtype=merged[key].dtype)
+                merged[key] = torch.cat((merged[key], mem_val), 0)
         if "batch_idx" in merged and "batch_idx" in memory_batch:
             merged["batch_idx"] = torch.cat(
                 (merged["batch_idx"], memory_batch["batch_idx"] + main_imgs), 0
