@@ -1,6 +1,5 @@
 EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
-[34m[1mengine/trainer: [0mtask=detect, mode=train, model=/home/ddwilde/scriptie/pretrained/small.pt, data=/home/ddwilde/scriptie/yaml/DOTA-stage1.yaml, epochs=15, time=None, patience=100, batch=8, imgsz=640, save=True, save_period=-1, cache=False, device=None, workers=8, project=/home/ddwilde/scriptie/runs/dota_saab, name=stage1-saab2, exist_ok=False, pretrained=True, optimizer=auto, verbose=True, seed=0, deterministic=True, single_cls=False, rect=False, cos_lr=False, close_mosaic=10, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, lora={'enable': True, 'freeze_backbone': True}, continual={'enable': False, 'batches': [], 'adapter_strategy': 'last', 'save_history': True}, replay={'enable': True, 'buffer_per_class': 128, 'sample_per_batch': 16, 'loss_weight': 0.5}, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=None, iou=0.7, max_det=300, half=False, dnn=False, plots=True, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.0, copy_paste=0.0, auto_augment=randaugment, erasing=0.4, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=/home/ddwilde/scriptie/runs/dota_saab/stage1-saab2
-Overriding model.yaml nc=10 with nc=15
+[34m[1mengine/trainer: [0mtask=detect, mode=train, model=/home/ddwilde/scriptie/runs/dota_saab/stage1-saab2/weights/best.pt, data=/home/ddwilde/scriptie/yaml/DOTA-stage2.yaml, epochs=15, time=None, patience=100, batch=4, imgsz=640, save=True, save_period=-1, cache=False, device=None, workers=8, project=/home/ddwilde/scriptie/runs/dota_saab, name=stage2-saab2, exist_ok=False, pretrained=True, optimizer=auto, verbose=True, seed=0, deterministic=True, single_cls=False, rect=False, cos_lr=False, close_mosaic=10, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, lora={'enable': True, 'freeze_backbone': True}, continual={'enable': False, 'batches': [], 'adapter_strategy': 'last', 'save_history': True}, replay={'enable': True, 'buffer_per_class': 128, 'sample_per_batch': 8, 'loss_weight': 0.5, 'init_buffer': '/home/ddwilde/scriptie/runs/dota_saab/stage1-saab2/replay/buffer.pt', 'memory_dir': '/home/ddwilde/scriptie/datasets/memory/stage1', 'memory_ratio': 0.25}, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=None, iou=0.7, max_det=300, half=False, dnn=False, plots=True, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.0, copy_paste=0.0, auto_augment=randaugment, erasing=0.4, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=/home/ddwilde/scriptie/runs/dota_saab/stage2-saab2
 
                    from  n    params  module                                       arguments                     
   0                  -1  1       928  ednet.nn.modules.conv.Conv                   [3, 32, 3, 2]                 
@@ -35,10 +34,10 @@ Overriding model.yaml nc=10 with nc=15
  29    [19, 22, 25, 28]  1   1628424  ednet.nn.modules.head.v10Detect              [15, [64, 128, 256, 512]]     
 ednet-s summary: 510 layers, 9,325,736 parameters, 9,325,720 gradients
 
-Transferred 737/753 items from pretrained weights
+Transferred 725/753 items from pretrained weights
 LoRA enabled: 28 adapters (rank=8, alpha=16.0, freeze_backbone=True)
 Replay feature tapper initialized for layers: ['P3', 'P4']
-[34m[1mTensorBoard: [0mStart with 'tensorboard --logdir /home/ddwilde/scriptie/runs/dota_saab/stage1-saab2', view at http://localhost:6006/
+[34m[1mTensorBoard: [0mStart with 'tensorboard --logdir /home/ddwilde/scriptie/runs/dota_saab/stage2-saab2', view at http://localhost:6006/
 WARNING ⚠️ setting 'requires_grad=True' for frozen layer 'model.0.conv.weight'. See ednet.engine.trainer for customization of frozen layers.
 WARNING ⚠️ setting 'requires_grad=True' for frozen layer 'model.0.bn.weight'. See ednet.engine.trainer for customization of frozen layers.
 WARNING ⚠️ setting 'requires_grad=True' for frozen layer 'model.0.bn.bias'. See ednet.engine.trainer for customization of frozen layers.
@@ -443,3 +442,14 @@ WARNING ⚠️ setting 'requires_grad=True' for frozen layer 'model.29.one2one_c
 WARNING ⚠️ setting 'requires_grad=True' for frozen layer 'model.29.one2one_cv3.3.2.bias'. See ednet.engine.trainer for customization of frozen layers.
 [34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks with YOLOv8n...
 [34m[1mAMP: [0mchecks passed ✅
+Plotting labels to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab2/labels.jpg... 
+[34m[1moptimizer:[0m 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+[34m[1moptimizer:[0m AdamW(lr=0.000526, momentum=0.9) with parameter groups 117 weight(decay=0.0), 202 weight(decay=0.0005), 139 bias(decay=0.0)
+Memory replay enabled from /home/ddwilde/scriptie/datasets/memory/stage1/images with batch size 1 (25.0% of primary batch).
+[34m[1mTensorBoard: [0mWARNING ⚠️ TensorBoard graph visualization failure 'LoRAConv2d' object has no attribute 'in_channels'
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to [1m/home/ddwilde/scriptie/runs/dota_saab/stage2-saab2[0m
+Starting training for 15 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
