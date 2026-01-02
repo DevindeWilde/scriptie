@@ -229,7 +229,14 @@ class BaseModel(nn.Module):
                 if isinstance(m, (Conv, Conv2, DWConv)) and hasattr(m, "bn"):
                     if isinstance(m, Conv2):
                         m.fuse_convs()
-                    m.conv = fuse_conv_and_bn(m.conv, m.bn)  # update conv
+                    conv_layer = getattr(m, "conv", None)
+                    if isinstance(conv_layer, LoRAConv2d):
+                        LOGGER.warning(f"Skipping fusion for LoRA-wrapped layer {m.__class__.__name__}")
+                        continue
+                    if conv_layer is None or not hasattr(conv_layer, "in_channels"):
+                        LOGGER.warning("Skipping fusion for layer without standard Conv2d weights")
+                        continue
+                    m.conv = fuse_conv_and_bn(conv_layer, m.bn)  # update conv
                     delattr(m, "bn")  # remove batchnorm
                     m.forward = m.forward_fuse  # update forward
                 if isinstance(m, ConvTranspose) and hasattr(m, "bn"):
