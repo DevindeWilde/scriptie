@@ -244,16 +244,26 @@ class DetectionTrainer(BaseTrainer):
 
     def _ensure_tensor(self, value, reference):
         if torch.is_tensor(value):
-            return value.to(reference.device, dtype=reference.dtype)
+            if torch.is_tensor(reference):
+                return value.to(reference.device, dtype=reference.dtype)
+            return value
         if isinstance(value, (list, tuple)):
             if len(value) == 0:
-                return reference.new_empty((0, *reference.shape[1:]))
-            if torch.is_tensor(value[0]):
-                value = torch.stack(value, dim=0)
-            else:
-                value = torch.tensor(value, dtype=reference.dtype, device=reference.device)
-            return value
-        return reference.new_tensor(value)
+                if torch.is_tensor(reference):
+                    return reference.new_empty((0, *reference.shape[1:]))
+                return []
+            if isinstance(value, (list, tuple)):
+                if torch.is_tensor(value[0]):
+                    stacked = torch.stack(value, dim=0)
+                    if torch.is_tensor(reference):
+                        return stacked.to(reference.device, dtype=reference.dtype)
+                    return stacked
+            if torch.is_tensor(reference):
+                return torch.tensor(value, dtype=reference.dtype, device=reference.device)
+            return torch.tensor(value)
+        if torch.is_tensor(reference):
+            return reference.new_tensor(value)
+        return torch.tensor(value)
 
     def _merge_memory_batch(self, batch, memory_batch):
         if not memory_batch:
@@ -278,12 +288,15 @@ class DetectionTrainer(BaseTrainer):
             merged["im_file"] = merged["im_file"] + memory_batch["im_file"]
         for key in ("ori_shape", "resized_shape", "ratio_pad"):
             if key in merged and key in memory_batch:
-                mem_val = memory_batch[key]
-                if isinstance(mem_val, (list, tuple)):
-                    mem_val = torch.tensor(mem_val, dtype=merged[key].dtype, device=merged[key].device)
-                if not torch.is_tensor(mem_val):
-                    mem_val = torch.tensor(mem_val, dtype=merged[key].dtype, device=merged[key].device)
-                merged[key] = torch.cat((merged[key], mem_val), 0)
+                if torch.is_tensor(merged[key]):
+                    mem_val = self._ensure_tensor(memory_batch[key], merged[key])
+                    merged[key] = torch.cat((merged[key], mem_val), 0)
+                else:
+                    mem_val = memory_batch[key]
+                    if isinstance(mem_val, list):
+                        merged[key] = merged[key] + mem_val
+                    else:
+                        merged[key].append(mem_val)
         return merged
 
     def label_loss_items(self, loss_items=None, prefix="train"):
