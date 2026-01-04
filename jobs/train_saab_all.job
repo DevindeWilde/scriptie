@@ -24,7 +24,7 @@ python train.py \
     --data /home/ddwilde/scriptie/yaml/DOTA-stage1.yaml \
     --epochs 30 \
     --imgsz 640 \
-    --batch-size 4 \
+    --batch-size 8 \
     --project /home/ddwilde/scriptie/runs/dota_saab \
     --name stage1-saab \
     --workers 8 \
@@ -46,7 +46,7 @@ python train.py \
   --data /home/ddwilde/scriptie/yaml/DOTA-stage2.yaml \
   --epochs 30 \
   --imgsz 640 \
-  --batch-size 4 \
+  --batch-size 8 \
   --project /home/ddwilde/scriptie/runs/dota_saab \
   --name stage2-saab \
   --workers 8 \
@@ -57,7 +57,7 @@ python train.py \
   --override replay.buffer_per_class=128 \
   --override replay.sample_per_batch=32 \
   --override replay.loss_weight=1.0 \
-  --override replay.init_buffer=/home/ddwilde/scriptie/runs/dota_saab/stage1-saab/replay/buffer.pt \
+  --override replay.init_buffer=/home/ddwilde/scriptie/runs/dota_saab/stage1-saab2/replay/buffer.pt \
   --override replay.memory_dir=/home/ddwilde/scriptie/datasets/memory/stage1 \
   --override replay.memory_ratio=0.5 \
   --override replay.tiny_max_pixels=320
@@ -71,7 +71,7 @@ python train.py \
   --data /home/ddwilde/scriptie/yaml/DOTA-stage3.yaml \
   --epochs 30 \
   --imgsz 640 \
-  --batch-size 4 \
+  --batch-size 8 \
   --project /home/ddwilde/scriptie/runs/dota_saab \
   --name stage3-saab \
   --workers 8 \
@@ -82,7 +82,7 @@ python train.py \
   --override replay.buffer_per_class=128 \
   --override replay.sample_per_batch=32 \
   --override replay.loss_weight=1.0 \
-  --override replay.init_buffer=/home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/buffer.pt \
+  --override replay.init_buffer=/home/ddwilde/scriptie/runs/dota_saab/stage2-saab2/replay/buffer.pt \
   --override replay.memory_dir=/home/ddwilde/scriptie/datasets/memory/stage3 \
   --override replay.memory_ratio=0.5 \
   --override replay.tiny_max_pixels=320
