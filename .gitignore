@@ -1,9 +1,7 @@
 # Ignore Python cache directories
-datasets/
 __pycache__/
 *.py[cod]
 
-!/datasets/**/labels/
-!/datasets/**/labels/*.txt
+datasets/**/**/images/
 # Ignore macOS .DS_Store file
 .DS_Store
