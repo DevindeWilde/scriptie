@@ -1,4 +1,0 @@
-usage: build_memory_dataset.py [-h] --images IMAGES --labels LABELS --dest
-                               DEST --classes CLASSES [CLASSES ...]
-                               [--per-class PER_CLASS] [--seed SEED]
-build_memory_dataset.py: error: argument --classes: invalid int value: '3,'
