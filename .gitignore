@@ -3,5 +3,7 @@ datasets/
 __pycache__/
 *.py[cod]
 
+!/datasets/**/labels/
+!/datasets/**/labels/*.txt
 # Ignore macOS .DS_Store file
 .DS_Store
