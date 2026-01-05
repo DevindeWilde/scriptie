@@ -1,7 +1,7 @@
 [
   {
     "epoch": 1,
-    "timestamp": 1765452918.822087,
+    "timestamp": 1767615875.5571933,
     "training": true,
     "metrics": {
       "plane": {
@@ -113,7 +113,7 @@
   },
   {
     "epoch": 2,
-    "timestamp": 1765452954.6999068,
+    "timestamp": 1767615911.168444,
     "training": true,
     "metrics": {
       "plane": {
@@ -225,7 +225,7 @@
   },
   {
     "epoch": 3,
-    "timestamp": 1765452991.8466334,
+    "timestamp": 1767615948.1518564,
     "training": true,
     "metrics": {
       "plane": {
@@ -337,7 +337,7 @@
   },
   {
     "epoch": 4,
-    "timestamp": 1765453026.3376968,
+    "timestamp": 1767615982.2962506,
     "training": true,
     "metrics": {
       "plane": {
@@ -449,7 +449,7 @@
   },
   {
     "epoch": 5,
-    "timestamp": 1765453063.875009,
+    "timestamp": 1767616019.5180483,
     "training": true,
     "metrics": {
       "plane": {
@@ -561,7 +561,7 @@
   },
   {
     "epoch": 6,
-    "timestamp": 1765453101.365353,
+    "timestamp": 1767616057.0002606,
     "training": true,
     "metrics": {
       "plane": {
@@ -673,7 +673,7 @@
   },
   {
     "epoch": 7,
-    "timestamp": 1765453138.6557174,
+    "timestamp": 1767616094.1212423,
     "training": true,
     "metrics": {
       "plane": {
@@ -785,7 +785,7 @@
   },
   {
     "epoch": 8,
-    "timestamp": 1765453173.012598,
+    "timestamp": 1767616128.3281837,
     "training": true,
     "metrics": {
       "plane": {
@@ -897,7 +897,7 @@
   },
   {
     "epoch": 9,
-    "timestamp": 1765453209.0970924,
+    "timestamp": 1767616164.3523443,
     "training": true,
     "metrics": {
       "plane": {
@@ -1009,7 +1009,7 @@
   },
   {
     "epoch": 10,
-    "timestamp": 1765453245.7562742,
+    "timestamp": 1767616200.8900034,
     "training": true,
     "metrics": {
       "plane": {
@@ -1121,7 +1121,7 @@
   },
   {
     "epoch": 11,
-    "timestamp": 1765453282.075145,
+    "timestamp": 1767616237.2344174,
     "training": true,
     "metrics": {
       "plane": {
@@ -1233,7 +1233,7 @@
   },
   {
     "epoch": 12,
-    "timestamp": 1765453318.655255,
+    "timestamp": 1767616273.5677893,
     "training": true,
     "metrics": {
       "plane": {
@@ -1345,7 +1345,7 @@
   },
   {
     "epoch": 13,
-    "timestamp": 1765453354.99497,
+    "timestamp": 1767616309.7604115,
     "training": true,
     "metrics": {
       "plane": {
@@ -1457,7 +1457,7 @@
   },
   {
     "epoch": 14,
-    "timestamp": 1765453390.9655523,
+    "timestamp": 1767616345.442015,
     "training": true,
     "metrics": {
       "plane": {
@@ -1569,7 +1569,7 @@
   },
   {
     "epoch": 15,
-    "timestamp": 1765453425.3703122,
+    "timestamp": 1767616379.5084813,
     "training": true,
     "metrics": {
       "plane": {
@@ -1681,7 +1681,7 @@
   },
   {
     "epoch": 16,
-    "timestamp": 1765453463.6893852,
+    "timestamp": 1767616417.8849866,
     "training": true,
     "metrics": {
       "plane": {
@@ -1793,7 +1793,7 @@
   },
   {
     "epoch": 17,
-    "timestamp": 1765453499.959615,
+    "timestamp": 1767616454.1011033,
     "training": true,
     "metrics": {
       "plane": {
@@ -1905,7 +1905,7 @@
   },
   {
     "epoch": 18,
-    "timestamp": 1765453535.7881782,
+    "timestamp": 1767616489.8078637,
     "training": true,
     "metrics": {
       "plane": {
@@ -2017,7 +2017,7 @@
   },
   {
     "epoch": 19,
-    "timestamp": 1765453573.6095154,
+    "timestamp": 1767616527.2889063,
     "training": true,
     "metrics": {
       "plane": {
@@ -2129,7 +2129,7 @@
   },
   {
     "epoch": 20,
-    "timestamp": 1765453610.6349058,
+    "timestamp": 1767616564.6684232,
     "training": true,
     "metrics": {
       "plane": {
@@ -2241,7 +2241,7 @@
   },
   {
     "epoch": 21,
-    "timestamp": 1765453646.7629375,
+    "timestamp": 1767616600.9482813,
     "training": true,
     "metrics": {
       "plane": {
@@ -2353,7 +2353,7 @@
   },
   {
     "epoch": 22,
-    "timestamp": 1765453682.623891,
+    "timestamp": 1767616636.8467994,
     "training": true,
     "metrics": {
       "plane": {
@@ -2465,7 +2465,7 @@
   },
   {
     "epoch": 23,
-    "timestamp": 1765453718.6080725,
+    "timestamp": 1767616672.6729982,
     "training": true,
     "metrics": {
       "plane": {
@@ -2577,7 +2577,7 @@
   },
   {
     "epoch": 24,
-    "timestamp": 1765453754.9637632,
+    "timestamp": 1767616709.010981,
     "training": true,
     "metrics": {
       "plane": {
@@ -2689,7 +2689,7 @@
   },
   {
     "epoch": 25,
-    "timestamp": 1765453791.1142,
+    "timestamp": 1767616745.114339,
     "training": true,
     "metrics": {
       "plane": {
@@ -2801,7 +2801,7 @@
   },
   {
     "epoch": 26,
-    "timestamp": 1765453827.3422644,
+    "timestamp": 1767616781.2678373,
     "training": true,
     "metrics": {
       "plane": {
@@ -2913,7 +2913,7 @@
   },
   {
     "epoch": 27,
-    "timestamp": 1765453863.1848419,
+    "timestamp": 1767616817.0404794,
     "training": true,
     "metrics": {
       "plane": {
@@ -3025,7 +3025,7 @@
   },
   {
     "epoch": 28,
-    "timestamp": 1765453899.7549498,
+    "timestamp": 1767616853.619949,
     "training": true,
     "metrics": {
       "plane": {
@@ -3137,7 +3137,7 @@
   },
   {
     "epoch": 29,
-    "timestamp": 1765453935.5199323,
+    "timestamp": 1767616889.335426,
     "training": true,
     "metrics": {
       "plane": {
@@ -3249,7 +3249,7 @@
   },
   {
     "epoch": 30,
-    "timestamp": 1765453971.1651623,
+    "timestamp": 1767616924.7825272,
     "training": true,
     "metrics": {
       "plane": {
@@ -3361,7 +3361,7 @@
   },
   {
     "epoch": 31,
-    "timestamp": 1765454008.4119117,
+    "timestamp": 1767616961.9961581,
     "training": true,
     "metrics": {
       "plane": {
@@ -3473,7 +3473,7 @@
   },
   {
     "epoch": 32,
-    "timestamp": 1765454044.971672,
+    "timestamp": 1767616998.6251645,
     "training": true,
     "metrics": {
       "plane": {
@@ -3585,7 +3585,7 @@
   },
   {
     "epoch": 33,
-    "timestamp": 1765454080.9754095,
+    "timestamp": 1767617034.616453,
     "training": true,
     "metrics": {
       "plane": {
@@ -3697,7 +3697,7 @@
   },
   {
     "epoch": 34,
-    "timestamp": 1765454117.1986678,
+    "timestamp": 1767617070.9113848,
     "training": true,
     "metrics": {
       "plane": {
@@ -3809,7 +3809,7 @@
   },
   {
     "epoch": 35,
-    "timestamp": 1765454154.4584875,
+    "timestamp": 1767617107.9494498,
     "training": true,
     "metrics": {
       "plane": {
@@ -3921,7 +3921,7 @@
   },
   {
     "epoch": 36,
-    "timestamp": 1765454190.088071,
+    "timestamp": 1767617143.8291652,
     "training": true,
     "metrics": {
       "plane": {
@@ -4033,7 +4033,7 @@
   },
   {
     "epoch": 37,
-    "timestamp": 1765454227.7541203,
+    "timestamp": 1767617181.423331,
     "training": true,
     "metrics": {
       "plane": {
@@ -4145,7 +4145,7 @@
   },
   {
     "epoch": 38,
-    "timestamp": 1765454264.1702726,
+    "timestamp": 1767617217.7550187,
     "training": true,
     "metrics": {
       "plane": {
@@ -4257,7 +4257,7 @@
   },
   {
     "epoch": 39,
-    "timestamp": 1765454301.2528553,
+    "timestamp": 1767617254.5706682,
     "training": true,
     "metrics": {
       "plane": {
@@ -4369,7 +4369,7 @@
   },
   {
     "epoch": 40,
-    "timestamp": 1765454338.4769945,
+    "timestamp": 1767617291.6192782,
     "training": true,
     "metrics": {
       "plane": {
@@ -4481,7 +4481,7 @@
   },
   {
     "epoch": 41,
-    "timestamp": 1765454377.7524183,
+    "timestamp": 1767617330.9863923,
     "training": true,
     "metrics": {
       "plane": {
@@ -4593,7 +4593,7 @@
   },
   {
     "epoch": 42,
-    "timestamp": 1765454415.230218,
+    "timestamp": 1767617368.4842882,
     "training": true,
     "metrics": {
       "plane": {
@@ -4705,7 +4705,7 @@
   },
   {
     "epoch": 43,
-    "timestamp": 1765454452.1383724,
+    "timestamp": 1767617405.3647885,
     "training": true,
     "metrics": {
       "plane": {
@@ -4817,7 +4817,7 @@
   },
   {
     "epoch": 44,
-    "timestamp": 1765454488.0465171,
+    "timestamp": 1767617441.099936,
     "training": true,
     "metrics": {
       "plane": {

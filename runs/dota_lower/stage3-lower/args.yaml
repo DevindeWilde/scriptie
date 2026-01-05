@@ -53,7 +53,7 @@ replay:
   tap_layers:
     P3: 16
     P4: 25
-  tiny_max_pixels: 32
+  tiny_max_pixels: 128
   context_scale: 1.5
   buffer_per_class: 64
   sample_per_batch: 16
@@ -63,6 +63,8 @@ replay:
   buffer_file: buffer.pt
   init_buffer: null
   carryover_growth: 1.5
+  memory_dir: null
+  memory_ratio: 0.25
 overlap_mask: true
 mask_ratio: 4
 dropout: 0.0
