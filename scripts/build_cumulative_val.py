@@ -28,20 +28,32 @@ def write_label_dir(target_dir: Path, labels: Dict[str, List[str]]) -> None:
         out_path = target_dir / name
         out_path.write_text("\n".join(lines))
 
+def ensure_stage_specific_copy(stage_dir: Path) -> Path:
+    """Persist the original stage-specific val labels under val_sep/labels."""
+    sep_dir = stage_dir / "val_sep" / "labels"
+    if sep_dir.exists():
+        return sep_dir
+    val_dir = stage_dir / "val" / "labels"
+    sep_dir.mkdir(parents=True, exist_ok=True)
+    for txt in sorted(val_dir.glob("*.txt")):
+        sep_dir.joinpath(txt.name).write_text(txt.read_text())
+    return sep_dir
+
+
 def main() -> None:
-    cumulative: Dict[str, List[str]] = {}
+    cumulative: Dict[str, List[str]] | None = None
     for stage in STAGE_ORDER:
         stage_dir = DATASET_ROOT / f"dota-yolo-{stage}"
-        val_labels = stage_dir / "val" / "labels"
-        stage_records = read_label_dir(val_labels)
-        if not cumulative:
+        base_dir = ensure_stage_specific_copy(stage_dir)
+        stage_records = read_label_dir(base_dir)
+        if cumulative is None:
             cumulative = {name: lines[:] for name, lines in stage_records.items()}
         else:
             for name, lines in stage_records.items():
                 cumulative.setdefault(name, []).extend(lines)
-        val_all_dir = stage_dir / "val_all" / "labels"
-        write_label_dir(val_all_dir, cumulative)
-        print(f"Wrote {len(cumulative)} label files to {val_all_dir}")
+        target_val = stage_dir / "val" / "labels"
+        write_label_dir(target_val, cumulative)
+        print(f"Stage {stage} cumulative val labels written ({len(cumulative)} files).")
 
 
 if __name__ == "__main__":
