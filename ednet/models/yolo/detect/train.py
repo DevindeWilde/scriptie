@@ -1,3 +1,4 @@
+import contextlib
 import math
 import random
 from copy import copy
@@ -11,8 +12,8 @@ import torch.nn.functional as F
 
 from ednet.data import build_dataloader, build_yolo_dataset
 from ednet.engine.replay import (
+    DetectionPreLogitTapper,
     FeatureTapConfig,
-    FeatureTapper,
     TinyReplayBuffer,
     build_replay_batch,
     extract_tiny_embeddings,
@@ -130,7 +131,6 @@ class DetectionTrainer(BaseTrainer):
         self.replay_samples_per_class = 0
         self.replay_loss_weight = 1.0
         self.replay_max_edge = 32.0
-        self.replay_context_scale = 1.5
         self.replay_scale_weight = "uniform"
         self.replay_save_path: Optional[Path] = None
         self.replay_init_buffer: Optional[Path] = None
@@ -144,10 +144,24 @@ class DetectionTrainer(BaseTrainer):
         if self.replay_enabled:
             tap_layers = replay_args.get("tap_layers") or {}
             layer_map = {k: int(v) for k, v in tap_layers.items()} if tap_layers else FeatureTapConfig().layers.copy()
-            tap_config = FeatureTapConfig(layers=layer_map, detach=True)
-            self.feature_tapper = FeatureTapper(model, tap_config, auto_activate=False)
-            self._feature_tapper_needs_activation = True
-            LOGGER.info(f"Replay feature tapper initialized for layers: {list(tap_config.layers.keys())}")
+            detect_module = None
+            with contextlib.suppress(AttributeError, IndexError):
+                detect_module = de_parallel(model).model[-1]
+            level_indices = self._resolve_detect_level_indices(detect_module, layer_map.keys()) if detect_module else {}
+            if detect_module is not None and level_indices:
+                self.feature_tapper = DetectionPreLogitTapper(
+                    detect_module,
+                    level_indices=level_indices,
+                    detach=False,
+                    auto_activate=False,
+                )
+                self._feature_tapper_needs_activation = True
+                LOGGER.info(
+                    "Replay feature tapper initialized for detection head levels: %s",
+                    list(level_indices.keys()),
+                )
+            else:
+                LOGGER.warning("Replay feature tapper initialization skipped; detection head mapping unavailable.")
             capacity = int(replay_args.get("buffer_per_class", 64))
             self.replay_capacity_growth = float(replay_args.get("carryover_growth", 1.5))
             self.replay_buffer = TinyReplayBuffer(
@@ -166,7 +180,6 @@ class DetectionTrainer(BaseTrainer):
             self.replay_samples_per_class = max(1, int(replay_args.get("sample_per_batch", 16)))
             self.replay_loss_weight = float(replay_args.get("loss_weight", 1.0))
             self.replay_max_edge = float(replay_args.get("tiny_max_pixels", 32))
-            self.replay_context_scale = float(replay_args.get("context_scale", 1.5))
             self.replay_scale_weight = replay_args.get("scale_weighting", "uniform")
             store_dir = replay_args.get("store_dir", "replay")
             buffer_file = replay_args.get("buffer_file", "buffer.pt")
@@ -299,6 +312,23 @@ class DetectionTrainer(BaseTrainer):
                         merged[key].append(mem_val)
         return merged
 
+    def _resolve_detect_level_indices(self, detect_module, level_names):
+        if detect_module is None or not hasattr(detect_module, "stride"):
+            return {}
+        stride_tensor = getattr(detect_module, "stride", torch.tensor([]))
+        if hasattr(stride_tensor, "tolist"):
+            stride_list = [int(s) for s in stride_tensor.tolist()]
+        else:
+            stride_list = [int(s) for s in stride_tensor]
+        mapping = {}
+        for level in level_names:
+            stride = int(self.replay_strides.get(level, 0))
+            if stride <= 0:
+                continue
+            with contextlib.suppress(ValueError):
+                mapping[level] = stride_list.index(stride)
+        return mapping
+
     def label_loss_items(self, loss_items=None, prefix="train"):
         """
         Returns a loss dict with labelled training loss items tensor.
@@ -384,7 +414,6 @@ class DetectionTrainer(BaseTrainer):
             batch_idx,
             self.replay_strides,
             self.replay_max_edge,
-            self.replay_context_scale,
             (img_h, img_w),
         )
         if not current_items:
@@ -416,22 +445,31 @@ class DetectionTrainer(BaseTrainer):
         total_loss = 0.0
         loss_terms = 0
         for level, class_map in current_groups.items():
-            if level not in replay_batch:
+            targets = replay_batch.get(level)
+            if not targets:
                 continue
-            targets = replay_batch[level]
             target_cls = targets["cls"]
+            target_emb = targets["embedding"]
+            if target_emb.numel() == 0:
+                continue
             for cls_id, items in class_map.items():
                 mask = target_cls == int(cls_id)
                 if not mask.any():
                     continue
-                current_tiny = torch.stack([it.tiny.to(self.device) for it in items]).mean(dim=0)
-                current_context = torch.stack([it.context.to(self.device) for it in items]).mean(dim=0)
-                target_tiny = targets["tiny"][mask].mean(dim=0)
-                target_context = targets["context"][mask].mean(dim=0)
+                current_emb = torch.stack([it.embedding.to(self.device) for it in items])
+                target_pool = target_emb[mask]
+                if target_pool.shape[0] == 0:
+                    continue
+                sample_idx = torch.randint(
+                    0, target_pool.shape[0], (current_emb.shape[0],), device=target_pool.device
+                )
+                matched = target_pool[sample_idx].to(current_emb.dtype)
+                current_norm = F.normalize(current_emb, dim=1)
+                target_norm = F.normalize(matched, dim=1)
                 weight = self._scale_weight(level)
-                total_loss += weight * F.mse_loss(current_tiny, target_tiny)
-                total_loss += weight * F.mse_loss(current_context, target_context)
-                loss_terms += 2
+                loss_vec = 1.0 - (current_norm * target_norm).sum(dim=1)
+                total_loss += weight * loss_vec.sum()
+                loss_terms += loss_vec.shape[0]
         if loss_terms == 0:
             return None
         return total_loss / loss_terms

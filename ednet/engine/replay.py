@@ -9,6 +9,7 @@ from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
 import torch
 import torch.nn as nn
+from torch.utils.hooks import RemovableHandle
 
 
 @dataclass
@@ -108,14 +109,91 @@ class FeatureTapper:
         self.close()
 
 
+class DetectionPreLogitTapper:
+    """Tapper that records detection head classification pre-logit tensors via forward pre-hooks."""
+
+    def __init__(
+        self,
+        detect_module: nn.Module,
+        level_to_indices: Dict[str, int],
+        detach: bool = False,
+        clone: bool = False,
+        auto_activate: bool = True,
+    ) -> None:
+        self.detect_module = detect_module
+        self.level_to_indices = level_to_indices
+        self.detach = detach
+        self.clone = clone
+        self._features: Dict[str, torch.Tensor] = {}
+        self._hooks: List[RemovableHandle] = []
+        if auto_activate:
+            self.activate()
+
+    def _classification_branches(self) -> Optional[nn.ModuleList]:
+        branches = getattr(self.detect_module, "cv3", None)
+        if branches is None:
+            return None
+        return branches
+
+    def _build_hook(self, level: str):
+        def hook(_, inputs):
+            if not inputs:
+                return
+            tensor = inputs[0]
+            if isinstance(tensor, (list, tuple)):
+                tensor = tensor[0]
+            if isinstance(tensor, torch.Tensor):
+                if self.detach:
+                    tensor = tensor.detach()
+                if self.clone:
+                    tensor = tensor.clone()
+                self._features[level] = tensor
+
+        return hook
+
+    def activate(self) -> None:
+        if self._hooks:
+            return
+        branches = self._classification_branches()
+        if branches is None:
+            return
+        for level, idx in self.level_to_indices.items():
+            if idx < 0 or idx >= len(branches):
+                continue
+            branch = branches[idx]
+            if not isinstance(branch, nn.Sequential) or len(branch) == 0:
+                continue
+            final_conv = branch[-1]
+            handle = final_conv.register_forward_pre_hook(self._build_hook(level))
+            self._hooks.append(handle)
+
+    def deactivate(self) -> None:
+        for handle in self._hooks:
+            handle.remove()
+        self._hooks.clear()
+
+    def pop(self) -> Dict[str, torch.Tensor]:
+        features = self._features
+        self._features = {}
+        return features
+
+    def clear(self) -> None:
+        self._features.clear()
+
+    def close(self) -> None:
+        self.deactivate()
+
+    def __del__(self):
+        self.close()
+
+
 @dataclass
 class TinyReplayItem:
-    """Container for a single replay entry consisting of aggregated tiny/context embeddings."""
+    """Container for a single replay sample consisting of a detection head pre-logit embedding."""
 
     cls: int
     level: str
-    tiny: torch.Tensor
-    context: torch.Tensor
+    embedding: torch.Tensor
     metadata: Dict = field(default_factory=dict)
 
 
@@ -148,8 +226,7 @@ class TinyReplayBuffer:
         entry = TinyReplayItem(
             cls=item.cls,
             level=item.level,
-            tiny=item.tiny.detach().to(self.device, dtype=self.dtype),
-            context=item.context.detach().to(self.device, dtype=self.dtype),
+            embedding=item.embedding.detach().to(self.device, dtype=self.dtype),
             metadata=item.metadata,
         )
         bucket = self._storage[entry.cls]
@@ -190,8 +267,7 @@ class TinyReplayBuffer:
             int(cls): [
                 {
                     "level": item.level,
-                    "tiny": item.tiny.cpu(),
-                    "context": item.context.cpu(),
+                    "embedding": item.embedding.cpu(),
                     "metadata": item.metadata,
                 }
                 for item in items
@@ -212,16 +288,15 @@ class TinyReplayBuffer:
             cls_id = int(cls)
             bucket = self._storage[cls_id]
             for entry in entries:
-                bucket.append(
-                    TinyReplayItem(
-                        cls=cls_id,
-                        level=entry.get("level", "P3"),
-                        tiny=entry.get("tiny", torch.empty(0)).to(self.device, dtype=self.dtype),
-                        context=entry.get("context", torch.empty(0)).to(self.device, dtype=self.dtype),
-                        metadata=entry.get("metadata", {}),
+                    bucket.append(
+                        TinyReplayItem(
+                            cls=cls_id,
+                            level=entry.get("level", "P3"),
+                            embedding=entry.get("embedding", torch.empty(0)).to(self.device, dtype=self.dtype),
+                            metadata=entry.get("metadata", {}),
+                        )
                     )
-                )
-                total += 1
+                    total += 1
         return total
 
     def save(self, path: str | Path) -> int:
@@ -250,26 +325,20 @@ def build_replay_batch(
     balance_levels: Optional[List[str]] = None,
     device: Optional[torch.device] = None,
 ) -> Dict[str, Dict[str, torch.Tensor]]:
-    """
-    Sample embeddings and organize them by feature level for downstream losses.
+    """Sample embeddings and organize them by feature level for downstream losses."""
 
-    Returns:
-        Dict level -> {"cls": tensor, "tiny": tensor, "context": tensor}
-    """
     samples = buffer.sample_balanced(per_class, levels=balance_levels)
     by_level: Dict[str, Dict[str, List[torch.Tensor]]] = {}
     for item in samples:
-        entry = by_level.setdefault(item.level, {"cls": [], "tiny": [], "context": []})
+        entry = by_level.setdefault(item.level, {"cls": [], "embedding": []})
         entry["cls"].append(torch.tensor(item.cls, dtype=torch.long))
-        entry["tiny"].append(item.tiny)
-        entry["context"].append(item.context)
+        entry["embedding"].append(item.embedding)
 
     batched = {}
     for level, data in by_level.items():
         level_batch = {
             "cls": torch.stack(data["cls"]),
-            "tiny": torch.stack(data["tiny"]),
-            "context": torch.stack(data["context"]),
+            "embedding": torch.stack(data["embedding"]),
         }
         if device is not None:
             level_batch = {k: v.to(device) for k, v in level_batch.items()}
@@ -284,11 +353,10 @@ def extract_tiny_embeddings(
     batch_indices: torch.Tensor,
     strides: Dict[str, int],
     max_edge: float,
-    context_scale: float = 1.5,
     image_hw: Tuple[int, int] = (640, 640),
 ) -> List[TinyReplayItem]:
     """
-    Extract TinyEx and ContextEx embeddings for tiny objects by pooling feature crops.
+    Extract detection head pre-logit embeddings for tiny objects by pooling feature crops.
     """
 
     if boxes.numel() == 0:
@@ -322,18 +390,13 @@ def extract_tiny_embeddings(
             y2 = (box[3] / stride).clamp(0, h - 1)
 
             tiny_patch = crop_feature(sample_feat, x1, y1, x2, y2)
-            cx1, cy1, cx2, cy2 = expand_box(x1, y1, x2, y2, context_scale, w, h)
-            context_patch = crop_feature(sample_feat, cx1, cy1, cx2, cy2)
-
             tiny_emb = adaptive_pool(tiny_patch)
-            context_emb = adaptive_pool(context_patch)
 
             items.append(
                 TinyReplayItem(
                     cls=int(cls),
                     level=level,
-                    tiny=tiny_emb,
-                    context=context_emb,
+                    embedding=tiny_emb,
                     metadata={"stride": stride},
                 )
             )
@@ -358,14 +421,3 @@ def crop_feature(feature: torch.Tensor, x1, y1, x2, y2) -> torch.Tensor:
         return torch.zeros_like(feature[:, :1, :1])
     return feature[:, y1i:y2i, x1i:x2i]
 
-
-def expand_box(x1, y1, x2, y2, scale, width, height):
-    """Expand box coordinates by a scale factor while clamping to feature map size."""
-    cx, cy = (x1 + x2) / 2, (y1 + y2) / 2
-    w = (x2 - x1) * scale
-    h = (y2 - y1) * scale
-    new_x1 = max(0.0, cx - w / 2)
-    new_y1 = max(0.0, cy - h / 2)
-    new_x2 = min(width - 1.0, cx + w / 2)
-    new_y2 = min(height - 1.0, cy + h / 2)
-    return new_x1, new_y1, new_x2, new_y2

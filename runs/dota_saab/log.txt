@@ -1,0 +1,21 @@
+vanaf 0 tot de 4de run heb ik gespeeld met de settings; we zijn van 15 naar 30 naar 50 epochs gegaan
+ook van memory ratio 0.25 naar 0.5 en batchsize 4 naar 8. de replay loss weight is ook van 0.5 naar 1.0 gegaan
+
+
+now we are gonna switch losses because it is contributing too little
+
+Keep LoRA adapters on P3/P4 unchanged.
+
+Keep the tiny-object filter unchanged (same tiny_max_pixels, same definition of positives).
+
+Change replay embedding source: store and sample detection head pre-logit embeddings (the vector right before the final classification layer) for the selected tiny positives, still tagged by (class_id, level).
+
+Change replay loss: replace MSE with cosine distance:
+
+L2-normalize current and stored embeddings
+
+compute loss = 1 - cosine(current, stored)
+
+compute instance-wise (no averaging over class-level means)
+
+aggregate over all matched (class, level) pairs, then multiply by replay.loss_weight and add to detection loss.
