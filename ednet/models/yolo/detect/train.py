@@ -460,10 +460,8 @@ class DetectionTrainer(BaseTrainer):
                 target_pool = target_emb[mask]
                 if target_pool.shape[0] == 0:
                     continue
-                sample_idx = torch.randint(
-                    0, target_pool.shape[0], (current_emb.shape[0],), device=target_pool.device
-                )
-                matched = target_pool[sample_idx].to(current_emb.dtype)
+                prototype = target_pool.mean(dim=0, keepdim=True).to(current_emb.dtype)
+                matched = prototype.expand(current_emb.shape[0], -1)
                 current_norm = F.normalize(current_emb, dim=1)
                 target_norm = F.normalize(matched, dim=1)
                 weight = self._scale_weight(level)
