@@ -144,6 +144,13 @@ class DetectionTrainer(BaseTrainer):
         if self.replay_enabled:
             tap_layers = replay_args.get("tap_layers") or {}
             layer_map = {k: int(v) for k, v in tap_layers.items()} if tap_layers else FeatureTapConfig().layers.copy()
+            default_stride_map = {"P2": 4, "P3": 8, "P4": 16, "P5": 32, "P6": 64}
+            stride_overrides = replay_args.get("strides") or {}
+            self.replay_strides = {
+                level: int(stride_overrides.get(level, default_stride_map.get(level, 8)))
+                for level in layer_map.keys()
+            }
+            self.replay_levels = list(layer_map.keys())
             detect_module = None
             with contextlib.suppress(AttributeError, IndexError):
                 detect_module = de_parallel(model).model[-1]
@@ -170,13 +177,6 @@ class DetectionTrainer(BaseTrainer):
                 device="cpu",
                 carryover_growth=self.replay_capacity_growth,
             )
-            default_stride_map = {"P2": 4, "P3": 8, "P4": 16, "P5": 32, "P6": 64}
-            stride_overrides = replay_args.get("strides") or {}
-            self.replay_strides = {
-                level: int(stride_overrides.get(level, default_stride_map.get(level, 8)))
-                for level in layer_map.keys()
-            }
-            self.replay_levels = list(layer_map.keys())
             self.replay_samples_per_class = max(1, int(replay_args.get("sample_per_batch", 16)))
             self.replay_loss_weight = float(replay_args.get("loss_weight", 1.0))
             self.replay_max_edge = float(replay_args.get("tiny_max_pixels", 32))
