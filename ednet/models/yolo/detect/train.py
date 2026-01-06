@@ -158,7 +158,7 @@ class DetectionTrainer(BaseTrainer):
             if detect_module is not None and level_indices:
                 self.feature_tapper = DetectionPreLogitTapper(
                     detect_module,
-                    level_indices=level_indices,
+                    level_to_indices=level_indices,
                     detach=False,
                     auto_activate=False,
                 )

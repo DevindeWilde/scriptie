@@ -115,13 +115,13 @@ class DetectionPreLogitTapper:
     def __init__(
         self,
         detect_module: nn.Module,
-        level_to_indices: Dict[str, int],
+        level_to_indices: Dict[str, int] | None = None,
         detach: bool = False,
         clone: bool = False,
         auto_activate: bool = True,
     ) -> None:
         self.detect_module = detect_module
-        self.level_to_indices = level_to_indices
+        self.level_to_indices = level_to_indices or {}
         self.detach = detach
         self.clone = clone
         self._features: Dict[str, torch.Tensor] = {}
@@ -420,4 +420,3 @@ def crop_feature(feature: torch.Tensor, x1, y1, x2, y2) -> torch.Tensor:
     if x2i <= x1i or y2i <= y1i:
         return torch.zeros_like(feature[:, :1, :1])
     return feature[:, y1i:y2i, x1i:x2i]
-
