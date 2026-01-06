@@ -460,12 +460,22 @@ class DetectionTrainer(BaseTrainer):
                 target_pool = target_emb[mask]
                 if target_pool.shape[0] == 0:
                     continue
-                prototype = target_pool.mean(dim=0, keepdim=True).to(current_emb.dtype)
-                matched = prototype.expand(current_emb.shape[0], -1)
+                normed_pool = F.normalize(target_pool, dim=1)
+                prototype = F.normalize(normed_pool.mean(dim=0, keepdim=True), dim=1).to(current_emb.dtype)
                 current_norm = F.normalize(current_emb, dim=1)
-                target_norm = F.normalize(matched, dim=1)
+                cosine = (current_norm * prototype).sum(dim=1)
+                if RANK in {-1, 0} and getattr(self.args, "debug_replay", False):
+                    LOGGER.info(
+                        "Replay cosine level=%s cls=%s mean=%.3f median=%.3f min=%.3f max=%.3f",
+                        level,
+                        int(cls_id),
+                        float(cosine.mean()),
+                        float(cosine.median()),
+                        float(cosine.min()),
+                        float(cosine.max()),
+                    )
                 weight = self._scale_weight(level)
-                loss_vec = 1.0 - (current_norm * target_norm).sum(dim=1)
+                loss_vec = 1.0 - cosine
                 total_loss += weight * loss_vec.sum()
                 loss_terms += loss_vec.shape[0]
         if loss_terms == 0:
