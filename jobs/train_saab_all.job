@@ -54,7 +54,7 @@ python train.py \
   --project /home/ddwilde/scriptie/runs/dota_saab \
   --name stage2-saab \
   --workers 8 \
-  --weights /home/ddwilde/scriptie/runs/dota_saab/stage1-saab/weights/best.pt \
+  --weights /home/ddwilde/scriptie/runs/dota_saab/stage1-saab5/weights/best.pt \
   --override lora.enable=True \
   --override lora.freeze_backbone=True \
   --override replay.enable=True \
@@ -79,7 +79,7 @@ python train.py \
   --project /home/ddwilde/scriptie/runs/dota_saab \
   --name stage3-saab \
   --workers 8 \
-  --weights /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/weights/best.pt \
+  --weights /home/ddwilde/scriptie/runs/dota_saab/stage2-saab5/weights/best.pt \
   --override lora.enable=True \
   --override lora.freeze_backbone=True \
   --override replay.enable=True \
