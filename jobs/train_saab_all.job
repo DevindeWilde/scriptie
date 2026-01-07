@@ -23,50 +23,50 @@ mv /home/ddwilde/scriptie/datasets/dota-yolo-stage3/test/images/ /home/ddwilde/s
 mv /home/ddwilde/scriptie/datasets/dota-yolo-stage3/train/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage1/train/
 mv /home/ddwilde/scriptie/datasets/dota-yolo-stage3/val/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage1/val/
 
-# python train.py \
-#     --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
-#     --data /home/ddwilde/scriptie/yaml/DOTA-stage1.yaml \
-#     --epochs 30 \
-#     --imgsz 640 \
-#     --batch-size 8 \
-#     --project /home/ddwilde/scriptie/runs/dota_saab \
-#     --name stage1-saab \
-#     --workers 8 \
-#     --weights /home/ddwilde/scriptie/pretrained/small.pt \
-#     --override lora.enable=True \
-#     --override lora.freeze_backbone=True \
-#     --override replay.enable=True \
-#     --override replay.buffer_per_class=128 \
-#     --override replay.sample_per_batch=32 \
-#     --override replay.loss_weight=1.0 \
-#     --override replay.tiny_max_pixels=320 \
-#     --override replay.debug=True
+python train.py \
+    --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
+    --data /home/ddwilde/scriptie/yaml/DOTA-stage1.yaml \
+    --epochs 30 \
+    --imgsz 640 \
+    --batch-size 8 \
+    --project /home/ddwilde/scriptie/runs/dota_saab \
+    --name stage1-saab \
+    --workers 8 \
+    --weights /home/ddwilde/scriptie/pretrained/small.pt \
+    --override lora.enable=True \
+    --override lora.freeze_backbone=True \
+    --override replay.enable=True \
+    --override replay.buffer_per_class=128 \
+    --override replay.sample_per_batch=32 \
+    --override replay.loss_weight=5.0 \
+    --override replay.tiny_max_pixels=320 \
+    --override replay.debug=True
 
 mv /home/ddwilde/scriptie/datasets/dota-yolo-stage1/test/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage2/test/
 mv /home/ddwilde/scriptie/datasets/dota-yolo-stage1/train/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage2/train/
 mv /home/ddwilde/scriptie/datasets/dota-yolo-stage1/val/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage2/val/
 
-# python train.py \
-#   --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
-#   --data /home/ddwilde/scriptie/yaml/DOTA-stage2.yaml \
-#   --epochs 30 \
-#   --imgsz 640 \
-#   --batch-size 8 \
-#   --project /home/ddwilde/scriptie/runs/dota_saab \
-#   --name stage2-saab \
-#   --workers 8 \
-#   --weights /home/ddwilde/scriptie/runs/dota_saab/stage1-saab5/weights/best.pt \
-#   --override lora.enable=True \
-#   --override lora.freeze_backbone=True \
-#   --override replay.enable=True \
-#   --override replay.buffer_per_class=128 \
-#   --override replay.sample_per_batch=32 \
-#   --override replay.loss_weight=1.0 \
-#   --override replay.init_buffer=/home/ddwilde/scriptie/runs/dota_saab/stage1-saab5/replay/buffer.pt \
-#   --override replay.memory_dir=/home/ddwilde/scriptie/datasets/memory/stage1 \
-#   --override replay.memory_ratio=0.5 \
-#   --override replay.tiny_max_pixels=320 \
-#   --override replay.debug=True
+python train.py \
+  --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/ddwilde/scriptie/yaml/DOTA-stage2.yaml \
+  --epochs 30 \
+  --imgsz 640 \
+  --batch-size 8 \
+  --project /home/ddwilde/scriptie/runs/dota_saab \
+  --name stage2-saab \
+  --workers 8 \
+  --weights /home/ddwilde/scriptie/runs/dota_saab/stage1-saab5/weights/best.pt \
+  --override lora.enable=True \
+  --override lora.freeze_backbone=True \
+  --override replay.enable=True \
+  --override replay.buffer_per_class=128 \
+  --override replay.sample_per_batch=32 \
+  --override replay.loss_weight=5.0 \
+  --override replay.init_buffer=/home/ddwilde/scriptie/runs/dota_saab/stage1-saab5/replay/buffer.pt \
+  --override replay.memory_dir=/home/ddwilde/scriptie/datasets/memory/stage1 \
+  --override replay.memory_ratio=0.5 \
+  --override replay.tiny_max_pixels=320 \
+  --override replay.debug=True
 
 mv /home/ddwilde/scriptie/datasets/dota-yolo-stage2/test/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage3/test/
 mv /home/ddwilde/scriptie/datasets/dota-yolo-stage2/train/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage3/train/
@@ -87,7 +87,7 @@ python train.py \
   --override replay.enable=True \
   --override replay.buffer_per_class=128 \
   --override replay.sample_per_batch=32 \
-  --override replay.loss_weight=1.0 \
+  --override replay.loss_weight=5.0 \
   --override replay.init_buffer=/home/ddwilde/scriptie/runs/dota_saab/stage2-saab5/replay/buffer.pt \
   --override replay.memory_dir=/home/ddwilde/scriptie/datasets/memory/stage3 \
   --override replay.memory_ratio=0.5 \
