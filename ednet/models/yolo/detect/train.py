@@ -15,8 +15,8 @@ from ednet.engine.replay import (
     DetectionPreLogitTapper,
     FeatureTapConfig,
     TinyReplayBuffer,
+    TinyReplayItem,
     build_replay_batch,
-    extract_tiny_embeddings,
 )
 from ednet.engine.trainer import BaseTrainer
 from ednet.models import yolo
@@ -395,29 +395,7 @@ class DetectionTrainer(BaseTrainer):
         features = self.feature_tapper.pop()
         if not features:
             return None
-        boxes = batch.get("bboxes")
-        classes = batch.get("cls")
-        batch_idx = batch.get("batch_idx")
-        imgs = batch.get("img")
-        if boxes is None or classes is None or batch_idx is None or imgs is None:
-            return None
-        if boxes.numel() == 0:
-            return None
-        base_level = next(iter(features.values()))
-        target_device = base_level.device
-        img_h, img_w = imgs.shape[2:]
-        boxes = boxes.to(target_device)
-        classes = classes.to(target_device).view(-1)
-        batch_idx = batch_idx.to(target_device).long()
-        current_items = extract_tiny_embeddings(
-            features,
-            boxes,
-            classes,
-            batch_idx,
-            self.replay_strides,
-            self.replay_max_edge,
-            (img_h, img_w),
-        )
+        current_items = self._gather_positive_embeddings(features)
         if not current_items:
             return None
         grouped = self._group_embeddings(current_items)
@@ -441,6 +419,57 @@ class DetectionTrainer(BaseTrainer):
             level_map = grouped.setdefault(item.level, {})
             level_map.setdefault(item.cls, []).append(item)
         return grouped
+
+    def _gather_positive_embeddings(self, features):
+        """Collect TinyReplayItems from tapped features using stored positive cell indices."""
+        loss_module = getattr(de_parallel(self.model), "loss", None)
+        if loss_module is None:
+            return []
+        pos = getattr(loss_module, "last_positive_cells", None)
+        if not pos:
+            return []
+        indices = pos.get("indices")
+        classes = pos.get("classes")
+        max_edge = pos.get("max_edge")
+        if indices is None or classes is None or max_edge is None:
+            return []
+        if indices.numel() == 0:
+            return []
+        size_mask = max_edge <= self.replay_max_edge
+        if not size_mask.any():
+            return []
+        indices = indices[size_mask]
+        classes = classes[size_mask]
+        max_edge = max_edge[size_mask]
+        level_names = getattr(loss_module, "level_names", [])
+        items = []
+        unique_levels = indices[:, 0].unique()
+        for level_idx in unique_levels:
+            level_mask = indices[:, 0] == level_idx
+            if not level_mask.any():
+                continue
+            name = level_names[level_idx] if level_idx < len(level_names) else str(int(level_idx))
+            feat = features.get(name)
+            if feat is None:
+                continue
+            sel_indices = indices[level_mask]
+            sel_classes = classes[level_mask]
+            sel_sizes = max_edge[level_mask]
+            batch_idx = sel_indices[:, 1].long()
+            gy = sel_indices[:, 2].long()
+            gx = sel_indices[:, 3].long()
+            vecs = feat[batch_idx, :, gy, gx]
+            for embedding, cls_id, size in zip(vecs, sel_classes, sel_sizes):
+                items.append(
+                    TinyReplayItem(
+                        cls=int(cls_id.item()),
+                        level=name,
+                        embedding=embedding.detach(),
+                        metadata={"max_edge": float(size.item())},
+                    )
+                )
+        loss_module.last_positive_cells = None
+        return items
 
     def _log_embedding_stats(self, grouped):
         if not (self.replay_debug and RANK in {-1, 0}):

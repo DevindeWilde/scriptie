@@ -1,3 +1,5 @@
+import math
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -176,6 +178,8 @@ class v8DetectionLoss:
         self.no = m.nc + m.reg_max * 4
         self.reg_max = m.reg_max
         self.device = device
+        self.level_names = [self._make_level_name(int(s)) for s in self.stride.tolist()]
+        self.last_positive_cells = None
 
         self.use_dfl = m.reg_max > 1
 
@@ -235,7 +239,7 @@ class v8DetectionLoss:
         # Pboxes
         pred_bboxes = self.bbox_decode(anchor_points, pred_distri)  # xyxy, (b, h*w, 4)
 
-        _, target_bboxes, target_scores, fg_mask, _ = self.assigner(
+        target_labels, target_bboxes, target_scores, fg_mask, target_gt_idx = self.assigner(
             pred_scores.detach().sigmoid(),
             (pred_bboxes.detach() * stride_tensor).type(gt_bboxes.dtype),
             anchor_points * stride_tensor,
@@ -243,6 +247,7 @@ class v8DetectionLoss:
             gt_bboxes,
             mask_gt,
         )
+        self._record_positive_cells(fg_mask, target_labels, target_bboxes, feats)
 
         target_scores_sum = max(target_scores.sum(), 1)
 
@@ -262,6 +267,64 @@ class v8DetectionLoss:
         loss[2] *= self.hyp.dfl  # dfl gain
 
         return loss.sum() * batch_size, loss.detach()  # loss(box, cls, dfl)
+
+    @staticmethod
+    def _make_level_name(stride_val: int) -> str:
+        if stride_val <= 0:
+            return "P?"
+        power = round(math.log2(stride_val))
+        return f"P{power}"
+
+    def _record_positive_cells(self, fg_mask, target_labels, target_bboxes, feats):
+        """Store (level, batch, gy, gx, cls, max_edge_px) tuples for positive anchors."""
+        self.last_positive_cells = None
+        if fg_mask is None or not fg_mask.any():
+            return
+        index_entries = []
+        cls_entries = []
+        size_entries = []
+        offset = 0
+        device = fg_mask.device
+        dtype = torch.long
+        for level_idx, feat in enumerate(feats):
+            h, w = feat.shape[2], feat.shape[3]
+            level_size = h * w
+            level_mask = fg_mask[:, offset : offset + level_size]
+            if not level_mask.any():
+                offset += level_size
+                continue
+            pos = level_mask.nonzero(as_tuple=False)
+            if pos.numel() == 0:
+                offset += level_size
+                continue
+            batch_idx = pos[:, 0]
+            local_idx = pos[:, 1]
+            gy = torch.div(local_idx, w, rounding_mode="trunc")
+            gx = local_idx % w
+            cls = target_labels[:, offset : offset + level_size]
+            cls_ids = cls[batch_idx, local_idx].long()
+            boxes = target_bboxes[:, offset : offset + level_size, :]
+            box_vals = boxes[batch_idx, local_idx]
+            widths = (box_vals[:, 2] - box_vals[:, 0]).abs()
+            heights = (box_vals[:, 3] - box_vals[:, 1]).abs()
+            max_edge = torch.max(widths, heights)
+            level_tensor = torch.full(
+                (batch_idx.shape[0], 1), level_idx, dtype=dtype, device=device
+            )
+            indices = torch.stack(
+                (level_tensor.squeeze(1), batch_idx.to(dtype), gy.to(dtype), gx.to(dtype)),
+                dim=1,
+            )
+            index_entries.append(indices.detach())
+            cls_entries.append(cls_ids.detach())
+            size_entries.append(max_edge.detach())
+            offset += level_size
+        if index_entries:
+            self.last_positive_cells = {
+                "indices": torch.cat(index_entries, dim=0),
+                "classes": torch.cat(cls_entries, dim=0),
+                "max_edge": torch.cat(size_entries, dim=0),
+            }
 
 
 class v8SegmentationLoss(v8DetectionLoss):
