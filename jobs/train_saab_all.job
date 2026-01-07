@@ -26,7 +26,7 @@ mv /home/ddwilde/scriptie/datasets/dota-yolo-stage3/val/images/ /home/ddwilde/sc
 python train.py \
     --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
     --data /home/ddwilde/scriptie/yaml/DOTA-stage1.yaml \
-    --epochs 5 \
+    --epochs 30 \
     --imgsz 640 \
     --batch-size 8 \
     --project /home/ddwilde/scriptie/runs/dota_saab \
@@ -49,7 +49,7 @@ mv /home/ddwilde/scriptie/datasets/dota-yolo-stage1/val/images/ /home/ddwilde/sc
 python train.py \
   --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
   --data /home/ddwilde/scriptie/yaml/DOTA-stage2.yaml \
-  --epochs 5 \
+  --epochs 30 \
   --imgsz 640 \
   --batch-size 8 \
   --project /home/ddwilde/scriptie/runs/dota_saab \
@@ -75,7 +75,7 @@ mv /home/ddwilde/scriptie/datasets/dota-yolo-stage2/val/images/ /home/ddwilde/sc
 python train.py \
   --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
   --data /home/ddwilde/scriptie/yaml/DOTA-stage3.yaml \
-  --epochs 5 \
+  --epochs 30 \
   --imgsz 640 \
   --batch-size 8 \
   --project /home/ddwilde/scriptie/runs/dota_saab \
