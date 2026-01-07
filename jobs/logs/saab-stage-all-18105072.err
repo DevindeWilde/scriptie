@@ -1,0 +1,69 @@
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 87, in <module>
+    main(opt)
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 78, in main
+    results = model.train(**train_params)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 761, in train
+    self.trainer = (trainer or self._smart_load("trainer"))(overrides=args, _callbacks=self.callbacks)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/trainer.py", line 102, in __init__
+    self.args = get_cfg(cfg, overrides)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/cfg/__init__.py", line 208, in get_cfg
+    check_dict_alignment(cfg, overrides)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/cfg/__init__.py", line 395, in check_dict_alignment
+    raise SyntaxError(string + CLI_HELP_MSG) from e
+SyntaxError: '[31m[1mdebug_replay[0m' is not a valid YOLO argument. Similar arguments are i.e. ["replay={'enable': False, 'tap_layers': {'P3': 16, 'P4': 25}, 'tiny_max_pixels': 128, 'context_scale': 1.5, 'buffer_per_class': 64, 'sample_per_batch': 16, 'loss_weight': 1.0, 'scale_weighting': 'stride', 'store_dir': 'replay', 'buffer_file': 'buffer.pt', 'init_buffer': None, 'carryover_growth': 1.5, 'memory_dir': None, 'memory_ratio': 0.25}"].
+
+    Refer to the documentation for more information
+    
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 87, in <module>
+    main(opt)
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 63, in main
+    model = EDNet(opt.weights)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/model.py", line 47, in __init__
+    super().__init__(model=model or fixed_model_path, task=task, verbose=verbose)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/model.py", line 14, in __init__
+    super().__init__(model=model, task=task, verbose=verbose)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 132, in __init__
+    self._load(model, task=task)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 251, in _load
+    self.model, self.ckpt = attempt_load_one_weight(weights)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/tasks.py", line 666, in attempt_load_one_weight
+    ckpt, weight = torch_safe_load(weight)  # load ckpt
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/tasks.py", line 587, in torch_safe_load
+    ckpt = torch.load(file, map_location="cpu")
+  File "/gpfs/home6/ddwilde/scriptie/ednet/utils/patches.py", line 85, in torch_load
+    return _torch_load(*args, **kwargs)
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 1484, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/ddwilde/scriptie/runs/dota_saab/stage1-saab5/weights/best.pt'
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 87, in <module>
+    main(opt)
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 63, in main
+    model = EDNet(opt.weights)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/model.py", line 47, in __init__
+    super().__init__(model=model or fixed_model_path, task=task, verbose=verbose)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/model.py", line 14, in __init__
+    super().__init__(model=model, task=task, verbose=verbose)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 132, in __init__
+    self._load(model, task=task)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 251, in _load
+    self.model, self.ckpt = attempt_load_one_weight(weights)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/tasks.py", line 666, in attempt_load_one_weight
+    ckpt, weight = torch_safe_load(weight)  # load ckpt
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/tasks.py", line 587, in torch_safe_load
+    ckpt = torch.load(file, map_location="cpu")
+  File "/gpfs/home6/ddwilde/scriptie/ednet/utils/patches.py", line 85, in torch_load
+    return _torch_load(*args, **kwargs)
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 1484, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/ddwilde/scriptie/runs/dota_saab/stage2-saab5/weights/best.pt'

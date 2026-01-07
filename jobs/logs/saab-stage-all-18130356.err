@@ -1,0 +1,83 @@
+mv: cannot stat '/home/ddwilde/scriptie/datasets/dota-yolo-stage3/test/images/': No such file or directory
+mv: cannot stat '/home/ddwilde/scriptie/datasets/dota-yolo-stage3/train/images/': No such file or directory
+mv: cannot stat '/home/ddwilde/scriptie/datasets/dota-yolo-stage3/val/images/': No such file or directory
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/trainer.py", line 579, in get_dataset
+    data = check_det_dataset(self.args.data)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/data/utils.py", line 327, in check_det_dataset
+    raise FileNotFoundError(m)
+FileNotFoundError: 
+Dataset '/home/ddwilde/scriptie/yaml/DOTA-stage1.yaml' images not found ⚠️, missing path '/gpfs/home6/ddwilde/scriptie/datasets/dota-yolo-stage1/val/images'
+Note dataset download directory is '/gpfs/home6/ddwilde/datasets'. You can update this in '/home/ddwilde/.config/Ultralytics/settings.yaml'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 87, in <module>
+    main(opt)
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 78, in main
+    results = model.train(**train_params)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 761, in train
+    self.trainer = (trainer or self._smart_load("trainer"))(overrides=args, _callbacks=self.callbacks)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/trainer.py", line 134, in __init__
+    self.trainset, self.testset = self.get_dataset()
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/trainer.py", line 583, in get_dataset
+    raise RuntimeError(emojis(f"Dataset '{clean_url(self.args.data)}' error ❌ {e}")) from e
+RuntimeError: Dataset '/home/ddwilde/scriptie/yaml/DOTA-stage1.yaml' error ❌ 
+Dataset '/home/ddwilde/scriptie/yaml/DOTA-stage1.yaml' images not found ⚠️, missing path '/gpfs/home6/ddwilde/scriptie/datasets/dota-yolo-stage1/val/images'
+Note dataset download directory is '/gpfs/home6/ddwilde/datasets'. You can update this in '/home/ddwilde/.config/Ultralytics/settings.yaml'
+mv: cannot stat '/home/ddwilde/scriptie/datasets/dota-yolo-stage1/test/images/': No such file or directory
+mv: cannot stat '/home/ddwilde/scriptie/datasets/dota-yolo-stage1/train/images/': No such file or directory
+mv: cannot stat '/home/ddwilde/scriptie/datasets/dota-yolo-stage1/val/images/': No such file or directory
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 87, in <module>
+    main(opt)
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 63, in main
+    model = EDNet(opt.weights)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/model.py", line 47, in __init__
+    super().__init__(model=model or fixed_model_path, task=task, verbose=verbose)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/model.py", line 14, in __init__
+    super().__init__(model=model, task=task, verbose=verbose)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 132, in __init__
+    self._load(model, task=task)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 251, in _load
+    self.model, self.ckpt = attempt_load_one_weight(weights)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/tasks.py", line 666, in attempt_load_one_weight
+    ckpt, weight = torch_safe_load(weight)  # load ckpt
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/tasks.py", line 587, in torch_safe_load
+    ckpt = torch.load(file, map_location="cpu")
+  File "/gpfs/home6/ddwilde/scriptie/ednet/utils/patches.py", line 85, in torch_load
+    return _torch_load(*args, **kwargs)
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 1484, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/ddwilde/scriptie/runs/dota_saab/stage1-saab5/weights/best.pt'
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 87, in <module>
+    main(opt)
+  File "/gpfs/home6/ddwilde/scriptie/train.py", line 63, in main
+    model = EDNet(opt.weights)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/model.py", line 47, in __init__
+    super().__init__(model=model or fixed_model_path, task=task, verbose=verbose)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/models/yolo/model.py", line 14, in __init__
+    super().__init__(model=model, task=task, verbose=verbose)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 132, in __init__
+    self._load(model, task=task)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/model.py", line 251, in _load
+    self.model, self.ckpt = attempt_load_one_weight(weights)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/tasks.py", line 666, in attempt_load_one_weight
+    ckpt, weight = torch_safe_load(weight)  # load ckpt
+  File "/gpfs/home6/ddwilde/scriptie/ednet/nn/tasks.py", line 587, in torch_safe_load
+    ckpt = torch.load(file, map_location="cpu")
+  File "/gpfs/home6/ddwilde/scriptie/ednet/utils/patches.py", line 85, in torch_load
+    return _torch_load(*args, **kwargs)
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 1484, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/ddwilde/ednet_env/lib/python3.10/site-packages/torch/serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/ddwilde/scriptie/runs/dota_saab/stage2-saab5/weights/best.pt'
