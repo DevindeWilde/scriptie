@@ -800,6 +800,8 @@ class E2EDetectLoss:
         """Initialize E2EDetectLoss with one-to-many and one-to-one detection losses using the provided model."""
         self.one2many = v8DetectionLoss(model, tal_topk=10)
         self.one2one = v8DetectionLoss(model, tal_topk=1)
+        self.level_names = getattr(self.one2many, "level_names", [])
+        self.last_positive_cells = None
 
     def __call__(self, preds, batch):
         """Calculate the sum of the loss for box, cls and dfl multiplied by batch size."""
@@ -808,4 +810,9 @@ class E2EDetectLoss:
         loss_one2many = self.one2many(one2many, batch)
         one2one = preds["one2one"]
         loss_one2one = self.one2one(one2one, batch)
+        self.last_positive_cells = (
+            self.one2many.last_positive_cells or self.one2one.last_positive_cells
+        )
+        self.one2many.last_positive_cells = None
+        self.one2one.last_positive_cells = None
         return loss_one2many[0] + loss_one2one[0], loss_one2many[1] + loss_one2one[1]

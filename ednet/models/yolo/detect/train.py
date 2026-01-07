@@ -396,6 +396,7 @@ class DetectionTrainer(BaseTrainer):
         if not features:
             return None
         current_items = self._gather_positive_embeddings(features)
+        print(f"Current items collected: {len(current_items)}")
         if not current_items:
             return None
         grouped = self._group_embeddings(current_items)
