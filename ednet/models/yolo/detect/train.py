@@ -132,6 +132,7 @@ class DetectionTrainer(BaseTrainer):
         self.replay_loss_weight = 1.0
         self.replay_max_edge = 32.0
         self.replay_scale_weight = "uniform"
+        self.replay_debug = False
         self.replay_save_path: Optional[Path] = None
         self.replay_init_buffer: Optional[Path] = None
         self.replay_capacity_growth = 1.5
@@ -181,6 +182,7 @@ class DetectionTrainer(BaseTrainer):
             self.replay_loss_weight = float(replay_args.get("loss_weight", 1.0))
             self.replay_max_edge = float(replay_args.get("tiny_max_pixels", 32))
             self.replay_scale_weight = replay_args.get("scale_weighting", "uniform")
+            self.replay_debug = bool(replay_args.get("debug", False))
             store_dir = replay_args.get("store_dir", "replay")
             buffer_file = replay_args.get("buffer_file", "buffer.pt")
             if store_dir:
@@ -419,6 +421,7 @@ class DetectionTrainer(BaseTrainer):
         if not current_items:
             return None
         grouped = self._group_embeddings(current_items)
+        self._log_embedding_stats(grouped)
         replay_batch = build_replay_batch(
             self.replay_buffer,
             per_class=self.replay_samples_per_class,
@@ -438,6 +441,23 @@ class DetectionTrainer(BaseTrainer):
             level_map = grouped.setdefault(item.level, {})
             level_map.setdefault(item.cls, []).append(item)
         return grouped
+
+    def _log_embedding_stats(self, grouped):
+        if not (self.replay_debug and RANK in {-1, 0}):
+            return
+        for level, class_map in grouped.items():
+            all_items = [it.embedding for items in class_map.values() for it in items]
+            if not all_items:
+                continue
+            tensors = torch.stack(all_items).to(self.device)
+            norm = tensors.norm(dim=1)
+            LOGGER.info(
+                "Replay tap %s: count=%d mean_norm=%.4f max_norm=%.4f",
+                level,
+                tensors.shape[0],
+                float(norm.mean()),
+                float(norm.max()),
+            )
 
     def _compute_replay_consistency(self, current_groups, replay_batch):
         if not replay_batch:

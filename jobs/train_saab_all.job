@@ -40,7 +40,7 @@ python train.py \
     --override replay.sample_per_batch=32 \
     --override replay.loss_weight=1.0 \
     --override replay.tiny_max_pixels=320 \
-    --override debug_replay=True
+    --override replay.debug=True
 
 mv /home/ddwilde/scriptie/datasets/dota-yolo-stage1/test/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage2/test/
 mv /home/ddwilde/scriptie/datasets/dota-yolo-stage1/train/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage2/train/
@@ -66,7 +66,7 @@ python train.py \
   --override replay.memory_dir=/home/ddwilde/scriptie/datasets/memory/stage1 \
   --override replay.memory_ratio=0.5 \
   --override replay.tiny_max_pixels=320 \
-  --override debug_replay=True
+  --override replay.debug=True
 
 mv /home/ddwilde/scriptie/datasets/dota-yolo-stage2/test/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage3/test/
 mv /home/ddwilde/scriptie/datasets/dota-yolo-stage2/train/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage3/train/
@@ -92,4 +92,4 @@ python train.py \
   --override replay.memory_dir=/home/ddwilde/scriptie/datasets/memory/stage3 \
   --override replay.memory_ratio=0.5 \
   --override replay.tiny_max_pixels=320 \
-  --override debug_replay=True
+  --override replay.debug=True
