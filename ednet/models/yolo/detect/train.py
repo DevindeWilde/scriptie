@@ -422,7 +422,12 @@ class DetectionTrainer(BaseTrainer):
 
     def _gather_positive_embeddings(self, features):
         """Collect TinyReplayItems from tapped features using stored positive cell indices."""
-        loss_module = getattr(de_parallel(self.model), "loss", None)
+        model_single = de_parallel(self.model)
+        criterion = getattr(model_single, "criterion", None)
+        if criterion is None and hasattr(model_single, "init_criterion"):
+            criterion = model_single.init_criterion()
+            model_single.criterion = criterion
+        loss_module = criterion
         if loss_module is None:
             return []
         pos = getattr(loss_module, "last_positive_cells", None)
