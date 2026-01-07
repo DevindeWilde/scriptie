@@ -450,7 +450,7 @@ class DetectionTrainer(BaseTrainer):
                     float(self.replay_max_edge),
                 )
             return []
-        if self.replay_debug and RANK in {-1, 0}:
+        if self.replay_debug:
             LOGGER.info(
                 "Replay tap positives before filter=%d after=%d",
                 int(size_mask.numel()),
