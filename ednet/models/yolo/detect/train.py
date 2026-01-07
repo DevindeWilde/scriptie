@@ -442,7 +442,20 @@ class DetectionTrainer(BaseTrainer):
             return []
         size_mask = max_edge <= self.replay_max_edge
         if not size_mask.any():
+            if self.replay_debug and RANK in {-1, 0}:
+                LOGGER.info(
+                    "Replay tap skipped: max_edge min=%.2f max=%.2f threshold=%.2f",
+                    float(max_edge.min()),
+                    float(max_edge.max()),
+                    float(self.replay_max_edge),
+                )
             return []
+        if self.replay_debug and RANK in {-1, 0}:
+            LOGGER.info(
+                "Replay tap positives before filter=%d after=%d",
+                int(size_mask.numel()),
+                int(size_mask.sum()),
+            )
         indices = indices[size_mask]
         classes = classes[size_mask]
         max_edge = max_edge[size_mask]
