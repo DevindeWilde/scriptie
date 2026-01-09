@@ -101,8 +101,18 @@ class DetectionTrainer(BaseTrainer):
     def get_model(self, cfg=None, weights=None, verbose=True):
         """Return a YOLO detection model."""
         model = DetectionModel(cfg, nc=self.data["nc"], verbose=verbose and RANK == -1)
+        self.active_class_ids = None
+        stage_cfg = getattr(self.args, "stage", None)
+        if isinstance(stage_cfg, dict):
+            raw_ids = stage_cfg.get("active_classes")
+            if raw_ids is not None:
+                if isinstance(raw_ids, str):
+                    raw_ids = raw_ids.strip("[]").split(",")
+                self.active_class_ids = tuple(sorted(int(x) for x in raw_ids))
+                LOGGER.info(f"Active classes for this stage: {self.active_class_ids}")
         if weights:
             model.load(weights)
+        model.active_class_ids = self.active_class_ids
         lora_args = getattr(self.args, "lora", None)
         self.lora_enabled = bool(isinstance(lora_args, dict) and lora_args.get("enable"))
         if self.lora_enabled:

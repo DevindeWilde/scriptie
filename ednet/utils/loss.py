@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from ednet.utils import LOGGER
 from ednet.utils.metrics import OKS_SIGMA
 from ednet.utils.ops import crop_mask, xywh2xyxy, xyxy2xywh
 from ednet.utils.tal import RotatedTaskAlignedAssigner, TaskAlignedAssigner, dist2bbox, dist2rbox, make_anchors
@@ -186,6 +187,14 @@ class v8DetectionLoss:
         self.assigner = TaskAlignedAssigner(topk=tal_topk, num_classes=self.nc, alpha=0.5, beta=6.0)
         self.bbox_loss = BboxLoss(m.reg_max).to(device)
         self.proj = torch.arange(m.reg_max, dtype=torch.float, device=device)
+        self.active_classes: tuple[int, ...] | None = None
+        self.inactive_ignore_iou = getattr(h, "inactive_ignore_iou", 0.5)
+
+    def set_active_classes(self, class_ids: tuple[int, ...] | None):
+        """Optional hook to limit positive supervision to a subset of classes."""
+        self.active_classes = class_ids
+        if class_ids is not None:
+            LOGGER.info(f"Limiting positives to classes {class_ids}")
 
     def preprocess(self, targets, batch_size, scale_tensor):
         """Preprocesses the target counts and matches with the input batch size to output a tensor."""
@@ -235,9 +244,35 @@ class v8DetectionLoss:
         targets = self.preprocess(targets.to(self.device), batch_size, scale_tensor=imgsz[[1, 0, 1, 0]])
         gt_labels, gt_bboxes = targets.split((1, 4), 2)  # cls, xyxy
         mask_gt = gt_bboxes.sum(2, keepdim=True).gt_(0.0)
+        active_mask = None
+        inactive_mask = None
+        if self.active_classes is not None:
+            class_ids = gt_labels.squeeze(-1).long()
+            active_mask = torch.isin(class_ids, torch.tensor(self.active_classes, device=class_ids.device))
+            mask_gt_bool = mask_gt.squeeze(-1).bool()
+            inactive_mask = (~active_mask) & mask_gt_bool
+            inactive = int(inactive_mask.sum())
+            if inactive:
+                inactive_cls, counts = torch.unique(class_ids[inactive_mask], return_counts=True)
+                if torch.isin(torch.tensor(self.active_classes, device=inactive_cls.device), inactive_cls).any():
+                    LOGGER.warning("Active class leaked into inactive mask!")
+                details = ", ".join(
+                    f"{int(cls)}:{int(cnt)}" for cls, cnt in zip(inactive_cls.tolist(), counts.tolist())
+                )
+            else:
+                details = "-"
+            LOGGER.info(
+                f"Stage replay: {inactive} GT boxes marked inactive (classes {self.active_classes})."
+                f" Per-class inactive counts: {details}"
+            )
 
         # Pboxes
         pred_bboxes = self.bbox_decode(anchor_points, pred_distri)  # xyxy, (b, h*w, 4)
+
+        assign_mask = mask_gt
+        if active_mask is not None:
+            assign_mask = mask_gt.clone()
+            assign_mask[~active_mask[..., None]] = 0
 
         target_labels, target_bboxes, target_scores, fg_mask, target_gt_idx = self.assigner(
             pred_scores.detach().sigmoid(),
@@ -245,7 +280,7 @@ class v8DetectionLoss:
             anchor_points * stride_tensor,
             gt_labels,
             gt_bboxes,
-            mask_gt,
+            assign_mask,
         )
         self._record_positive_cells(fg_mask, target_labels, target_bboxes, feats)
 
@@ -253,7 +288,20 @@ class v8DetectionLoss:
 
         # Cls loss
         # loss[1] = self.varifocal_loss(pred_scores, target_scores, target_labels) / target_scores_sum  # VFL way
-        loss[1] = self.bce(pred_scores, target_scores.to(dtype)).sum() / target_scores_sum  # BCE
+        ignore_mask = None
+        if inactive_mask is not None and inactive_mask.any():
+            ignore_mask = self._build_inactive_ignore_mask(
+                pred_bboxes.detach(), stride_tensor, gt_bboxes, inactive_mask, fg_mask
+            )
+        bce_loss = self.bce(pred_scores, target_scores.to(dtype))
+        if ignore_mask is not None:
+            overlap = ignore_mask & fg_mask
+            if overlap.any():
+                raise RuntimeError(f"{int(overlap.sum())} positives incorrectly marked for ignore")
+            weight = (~ignore_mask).unsqueeze(-1).to(dtype)
+            loss[1] = (bce_loss * weight).sum() / target_scores_sum
+        else:
+            loss[1] = bce_loss.sum() / target_scores_sum  # BCE
 
         # Bbox loss
         if fg_mask.sum():
@@ -325,6 +373,30 @@ class v8DetectionLoss:
                 "classes": torch.cat(cls_entries, dim=0),
                 "max_edge": torch.cat(size_entries, dim=0),
             }
+
+    def _build_inactive_ignore_mask(self, pred_bboxes, stride_tensor, gt_bboxes, inactive_mask, fg_mask):
+        """Return a boolean mask of anchors to ignore due to overlaps with inactive GT boxes."""
+        bs, num_anchors, _ = pred_bboxes.shape
+        ignore_mask = torch.zeros((bs, num_anchors), dtype=torch.bool, device=pred_bboxes.device)
+        pred_img = (pred_bboxes * stride_tensor).to(gt_bboxes.dtype)
+        for b in range(bs):
+            inactive_boxes = gt_bboxes[b, inactive_mask[b]]
+            if inactive_boxes.numel() == 0:
+                continue
+            anchors = pred_img[b]  # shape (num_anchors, 4)
+            try:
+                from torchvision.ops import box_iou
+
+                ious = box_iou(anchors, inactive_boxes)
+            except Exception:
+                # Fall back to scalar IoU computation if torchvision is unavailable
+                ious = bbox_iou(anchors.unsqueeze(1), inactive_boxes.unsqueeze(0), xywh=False).squeeze(-1)
+            max_iou = ious.max(dim=1).values
+            ignore_mask[b] = max_iou > self.inactive_ignore_iou
+        ignore_mask &= ~fg_mask
+        if ignore_mask.any():
+            LOGGER.info(f"Ignoring {int(ignore_mask.sum())} negative anchors overlapping inactive GT.")
+        return ignore_mask if ignore_mask.any() else None
 
 
 class v8SegmentationLoss(v8DetectionLoss):
@@ -802,6 +874,10 @@ class E2EDetectLoss:
         self.one2one = v8DetectionLoss(model, tal_topk=1)
         self.level_names = getattr(self.one2many, "level_names", [])
         self.last_positive_cells = None
+
+    def set_active_classes(self, class_ids):
+        self.one2many.set_active_classes(class_ids)
+        self.one2one.set_active_classes(class_ids)
 
     def __call__(self, preds, batch):
         """Calculate the sum of the loss for box, cls and dfl multiplied by batch size."""
