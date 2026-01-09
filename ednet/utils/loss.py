@@ -268,11 +268,12 @@ class v8DetectionLoss:
                 details = ", ".join(
                     f"{int(cls)}:{int(cnt)}" for cls, cnt in zip(inactive_cls.tolist(), counts.tolist())
                 )
-            else:
-                details = "-"
+            # else:
+            #     details = "-"
             # LOGGER.info(
             #     f"Stage replay: {inactive} GT boxes marked inactive (classes {self.active_classes})."
             #     f" Per-class inactive counts: {details}"
+            # )
             # )
 
         # Pboxes
@@ -427,8 +428,8 @@ class v8DetectionLoss:
             max_iou = ious.max(dim=1).values
             ignore_mask[b] = max_iou > self.inactive_ignore_iou
         ignore_mask &= ~fg_mask
-        if ignore_mask.any():
-            #LOGGER.info(f"Ignoring {int(ignore_mask.sum())} negative anchors overlapping inactive GT.")
+        # if ignore_mask.any():
+        #     LOGGER.info(f"Ignoring {int(ignore_mask.sum())} negative anchors overlapping inactive GT.")
         return ignore_mask if ignore_mask.any() else None
 
 
