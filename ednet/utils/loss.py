@@ -270,10 +270,10 @@ class v8DetectionLoss:
                 )
             else:
                 details = "-"
-            LOGGER.info(
-                f"Stage replay: {inactive} GT boxes marked inactive (classes {self.active_classes})."
-                f" Per-class inactive counts: {details}"
-            )
+            # LOGGER.info(
+            #     f"Stage replay: {inactive} GT boxes marked inactive (classes {self.active_classes})."
+            #     f" Per-class inactive counts: {details}"
+            # )
 
         # Pboxes
         pred_bboxes = self.bbox_decode(anchor_points, pred_distri)  # xyxy, (b, h*w, 4)
@@ -428,7 +428,7 @@ class v8DetectionLoss:
             ignore_mask[b] = max_iou > self.inactive_ignore_iou
         ignore_mask &= ~fg_mask
         if ignore_mask.any():
-            LOGGER.info(f"Ignoring {int(ignore_mask.sum())} negative anchors overlapping inactive GT.")
+            #LOGGER.info(f"Ignoring {int(ignore_mask.sum())} negative anchors overlapping inactive GT.")
         return ignore_mask if ignore_mask.any() else None
 
 
