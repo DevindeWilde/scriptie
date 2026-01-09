@@ -24,7 +24,7 @@ python train.py \
     --data /home/ddwilde/scriptie/yaml/DOTA.yaml \
     --epochs 10 \
     --imgsz 640 \
-    --batch-size 8 \
+    --batch-size 4 \
     --project /home/ddwilde/scriptie/runs/dota_saab_ignore \
     --name stage1-saab \
     --workers 8 \
@@ -44,7 +44,7 @@ python train.py \
   --data /home/ddwilde/scriptie/yaml/DOTA.yaml \
   --epochs 10 \
   --imgsz 640 \
-  --batch-size 8 \
+  --batch-size 4 \
   --project /home/ddwilde/scriptie/runs/dota_saab_ignore \
   --name stage2-saab \
   --workers 8 \
@@ -56,11 +56,12 @@ python train.py \
   --override replay.sample_per_batch=32 \
   --override replay.loss_weight=1.0 \
   --override replay.init_buffer=/home/ddwilde/scriptie/runs/dota_saab_ignore/stage1-saab/replay/buffer.pt \
-  --override replay.memory_dir=/home/ddwilde/scriptie/datasets/memory/stage1 \
-  --override replay.memory_ratio=0.5 \
+  --override replay.memory_dir=None \
+  --override replay.memory_ratio=0.0 \
   --override replay.tiny_max_pixels=320 \
   --override replay.debug=True \
-  --override "stage.active_classes=[1]"
+  --override "stage.active_classes=[1,9,10]" \
+  --override "stage.prev_classes=[9,10]"
 
 python train.py \
   --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
@@ -79,8 +80,9 @@ python train.py \
   --override replay.sample_per_batch=32 \
   --override replay.loss_weight=1.0 \
   --override replay.init_buffer=/home/ddwilde/scriptie/runs/dota_saab_ignore/stage2-saab/replay/buffer.pt \
-  --override replay.memory_dir=/home/ddwilde/scriptie/datasets/memory/stage3 \
-  --override replay.memory_ratio=0.5 \
+  --override replay.memory_dir=None \
+  --override replay.memory_ratio=0.0 \
   --override replay.tiny_max_pixels=320 \
   --override replay.debug=True \
-  --override "stage.active_classes=[0,11]"
+  --override "stage.active_classes=[0,1,9,10,11]" \
+  --override "stage.prev_classes=[1,9,10]"

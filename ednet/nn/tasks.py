@@ -336,6 +336,7 @@ class DetectionModel(BaseModel):
         """Initialize the YOLOv8 detection model with the given config and parameters."""
         super().__init__()
         self.active_class_ids = None
+        self.prev_class_ids = None
         self.yaml = cfg if isinstance(cfg, dict) else yaml_model_load(cfg)  # cfg dict
         if self.yaml["backbone"][0][2] == "Silence":
             LOGGER.warning(
@@ -424,7 +425,10 @@ class DetectionModel(BaseModel):
         """Initialize the loss criterion for the DetectionModel."""
         loss = E2EDetectLoss(self) if getattr(self, "end2end", False) else v8DetectionLoss(self)
         if hasattr(loss, "set_active_classes"):
-            loss.set_active_classes(getattr(self, "active_class_ids", None))
+            loss.set_active_classes(
+                getattr(self, "active_class_ids", None),
+                getattr(self, "prev_class_ids", None),
+            )
         return loss
 
 

@@ -181,6 +181,7 @@ class v8DetectionLoss:
         self.device = device
         self.level_names = [self._make_level_name(int(s)) for s in self.stride.tolist()]
         self.last_positive_cells = None
+        self.last_replay_cells = None
 
         self.use_dfl = m.reg_max > 1
 
@@ -188,13 +189,21 @@ class v8DetectionLoss:
         self.bbox_loss = BboxLoss(m.reg_max).to(device)
         self.proj = torch.arange(m.reg_max, dtype=torch.float, device=device)
         self.active_classes: tuple[int, ...] | None = None
+        self.prev_classes: tuple[int, ...] | None = None
         self.inactive_ignore_iou = getattr(h, "inactive_ignore_iou", 0.5)
 
-    def set_active_classes(self, class_ids: tuple[int, ...] | None):
-        """Optional hook to limit positive supervision to a subset of classes."""
+    def set_active_classes(
+        self,
+        class_ids: tuple[int, ...] | None,
+        prev_class_ids: tuple[int, ...] | None = None,
+    ):
+        """Optional hook to control which classes act as positives and which feed replay."""
         self.active_classes = class_ids
+        self.prev_classes = prev_class_ids
         if class_ids is not None:
             LOGGER.info(f"Limiting positives to classes {class_ids}")
+        if prev_class_ids:
+            LOGGER.info(f"Replay targets limited to previous classes {prev_class_ids}")
 
     def preprocess(self, targets, batch_size, scale_tensor):
         """Preprocesses the target counts and matches with the input batch size to output a tensor."""
@@ -282,7 +291,11 @@ class v8DetectionLoss:
             gt_bboxes,
             assign_mask,
         )
-        self._record_positive_cells(fg_mask, target_labels, target_bboxes, feats)
+        pos_cells = self._record_positive_cells(fg_mask, target_labels, target_bboxes, feats)
+        if self.prev_classes and pos_cells:
+            self.last_replay_cells = self._filter_positive_cells(pos_cells, self.prev_classes)
+        else:
+            self.last_replay_cells = None
 
         target_scores_sum = max(target_scores.sum(), 1)
 
@@ -327,7 +340,7 @@ class v8DetectionLoss:
         """Store (level, batch, gy, gx, cls, max_edge_px) tuples for positive anchors."""
         self.last_positive_cells = None
         if fg_mask is None or not fg_mask.any():
-            return
+            return None
         index_entries = []
         cls_entries = []
         size_entries = []
@@ -373,6 +386,26 @@ class v8DetectionLoss:
                 "classes": torch.cat(cls_entries, dim=0),
                 "max_edge": torch.cat(size_entries, dim=0),
             }
+        return self.last_positive_cells
+
+    def _filter_positive_cells(self, cells, class_filter):
+        if not cells:
+            return None
+        classes = cells.get("classes")
+        if classes is None or classes.numel() == 0:
+            return None
+        device = classes.device
+        filt = torch.tensor(class_filter, device=device, dtype=classes.dtype)
+        if filt.numel() == 0:
+            return None
+        keep = torch.isin(classes, filt)
+        if not keep.any():
+            return None
+        return {
+            "indices": cells["indices"][keep],
+            "classes": classes[keep],
+            "max_edge": cells["max_edge"][keep],
+        }
 
     def _build_inactive_ignore_mask(self, pred_bboxes, stride_tensor, gt_bboxes, inactive_mask, fg_mask):
         """Return a boolean mask of anchors to ignore due to overlaps with inactive GT boxes."""
@@ -874,10 +907,12 @@ class E2EDetectLoss:
         self.one2one = v8DetectionLoss(model, tal_topk=1)
         self.level_names = getattr(self.one2many, "level_names", [])
         self.last_positive_cells = None
+        self.prev_classes: tuple[int, ...] | None = None
 
-    def set_active_classes(self, class_ids):
-        self.one2many.set_active_classes(class_ids)
-        self.one2one.set_active_classes(class_ids)
+    def set_active_classes(self, class_ids, prev_class_ids: tuple[int, ...] | None = None):
+        self.prev_classes = prev_class_ids
+        self.one2many.set_active_classes(class_ids, prev_class_ids)
+        self.one2one.set_active_classes(class_ids, prev_class_ids)
 
     def __call__(self, preds, batch):
         """Calculate the sum of the loss for box, cls and dfl multiplied by batch size."""

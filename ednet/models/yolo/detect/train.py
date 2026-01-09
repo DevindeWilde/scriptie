@@ -102,17 +102,27 @@ class DetectionTrainer(BaseTrainer):
         """Return a YOLO detection model."""
         model = DetectionModel(cfg, nc=self.data["nc"], verbose=verbose and RANK == -1)
         self.active_class_ids = None
+        self.prev_class_ids = None
         stage_cfg = getattr(self.args, "stage", None)
         if isinstance(stage_cfg, dict):
             raw_ids = stage_cfg.get("active_classes")
             if raw_ids is not None:
                 if isinstance(raw_ids, str):
-                    raw_ids = raw_ids.strip("[]").split(",")
+                    raw_ids = raw_ids.strip("[]")
+                    raw_ids = [] if raw_ids == "" else raw_ids.split(",")
                 self.active_class_ids = tuple(sorted(int(x) for x in raw_ids))
                 LOGGER.info(f"Active classes for this stage: {self.active_class_ids}")
+            prev_ids = stage_cfg.get("prev_classes")
+            if prev_ids is not None:
+                if isinstance(prev_ids, str):
+                    prev_ids = prev_ids.strip("[]")
+                    prev_ids = [] if prev_ids == "" else prev_ids.split(",")
+                self.prev_class_ids = tuple(sorted(int(x) for x in prev_ids))
+                LOGGER.info(f"Replay/previous classes for this stage: {self.prev_class_ids}")
         if weights:
             model.load(weights)
         model.active_class_ids = self.active_class_ids
+        model.prev_class_ids = self.prev_class_ids
         lora_args = getattr(self.args, "lora", None)
         self.lora_enabled = bool(isinstance(lora_args, dict) and lora_args.get("enable"))
         if self.lora_enabled:
@@ -441,7 +451,9 @@ class DetectionTrainer(BaseTrainer):
         loss_module = criterion
         if loss_module is None:
             return []
-        pos = getattr(loss_module, "last_positive_cells", None)
+        pos = getattr(loss_module, "last_replay_cells", None)
+        if not pos:
+            pos = getattr(loss_module, "last_positive_cells", None)
         if not pos:
             return []
         indices = pos.get("indices")
@@ -498,6 +510,8 @@ class DetectionTrainer(BaseTrainer):
                     )
                 )
         loss_module.last_positive_cells = None
+        if hasattr(loss_module, "last_replay_cells"):
+            loss_module.last_replay_cells = None
         return items
 
     def _log_embedding_stats(self, grouped):
