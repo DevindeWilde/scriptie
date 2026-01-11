@@ -1,0 +1,40 @@
+#!/bin/bash
+#SBATCH --job-name=saab-stage-all
+#SBATCH --time=24:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --partition=gpu_a100 
+#SBATCH --gpus-per-node=1
+#SBATCH --gres=gpu:1
+#SBATCH --output=logs/upper_saab-stage-all-%j.out
+#SBATCH --error=logs/upper_saab-stage-all-%j.err
+
+module purge
+module load 2023
+module load CUDA/12.4.0
+module load Python/3.11.3-GCCcore-12.3.0
+
+source $HOME/ednet_env/bin/activate
+cd $HOME/scriptie
+
+python train.py \
+    --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
+    --data /home/ddwilde/scriptie/yaml/DOTA.yaml \
+    --epochs 50 \
+    --imgsz 640 \
+    --batch-size 4 \
+    --project /home/ddwilde/scriptie/runs/dota_saab_upper \
+    --name stage1-saab \
+    --workers 8 \
+    --weights /home/ddwilde/scriptie/pretrained/small.pt \
+    --override lora.enable=True \
+    --override lora.freeze_backbone=True \
+    --override replay.enable=True \
+    --override replay.buffer_per_class=128 \
+    --override replay.sample_per_batch=32 \
+    --override replay.loss_weight=1.0 \
+    --override replay.tiny_max_pixels=320 \
+    --override replay.debug=True \
+    --override "stage.active_classes=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]"
