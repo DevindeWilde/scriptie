@@ -29,3 +29,4 @@ python train.py \
     --name upper-saab \
     --workers 8 \
     --weights /home/ddwilde/scriptie/pretrained/small.pt \
+    --override "stage.active_classes=[0,1,9,10,11]" \
