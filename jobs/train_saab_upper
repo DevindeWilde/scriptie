@@ -26,15 +26,6 @@ python train.py \
     --imgsz 640 \
     --batch-size 4 \
     --project /home/ddwilde/scriptie/runs/dota_saab_upper \
-    --name stage1-saab \
+    --name upper-saab \
     --workers 8 \
     --weights /home/ddwilde/scriptie/pretrained/small.pt \
-    --override lora.enable=True \
-    --override lora.freeze_backbone=True \
-    --override replay.enable=True \
-    --override replay.buffer_per_class=128 \
-    --override replay.sample_per_batch=32 \
-    --override replay.loss_weight=1.0 \
-    --override replay.tiny_max_pixels=320 \
-    --override replay.debug=True \
-    --override "stage.active_classes=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]"
