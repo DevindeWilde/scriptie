@@ -1,7 +1,7 @@
 [
   {
     "epoch": 1,
-    "timestamp": 1767969811.4753723,
+    "timestamp": 1768137135.410951,
     "training": true,
     "metrics": {
       "plane": {
@@ -68,17 +68,17 @@
         "num_targets": 406
       },
       "large-vehicle": {
-        "precision": 0.3304073766126321,
-        "recall": 0.40348637754365,
-        "map50": 0.2968005682021886,
-        "map": 0.13682607489013904,
+        "precision": 0.5372581132278771,
+        "recall": 0.5625177204423022,
+        "map50": 0.5079491485319055,
+        "map": 0.27006592468172563,
         "num_targets": 3527
       },
       "small-vehicle": {
-        "precision": 0.3009186574144866,
-        "recall": 0.2712896138923837,
-        "map50": 0.17474473604226012,
-        "map": 0.07783717011013945,
+        "precision": 0.5347945478966519,
+        "recall": 0.3668938228182018,
+        "map50": 0.3590138743854713,
+        "map": 0.16956604217990462,
         "num_targets": 4549
       },
       "helicopter": {
@@ -113,7 +113,7 @@
   },
   {
     "epoch": 2,
-    "timestamp": 1767969870.0028238,
+    "timestamp": 1768137198.136255,
     "training": true,
     "metrics": {
       "plane": {
@@ -126,8 +126,8 @@
       "ship": {
         "precision": 1.0,
         "recall": 0.0,
-        "map50": 0.024906933860611852,
-        "map": 0.00939720462240028,
+        "map50": 0.03897948981353633,
+        "map": 0.013659792280825717,
         "num_targets": 8385
       },
       "storage-tank": {
@@ -180,17 +180,17 @@
         "num_targets": 406
       },
       "large-vehicle": {
-        "precision": 0.37657933565969876,
-        "recall": 0.43833286078820527,
-        "map50": 0.32344156466892354,
-        "map": 0.17096452141432797,
+        "precision": 0.6106379337205101,
+        "recall": 0.6158208108874398,
+        "map50": 0.6002502279887408,
+        "map": 0.34700648062455597,
         "num_targets": 3527
       },
       "small-vehicle": {
-        "precision": 0.3487410417845915,
-        "recall": 0.2865193837495442,
-        "map50": 0.2059855233143778,
-        "map": 0.10183110097956172,
+        "precision": 0.5996738778528201,
+        "recall": 0.41458253153131147,
+        "map50": 0.4228861991153989,
+        "map": 0.21951866033808143,
         "num_targets": 4549
       },
       "helicopter": {
@@ -225,7 +225,7 @@
   },
   {
     "epoch": 3,
-    "timestamp": 1767969928.0672028,
+    "timestamp": 1768137259.9771183,
     "training": true,
     "metrics": {
       "plane": {
@@ -236,10 +236,10 @@
         "num_targets": 1783
       },
       "ship": {
-        "precision": 0.525358508186791,
-        "recall": 0.0009255522057965093,
-        "map50": 0.03531999360344435,
-        "map": 0.01578507545670644,
+        "precision": 0.7663497231398466,
+        "recall": 0.008997044483693924,
+        "map50": 0.1864898605760714,
+        "map": 0.05987408360856121,
         "num_targets": 8385
       },
       "storage-tank": {
@@ -292,17 +292,17 @@
         "num_targets": 406
       },
       "large-vehicle": {
-        "precision": 0.4444438209722691,
-        "recall": 0.47269516081537627,
-        "map50": 0.39768336473595345,
-        "map": 0.21850514742165048,
+        "precision": 0.6770554171719103,
+        "recall": 0.6166713921179473,
+        "map50": 0.629689358323561,
+        "map": 0.36244010830679635,
         "num_targets": 3527
       },
       "small-vehicle": {
-        "precision": 0.31864432362670236,
-        "recall": 0.33000567865373315,
-        "map50": 0.2057386141199234,
-        "map": 0.10255763240161209,
+        "precision": 0.5180667544414823,
+        "recall": 0.4776874038250165,
+        "map50": 0.43104337624687106,
+        "map": 0.21280927580815426,
         "num_targets": 4549
       },
       "helicopter": {
@@ -337,7 +337,7 @@
   },
   {
     "epoch": 4,
-    "timestamp": 1767969985.5431836,
+    "timestamp": 1768137320.7611456,
     "training": true,
     "metrics": {
       "plane": {
@@ -348,10 +348,10 @@
         "num_targets": 1783
       },
       "ship": {
-        "precision": 0.21368179893084108,
-        "recall": 0.0029815146094215863,
-        "map50": 0.030729893598716293,
-        "map": 0.01629976935387279,
+        "precision": 0.6068296329007811,
+        "recall": 0.1794682246017302,
+        "map50": 0.24488550813289334,
+        "map": 0.07789863338085454,
         "num_targets": 8385
       },
       "storage-tank": {
@@ -404,17 +404,17 @@
         "num_targets": 406
       },
       "large-vehicle": {
-        "precision": 0.40356358877960546,
-        "recall": 0.5523107456762121,
-        "map50": 0.44199790887955026,
-        "map": 0.24167718878175112,
+        "precision": 0.6823362456560976,
+        "recall": 0.6515452225687554,
+        "map50": 0.6560716858981303,
+        "map": 0.3806295532987798,
         "num_targets": 3527
       },
       "small-vehicle": {
-        "precision": 0.3771329986992048,
-        "recall": 0.2769839525170367,
-        "map50": 0.2198607254884259,
-        "map": 0.11178133916530933,
+        "precision": 0.5040386229552428,
+        "recall": 0.4823038030336338,
+        "map50": 0.4294559188070626,
+        "map": 0.20127589404557011,
         "num_targets": 4549
       },
       "helicopter": {
@@ -449,7 +449,7 @@
   },
   {
     "epoch": 5,
-    "timestamp": 1767970043.405907,
+    "timestamp": 1768137382.1027145,
     "training": true,
     "metrics": {
       "plane": {
@@ -460,10 +460,10 @@
         "num_targets": 1783
       },
       "ship": {
-        "precision": 0.35255173532038947,
-        "recall": 0.0642814549791294,
-        "map50": 0.07655654907628001,
-        "map": 0.03604622886091874,
+        "precision": 0.6740866210549341,
+        "recall": 0.2661533328199995,
+        "map50": 0.3165022503918287,
+        "map": 0.1103010767066154,
         "num_targets": 8385
       },
       "storage-tank": {
@@ -516,17 +516,17 @@
         "num_targets": 406
       },
       "large-vehicle": {
-        "precision": 0.35863780973925996,
-        "recall": 0.5574142330592572,
-        "map50": 0.39303621568805036,
-        "map": 0.2098142123034988,
+        "precision": 0.6461875319650913,
+        "recall": 0.6512616954919195,
+        "map50": 0.6399046689109938,
+        "map": 0.37877547378855125,
         "num_targets": 3527
       },
       "small-vehicle": {
-        "precision": 0.3338653701117972,
-        "recall": 0.3745878214992306,
-        "map50": 0.2672532875373629,
-        "map": 0.13234608919909685,
+        "precision": 0.5321022538619284,
+        "recall": 0.4822369082646067,
+        "map50": 0.4538124580204759,
+        "map": 0.23032151113886573,
         "num_targets": 4549
       },
       "helicopter": {
@@ -561,7 +561,7 @@
   },
   {
     "epoch": 6,
-    "timestamp": 1767970100.5568612,
+    "timestamp": 1768137442.9307132,
     "training": true,
     "metrics": {
       "plane": {
@@ -572,10 +572,10 @@
         "num_targets": 1783
       },
       "ship": {
-        "precision": 0.587064763152363,
-        "recall": 0.015259637826390624,
-        "map50": 0.08231047931427073,
-        "map": 0.04041721650902832,
+        "precision": 0.6666413879222903,
+        "recall": 0.3402504472271914,
+        "map50": 0.3431346648368356,
+        "map": 0.13123324648806886,
         "num_targets": 8385
       },
       "storage-tank": {
@@ -628,17 +628,17 @@
         "num_targets": 406
       },
       "large-vehicle": {
-        "precision": 0.44512793856732497,
-        "recall": 0.5783952367451092,
-        "map50": 0.47050088679186836,
-        "map": 0.26917997555604123,
+        "precision": 0.6582118968986482,
+        "recall": 0.6572157641054721,
+        "map50": 0.654418962987338,
+        "map": 0.40125714030696347,
         "num_targets": 3527
       },
       "small-vehicle": {
-        "precision": 0.4402669569293696,
-        "recall": 0.370191250824357,
-        "map50": 0.32572488836158453,
-        "map": 0.16728842500358027,
+        "precision": 0.46178469181747345,
+        "recall": 0.508243570015388,
+        "map50": 0.43761854018526797,
+        "map": 0.21943897152539565,
         "num_targets": 4549
       },
       "helicopter": {
@@ -673,7 +673,7 @@
   },
   {
     "epoch": 7,
-    "timestamp": 1767970158.2879262,
+    "timestamp": 1768137504.017366,
     "training": true,
     "metrics": {
       "plane": {
@@ -684,10 +684,10 @@
         "num_targets": 1783
       },
       "ship": {
-        "precision": 0.5190892778963733,
-        "recall": 0.15670840787119858,
-        "map50": 0.15940535502826508,
-        "map": 0.07440787378986105,
+        "precision": 0.6794516580253734,
+        "recall": 0.4604651162790698,
+        "map50": 0.4499904893352957,
+        "map": 0.1874663253701127,
         "num_targets": 8385
       },
       "storage-tank": {
@@ -740,17 +740,17 @@
         "num_targets": 406
       },
       "large-vehicle": {
-        "precision": 0.3633781140923702,
-        "recall": 0.6682733201020697,
-        "map50": 0.45927737636620286,
-        "map": 0.26227483857346534,
+        "precision": 0.7498813257077935,
+        "recall": 0.6613335762754532,
+        "map50": 0.7012446073450936,
+        "map": 0.4244752115048384,
         "num_targets": 3527
       },
       "small-vehicle": {
-        "precision": 0.37367792852743337,
-        "recall": 0.3655748516157397,
-        "map50": 0.29726268895814634,
-        "map": 0.1486990120394099,
+        "precision": 0.5688160756138921,
+        "recall": 0.4655968344691141,
+        "map50": 0.4627043868652079,
+        "map": 0.22810201244097122,
         "num_targets": 4549
       },
       "helicopter": {
@@ -785,7 +785,7 @@
   },
   {
     "epoch": 8,
-    "timestamp": 1767970215.376468,
+    "timestamp": 1768137565.3466253,
     "training": true,
     "metrics": {
       "plane": {
@@ -796,10 +796,10 @@
         "num_targets": 1783
       },
       "ship": {
-        "precision": 0.6183214248431106,
-        "recall": 0.18354203935599284,
-        "map50": 0.2067310384826947,
-        "map": 0.0937931454608106,
+        "precision": 0.7959899549443137,
+        "recall": 0.44245676803816336,
+        "map50": 0.500637049532835,
+        "map": 0.23873837208492535,
         "num_targets": 8385
       },
       "storage-tank": {
@@ -852,17 +852,17 @@
         "num_targets": 406
       },
       "large-vehicle": {
-        "precision": 0.47269128527552456,
-        "recall": 0.6036291465834988,
-        "map50": 0.49064869072788464,
-        "map": 0.2850974802985057,
+        "precision": 0.7554273073367473,
+        "recall": 0.6498051780161221,
+        "map50": 0.7064695973949991,
+        "map": 0.4358012424096856,
         "num_targets": 3527
       },
       "small-vehicle": {
-        "precision": 0.3149684758662333,
-        "recall": 0.42602769839525173,
-        "map50": 0.30675097921580274,
-        "map": 0.15807338000532484,
+        "precision": 0.5132452215752308,
+        "recall": 0.5159375686964168,
+        "map50": 0.4661836285559081,
+        "map": 0.24843083901255175,
         "num_targets": 4549
       },
       "helicopter": {
@@ -897,7 +897,7 @@
   },
   {
     "epoch": 9,
-    "timestamp": 1767970272.9723787,
+    "timestamp": 1768137627.2428255,
     "training": true,
     "metrics": {
       "plane": {
@@ -908,10 +908,10 @@
         "num_targets": 1783
       },
       "ship": {
-        "precision": 0.6253314756934254,
-        "recall": 0.20502047963288272,
-        "map50": 0.22855361094183738,
-        "map": 0.10167158756818469,
+        "precision": 0.8096661949711448,
+        "recall": 0.4257602862254025,
+        "map50": 0.5092647818128831,
+        "map": 0.24778073970866937,
         "num_targets": 8385
       },
       "storage-tank": {
@@ -964,17 +964,17 @@
         "num_targets": 406
       },
       "large-vehicle": {
-        "precision": 0.47773782858486696,
-        "recall": 0.6087326339665438,
-        "map50": 0.48156808518387295,
-        "map": 0.2801937042725103,
+        "precision": 0.7180797376854227,
+        "recall": 0.6660051034873831,
+        "map50": 0.6832315854970994,
+        "map": 0.42239203897905664,
         "num_targets": 3527
       },
       "small-vehicle": {
-        "precision": 0.32297192571616945,
-        "recall": 0.46845460540778194,
-        "map50": 0.3339186906734886,
-        "map": 0.16661598183617654,
+        "precision": 0.5344946086958329,
+        "recall": 0.5232412640634229,
+        "map50": 0.47708165631956034,
+        "map": 0.2564638673987828,
         "num_targets": 4549
       },
       "helicopter": {
@@ -1009,7 +1009,7 @@
   },
   {
     "epoch": 10,
-    "timestamp": 1767970330.3914642,
+    "timestamp": 1768137687.958143,
     "training": true,
     "metrics": {
       "plane": {
@@ -1020,10 +1020,10 @@
         "num_targets": 1783
       },
       "ship": {
-        "precision": 0.6357372854684981,
-        "recall": 0.24400715563506262,
-        "map50": 0.25915327019628215,
-        "map": 0.1157422732826072,
+        "precision": 0.8222767658644098,
+        "recall": 0.4221163620388427,
+        "map50": 0.4914625813078999,
+        "map": 0.22830529618890422,
         "num_targets": 8385
       },
       "storage-tank": {
@@ -1076,17 +1076,4497 @@
         "num_targets": 406
       },
       "large-vehicle": {
-        "precision": 0.44897286006964005,
-        "recall": 0.623280577349191,
-        "map50": 0.46359859293785677,
-        "map": 0.2664623087701298,
+        "precision": 0.6789068518523113,
+        "recall": 0.6872696342500709,
+        "map50": 0.6838610131065195,
+        "map": 0.4232293917795576,
         "num_targets": 3527
       },
       "small-vehicle": {
-        "precision": 0.3455418552338741,
-        "recall": 0.4286656408001759,
-        "map50": 0.31009207643113296,
-        "map": 0.15720295981365096,
+        "precision": 0.4929461134326957,
+        "recall": 0.4719718619476808,
+        "map50": 0.42032727174864337,
+        "map": 0.21437860738619552,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 11,
+    "timestamp": 1768137749.940391,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.7817967293923036,
+        "recall": 0.47048300536672627,
+        "map50": 0.5119045723318986,
+        "map": 0.24540530328674767,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.6573842844501506,
+        "recall": 0.7371703997731783,
+        "map50": 0.7077927463390685,
+        "map": 0.4544131383054258,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.6442221369540969,
+        "recall": 0.41041987249945044,
+        "map50": 0.4505874283115821,
+        "map": 0.2425084586632321,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 12,
+    "timestamp": 1768137811.6134408,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.7315376045829707,
+        "recall": 0.46249254621347646,
+        "map50": 0.48038199185502894,
+        "map": 0.21475252001935616,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7922260087724441,
+        "recall": 0.6509781684150836,
+        "map50": 0.7065894980310109,
+        "map": 0.4306403045788172,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5623478855716584,
+        "recall": 0.5008052127748764,
+        "map50": 0.4871986006531686,
+        "map": 0.25083914484062014,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 13,
+    "timestamp": 1768137872.7192736,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.7338365979402993,
+        "recall": 0.48372093023255813,
+        "map50": 0.5255624831329824,
+        "map": 0.25233885009071544,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7719686784477183,
+        "recall": 0.6815990927133542,
+        "map50": 0.7119983937889766,
+        "map": 0.43428521768980877,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.582524375947686,
+        "recall": 0.48560123103978897,
+        "map50": 0.4900830932276932,
+        "map": 0.25095506281196367,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 14,
+    "timestamp": 1768137933.8932946,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.7228100520284028,
+        "recall": 0.46964818127608826,
+        "map50": 0.47369071053364353,
+        "map": 0.2120799119589908,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7572052634432236,
+        "recall": 0.6589169265664871,
+        "map50": 0.6955609270259357,
+        "map": 0.43389637874889,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5171641040912865,
+        "recall": 0.4928555726533304,
+        "map50": 0.4544865380008698,
+        "map": 0.23611840533065065,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 15,
+    "timestamp": 1768137995.7279847,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.7553176443232692,
+        "recall": 0.46535480023852116,
+        "map50": 0.5063642939380094,
+        "map": 0.23973477387134956,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7637410613054004,
+        "recall": 0.6580772517829507,
+        "map50": 0.7011685026105748,
+        "map": 0.4406432627078297,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5904251561073137,
+        "recall": 0.4937348867883051,
+        "map50": 0.4787804353498861,
+        "map": 0.2491368572173711,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 16,
+    "timestamp": 1768138056.466076,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.774143926814928,
+        "recall": 0.4688133571854502,
+        "map50": 0.5145111587973916,
+        "map": 0.24498191398688302,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7373177894275817,
+        "recall": 0.6906719591721009,
+        "map50": 0.7126365762570384,
+        "map": 0.44499787167144184,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5852020426941085,
+        "recall": 0.4838133991794137,
+        "map50": 0.47683428850403003,
+        "map": 0.2507744421357454,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 17,
+    "timestamp": 1768138117.9936306,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8389541076110465,
+        "recall": 0.4649970184853906,
+        "map50": 0.5405867646860092,
+        "map": 0.2654608965312263,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7251104985818339,
+        "recall": 0.6970380806502156,
+        "map50": 0.7044914387050413,
+        "map": 0.4414763472993797,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5460641440601531,
+        "recall": 0.5062651132116949,
+        "map50": 0.48323615276206877,
+        "map": 0.2522542251669644,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 18,
+    "timestamp": 1768138179.3308816,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.839157213025542,
+        "recall": 0.4688133571854502,
+        "map50": 0.544326623727753,
+        "map": 0.27419437170505895,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.6966093387856475,
+        "recall": 0.74113977884888,
+        "map50": 0.7212109873895134,
+        "map": 0.45850996387771525,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.571979244365978,
+        "recall": 0.46163992086172784,
+        "map50": 0.46688662487150606,
+        "map": 0.23971567580379943,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 19,
+    "timestamp": 1768138240.254629,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.7703601254183686,
+        "recall": 0.4948950739648414,
+        "map50": 0.5205247472784944,
+        "map": 0.24002567201638786,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7882646266964433,
+        "recall": 0.6657215764105472,
+        "map50": 0.724730343733915,
+        "map": 0.47814141356558826,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5711896747745101,
+        "recall": 0.5091228841503627,
+        "map50": 0.49364005954692114,
+        "map": 0.256029688970289,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 20,
+    "timestamp": 1768138301.116991,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8221543497312702,
+        "recall": 0.4913536076326774,
+        "map50": 0.5517209732773766,
+        "map": 0.2707705588875696,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7703790181506487,
+        "recall": 0.6841508364048766,
+        "map50": 0.7226427482858645,
+        "map": 0.4572782556696661,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5508044188955701,
+        "recall": 0.5269783491370654,
+        "map50": 0.500882974889062,
+        "map": 0.254496282950572,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 21,
+    "timestamp": 1768138362.6239648,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.7739334609213488,
+        "recall": 0.5006559332140728,
+        "map50": 0.5315751590862903,
+        "map": 0.2508877516458822,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7092433221977689,
+        "recall": 0.7360362914658349,
+        "map50": 0.730432857053592,
+        "map": 0.47224056496730593,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.6653312248300526,
+        "recall": 0.46586919174301017,
+        "map50": 0.4936430618573687,
+        "map": 0.26176417377121136,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 22,
+    "timestamp": 1768138423.595377,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.7968301521041531,
+        "recall": 0.48364196891328676,
+        "map50": 0.5305310925031471,
+        "map": 0.25870811827453233,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7748998480990659,
+        "recall": 0.6558939351681058,
+        "map50": 0.7118223192910307,
+        "map": 0.45006009767132016,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5178278784089805,
+        "recall": 0.5416575071444274,
+        "map50": 0.4977516435812942,
+        "map": 0.26173168033917105,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 23,
+    "timestamp": 1768138484.9512894,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8239215517563445,
+        "recall": 0.48160101493434826,
+        "map50": 0.5391386951781969,
+        "map": 0.26425065107201784,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.747835791824139,
+        "recall": 0.7022965693223703,
+        "map50": 0.7273466416593142,
+        "map": 0.4765745833118437,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.6098354196855535,
+        "recall": 0.5106616838865685,
+        "map50": 0.5041204318219352,
+        "map": 0.2723961802638938,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 24,
+    "timestamp": 1768138545.9761539,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.7915736748946365,
+        "recall": 0.49641656308322973,
+        "map50": 0.5419256312417267,
+        "map": 0.26294843876507024,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7828213236558619,
+        "recall": 0.6739438616387865,
+        "map50": 0.7290843783900824,
+        "map": 0.4729893761056852,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5878488881149542,
+        "recall": 0.5218729391074961,
+        "map50": 0.5083044707879385,
+        "map": 0.2726161842693501,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 25,
+    "timestamp": 1768138606.8763206,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8411439549260834,
+        "recall": 0.49421586165772213,
+        "map50": 0.5669386927487737,
+        "map": 0.2912224274993082,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7566456720925635,
+        "recall": 0.7031471505528778,
+        "map50": 0.7313337887893252,
+        "map": 0.4654544794427239,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5612787837068702,
+        "recall": 0.502747856671796,
+        "map50": 0.490058991890389,
+        "map": 0.2541470925758168,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 26,
+    "timestamp": 1768138667.4017262,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8570457762539185,
+        "recall": 0.46416219439475254,
+        "map50": 0.5599077016467335,
+        "map": 0.2932439875216335,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7136229317752234,
+        "recall": 0.7255971188491743,
+        "map50": 0.7217425567697052,
+        "map": 0.47266575802623656,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.6288510301408806,
+        "recall": 0.4805451747636843,
+        "map50": 0.5071531311470282,
+        "map": 0.26874673418214956,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 27,
+    "timestamp": 1768138730.0747044,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8418538589185514,
+        "recall": 0.4884913536076327,
+        "map50": 0.5476336633311661,
+        "map": 0.27342622515752946,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7588946263243346,
+        "recall": 0.7054153671675645,
+        "map50": 0.7291700814131243,
+        "map": 0.47734495215788975,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5752358651181043,
+        "recall": 0.5038469993405144,
+        "map50": 0.49986001205780056,
+        "map": 0.26090124101290746,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 28,
+    "timestamp": 1768138791.6454124,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8304778965404236,
+        "recall": 0.48884913536076324,
+        "map50": 0.5514637280233822,
+        "map": 0.279512244159157,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7442081515196266,
+        "recall": 0.711652962857953,
+        "map50": 0.7245465586298276,
+        "map": 0.46976412298910625,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.6405490743880263,
+        "recall": 0.4985711145306661,
+        "map50": 0.5184072338466352,
+        "map": 0.27548632028655334,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 29,
+    "timestamp": 1768138852.8275485,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8360278585343892,
+        "recall": 0.4883720930232558,
+        "map50": 0.5486787180510362,
+        "map": 0.27095396306405034,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7569041019368189,
+        "recall": 0.7266798979302523,
+        "map50": 0.743936813627444,
+        "map": 0.48464112196676457,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.6352225683318241,
+        "recall": 0.5045421328120823,
+        "map50": 0.5215067329526056,
+        "map": 0.2793017770729339,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 30,
+    "timestamp": 1768138913.5080957,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8056106990796287,
+        "recall": 0.5005366726296959,
+        "map50": 0.5503157465783745,
+        "map": 0.28001054098441347,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7559404735478938,
+        "recall": 0.7280159849860256,
+        "map50": 0.7478762169380768,
+        "map": 0.49978148108645337,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.6623623522344515,
+        "recall": 0.4993872013729858,
+        "map50": 0.5169976057455667,
+        "map": 0.28547267119452513,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 31,
+    "timestamp": 1768138974.8372903,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8167789503904608,
+        "recall": 0.4886106141920095,
+        "map50": 0.536275161431757,
+        "map": 0.26560823770660913,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7913745636361064,
+        "recall": 0.696922326352437,
+        "map50": 0.743301659976823,
+        "map": 0.490139549252783,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5947379981114451,
+        "recall": 0.5423169927456584,
+        "map50": 0.5257082745160576,
+        "map": 0.2807055671987437,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 32,
+    "timestamp": 1768139038.2838864,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8477658916649876,
+        "recall": 0.47951048416164693,
+        "map50": 0.5576978221694733,
+        "map": 0.2829834132584361,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.748434722302059,
+        "recall": 0.7220571051021859,
+        "map50": 0.7285747444975651,
+        "map": 0.47163513737554175,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5919412624194562,
+        "recall": 0.5057584985041569,
+        "map50": 0.5119522800749374,
+        "map": 0.26980857151023513,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 33,
+    "timestamp": 1768139098.995007,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8355490789055152,
+        "recall": 0.49648181276088255,
+        "map50": 0.5497747673997389,
+        "map": 0.27649579488763626,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7901723505114427,
+        "recall": 0.7039977317833853,
+        "map50": 0.7468539480174907,
+        "map": 0.4887212161101089,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.6131010319880286,
+        "recall": 0.5122004836227743,
+        "map50": 0.5244845614109923,
+        "map": 0.27910112685791266,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 34,
+    "timestamp": 1768139159.761397,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8226867402706787,
+        "recall": 0.4968972102693033,
+        "map50": 0.5529452890327969,
+        "map": 0.27376796232947825,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7710256036329208,
+        "recall": 0.7136376523958038,
+        "map50": 0.736935663940915,
+        "map": 0.48311379798603965,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5641302466376522,
+        "recall": 0.5023081996043086,
+        "map50": 0.4958108410813363,
+        "map": 0.2671314789044442,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 35,
+    "timestamp": 1768139221.017176,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8502422966136393,
+        "recall": 0.49433512224209897,
+        "map50": 0.5670039762007214,
+        "map": 0.2864264944705136,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.796445459681245,
+        "recall": 0.69778308423049,
+        "map50": 0.7420667577791233,
+        "map": 0.48886011911457183,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.58464517238329,
+        "recall": 0.526049681248626,
+        "map50": 0.5167528573546849,
+        "map": 0.28136541286835504,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 36,
+    "timestamp": 1768139281.8931372,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8293929764885248,
+        "recall": 0.4928097703291502,
+        "map50": 0.5551726477031805,
+        "map": 0.2789641175357018,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7758965689249389,
+        "recall": 0.7207258293166997,
+        "map50": 0.7467387405532826,
+        "map": 0.49159697464342,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.6046005419600763,
+        "recall": 0.5163772257639041,
+        "map50": 0.5245103292923655,
+        "map": 0.278069540287789,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 37,
+    "timestamp": 1768139343.1208417,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8593894463715105,
+        "recall": 0.4890931181628856,
+        "map50": 0.555737795373158,
+        "map": 0.2865548340422472,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7686844709808233,
+        "recall": 0.7198752480861922,
+        "map50": 0.7440813435579079,
+        "map": 0.4895195849596415,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.6131602133587938,
+        "recall": 0.5097823697515937,
+        "map50": 0.505649640776454,
+        "map": 0.27637354712356127,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 38,
+    "timestamp": 1768139405.2037768,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8630297378027212,
+        "recall": 0.4896839594514013,
+        "map50": 0.5714786650935824,
+        "map": 0.2956043489080905,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.8081835619423241,
+        "recall": 0.6868890438496336,
+        "map50": 0.7399935944333067,
+        "map": 0.48684248791609114,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5444636874356,
+        "recall": 0.5374807650032974,
+        "map50": 0.5212324514744704,
+        "map": 0.2740532325126874,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 39,
+    "timestamp": 1768139467.0856526,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.858649071976729,
+        "recall": 0.4926654740608229,
+        "map50": 0.5623184687422449,
+        "map": 0.28844990929658676,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7677875784416991,
+        "recall": 0.7246952083924014,
+        "map50": 0.7440619757916281,
+        "map": 0.48828009477298134,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5703694142961792,
+        "recall": 0.5104418553528248,
+        "map50": 0.5114553270488538,
+        "map": 0.26813068133605356,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 40,
+    "timestamp": 1768139528.2747617,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8193980539419015,
+        "recall": 0.5147286821705427,
+        "map50": 0.5713506937677786,
+        "map": 0.29437117874129226,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7569265723466094,
+        "recall": 0.7215764105472072,
+        "map50": 0.7426662659127489,
+        "map": 0.4890660938049298,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.6233092831854792,
+        "recall": 0.4979734625810686,
+        "map50": 0.5208619534792656,
+        "map": 0.2825168973046631,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 41,
+    "timestamp": 1768139587.224773,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8464858310484462,
+        "recall": 0.49409660107334524,
+        "map50": 0.5695394586828039,
+        "map": 0.29573938983792064,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7694262648491976,
+        "recall": 0.6916224823794996,
+        "map50": 0.7338532376309264,
+        "map": 0.48672117216858196,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.6031606391011126,
+        "recall": 0.5113211694877995,
+        "map50": 0.5118266586526989,
+        "map": 0.2817943301945406,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 42,
+    "timestamp": 1768139644.4971607,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8574332546476292,
+        "recall": 0.4900417412045319,
+        "map50": 0.5870727084571216,
+        "map": 0.3052056681750631,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7759584026166374,
+        "recall": 0.6915225404026084,
+        "map50": 0.7309240734645496,
+        "map": 0.4843167247703165,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.538719405582551,
+        "recall": 0.5486920202242251,
+        "map50": 0.5212995444694511,
+        "map": 0.27433142716893044,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 43,
+    "timestamp": 1768139702.0290456,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8572666067625023,
+        "recall": 0.48922422720872333,
+        "map50": 0.5706980976715996,
+        "map": 0.29044889959125997,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7695561450093036,
+        "recall": 0.6988942444003402,
+        "map50": 0.7323512633719227,
+        "map": 0.485273202732966,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5342299814420333,
+        "recall": 0.5486920202242251,
+        "map50": 0.5106259753981955,
+        "map": 0.270689767161013,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 44,
+    "timestamp": 1768139759.6193836,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8509411447296623,
+        "recall": 0.483840190816935,
+        "map50": 0.5693444846619065,
+        "map": 0.2940082526172822,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7831772873532652,
+        "recall": 0.7144882336263113,
+        "map50": 0.7448836365947256,
+        "map": 0.4943889143547232,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5361689074184953,
+        "recall": 0.5561661903715103,
+        "map50": 0.5179472373170896,
+        "map": 0.2761437685282259,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 45,
+    "timestamp": 1768139817.4878213,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.838828582249459,
+        "recall": 0.4946983357836071,
+        "map50": 0.580814548960889,
+        "map": 0.3014322474261132,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7349002885812446,
+        "recall": 0.7490785370002835,
+        "map50": 0.7537614224631366,
+        "map": 0.5022255595571709,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.6677688981200146,
+        "recall": 0.48428225983732687,
+        "map50": 0.5193319181607625,
+        "map": 0.2871252737626232,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 46,
+    "timestamp": 1768139874.9875553,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.853456913980206,
+        "recall": 0.4861958474361575,
+        "map50": 0.5760690195016939,
+        "map": 0.30244900949221165,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7838010142192549,
+        "recall": 0.70307688708596,
+        "map50": 0.7445757201711511,
+        "map": 0.4969479622689138,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.589613165882014,
+        "recall": 0.5172565398988789,
+        "map50": 0.5164162659563077,
+        "map": 0.27813544810180424,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 47,
+    "timestamp": 1768139932.6049254,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8422027152778561,
+        "recall": 0.491395697597248,
+        "map50": 0.5792713412972454,
+        "map": 0.2996874651462206,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7933120047698234,
+        "recall": 0.7022965693223703,
+        "map50": 0.7474902872506035,
+        "map": 0.4963106815603461,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.6112399679556223,
+        "recall": 0.5282479665860629,
+        "map50": 0.5233661592509296,
+        "map": 0.2890546897324922,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 48,
+    "timestamp": 1768139989.8170512,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8504456722033752,
+        "recall": 0.48801431127012523,
+        "map50": 0.5769330218765859,
+        "map": 0.30125124261288366,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7951850564606672,
+        "recall": 0.6967946925417864,
+        "map50": 0.7417686910023787,
+        "map": 0.49480591002797836,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.5766370859081128,
+        "recall": 0.5271488239173445,
+        "map50": 0.5187946608838991,
+        "map": 0.2857153243352576,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 49,
+    "timestamp": 1768140046.8149328,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8397712835230373,
+        "recall": 0.49230769230769234,
+        "map50": 0.5789254294756578,
+        "map": 0.3011481963520502,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.7940250663303176,
+        "recall": 0.704564785937057,
+        "map50": 0.7473822923964224,
+        "map": 0.5006508617019199,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.6106792121841669,
+        "recall": 0.5157177401626731,
+        "map50": 0.5275257272020725,
+        "map": 0.2871111095411491,
+        "num_targets": 4549
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 42
+      },
+      "roundabout": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 142
+      },
+      "soccer-ball-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 127
+      },
+      "swimming-pool": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 397
+      }
+    }
+  },
+  {
+    "epoch": 50,
+    "timestamp": 1768140103.989111,
+    "training": true,
+    "metrics": {
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1783
+      },
+      "ship": {
+        "precision": 0.8444538522028195,
+        "recall": 0.4900417412045319,
+        "map50": 0.5775897588783296,
+        "map": 0.3025560179035048,
+        "num_targets": 8385
+      },
+      "storage-tank": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 2345
+      },
+      "baseball-diamond": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 185
+      },
+      "tennis-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 639
+      },
+      "basketball-court": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 110
+      },
+      "ground-track-field": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 119
+      },
+      "harbor": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1684
+      },
+      "bridge": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 406
+      },
+      "large-vehicle": {
+        "precision": 0.8028241688479542,
+        "recall": 0.7017295151686986,
+        "map50": 0.7482909231750287,
+        "map": 0.50470122058043,
+        "num_targets": 3527
+      },
+      "small-vehicle": {
+        "precision": 0.6046538995003513,
+        "recall": 0.5220927676412398,
+        "map50": 0.5267732649622308,
+        "map": 0.2861865832052056,
         "num_targets": 4549
       },
       "helicopter": {
@@ -1121,7 +5601,7 @@
   },
   {
     "epoch": null,
-    "timestamp": 1767970339.3013682,
+    "timestamp": 1768140113.3172946,
     "training": false,
     "metrics": {
       "plane": {
@@ -1132,10 +5612,10 @@
         "num_targets": 1783
       },
       "ship": {
-        "precision": 0.6253314756934254,
-        "recall": 0.20502047963288272,
-        "map50": 0.22855361094183738,
-        "map": 0.10167158756818469,
+        "precision": 0.8444538522028195,
+        "recall": 0.4900417412045319,
+        "map50": 0.5775897588783296,
+        "map": 0.3025560179035048,
         "num_targets": 8385
       },
       "storage-tank": {
@@ -1188,17 +5668,17 @@
         "num_targets": 406
       },
       "large-vehicle": {
-        "precision": 0.47773782858486696,
-        "recall": 0.6087326339665438,
-        "map50": 0.48156808518387295,
-        "map": 0.2801937042725103,
+        "precision": 0.8028241688479542,
+        "recall": 0.7017295151686986,
+        "map50": 0.7482909231750287,
+        "map": 0.50470122058043,
         "num_targets": 3527
       },
       "small-vehicle": {
-        "precision": 0.32297192571616945,
-        "recall": 0.46845460540778194,
-        "map50": 0.3339186906734886,
-        "map": 0.16661598183617654,
+        "precision": 0.6046538995003513,
+        "recall": 0.5220927676412398,
+        "map50": 0.5267732649622308,
+        "map": 0.2861865832052056,
         "num_targets": 4549
       },
       "helicopter": {

@@ -2,7 +2,7 @@ task: detect
 mode: train
 model: /home/ddwilde/scriptie/runs/dota_saab_ignore/stage2-saab/weights/best.pt
 data: /home/ddwilde/scriptie/yaml/DOTA.yaml
-epochs: 10
+epochs: 50
 time: null
 patience: 100
 batch: 4
