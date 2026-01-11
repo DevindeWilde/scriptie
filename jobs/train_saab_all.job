@@ -22,7 +22,7 @@ cd $HOME/scriptie
 python train.py \
     --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
     --data /home/ddwilde/scriptie/yaml/DOTA.yaml \
-    --epochs 10 \
+    --epochs 50 \
     --imgsz 640 \
     --batch-size 4 \
     --project /home/ddwilde/scriptie/runs/dota_saab_ignore \
@@ -42,7 +42,7 @@ python train.py \
 python train.py \
   --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
   --data /home/ddwilde/scriptie/yaml/DOTA.yaml \
-  --epochs 10 \
+  --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
   --project /home/ddwilde/scriptie/runs/dota_saab_ignore \
@@ -66,7 +66,7 @@ python train.py \
 python train.py \
   --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
   --data /home/ddwilde/scriptie/yaml/DOTA.yaml \
-  --epochs 10 \
+  --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
   --project /home/ddwilde/scriptie/runs/dota_saab_ignore \
