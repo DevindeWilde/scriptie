@@ -1,0 +1,5 @@
+small-vehicle
+large-vehicle
+plane
+helicopter
+ship
