@@ -1,4 +1,5 @@
 import contextlib
+import itertools
 import math
 import random
 from copy import copy
@@ -130,7 +131,7 @@ class DetectionTrainer(BaseTrainer):
                 rank=int(lora_args.get("rank", 8)),
                 alpha=float(lora_args.get("alpha", 16.0)),
                 dropout=float(lora_args.get("dropout", 0.0)),
-                feature_pyramid_indices=tuple(int(idx) for idx in lora_args.get("feature_pyramid_indices", (16, 22, 25))),
+                feature_pyramid_indices=tuple(int(idx) for idx in lora_args.get("feature_pyramid_indices", (16, 19, 22, 25))),
                 include_detection_head=bool(lora_args.get("include_detection_head", True)),
             )
             freeze_backbone = bool(lora_args.get("freeze_backbone", True))
@@ -138,6 +139,16 @@ class DetectionTrainer(BaseTrainer):
             LOGGER.info(
                 f"LoRA enabled: {len(adapters)} adapters (rank={lora_config.rank}, alpha={lora_config.alpha}, "
                 f"freeze_backbone={freeze_backbone})"
+            )
+            if adapters and RANK in {-1, 0}:
+                adapter_names = [name for name, _ in adapters]
+                LOGGER.info("LoRA adapter registry: %d modules -> %s", len(adapter_names), adapter_names)
+            trainable = [(n, p) for n, p in model.named_parameters() if p.requires_grad]
+            total_params = sum(p.numel() for _, p in trainable)
+            head = [(n, p.numel()) for n, p in itertools.islice(trainable, 20)]
+            LOGGER.info(
+                "Trainable params: %d tensors (%d weights) example=%s",
+                len(trainable), total_params, head,
             )
             adapter_path = lora_args.get("init_adapter")
             if adapter_path:

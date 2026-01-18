@@ -26,7 +26,7 @@ class LoRAConfig:
     rank: int = 8
     alpha: float = 16.0
     dropout: float = 0.0
-    feature_pyramid_indices: Sequence[int] = (16, 22, 25)
+    feature_pyramid_indices: Sequence[int] = (16, 19, 22, 25)
     include_detection_head: bool = True
 
 
