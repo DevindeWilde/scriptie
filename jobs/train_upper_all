@@ -21,12 +21,11 @@ cd $HOME/scriptie
 
 python train.py \
     --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
-    --data /home/ddwilde/scriptie/yaml/DOTA.yaml \
+    --data /home/ddwilde/scriptie/yaml/DOTA-filtered.yaml \
     --epochs 50 \
     --imgsz 640 \
     --batch-size 4 \
-    --project /home/ddwilde/scriptie/runs/dota_saab_upper \
-    --name upper-saab \
+    --project /home/ddwilde/scriptie/runs/dota_upper \
+    --name upper-all \
     --workers 8 \
     --weights /home/ddwilde/scriptie/pretrained/small.pt \
-    --override "stage.active_classes=[0,1,9,10,11]" \

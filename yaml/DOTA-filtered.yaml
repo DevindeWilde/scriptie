@@ -1,6 +1,6 @@
-path: /home/ddwilde/scriptie/datasets/dota_stages/stage3/
+path: /home/ddwilde/scriptie/datasets/dota-filtered-full
 train: train/images
-val: val_seen/images
+val: val/images
 test: test/images
 names:
   0: small-vehicle
