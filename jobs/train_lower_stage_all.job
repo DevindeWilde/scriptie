@@ -39,7 +39,7 @@ python train.py \
   --project $HOME/scriptie/runs/dota_lower \
   --name stage2-lower \
   --workers 8 \
-  --weights /home/ddwilde/scriptie/runs/dota_lower/stage1-saab/weights/best.pt
+  --weights /home/ddwilde/scriptie/runs/dota_lower/stage1-lower/weights/best.pt
 
 python train.py \
   --cfg $HOME/scriptie/cfg/models/ednet/ednet-s.yaml \
@@ -50,4 +50,4 @@ python train.py \
   --project $HOME/scriptie/runs/dota_lower \
   --name stage3-lower \
   --workers 8 \
-  --weights /home/ddwilde/scriptie/runs/dota_lower/stage2-saab/weights/best.pt
+  --weights /home/ddwilde/scriptie/runs/dota_lower/stage2-lower/weights/best.pt
