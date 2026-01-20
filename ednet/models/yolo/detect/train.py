@@ -127,15 +127,17 @@ class DetectionTrainer(BaseTrainer):
         model.prev_class_ids = self.prev_class_ids
         lora_args = getattr(self.args, "lora", None)
         self.lora_enabled = bool(isinstance(lora_args, dict) and lora_args.get("enable"))
+        self.lora_freeze_backbone = False
         if self.lora_enabled:
             lora_config = LoRAConfig(
                 rank=int(lora_args.get("rank", 8)),
                 alpha=float(lora_args.get("alpha", 16.0)),
                 dropout=float(lora_args.get("dropout", 0.0)),
-                feature_pyramid_indices=tuple(int(idx) for idx in lora_args.get("feature_pyramid_indices", (16, 19, 22, 25))),
+                feature_pyramid_indices=tuple(int(idx) for idx in lora_args.get("feature_pyramid_indices", (19, 22, 25))),
                 include_detection_head=bool(lora_args.get("include_detection_head", True)),
             )
             freeze_backbone = bool(lora_args.get("freeze_backbone", True))
+            self.lora_freeze_backbone = freeze_backbone
             adapters = model.enable_lora(lora_config, freeze_backbone=freeze_backbone)
             LOGGER.info(
                 f"LoRA enabled: {len(adapters)} adapters (rank={lora_config.rank}, alpha={lora_config.alpha}, "

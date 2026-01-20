@@ -245,6 +245,7 @@ class BaseTrainer:
         self.set_model_attributes()
 
         # Freeze layers
+        lora_backbone_frozen = getattr(self, "lora_enabled", False) and getattr(self, "lora_freeze_backbone", False)
         freeze_list = (
             self.args.freeze
             if isinstance(self.args.freeze, list)
@@ -254,11 +255,14 @@ class BaseTrainer:
         )
         always_freeze_names = [".dfl"]  # always freeze these layers
         freeze_layer_names = [f"model.{x}." for x in freeze_list] + always_freeze_names
+        skip_unfreeze = lora_backbone_frozen and len(freeze_list) == 0
         for k, v in self.model.named_parameters():
             # v.register_hook(lambda x: torch.nan_to_num(x))  # NaN to 0 (commented for erratic training results)
             if any(x in k for x in freeze_layer_names):
                 LOGGER.info(f"Freezing layer '{k}'")
                 v.requires_grad = False
+            elif skip_unfreeze:
+                continue
             elif not v.requires_grad and v.dtype.is_floating_point:  # only floating point Tensor can require gradients
                 LOGGER.info(
                     f"WARNING ⚠️ setting 'requires_grad=True' for frozen layer '{k}'. "
