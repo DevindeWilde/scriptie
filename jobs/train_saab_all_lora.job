@@ -30,7 +30,7 @@ python train.py \
   --workers 8 \
   --weights pretrained/small.pt \
   --override lora.enable=True \
-  --override lora.freeze_backbone=True \
+  --override lora.freeze_backbone=False \
   --override lora.feature_pyramid_indices="[6,8,10]" \
   --override lora.include_detection_head=False \
   --override freeze=[0,1,2,3,4,5,7,9]
@@ -46,7 +46,7 @@ python train.py \
   --workers 8 \
   --weights /home/ddwilde/scriptie/runs/dota_lora2/stage1-lora/weights/best.pt \
   --override lora.enable=True \
-  --override lora.freeze_backbone=True \
+  --override lora.freeze_backbone=False \
   --override lora.feature_pyramid_indices="[6,8,10]" \
   --override lora.include_detection_head=False \
   --override freeze=[0,1,2,3,4,5,7,9]
@@ -62,7 +62,7 @@ python train.py \
   --workers 8 \
   --weights /home/ddwilde/scriptie/runs/dota_lora2/stage2-lora/weights/best.pt \
   --override lora.enable=True \
-  --override lora.freeze_backbone=True \
+  --override lora.freeze_backbone=False \
   --override lora.feature_pyramid_indices="[6,8,10]" \
   --override lora.include_detection_head=False \
   --override freeze=[0,1,2,3,4,5,7,9]
