@@ -53,7 +53,7 @@ replay: # (dict) Tiny object replay configuration (SA-AB)
   enable: False # (bool) enable feature replay sampling
   tap_layers: # (dict[str,int]) layer indices tapped for replay (P3-P4 default)
     P2: 19
-    P3: 16
+    P3: 22
     P4: 25
   tiny_max_pixels: 128 # (int) max edge size for an object to be considered tiny
   context_scale: 1.5 # (float) scale factor for contextual crop around tiny object

@@ -1,4 +1,5 @@
 import math
+from typing import Dict, List, Sequence
 
 import torch
 import torch.nn as nn
@@ -182,6 +183,11 @@ class v8DetectionLoss:
         self.level_names = [self._make_level_name(int(s)) for s in self.stride.tolist()]
         self.last_positive_cells = None
         self.last_replay_cells = None
+        self.replay_level_strides: Dict[str, int] = {}
+        self.replay_level_indices: Dict[str, int] = {}
+        self.replay_level_order: List[str] = []
+        self._replay_configured = False
+        self._replay_warned_missing_config = False
 
         self.use_dfl = m.reg_max > 1
 
@@ -204,6 +210,15 @@ class v8DetectionLoss:
             LOGGER.info(f"Limiting positives to classes {class_ids}")
         if prev_class_ids:
             LOGGER.info(f"Replay targets limited to previous classes {prev_class_ids}")
+
+    def set_replay_tap_config(self, level_names, stride_map):
+        """Register which FPN levels feed replay taps and their strides."""
+        self.replay_level_order = list(level_names)
+        self.replay_level_strides = {lvl: int(stride_map.get(lvl, 0)) for lvl in level_names}
+        name_to_idx = {name: idx for idx, name in enumerate(self.level_names)}
+        self.replay_level_indices = {lvl: name_to_idx.get(lvl, 0) for lvl in level_names if lvl in name_to_idx}
+        self._replay_configured = True
+        self._replay_warned_missing_config = False
 
     def preprocess(self, targets, batch_size, scale_tensor):
         """Preprocesses the target counts and matches with the input batch size to output a tensor."""
@@ -292,11 +307,9 @@ class v8DetectionLoss:
             gt_bboxes,
             assign_mask,
         )
-        pos_cells = self._record_positive_cells(fg_mask, target_labels, target_bboxes, feats)
-        if self.prev_classes and pos_cells:
-            self.last_replay_cells = self._filter_positive_cells(pos_cells, self.prev_classes)
-        else:
-            self.last_replay_cells = None
+        self._record_positive_cells(fg_mask, target_labels, target_bboxes, feats)
+        image_hw = (int(imgsz[0].item()), int(imgsz[1].item()))
+        self._record_prev_replay_cells(gt_labels, gt_bboxes, mask_gt, image_hw)
 
         target_scores_sum = max(target_scores.sum(), 1)
 
@@ -389,24 +402,74 @@ class v8DetectionLoss:
             }
         return self.last_positive_cells
 
-    def _filter_positive_cells(self, cells, class_filter):
-        if not cells:
-            return None
-        classes = cells.get("classes")
-        if classes is None or classes.numel() == 0:
-            return None
-        device = classes.device
-        filt = torch.tensor(class_filter, device=device, dtype=classes.dtype)
-        if filt.numel() == 0:
-            return None
-        keep = torch.isin(classes, filt)
-        if not keep.any():
-            return None
-        return {
-            "indices": cells["indices"][keep],
-            "classes": classes[keep],
-            "max_edge": cells["max_edge"][keep],
+    def _record_prev_replay_cells(self, gt_labels, gt_bboxes, mask_gt, image_hw):
+        self.last_replay_cells = None
+        if not self.prev_classes:
+            return
+        if not self._replay_configured:
+            if not self._replay_warned_missing_config:
+                LOGGER.warning("Replay tap config not set; GT-driven replay skipped for this batch.")
+                self._replay_warned_missing_config = True
+            return
+        class_ids = gt_labels.squeeze(-1).long()
+        valid_mask = mask_gt.squeeze(-1).bool()
+        prev_set = torch.tensor(self.prev_classes, device=class_ids.device)
+        is_prev = torch.isin(class_ids, prev_set)
+        mask = valid_mask & is_prev
+        if not mask.any():
+            return
+        img_h, img_w = image_hw
+        level_entries = []
+        class_entries = []
+        size_entries = []
+        for b_idx in range(class_ids.shape[0]):
+            valid = mask[b_idx]
+            if not valid.any():
+                continue
+            boxes = gt_bboxes[b_idx, valid]
+            classes = class_ids[b_idx, valid]
+            for box, cls_id in zip(boxes, classes):
+                level_name = self._select_replay_level(box, image_hw)
+                if level_name is None:
+                    continue
+                level_idx = self.replay_level_indices.get(level_name)
+                if level_idx is None:
+                    continue
+                stride = self.replay_level_strides.get(level_name, 1)
+                cx = ((box[0] + box[2]) * 0.5) * img_w
+                cy = ((box[1] + box[3]) * 0.5) * img_h
+                gx = int(cx / stride)
+                gy = int(cy / stride)
+                grid_w = max(1, int(round(img_w / stride)))
+                grid_h = max(1, int(round(img_h / stride)))
+                gx = min(max(gx, 0), grid_w - 1)
+                gy = min(max(gy, 0), grid_h - 1)
+                width = (box[2] - box[0]) * img_w
+                height = (box[3] - box[1]) * img_h
+                max_edge = float(max(width, height))
+                level_entries.append([level_idx, b_idx, gy, gx])
+                class_entries.append(int(cls_id.item()))
+                size_entries.append(max_edge)
+        if not level_entries:
+            return
+        self.last_replay_cells = {
+            "indices": torch.tensor(level_entries, device=self.device, dtype=torch.long),
+            "classes": torch.tensor(class_entries, device=self.device, dtype=torch.long),
+            "max_edge": torch.tensor(size_entries, device=self.device, dtype=torch.float),
         }
+
+    def _select_replay_level(self, box, image_hw):
+        if not self.replay_level_strides:
+            return None
+        img_h, img_w = image_hw
+        width = (box[2] - box[0]) * img_w
+        height = (box[3] - box[1]) * img_h
+        max_edge = float(max(width, height))
+        levels = sorted(self.replay_level_strides.items(), key=lambda kv: kv[1])
+        for name, stride in levels:
+            if max_edge <= stride * 6.0:
+                return name
+        return levels[-1][0]
 
     def _build_inactive_ignore_mask(self, pred_bboxes, stride_tensor, gt_bboxes, inactive_mask, fg_mask):
         """Return a boolean mask of anchors to ignore due to overlaps with inactive GT boxes."""

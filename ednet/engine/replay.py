@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import math
-import random
 from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -9,6 +8,7 @@ from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from torch.utils.hooks import RemovableHandle
 
 
@@ -25,7 +25,7 @@ class FeatureTapConfig:
             modifies tensors in place).
     """
 
-    layers: Dict[str, int] = field(default_factory=lambda: {"P3": 16, "P4": 25})
+    layers: Dict[str, int] = field(default_factory=lambda: {"P2": 19, "P3": 16, "P4": 25})
     detach: bool = True
     clone: bool = False
 
@@ -197,9 +197,28 @@ class TinyReplayItem:
     metadata: Dict = field(default_factory=dict)
 
 
+@dataclass
+class PrototypeEntry:
+    """Single prototype statistics."""
+
+    vector: torch.Tensor
+    count: int = 1
+
+    def clone(self) -> torch.Tensor:
+        return self.vector.clone()
+
+
+@dataclass
+class MultiPrototypeEntry:
+    """Collection of coarse and fine prototypes for a class/level."""
+
+    coarse: PrototypeEntry
+    fine: List[PrototypeEntry] = field(default_factory=list)
+
+
 class TinyReplayBuffer:
     """
-    Memory-efficient buffer that stores a limited number of TinyEx + ContextEx feature patches per class.
+    Buffer that stores running prototypes per (level, class) instead of raw feature crops.
     """
 
     def __init__(
@@ -208,71 +227,232 @@ class TinyReplayBuffer:
         dtype: torch.dtype = torch.float16,
         device: torch.device | str = torch.device("cpu"),
         carryover_growth: float = 1.5,
+        num_fine: int = 0,
+        use_coarse: bool = True,
+        ema_alpha: float = 0.05,
+        init_sim_thresh: float = 0.9,
+        gate_min_cos: float = 0.0,
+        init_strategy: str = "first_k",
+        weight_by_count: bool = False,
     ) -> None:
         self.capacity = per_class_capacity
         self.dtype = dtype
         self.device = torch.device(device)
         self.carryover_growth = float(max(carryover_growth, 1.0))
-        self._storage: Dict[int, List[TinyReplayItem]] = defaultdict(list)
+        self.num_fine = max(0, int(num_fine))
+        self.use_coarse = bool(use_coarse)
+        self.ema_alpha = float(ema_alpha)
+        self.init_sim_thresh = float(init_sim_thresh)
+        self.gate_min_cos = float(gate_min_cos)
+        self.init_strategy = init_strategy
+        self.weight_by_count = bool(weight_by_count)
+        self._storage: Dict[str, Dict[int, MultiPrototypeEntry]] = defaultdict(dict)
 
     def __len__(self) -> int:
-        return sum(len(items) for items in self._storage.values())
+        total = 0
+        for class_map in self._storage.values():
+            for entry in class_map.values():
+                total += entry.coarse.count
+                for slot in entry.fine:
+                    total += slot.count
+        return total
 
     def classes(self) -> List[int]:
-        return list(self._storage.keys())
+        cls_ids = set()
+        for class_map in self._storage.values():
+            cls_ids.update(class_map.keys())
+        return sorted(cls_ids)
 
     def add(self, item: TinyReplayItem) -> None:
-        """Insert a new sample while respecting per-class capacity."""
-        entry = TinyReplayItem(
-            cls=item.cls,
-            level=item.level,
-            embedding=item.embedding.detach().to(self.device, dtype=self.dtype),
-            metadata=item.metadata,
-        )
-        bucket = self._storage[entry.cls]
-        bucket.append(entry)
-        if len(bucket) > self.capacity:
-            bucket.pop(0)
+        """Insert a sample by updating prototypes for its level and class."""
+        if item.embedding is None or item.embedding.numel() == 0:
+            return
+        embedding = self._normalize(item.embedding)
+        entry, created = self._get_or_create_entry(item.level, item.cls, embedding)
+        if not created:
+            self._update_coarse(entry.coarse, embedding)
+        self._update_fine(entry, embedding)
 
     def sample_balanced(
         self,
         max_per_class: int,
         levels: Optional[Iterable[str]] = None,
     ) -> List[TinyReplayItem]:
-        """Sample up to `max_per_class` entries per class, optionally filtering by feature level."""
+        """Return prototypes per (level, class), optionally filtering by feature level."""
+        if max_per_class <= 0:
+            return []
         samples: List[TinyReplayItem] = []
         allowed_levels = set(levels) if levels else None
-        for cls, items in self._storage.items():
-            pool = (
-                [item for item in items if (allowed_levels is None or item.level in allowed_levels)]
-                if allowed_levels
-                else items
-            )
-            if not pool:
+        for level, class_map in self._storage.items():
+            if allowed_levels is not None and level not in allowed_levels:
                 continue
-            k = min(max_per_class, len(pool))
-            samples.extend(random.sample(pool, k) if k < len(pool) else pool[:])
+            for cls_id, entry in class_map.items():
+                if self.use_coarse and entry.coarse.vector is not None:
+                    samples.append(
+                        TinyReplayItem(
+                            cls=int(cls_id),
+                            level=level,
+                            embedding=entry.coarse.clone().to(self.device),
+                            metadata={"count": entry.coarse.count, "slot": "coarse"},
+                        )
+                    )
         return samples
 
     def clear(self) -> None:
-        self._storage.clear()
+        self._storage = defaultdict(dict)
 
     def counts(self) -> Dict[int, int]:
-        """Return number of samples stored per class."""
-        return {cls: len(items) for cls, items in self._storage.items()}
+        """Return aggregated sample counts per class across all levels."""
+        aggregated: Dict[int, int] = defaultdict(int)
+        for class_map in self._storage.values():
+            for cls_id, entry in class_map.items():
+                total = entry.coarse.count + sum(slot.count for slot in entry.fine)
+                aggregated[int(cls_id)] += int(total)
+        return dict(aggregated)
+
+    def iter_items(self, levels: Optional[Iterable[str]] = None):
+        allowed_levels = set(levels) if levels else None
+        for level, class_map in self._storage.items():
+            if allowed_levels is not None and level not in allowed_levels:
+                continue
+            for cls_id, entry in class_map.items():
+                if entry.coarse.vector is not None and entry.coarse.vector.numel() > 0:
+                    yield TinyReplayItem(
+                        cls=int(cls_id),
+                        level=level,
+                        embedding=entry.coarse.clone(),
+                        metadata={"count": entry.coarse.count, "slot": "coarse"},
+                    )
+                for idx, slot in enumerate(entry.fine):
+                    if slot.vector is None or slot.vector.numel() == 0:
+                        continue
+                    yield TinyReplayItem(
+                        cls=int(cls_id),
+                        level=level,
+                        embedding=slot.vector.clone(),
+                        metadata={"count": slot.count, "slot": f"fine_{idx}"},
+                    )
+
+    def collect_prototypes(
+        self,
+        levels: Optional[Iterable[str]] = None,
+        device: Optional[torch.device] = None,
+    ) -> Dict[str, Dict[int, Dict[str, torch.Tensor]]]:
+        allowed_levels = set(levels) if levels else None
+        result: Dict[str, Dict[int, Dict[str, torch.Tensor]]] = {}
+        target_device = torch.device(device) if device is not None else self.device
+        for level, class_map in self._storage.items():
+            if allowed_levels is not None and level not in allowed_levels:
+                continue
+            level_dict: Dict[int, Dict[str, torch.Tensor]] = {}
+            for cls_id, entry in class_map.items():
+                vectors: List[torch.Tensor] = []
+                counts: List[float] = []
+                if self.use_coarse and entry.coarse.vector is not None and entry.coarse.vector.numel() > 0:
+                    vectors.append(entry.coarse.vector.to(target_device, dtype=torch.float32))
+                    counts.append(float(entry.coarse.count))
+                for slot in entry.fine:
+                    if slot.vector is None or slot.vector.numel() == 0:
+                        continue
+                    vectors.append(slot.vector.to(target_device, dtype=torch.float32))
+                    counts.append(float(slot.count))
+                if not vectors:
+                    continue
+                proto_tensor = torch.stack(vectors, dim=0)
+                proto_tensor = F.normalize(proto_tensor, dim=1, eps=1e-6)
+                count_tensor = torch.tensor(counts, device=proto_tensor.device, dtype=proto_tensor.dtype)
+                level_dict[int(cls_id)] = {"prototypes": proto_tensor, "counts": count_tensor}
+            if level_dict:
+                result[level] = level_dict
+        return result
+
+    def _normalize(self, tensor: torch.Tensor) -> torch.Tensor:
+        vec = tensor.detach().to(self.device, dtype=torch.float32)
+        return F.normalize(vec, dim=0, eps=1e-6)
+
+    def _get_or_create_entry(self, level: str, cls: int, embedding: torch.Tensor) -> Tuple[MultiPrototypeEntry, bool]:
+        bucket = self._storage[level]
+        entry = bucket.get(cls)
+        if entry is None:
+            entry = MultiPrototypeEntry(
+                coarse=PrototypeEntry(vector=embedding.to(self.dtype), count=1),
+                fine=[],
+            )
+            bucket[cls] = entry
+            return entry, True
+        return entry, False
+
+    def _update_coarse(self, coarse: PrototypeEntry, embedding: torch.Tensor) -> None:
+        vec = coarse.vector.to(torch.float32)
+        count = coarse.count
+        if count < self.capacity:
+            count += 1
+            vec = vec + (embedding - vec) / count
+        else:
+            momentum = (self.capacity - 1) / float(self.capacity)
+            vec = vec * momentum + embedding * (1.0 - momentum)
+        coarse.vector = F.normalize(vec, dim=0, eps=1e-6).to(self.dtype)
+        coarse.count = count
+
+    def _update_fine(self, entry: MultiPrototypeEntry, embedding: torch.Tensor) -> None:
+        if self.num_fine <= 0:
+            return
+        slots = entry.fine
+        if len(slots) > self.num_fine:
+            entry.fine = slots = slots[: self.num_fine]
+        if len(slots) < self.num_fine:
+            if self.init_strategy == "first_k" or not slots:
+                slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1))
+                return
+            sims = [self._cosine(slot.vector, embedding) for slot in slots]
+            if max(sims, default=-1.0) < self.init_sim_thresh:
+                slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1))
+                return
+        if not slots:
+            slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1))
+            return
+        sims = torch.tensor([self._cosine(slot.vector, embedding) for slot in slots], device=self.device)
+        best_idx = int(torch.argmax(sims))
+        best_sim = float(sims[best_idx])
+        if best_sim < self.gate_min_cos:
+            if len(slots) < self.num_fine:
+                slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1))
+                return
+            replace_idx = min(range(len(slots)), key=lambda idx: slots[idx].count)
+            slots[replace_idx] = PrototypeEntry(vector=embedding.to(self.dtype), count=1)
+            return
+        slot = slots[best_idx]
+        vec = slot.vector.to(torch.float32)
+        count = slot.count
+        if count < self.capacity:
+            count += 1
+            vec = vec + (embedding - vec) / count
+        else:
+            alpha = self.ema_alpha if self.ema_alpha > 0 else (1.0 / float(self.capacity))
+            vec = vec * (1.0 - alpha) + embedding * alpha
+        slot.vector = F.normalize(vec, dim=0, eps=1e-6).to(self.dtype)
+        slot.count = count
+
+    def _cosine(self, proto: torch.Tensor, embedding: torch.Tensor) -> float:
+        v = proto.to(torch.float32)
+        return float(torch.clamp(torch.dot(v, embedding), -1.0, 1.0))
 
     # ------------------------------------------------------------------ Persistence helpers
     def state_dict(self) -> Dict:
         storage = {
-            int(cls): [
-                {
-                    "level": item.level,
-                    "embedding": item.embedding.cpu(),
-                    "metadata": item.metadata,
+            level: {
+                int(cls): {
+                    "coarse": {
+                        "prototype": entry.coarse.vector.cpu(),
+                        "count": int(entry.coarse.count),
+                    },
+                    "fine": [
+                        {"prototype": slot.vector.cpu(), "count": int(slot.count)} for slot in entry.fine
+                    ],
                 }
-                for item in items
-            ]
-            for cls, items in self._storage.items()
+                for cls, entry in class_map.items()
+            }
+            for level, class_map in self._storage.items()
         }
         return {
             "capacity": self.capacity,
@@ -284,19 +464,38 @@ class TinyReplayBuffer:
         self._storage.clear()
         storage = state.get("storage", {})
         total = 0
-        for cls, entries in storage.items():
-            cls_id = int(cls)
-            bucket = self._storage[cls_id]
-            for entry in entries:
-                    bucket.append(
-                        TinyReplayItem(
-                            cls=cls_id,
-                            level=entry.get("level", "P3"),
-                            embedding=entry.get("embedding", torch.empty(0)).to(self.device, dtype=self.dtype),
-                            metadata=entry.get("metadata", {}),
-                        )
-                    )
+        # Detect legacy format (class -> list of items)
+        legacy_format = storage and all(isinstance(v, list) for v in storage.values())
+        if legacy_format:
+            for cls, entries in storage.items():
+                cls_id = int(cls)
+                for entry in entries:
+                    level = entry.get("level", "P3")
+                    embedding = entry.get("embedding", torch.empty(0))
+                    tensor = embedding.to(self.device, dtype=self.dtype)
+                    self.add(TinyReplayItem(cls=cls_id, level=level, embedding=tensor))
                     total += 1
+            return total
+
+        for level, class_map in storage.items():
+            for cls, data in class_map.items():
+                cls_id = int(cls)
+                coarse_data = data.get("coarse", data)
+                proto_tensor = coarse_data.get("prototype", torch.empty(0))
+                proto = proto_tensor.to(self.device, dtype=self.dtype)
+                count = int(coarse_data.get("count", 1))
+                if proto.numel() == 0:
+                    continue
+                entry = MultiPrototypeEntry(coarse=PrototypeEntry(vector=proto, count=count), fine=[])
+                fine_list = data.get("fine", [])
+                for slot in fine_list:
+                    vec = slot.get("prototype", torch.empty(0)).to(self.device, dtype=self.dtype)
+                    if vec.numel() == 0:
+                        continue
+                    entry.fine.append(PrototypeEntry(vector=vec, count=int(slot.get("count", 1))))
+                    total += int(slot.get("count", 1))
+                total += count
+                self._storage[level][cls_id] = entry
         return total
 
     def save(self, path: str | Path) -> int:
@@ -324,26 +523,10 @@ def build_replay_batch(
     per_class: int,
     balance_levels: Optional[List[str]] = None,
     device: Optional[torch.device] = None,
-) -> Dict[str, Dict[str, torch.Tensor]]:
-    """Sample embeddings and organize them by feature level for downstream losses."""
+) -> Dict[str, Dict[int, Dict[str, torch.Tensor]]]:
+    """Return stored prototypes per level/class for downstream losses."""
 
-    samples = buffer.sample_balanced(per_class, levels=balance_levels)
-    by_level: Dict[str, Dict[str, List[torch.Tensor]]] = {}
-    for item in samples:
-        entry = by_level.setdefault(item.level, {"cls": [], "embedding": []})
-        entry["cls"].append(torch.tensor(item.cls, dtype=torch.long))
-        entry["embedding"].append(item.embedding)
-
-    batched = {}
-    for level, data in by_level.items():
-        level_batch = {
-            "cls": torch.stack(data["cls"]),
-            "embedding": torch.stack(data["embedding"]),
-        }
-        if device is not None:
-            level_batch = {k: v.to(device) for k, v in level_batch.items()}
-        batched[level] = level_batch
-    return batched
+    return buffer.collect_prototypes(levels=balance_levels, device=device)
 
 
 def extract_tiny_embeddings(

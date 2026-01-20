@@ -2,6 +2,7 @@ import contextlib
 import itertools
 import math
 import random
+from collections import defaultdict
 from copy import copy
 from pathlib import Path
 from typing import Optional
@@ -156,7 +157,8 @@ class DetectionTrainer(BaseTrainer):
         replay_args = getattr(self.args, "replay", None)
         self.replay_enabled = bool(isinstance(replay_args, dict) and replay_args.get("enable"))
         self.feature_tapper = None
-        self.replay_buffer = None
+        self.replay_teacher_buffer = None
+        self.replay_student_buffer = None
         self.replay_strides = {}
         self.replay_levels = []
         self.replay_samples_per_class = 0
@@ -173,6 +175,7 @@ class DetectionTrainer(BaseTrainer):
         self.memory_loader = None
         self._memory_iter = None
         self._feature_tapper_needs_activation = False
+        self.replay_slot_hits = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
         if self.replay_enabled:
             tap_layers = replay_args.get("tap_layers") or {}
             layer_map = {k: int(v) for k, v in tap_layers.items()} if tap_layers else FeatureTapConfig().layers.copy()
@@ -203,11 +206,30 @@ class DetectionTrainer(BaseTrainer):
                 LOGGER.warning("Replay feature tapper initialization skipped; detection head mapping unavailable.")
             capacity = int(replay_args.get("buffer_per_class", 64))
             self.replay_capacity_growth = float(replay_args.get("carryover_growth", 1.5))
-            self.replay_buffer = TinyReplayBuffer(
+            dtype = getattr(torch, replay_args.get("dtype", "float16"))
+            proto_args = replay_args.get("prototypes") or {}
+            proto_kwargs = {
+                "num_fine": int(proto_args.get("num_fine", 0)),
+                "use_coarse": bool(proto_args.get("use_coarse", True)),
+                "ema_alpha": float(proto_args.get("ema_alpha", 0.05)),
+                "init_sim_thresh": float(proto_args.get("init_sim_thresh", 0.9)),
+                "gate_min_cos": float(proto_args.get("gate_min_cos", 0.0)),
+                "init_strategy": str(proto_args.get("init_strategy", "first_k")),
+                "weight_by_count": bool(proto_args.get("weight_by_count", False)),
+            }
+            self.replay_teacher_buffer = TinyReplayBuffer(
                 per_class_capacity=capacity,
-                dtype=torch.float16,
+                dtype=dtype,
                 device="cpu",
                 carryover_growth=self.replay_capacity_growth,
+                **proto_kwargs,
+            )
+            self.replay_student_buffer = TinyReplayBuffer(
+                per_class_capacity=capacity,
+                dtype=dtype,
+                device="cpu",
+                carryover_growth=self.replay_capacity_growth,
+                **proto_kwargs,
             )
             self.replay_samples_per_class = max(1, int(replay_args.get("sample_per_batch", 16)))
             self.replay_loss_weight = float(replay_args.get("loss_weight", 1.0))
@@ -224,7 +246,7 @@ class DetectionTrainer(BaseTrainer):
             init_buffer = replay_args.get("init_buffer")
             if init_buffer:
                 self.replay_init_buffer = Path(init_buffer)
-                self._load_replay_memory(self.replay_init_buffer)
+                self._load_teacher_buffer(self.replay_init_buffer)
             memory_dir = replay_args.get("memory_dir")
             memory_ratio = float(replay_args.get("memory_ratio", 0.0) or 0.0)
             if memory_dir and memory_ratio > 0:
@@ -234,6 +256,17 @@ class DetectionTrainer(BaseTrainer):
             else:
                 self.replay_memory_dir = None
                 self.replay_memory_ratio = 0.0
+
+        criterion = getattr(model, "criterion", None)
+        if (
+            criterion is not None
+            and self.replay_enabled
+            and self.replay_levels
+            and hasattr(criterion, "set_replay_tap_config")
+        ):
+            criterion.set_replay_tap_config(self.replay_levels, self.replay_strides)
+            if hasattr(criterion, "set_active_classes"):
+                criterion.set_active_classes(self.active_class_ids, self.prev_class_ids)
         return model
 
     def _load_adapter_weights(self, model, adapter_path):
@@ -421,26 +454,32 @@ class DetectionTrainer(BaseTrainer):
 
     def compute_auxiliary_loss(self, batch):
         """Compute replay-based feature consistency loss."""
-        if not self.replay_enabled or self.feature_tapper is None or self.replay_buffer is None:
+        if (
+            not self.replay_enabled
+            or self.feature_tapper is None
+            or self.replay_teacher_buffer is None
+            or len(self.replay_teacher_buffer) == 0
+        ):
             return None
         features = self.feature_tapper.pop()
         if not features:
             return None
-        current_items = self._gather_positive_embeddings(features)
-        print(f"Current items collected: {len(current_items)}")
-        if not current_items:
+        replay_items = self._gather_embeddings(features, attr="last_replay_cells")
+        if not replay_items:
             return None
-        grouped = self._group_embeddings(current_items)
+        grouped = self._group_embeddings(replay_items)
         self._log_embedding_stats(grouped)
         replay_batch = build_replay_batch(
-            self.replay_buffer,
+            self.replay_teacher_buffer,
             per_class=self.replay_samples_per_class,
             balance_levels=self.replay_levels,
             device=self.device,
         )
         aux_loss = self._compute_replay_consistency(grouped, replay_batch)
-        for item in current_items:
-            self.replay_buffer.add(item)
+        if self.replay_student_buffer is not None:
+            student_items = self._gather_embeddings(features, attr="last_positive_cells")
+            for item in student_items:
+                self.replay_student_buffer.add(item)
         if aux_loss is None:
             return None
         return aux_loss * self.replay_loss_weight
@@ -452,8 +491,8 @@ class DetectionTrainer(BaseTrainer):
             level_map.setdefault(item.cls, []).append(item)
         return grouped
 
-    def _gather_positive_embeddings(self, features):
-        """Collect TinyReplayItems from tapped features using stored positive cell indices."""
+    def _gather_embeddings(self, features, attr="last_positive_cells"):
+        """Collect TinyReplayItems from tapped features using stored cell indices."""
         model_single = de_parallel(self.model)
         criterion = getattr(model_single, "criterion", None)
         if criterion is None and hasattr(model_single, "init_criterion"):
@@ -462,9 +501,10 @@ class DetectionTrainer(BaseTrainer):
         loss_module = criterion
         if loss_module is None:
             return []
-        pos = getattr(loss_module, "last_replay_cells", None)
-        if not pos:
-            pos = getattr(loss_module, "last_positive_cells", None)
+        if hasattr(loss_module, "set_replay_tap_config") and not getattr(loss_module, "_replay_configured", False):
+            if self.replay_levels and self.replay_strides:
+                loss_module.set_replay_tap_config(self.replay_levels, self.replay_strides)
+        pos = getattr(loss_module, attr, None)
         if not pos:
             return []
         indices = pos.get("indices")
@@ -494,6 +534,8 @@ class DetectionTrainer(BaseTrainer):
         classes = classes[size_mask]
         max_edge = max_edge[size_mask]
         level_names = getattr(loss_module, "level_names", [])
+        if attr == "last_replay_cells" and getattr(loss_module, "replay_level_order", None):
+            level_names = loss_module.replay_level_order
         items = []
         unique_levels = indices[:, 0].unique()
         for level_idx in unique_levels:
@@ -520,8 +562,9 @@ class DetectionTrainer(BaseTrainer):
                         metadata={"max_edge": float(size.item())},
                     )
                 )
-        loss_module.last_positive_cells = None
-        if hasattr(loss_module, "last_replay_cells"):
+        if attr == "last_positive_cells":
+            loss_module.last_positive_cells = None
+        if attr == "last_replay_cells" and hasattr(loss_module, "last_replay_cells"):
             loss_module.last_replay_cells = None
         return items
 
@@ -541,49 +584,85 @@ class DetectionTrainer(BaseTrainer):
                 float(norm.mean()),
                 float(norm.max()),
             )
+        if RANK in {-1, 0} and getattr(self.args, "debug_replay", False):
+            teacher = self.replay_teacher_buffer
+            if teacher:
+                proto_map = teacher.collect_prototypes()
+                for level, class_map in proto_map.items():
+                    for cls_id, data in class_map.items():
+                        counts = data["counts"]
+                        protos = data["prototypes"]
+                        if protos.shape[0] <= 1:
+                            continue
+                        cos = F.normalize(protos, dim=1) @ protos.transpose(0, 1)
+                        upper = torch.triu(cos, diagonal=1)
+                        if torch.any(upper != 0):
+                            vals = upper[upper != 0]
+                            LOGGER.info(
+                                "Replay proto cos level=%s cls=%s slots=%d min=%.3f max=%.3f",
+                                level,
+                                int(cls_id),
+                                protos.shape[0],
+                                float(vals.min()),
+                                float(vals.max()),
+                            )
 
     def _compute_replay_consistency(self, current_groups, replay_batch):
         if not replay_batch:
             return None
+        apply_counts = getattr(self.replay_teacher_buffer, "weight_by_count", False)
         total_loss = 0.0
-        loss_terms = 0
+        total_weight = 0.0
         for level, class_map in current_groups.items():
-            targets = replay_batch.get(level)
-            if not targets:
-                continue
-            target_cls = targets["cls"]
-            target_emb = targets["embedding"]
-            if target_emb.numel() == 0:
+            level_targets = replay_batch.get(level)
+            if not level_targets:
                 continue
             for cls_id, items in class_map.items():
-                mask = target_cls == int(cls_id)
-                if not mask.any():
+                proto_info = level_targets.get(int(cls_id))
+                if not proto_info:
                     continue
+                prototypes = proto_info["prototypes"].to(self.device)
+                if prototypes.ndim == 1:
+                    prototypes = prototypes.unsqueeze(0)
                 current_emb = torch.stack([it.embedding.to(self.device) for it in items])
-                target_pool = target_emb[mask]
-                if target_pool.shape[0] == 0:
+                if current_emb.numel() == 0:
                     continue
-                normed_pool = F.normalize(target_pool, dim=1)
-                prototype = F.normalize(normed_pool.mean(dim=0, keepdim=True), dim=1).to(current_emb.dtype)
                 current_norm = F.normalize(current_emb, dim=1)
-                cosine = (current_norm * prototype).sum(dim=1)
+                cosine = torch.matmul(current_norm, prototypes.transpose(0, 1))
+                max_cos, winners = torch.max(cosine, dim=1)
+                slot_counts = torch.bincount(winners.cpu(), minlength=prototypes.shape[0]).tolist()
+                self._accumulate_replay_hits(level, int(cls_id), slot_counts)
                 if RANK in {-1, 0} and getattr(self.args, "debug_replay", False):
                     LOGGER.info(
                         "Replay cosine level=%s cls=%s mean=%.3f median=%.3f min=%.3f max=%.3f",
                         level,
                         int(cls_id),
-                        float(cosine.mean()),
-                        float(cosine.median()),
-                        float(cosine.min()),
-                        float(cosine.max()),
+                        float(max_cos.mean()),
+                        float(max_cos.median()),
+                        float(max_cos.min()),
+                        float(max_cos.max()),
                     )
                 weight = self._scale_weight(level)
-                loss_vec = 1.0 - cosine
-                total_loss += weight * loss_vec.sum()
-                loss_terms += loss_vec.shape[0]
-        if loss_terms == 0:
+                loss_vec = (1.0 - max_cos) * weight
+                class_weight = 1.0
+                if apply_counts:
+                    counts = proto_info.get("counts")
+                    if counts is not None and counts.numel() > 0:
+                        class_weight = float(counts.sum().item())
+                total_loss += loss_vec.sum() * class_weight
+                total_weight += loss_vec.shape[0] * class_weight
+        if total_weight == 0:
             return None
-        return total_loss / loss_terms
+        replay_loss = total_loss / total_weight
+        if RANK in {-1, 0}:
+            self.auxiliary_info = self.auxiliary_info or {}
+            self.auxiliary_info.update(
+                {
+                    "replay/loss": float(replay_loss.detach()),
+                    "replay/examples": float(total_weight),
+                }
+            )
+        return replay_loss
 
     def _scale_weight(self, level: str) -> float:
         """Compute per-level weighting for replay consistency."""
@@ -596,11 +675,45 @@ class DetectionTrainer(BaseTrainer):
             return 1.0 / mapping.get(level, 1)
         return 1.0
 
-    def _load_replay_memory(self, path: Path):
-        if not self.replay_buffer:
+    def _accumulate_replay_hits(self, level, cls_id, slot_counts):
+        if not slot_counts:
+            return
+        level_map = self.replay_slot_hits[level]
+        cls_map = level_map[int(cls_id)]
+        for idx, count in enumerate(slot_counts):
+            if count:
+                cls_map[idx] += int(count)
+
+    def _write_replay_hits(self, epoch: int):
+        if not self.replay_slot_hits:
+            return
+        log_path = Path(self.save_dir) / "replay_slot_hits.log"
+        lines = [f"Epoch {epoch + 1}"]
+        for level in sorted(self.replay_slot_hits.keys()):
+            class_map = self.replay_slot_hits[level]
+            for cls_id in sorted(class_map.keys()):
+                slot_map = class_map[cls_id]
+                slot_str = ", ".join(f"{idx}:{count}" for idx, count in sorted(slot_map.items()))
+                lines.append(f"  level={level} cls={cls_id} hits={slot_str}")
+        with log_path.open("a", encoding="utf-8") as handle:
+            handle.write("\n".join(lines) + "\n")
+        self.replay_slot_hits = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
+
+    def save_metrics(self, metrics):
+        aux = getattr(self, "auxiliary_info", None)
+        if isinstance(aux, dict):
+            for key, value in aux.items():
+                metrics[key] = value
+        super().save_metrics(metrics)
+        if getattr(self, "replay_enabled", False):
+            self._write_replay_hits(self.epoch)
+
+    def _load_teacher_buffer(self, path: Path):
+        buffer = self.replay_teacher_buffer
+        if buffer is None:
             return
         try:
-            count = self.replay_buffer.load(path, allow_growth=True)
+            count = buffer.load(path, allow_growth=True)
         except FileNotFoundError:
             LOGGER.warning(f"Replay init buffer not found at {path}")
             return
@@ -611,12 +724,28 @@ class DetectionTrainer(BaseTrainer):
             LOGGER.info(f"Loaded {count} replay embeddings from {path}")
 
     def _maybe_save_replay_buffer(self, ctx=None):
-        if not (self.replay_buffer and self.replay_save_path):
+        if not self.replay_save_path:
             return
-        if len(self.replay_buffer) == 0:
+        teacher = self.replay_teacher_buffer
+        student = self.replay_student_buffer
+        has_teacher = bool(teacher and len(teacher) > 0)
+        has_student = bool(student and len(student) > 0)
+        if not (has_teacher or has_student):
             return
+        base_buffer = student or teacher
+        combined = TinyReplayBuffer(
+            per_class_capacity=base_buffer.capacity,
+            dtype=base_buffer.dtype,
+            device="cpu",
+            carryover_growth=self.replay_capacity_growth,
+        )
+        if has_teacher:
+            combined.load_state_dict(teacher.state_dict())
+        if has_student:
+            for item in student.iter_items():
+                combined.add(item)
         try:
-            saved = self.replay_buffer.save(self.replay_save_path)
+            saved = combined.save(self.replay_save_path)
         except Exception as exc:  # noqa: BLE001
             LOGGER.warning(f"Failed to save replay buffer to {self.replay_save_path}: {exc}")
             return
