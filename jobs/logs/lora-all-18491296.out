@@ -1,0 +1,743 @@
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+[34m[1mengine/trainer: [0mtask=detect, mode=train, model=pretrained/small.pt, data=/home/ddwilde/scriptie/yaml/DOTA-stage1.yaml, epochs=50, time=None, patience=100, batch=4, imgsz=640, save=True, save_period=-1, cache=False, device=None, workers=8, project=/home/ddwilde/scriptie/runs/dota_lora, name=stage1-lora, exist_ok=False, pretrained=True, optimizer=auto, verbose=True, seed=0, deterministic=True, single_cls=False, rect=False, cos_lr=False, close_mosaic=10, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, lora={'enable': True, 'freeze_backbone': True}, continual={'enable': False, 'batches': [], 'adapter_strategy': 'last', 'save_history': True}, replay={'enable': False, 'tap_layers': {'P2': 19, 'P3': 22, 'P4': 25}, 'tiny_max_pixels': 128, 'context_scale': 1.5, 'buffer_per_class': 64, 'sample_per_batch': 16, 'loss_weight': 1.0, 'scale_weighting': 'stride', 'store_dir': 'replay', 'buffer_file': 'buffer.pt', 'init_buffer': None, 'carryover_growth': 1.5, 'memory_dir': None, 'memory_ratio': 0.25, 'prototypes': {'num_fine': 0, 'use_coarse': True, 'ema_alpha': 0.05, 'init_sim_thresh': 0.9, 'gate_min_cos': 0.0, 'init_strategy': 'first_k', 'weight_by_count': False}}, stage={'active_classes': None, 'prev_classes': None}, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=None, iou=0.7, max_det=300, half=False, dnn=False, plots=True, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.0, copy_paste=0.0, auto_augment=randaugment, erasing=0.4, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=/home/ddwilde/scriptie/runs/dota_lora/stage1-lora
+Overriding model.yaml nc=10 with nc=2
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       928  ednet.nn.modules.conv.Conv                   [3, 32, 3, 2]                 
+  1                  -1  1     18560  ednet.nn.modules.conv.Conv                   [32, 64, 3, 2]                
+  2                  -1  1     29056  ednet.nn.modules.block.C2f                   [64, 64, 1, True]             
+  3                  -1  1     73984  ednet.nn.modules.conv.Conv                   [64, 128, 3, 2]               
+  4                  -1  2    197632  ednet.nn.modules.block.C2f                   [128, 128, 2, True]           
+  5                  -1  1    295424  ednet.nn.modules.conv.Conv                   [128, 256, 3, 2]              
+  6                  -1  2    420864  ednet.nn.modules.block.C2f_FCA               [256, 256, 2, True]           
+  7                  -1  1   1180672  ednet.nn.modules.conv.Conv                   [256, 512, 3, 2]              
+  8                  -1  1   1095680  ednet.nn.modules.block.C2f_FCA               [512, 512, 1, True]           
+  9                  -1  1    656896  ednet.nn.modules.block.SPPF                  [512, 512, 5]                 
+ 10                  -1  1    990976  ednet.nn.modules.block.PSA                   [512, 512]                    
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12             [-1, 6]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 13                  -1  1    591360  ednet.nn.modules.block.C2f                   [768, 256, 1]                 
+ 14                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 15             [-1, 4]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 16                  -1  1    148224  ednet.nn.modules.block.C2f                   [384, 128, 1]                 
+ 17                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 18             [-1, 2]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 19                  -1  1     37248  ednet.nn.modules.block.C2f                   [192, 64, 1]                  
+ 20                  -1  1     36992  ednet.nn.modules.conv.Conv                   [64, 64, 3, 2]                
+ 21            [-1, 16]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 22                  -1  1    123648  ednet.nn.modules.block.C2f                   [192, 128, 1]                 
+ 23                  -1  1    147712  ednet.nn.modules.conv.Conv                   [128, 128, 3, 2]              
+ 24            [-1, 13]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 25                  -1  1    493056  ednet.nn.modules.block.C2f                   [384, 256, 1]                 
+ 26                  -1  1     68864  ednet.nn.modules.block.SCDown                [256, 256, 3, 2]              
+ 27             [-1, 9]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 28                  -1  1   1089536  ednet.nn.modules.block.C2fCIB                [768, 512, 1, True, True]     
+ 29    [19, 22, 25, 28]  1   1621664  ednet.nn.modules.head.v10Detect              [2, [64, 128, 256, 512]]      
+ednet-s summary: 510 layers, 9,318,976 parameters, 9,318,960 gradients
+
+Transferred 737/753 items from pretrained weights
+LoRA enabled: 28 adapters (rank=8, alpha=16.0, freeze_backbone=True)
+LoRA adapter registry: 28 modules -> ['Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv']
+Trainable params: 56 tensors (160000 weights) example=[('model.19.cv1.conv.lora_A.weight', 1536), ('model.19.cv1.conv.lora_B.weight', 512), ('model.19.cv2.conv.lora_A.weight', 768), ('model.19.cv2.conv.lora_B.weight', 512), ('model.19.m.0.cv1.conv.lora_A.weight', 2304), ('model.19.m.0.cv1.conv.lora_B.weight', 256), ('model.19.m.0.cv2.conv.lora_A.weight', 2304), ('model.19.m.0.cv2.conv.lora_B.weight', 256), ('model.22.cv1.conv.lora_A.weight', 1536), ('model.22.cv1.conv.lora_B.weight', 1024), ('model.22.cv2.conv.lora_A.weight', 1536), ('model.22.cv2.conv.lora_B.weight', 1024), ('model.22.m.0.cv1.conv.lora_A.weight', 4608), ('model.22.m.0.cv1.conv.lora_B.weight', 512), ('model.22.m.0.cv2.conv.lora_A.weight', 4608), ('model.22.m.0.cv2.conv.lora_B.weight', 512), ('model.25.cv1.conv.lora_A.weight', 3072), ('model.25.cv1.conv.lora_B.weight', 2048), ('model.25.cv2.conv.lora_A.weight', 3072), ('model.25.cv2.conv.lora_B.weight', 2048)]
+[34m[1mTensorBoard: [0mStart with 'tensorboard --logdir /home/ddwilde/scriptie/runs/dota_lora/stage1-lora', view at http://localhost:6006/
+Freezing layer 'model.29.dfl.conv.weight'
+[34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks with YOLOv8n...
+[34m[1mAMP: [0mchecks passed ✅
+Plotting labels to /home/ddwilde/scriptie/runs/dota_lora/stage1-lora/labels.jpg... 
+[34m[1moptimizer:[0m 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+[34m[1moptimizer:[0m AdamW(lr=0.001667, momentum=0.9) with parameter groups 117 weight(decay=0.0), 202 weight(decay=0.0005), 139 bias(decay=0.0)
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+[34m[1mTensorBoard: [0mmodel graph visualization added ✅
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to [1m/home/ddwilde/scriptie/runs/dota_lora/stage1-lora[0m
+Starting training for 50 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.314     0.0127     0.0174    0.00743
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.678    0.00946     0.0127    0.00465
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.682     0.0177     0.0182    0.00638
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.663     0.0123     0.0131    0.00477
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.157    0.00983       0.01    0.00368
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.288     0.0133     0.0139    0.00597
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.161     0.0133     0.0144    0.00527
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.679     0.0138      0.017    0.00748
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.297     0.0109     0.0131    0.00499
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.272     0.0121     0.0136    0.00529
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.176    0.00923     0.0105    0.00394
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.271     0.0131      0.016    0.00648
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.162     0.0108     0.0107    0.00405
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357       0.21     0.0111      0.012    0.00456
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.257     0.0104      0.013    0.00551
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.391    0.00928     0.0128    0.00514
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.201     0.0104     0.0129    0.00504
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.211       0.01     0.0122    0.00463
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.447     0.0102     0.0141    0.00593
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.208     0.0117     0.0131    0.00494
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.174     0.0107     0.0122    0.00462
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357       0.21     0.0102     0.0131    0.00506
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.335      0.011     0.0138    0.00536
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357        0.2    0.00964      0.012    0.00447
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.204    0.00983     0.0124    0.00481
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.197     0.0111      0.012    0.00451
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.198    0.00964     0.0107    0.00404
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.202    0.00991     0.0118    0.00442
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.193     0.0096     0.0114    0.00438
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.184     0.0091      0.011     0.0042
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.188     0.0114     0.0118    0.00453
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.183    0.00901     0.0111    0.00413
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.181     0.0108     0.0113    0.00439
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.193    0.00915     0.0111    0.00415
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.173    0.00919     0.0103    0.00404
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.181    0.00883     0.0106     0.0042
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.186    0.00917     0.0116    0.00447
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.161    0.00983    0.00962    0.00392
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.194    0.00833     0.0107    0.00421
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.205    0.00874     0.0115    0.00456
+Closing dataloader mosaic
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.163     0.0127     0.0139    0.00541
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.155     0.0136     0.0134    0.00548
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357       0.15      0.013     0.0126    0.00493
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.162     0.0139      0.013    0.00509
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357       0.16      0.015      0.014    0.00535
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.158     0.0153     0.0142    0.00551
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.167     0.0137     0.0139    0.00555
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.171     0.0132     0.0134    0.00524
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.166     0.0133     0.0139     0.0056
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.167     0.0136     0.0141    0.00564
+
+50 epochs completed in 0.275 hours.
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_lora/stage1-lora/weights/last.pt, 19.5MB
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_lora/stage1-lora/weights/best.pt, 19.4MB
+
+Validating /home/ddwilde/scriptie/runs/dota_lora/stage1-lora/weights/best.pt...
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+Skipping layer fusion for LoRA-enabled model during weight loading.
+                   all        186       8357      0.679     0.0138      0.017    0.00748
+         small-vehicle         89       5547      0.358     0.0276     0.0288     0.0103
+         large-vehicle         73       2810          1          0    0.00518    0.00461
+Speed: 0.1ms preprocess, 4.5ms inference, 0.0ms loss, 0.2ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/dota_lora/stage1-lora[0m
+Training finished. Results saved in: /home/ddwilde/scriptie/runs/dota_lora/stage1-lora
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+[34m[1mengine/trainer: [0mtask=detect, mode=train, model=/home/ddwilde/scriptie/runs/dota_lora/stage1-lora/weights/best.pt, data=/home/ddwilde/scriptie/yaml/DOTA-stage2.yaml, epochs=50, time=None, patience=100, batch=4, imgsz=640, save=True, save_period=-1, cache=False, device=None, workers=8, project=/home/ddwilde/scriptie/runs/dota_lora, name=stage2-lora, exist_ok=False, pretrained=True, optimizer=auto, verbose=True, seed=0, deterministic=True, single_cls=False, rect=False, cos_lr=False, close_mosaic=10, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, lora={'enable': True, 'freeze_backbone': True}, continual={'enable': False, 'batches': [], 'adapter_strategy': 'last', 'save_history': True}, replay={'enable': False, 'tap_layers': {'P2': 19, 'P3': 22, 'P4': 25}, 'tiny_max_pixels': 128, 'context_scale': 1.5, 'buffer_per_class': 64, 'sample_per_batch': 16, 'loss_weight': 1.0, 'scale_weighting': 'stride', 'store_dir': 'replay', 'buffer_file': 'buffer.pt', 'init_buffer': None, 'carryover_growth': 1.5, 'memory_dir': None, 'memory_ratio': 0.25, 'prototypes': {'num_fine': 0, 'use_coarse': True, 'ema_alpha': 0.05, 'init_sim_thresh': 0.9, 'gate_min_cos': 0.0, 'init_strategy': 'first_k', 'weight_by_count': False}}, stage={'active_classes': None, 'prev_classes': None}, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=None, iou=0.7, max_det=300, half=False, dnn=False, plots=True, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.0, copy_paste=0.0, auto_augment=randaugment, erasing=0.4, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=/home/ddwilde/scriptie/runs/dota_lora/stage2-lora
+Overriding model.yaml nc=2 with nc=4
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       928  ednet.nn.modules.conv.Conv                   [3, 32, 3, 2]                 
+  1                  -1  1     18560  ednet.nn.modules.conv.Conv                   [32, 64, 3, 2]                
+  2                  -1  1     29056  ednet.nn.modules.block.C2f                   [64, 64, 1, True]             
+  3                  -1  1     73984  ednet.nn.modules.conv.Conv                   [64, 128, 3, 2]               
+  4                  -1  2    197632  ednet.nn.modules.block.C2f                   [128, 128, 2, True]           
+  5                  -1  1    295424  ednet.nn.modules.conv.Conv                   [128, 256, 3, 2]              
+  6                  -1  2    420864  ednet.nn.modules.block.C2f_FCA               [256, 256, 2, True]           
+  7                  -1  1   1180672  ednet.nn.modules.conv.Conv                   [256, 512, 3, 2]              
+  8                  -1  1   1095680  ednet.nn.modules.block.C2f_FCA               [512, 512, 1, True]           
+  9                  -1  1    656896  ednet.nn.modules.block.SPPF                  [512, 512, 5]                 
+ 10                  -1  1    990976  ednet.nn.modules.block.PSA                   [512, 512]                    
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12             [-1, 6]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 13                  -1  1    591360  ednet.nn.modules.block.C2f                   [768, 256, 1]                 
+ 14                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 15             [-1, 4]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 16                  -1  1    148224  ednet.nn.modules.block.C2f                   [384, 128, 1]                 
+ 17                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 18             [-1, 2]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 19                  -1  1     37248  ednet.nn.modules.block.C2f                   [192, 64, 1]                  
+ 20                  -1  1     36992  ednet.nn.modules.conv.Conv                   [64, 64, 3, 2]                
+ 21            [-1, 16]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 22                  -1  1    123648  ednet.nn.modules.block.C2f                   [192, 128, 1]                 
+ 23                  -1  1    147712  ednet.nn.modules.conv.Conv                   [128, 128, 3, 2]              
+ 24            [-1, 13]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 25                  -1  1    493056  ednet.nn.modules.block.C2f                   [384, 256, 1]                 
+ 26                  -1  1     68864  ednet.nn.modules.block.SCDown                [256, 256, 3, 2]              
+ 27             [-1, 9]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 28                  -1  1   1089536  ednet.nn.modules.block.C2fCIB                [768, 512, 1, True, True]     
+ 29    [19, 22, 25, 28]  1   1622704  ednet.nn.modules.head.v10Detect              [4, [64, 128, 256, 512]]      
+ednet-s summary: 510 layers, 9,320,016 parameters, 9,320,000 gradients
+
+Transferred 709/753 items from pretrained weights
+LoRA enabled: 28 adapters (rank=8, alpha=16.0, freeze_backbone=True)
+LoRA adapter registry: 28 modules -> ['Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv']
+Trainable params: 56 tensors (160000 weights) example=[('model.19.cv1.conv.lora_A.weight', 1536), ('model.19.cv1.conv.lora_B.weight', 512), ('model.19.cv2.conv.lora_A.weight', 768), ('model.19.cv2.conv.lora_B.weight', 512), ('model.19.m.0.cv1.conv.lora_A.weight', 2304), ('model.19.m.0.cv1.conv.lora_B.weight', 256), ('model.19.m.0.cv2.conv.lora_A.weight', 2304), ('model.19.m.0.cv2.conv.lora_B.weight', 256), ('model.22.cv1.conv.lora_A.weight', 1536), ('model.22.cv1.conv.lora_B.weight', 1024), ('model.22.cv2.conv.lora_A.weight', 1536), ('model.22.cv2.conv.lora_B.weight', 1024), ('model.22.m.0.cv1.conv.lora_A.weight', 4608), ('model.22.m.0.cv1.conv.lora_B.weight', 512), ('model.22.m.0.cv2.conv.lora_A.weight', 4608), ('model.22.m.0.cv2.conv.lora_B.weight', 512), ('model.25.cv1.conv.lora_A.weight', 3072), ('model.25.cv1.conv.lora_B.weight', 2048), ('model.25.cv2.conv.lora_A.weight', 3072), ('model.25.cv2.conv.lora_B.weight', 2048)]
+[34m[1mTensorBoard: [0mStart with 'tensorboard --logdir /home/ddwilde/scriptie/runs/dota_lora/stage2-lora', view at http://localhost:6006/
+Freezing layer 'model.29.dfl.conv.weight'
+[34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks with YOLOv8n...
+[34m[1mAMP: [0mchecks passed ✅
+Plotting labels to /home/ddwilde/scriptie/runs/dota_lora/stage2-lora/labels.jpg... 
+[34m[1moptimizer:[0m 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+[34m[1moptimizer:[0m AdamW(lr=0.00125, momentum=0.9) with parameter groups 117 weight(decay=0.0), 202 weight(decay=0.0005), 139 bias(decay=0.0)
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+[34m[1mTensorBoard: [0mmodel graph visualization added ✅
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to [1m/home/ddwilde/scriptie/runs/dota_lora/stage2-lora[0m
+Starting training for 50 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109          0          0          0          0
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   1.17e-05    8.9e-05   3.63e-05   3.63e-06
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   3.14e-05   0.000178   4.39e-05    5.2e-06
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000102   0.000445    6.6e-05   1.73e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000224    0.00059   0.000125   1.92e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000311   0.000558    0.00017   3.75e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000239    0.00059   0.000127   2.76e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   7.75e-05   0.000356   4.33e-05   1.69e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   7.83e-05   0.000356   4.22e-05   1.38e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   5.95e-05   0.000267   3.39e-05   8.81e-06
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   4.29e-05   0.000178   2.46e-05   9.32e-06
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000167   0.000323   0.000102   3.47e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109     0.0002   0.000412   0.000134   3.12e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109    0.00021   0.000501   0.000158   3.37e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109    0.00021    0.00831   0.000165   1.91e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000176     0.0159   0.000104   1.75e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000193     0.0159   0.000116   1.95e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109    0.00015    0.00805   7.88e-05   2.24e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000157    0.00814    8.2e-05   1.02e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000167    0.00822   0.000103   1.89e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000136    0.00805   8.41e-05   1.82e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000155    0.00814    8.7e-05   1.81e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000149    0.00814   8.02e-05   1.73e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000165    0.00814   9.78e-05   1.84e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000166    0.00822   0.000105   1.86e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000184    0.00831   0.000112    1.3e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   8.55e-05    0.00826   5.62e-05    9.7e-06
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109     0.0002     0.0084   0.000113    1.7e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000121    0.00844   8.16e-05   1.34e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109    0.00022    0.00849   0.000117   1.56e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000221    0.00849   0.000126   1.95e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   9.07e-05    0.00826   5.84e-05   9.72e-06
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   8.85e-05    0.00826   5.17e-05   9.01e-06
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109    0.00017     0.0087   9.32e-05    1.5e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000271      0.017   0.000162    2.8e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000424     0.0174   0.000237    3.8e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000314     0.0168   0.000178   2.96e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000302     0.0167   0.000174    2.5e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000201     0.0167   0.000125   1.99e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000206     0.0167   0.000122   2.13e-05
+Closing dataloader mosaic
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000352     0.0175   0.000207   4.58e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000596     0.0109   0.000378    8.7e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000581     0.0109   0.000371    8.4e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000577     0.0108   0.000353   7.77e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109    0.00058     0.0108   0.000352   8.12e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000663     0.0111   0.000416   8.98e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000594     0.0108   0.000375   7.88e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000535     0.0105   0.000319   7.62e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109    0.00036    0.00959   0.000207   5.33e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109   0.000455     0.0102   0.000257   6.24e-05
+
+50 epochs completed in 0.177 hours.
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_lora/stage2-lora/weights/last.pt, 19.5MB
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_lora/stage2-lora/weights/best.pt, 19.5MB
+
+Validating /home/ddwilde/scriptie/runs/dota_lora/stage2-lora/weights/best.pt...
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+Skipping layer fusion for LoRA-enabled model during weight loading.
+                   all        186      10109   0.000663     0.0111   0.000416   8.98e-05
+         small-vehicle         89       5547          0          0          0          0
+         large-vehicle         73       2810    0.00262     0.0132    0.00164   0.000356
+                 plane         45       1720          0          0          0          0
+            helicopter          5         32   3.48e-05     0.0312   1.82e-05   3.65e-06
+Speed: 0.1ms preprocess, 5.6ms inference, 0.0ms loss, 0.2ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/dota_lora/stage2-lora[0m
+Training finished. Results saved in: /home/ddwilde/scriptie/runs/dota_lora/stage2-lora
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+[34m[1mengine/trainer: [0mtask=detect, mode=train, model=/home/ddwilde/scriptie/runs/dota_lora/stage2-lora/weights/best.pt, data=/home/ddwilde/scriptie/yaml/DOTA-stage3.yaml, epochs=50, time=None, patience=100, batch=4, imgsz=640, save=True, save_period=-1, cache=False, device=None, workers=8, project=/home/ddwilde/scriptie/runs/dota_lora, name=stage3-lora, exist_ok=False, pretrained=True, optimizer=auto, verbose=True, seed=0, deterministic=True, single_cls=False, rect=False, cos_lr=False, close_mosaic=10, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, lora={'enable': True, 'freeze_backbone': True}, continual={'enable': False, 'batches': [], 'adapter_strategy': 'last', 'save_history': True}, replay={'enable': False, 'tap_layers': {'P2': 19, 'P3': 22, 'P4': 25}, 'tiny_max_pixels': 128, 'context_scale': 1.5, 'buffer_per_class': 64, 'sample_per_batch': 16, 'loss_weight': 1.0, 'scale_weighting': 'stride', 'store_dir': 'replay', 'buffer_file': 'buffer.pt', 'init_buffer': None, 'carryover_growth': 1.5, 'memory_dir': None, 'memory_ratio': 0.25, 'prototypes': {'num_fine': 0, 'use_coarse': True, 'ema_alpha': 0.05, 'init_sim_thresh': 0.9, 'gate_min_cos': 0.0, 'init_strategy': 'first_k', 'weight_by_count': False}}, stage={'active_classes': None, 'prev_classes': None}, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=None, iou=0.7, max_det=300, half=False, dnn=False, plots=True, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.0, copy_paste=0.0, auto_augment=randaugment, erasing=0.4, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=/home/ddwilde/scriptie/runs/dota_lora/stage3-lora
+Overriding model.yaml nc=4 with nc=5
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       928  ednet.nn.modules.conv.Conv                   [3, 32, 3, 2]                 
+  1                  -1  1     18560  ednet.nn.modules.conv.Conv                   [32, 64, 3, 2]                
+  2                  -1  1     29056  ednet.nn.modules.block.C2f                   [64, 64, 1, True]             
+  3                  -1  1     73984  ednet.nn.modules.conv.Conv                   [64, 128, 3, 2]               
+  4                  -1  2    197632  ednet.nn.modules.block.C2f                   [128, 128, 2, True]           
+  5                  -1  1    295424  ednet.nn.modules.conv.Conv                   [128, 256, 3, 2]              
+  6                  -1  2    420864  ednet.nn.modules.block.C2f_FCA               [256, 256, 2, True]           
+  7                  -1  1   1180672  ednet.nn.modules.conv.Conv                   [256, 512, 3, 2]              
+  8                  -1  1   1095680  ednet.nn.modules.block.C2f_FCA               [512, 512, 1, True]           
+  9                  -1  1    656896  ednet.nn.modules.block.SPPF                  [512, 512, 5]                 
+ 10                  -1  1    990976  ednet.nn.modules.block.PSA                   [512, 512]                    
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12             [-1, 6]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 13                  -1  1    591360  ednet.nn.modules.block.C2f                   [768, 256, 1]                 
+ 14                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 15             [-1, 4]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 16                  -1  1    148224  ednet.nn.modules.block.C2f                   [384, 128, 1]                 
+ 17                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 18             [-1, 2]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 19                  -1  1     37248  ednet.nn.modules.block.C2f                   [192, 64, 1]                  
+ 20                  -1  1     36992  ednet.nn.modules.conv.Conv                   [64, 64, 3, 2]                
+ 21            [-1, 16]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 22                  -1  1    123648  ednet.nn.modules.block.C2f                   [192, 128, 1]                 
+ 23                  -1  1    147712  ednet.nn.modules.conv.Conv                   [128, 128, 3, 2]              
+ 24            [-1, 13]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 25                  -1  1    493056  ednet.nn.modules.block.C2f                   [384, 256, 1]                 
+ 26                  -1  1     68864  ednet.nn.modules.block.SCDown                [256, 256, 3, 2]              
+ 27             [-1, 9]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 28                  -1  1   1089536  ednet.nn.modules.block.C2fCIB                [768, 512, 1, True, True]     
+ 29    [19, 22, 25, 28]  1   1623224  ednet.nn.modules.head.v10Detect              [5, [64, 128, 256, 512]]      
+ednet-s summary: 510 layers, 9,320,536 parameters, 9,320,520 gradients
+
+Transferred 709/753 items from pretrained weights
+LoRA enabled: 28 adapters (rank=8, alpha=16.0, freeze_backbone=True)
+LoRA adapter registry: 28 modules -> ['Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv', 'Conv.conv']
+Trainable params: 56 tensors (160000 weights) example=[('model.19.cv1.conv.lora_A.weight', 1536), ('model.19.cv1.conv.lora_B.weight', 512), ('model.19.cv2.conv.lora_A.weight', 768), ('model.19.cv2.conv.lora_B.weight', 512), ('model.19.m.0.cv1.conv.lora_A.weight', 2304), ('model.19.m.0.cv1.conv.lora_B.weight', 256), ('model.19.m.0.cv2.conv.lora_A.weight', 2304), ('model.19.m.0.cv2.conv.lora_B.weight', 256), ('model.22.cv1.conv.lora_A.weight', 1536), ('model.22.cv1.conv.lora_B.weight', 1024), ('model.22.cv2.conv.lora_A.weight', 1536), ('model.22.cv2.conv.lora_B.weight', 1024), ('model.22.m.0.cv1.conv.lora_A.weight', 4608), ('model.22.m.0.cv1.conv.lora_B.weight', 512), ('model.22.m.0.cv2.conv.lora_A.weight', 4608), ('model.22.m.0.cv2.conv.lora_B.weight', 512), ('model.25.cv1.conv.lora_A.weight', 3072), ('model.25.cv1.conv.lora_B.weight', 2048), ('model.25.cv2.conv.lora_A.weight', 3072), ('model.25.cv2.conv.lora_B.weight', 2048)]
+[34m[1mTensorBoard: [0mStart with 'tensorboard --logdir /home/ddwilde/scriptie/runs/dota_lora/stage3-lora', view at http://localhost:6006/
+Freezing layer 'model.29.dfl.conv.weight'
+[34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks with YOLOv8n...
+[34m[1mAMP: [0mchecks passed ✅
+Plotting labels to /home/ddwilde/scriptie/runs/dota_lora/stage3-lora/labels.jpg... 
+[34m[1moptimizer:[0m 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+[34m[1moptimizer:[0m AdamW(lr=0.001111, momentum=0.9) with parameter groups 117 weight(decay=0.0), 202 weight(decay=0.0005), 139 bias(decay=0.0)
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+Skipping fusion for LoRA-wrapped layer Conv
+[34m[1mTensorBoard: [0mmodel graph visualization added ✅
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to [1m/home/ddwilde/scriptie/runs/dota_lora/stage3-lora[0m
+Starting training for 50 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   1.43e-05   0.000116   7.16e-06   1.43e-06
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   9.15e-05    0.00034   5.33e-05    1.1e-05
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000162   0.000223   0.000414   0.000227
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000281     0.0004    0.00115   0.000413
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000743   0.000943    0.00138   0.000598
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000758   0.000893   0.000897   0.000342
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000518   0.000834   0.000608   0.000251
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000445   0.000587   0.000706   0.000172
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000436   0.000588   0.000384   0.000104
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000451   0.000506   0.000446   0.000129
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000391   0.000354   0.000549   0.000233
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000484   0.000494   0.000795   0.000306
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000528   0.000565   0.000829   0.000333
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000332   0.000353    0.00133   0.000582
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000443   0.000526    0.00133   0.000569
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849    0.00021   0.000328    0.00127   0.000461
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000247   0.000281    0.00117    0.00044
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000266   0.000282    0.00122   0.000557
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000241   0.000213    0.00113   0.000542
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000258   0.000364    0.00119   0.000544
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000157    0.00021     0.0011   0.000521
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000285   0.000399    0.00119   0.000548
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000336    0.00055    0.00122   0.000555
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000267   0.000397    0.00115    0.00044
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000262   0.000397    0.00116   0.000445
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000277   0.000432    0.00118   0.000444
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000145   0.000175    0.00108   0.000422
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000284   0.000432    0.00117   0.000339
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000169    0.00021    0.00109   0.000428
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000205   0.000293     0.0011   0.000433
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000299   0.000432    0.00115   0.000439
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000273   0.000397    0.00114   0.000341
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000326   0.000434    0.00117   0.000362
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000144   0.000257    0.00107    0.00032
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849    0.00021   0.000361    0.00111   0.000334
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000141   0.000257    0.00107   0.000422
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000214   0.000361    0.00111   0.000432
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000227   0.000396    0.00112   0.000334
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000264   0.000397    0.00113   0.000436
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000207   0.000293     0.0011   0.000427
+Closing dataloader mosaic
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000494   0.000573    0.00126   0.000363
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000346   0.000432    0.00118   0.000448
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000287   0.000444    0.00115   0.000434
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849    0.00022   0.000258    0.00111   0.000427
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000427     0.0004    0.00121   0.000448
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849    0.00019   0.000223    0.00109   0.000423
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849    0.00039   0.000399    0.00119   0.000449
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849    0.00042     0.0004    0.00121   0.000464
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000408   0.000365     0.0012   0.000464
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849   0.000361   0.000364    0.00118   0.000446
+
+50 epochs completed in 0.203 hours.
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_lora/stage3-lora/weights/last.pt, 19.5MB
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_lora/stage3-lora/weights/best.pt, 19.5MB
+
+Validating /home/ddwilde/scriptie/runs/dota_lora/stage3-lora/weights/best.pt...
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+Skipping layer fusion for LoRA-enabled model during weight loading.
+                   all        186      15849   0.000743   0.000943    0.00138   0.000598
+         small-vehicle         89       5547    0.00266    0.00162    0.00632    0.00287
+         large-vehicle         73       2810   7.75e-05   0.000712   3.91e-05   9.83e-06
+                 plane         45       1720   0.000138    0.00116    6.9e-05   1.38e-05
+            helicopter          5         32          0          0          0          0
+                  ship         65       5740   0.000837    0.00122   0.000491   9.96e-05
+Speed: 0.2ms preprocess, 5.4ms inference, 0.0ms loss, 0.1ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/dota_lora/stage3-lora[0m
+Training finished. Results saved in: /home/ddwilde/scriptie/runs/dota_lora/stage3-lora
