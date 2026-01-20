@@ -39,7 +39,7 @@ lora: # (dict) Low-Rank Adapter (LoRA) configuration for parameter-efficient fin
   rank: 8 # (int) intrinsic rank of the LoRA update
   alpha: 16.0 # (float) scaling factor applied to LoRA updates
   dropout: 0.0 # (float) dropout probability between LoRA projections
-  feature_pyramid_indices: [16, 19, 22, 25] # (list[int]) layer indices (P3–P4) to target with adapters
+  feature_pyramid_indices: [19, 22, 25] # (list[int]) layer indices (P2-P3–P4) to target with adapters
   include_detection_head: True # (bool) apply LoRA to detection head convolutions
   freeze_backbone: True # (bool) freeze backbone weights so only adapters update
   adapter_dir: adapters # (str) relative directory (under run folder) to store adapter checkpoints
@@ -67,6 +67,14 @@ replay: # (dict) Tiny object replay configuration (SA-AB)
   carryover_growth: 1.5 # (float) factor to expand capacity when loading persisted buffers
   memory_dir: # (str, optional) path to exemplar dataset (expects images/ and labels/ subdirs)
   memory_ratio: 0.25 # (float) fraction of each batch drawn from memory dataset (0 disables)
+  prototypes: # (dict) multi-prototype replay controls
+    num_fine: 0 # (int) number of fine prototypes per (level, class); 0 keeps single-prototype behavior
+    use_coarse: True # (bool) include coarse/global prototype when computing replay loss
+    ema_alpha: 0.05 # (float) EMA factor once prototype counts saturate capacity
+    init_sim_thresh: 0.9 # (float) cosine threshold required to seed a new fine slot
+    gate_min_cos: 0.0 # (float) minimum cosine to accept an update; below may trigger slot replacement
+    init_strategy: first_k # (str) fine-slot seeding strategy, choices=[first_k, threshold]
+    weight_by_count: False # (bool) weight replay loss by prototype sample counts
 # Segmentation
 stage:
   active_classes: null
