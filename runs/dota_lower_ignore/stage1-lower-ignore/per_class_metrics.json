@@ -1,0 +1,2144 @@
+[
+  {
+    "epoch": 1,
+    "timestamp": 1768921205.1007867,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.44878137427877274,
+        "recall": 0.29385253290066704,
+        "map50": 0.24967738285861285,
+        "map": 0.10005382152480569,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.44534367569439953,
+        "recall": 0.5437722419928825,
+        "map50": 0.41385543762851634,
+        "map": 0.1832712052085292,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "map50": 0.0005860156502129785,
+        "map": 5.8601565021297846e-05,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 2,
+    "timestamp": 1768921239.122145,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.481180170917013,
+        "recall": 0.25380768816409705,
+        "map50": 0.2502714299730145,
+        "map": 0.12047834661630726,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.28804280950280164,
+        "recall": 0.6144991076485739,
+        "map50": 0.31192166960635015,
+        "map": 0.18014556756874905,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 3,
+    "timestamp": 1768921271.6465313,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.529517939404143,
+        "recall": 0.34054443843519017,
+        "map50": 0.33930157157620244,
+        "map": 0.16787236312260448,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.443311091499294,
+        "recall": 0.5348754448398576,
+        "map50": 0.44636524161717434,
+        "map": 0.2714385426890998,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 4,
+    "timestamp": 1768921305.156778,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6199844357225134,
+        "recall": 0.3573530779227552,
+        "map50": 0.3749861624038026,
+        "map": 0.1943418090828824,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.581564951944921,
+        "recall": 0.6321129975934247,
+        "map50": 0.5778323272970203,
+        "map": 0.359089854079227,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 5,
+    "timestamp": 1768921338.1082466,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6271516351930657,
+        "recall": 0.3818280151433207,
+        "map50": 0.4015660770437332,
+        "map": 0.21310003615636997,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.5802500668466981,
+        "recall": 0.6765124555160142,
+        "map50": 0.6497091456749378,
+        "map": 0.3881408454798171,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 6,
+    "timestamp": 1768921370.4560056,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7232346513314661,
+        "recall": 0.3875968992248062,
+        "map50": 0.45953211833464264,
+        "map": 0.2215033248626359,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.5133109941663897,
+        "recall": 0.6758007117437722,
+        "map50": 0.5826543136833123,
+        "map": 0.3556517022628324,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 7,
+    "timestamp": 1768921404.0606916,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.5905173380594179,
+        "recall": 0.4645754461871282,
+        "map50": 0.42106124351451474,
+        "map": 0.21664393087574205,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.6469997577162172,
+        "recall": 0.6124555160142349,
+        "map50": 0.6164249539112294,
+        "map": 0.39277920449313225,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 8,
+    "timestamp": 1768921437.0743923,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6583006668730872,
+        "recall": 0.45754461871281776,
+        "map50": 0.47908309030212454,
+        "map": 0.23862189984529972,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.6472042558450969,
+        "recall": 0.6341637010676157,
+        "map50": 0.6501423642419579,
+        "map": 0.39458025659123164,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 9,
+    "timestamp": 1768921469.660786,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6350864277515083,
+        "recall": 0.48223476766833534,
+        "map50": 0.4720354988769235,
+        "map": 0.2476249176303431,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7469270313775241,
+        "recall": 0.6459074733096085,
+        "map50": 0.6890216212744794,
+        "map": 0.4306900245648917,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 10,
+    "timestamp": 1768921502.3057966,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.70615216579558,
+        "recall": 0.4457927671075919,
+        "map50": 0.47942575199149084,
+        "map": 0.24628673915012636,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.6278841146204777,
+        "recall": 0.6821396722938835,
+        "map50": 0.6686771329324335,
+        "map": 0.40429863634601243,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 11,
+    "timestamp": 1768921535.0055513,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6918178644011719,
+        "recall": 0.459347394988282,
+        "map50": 0.49500415053348223,
+        "map": 0.23244794528058907,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.6833810909621881,
+        "recall": 0.6736654804270462,
+        "map50": 0.6871727416031087,
+        "map": 0.4293925613990551,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 12,
+    "timestamp": 1768921568.1202202,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.669557178157552,
+        "recall": 0.45484045429962144,
+        "map50": 0.4783519607024787,
+        "map": 0.2330498617258158,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.741084331510505,
+        "recall": 0.6469750889679715,
+        "map50": 0.6843055394584531,
+        "map": 0.4370639441806977,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 13,
+    "timestamp": 1768921601.6534343,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.693142735344432,
+        "recall": 0.4595276726158284,
+        "map50": 0.48757021593646405,
+        "map": 0.24613376045239957,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.703761478689338,
+        "recall": 0.7046263345195729,
+        "map50": 0.725264807689911,
+        "map": 0.45669904891558744,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 14,
+    "timestamp": 1768921635.972498,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6241977889511625,
+        "recall": 0.5161348476654047,
+        "map50": 0.4924834401477581,
+        "map": 0.24388039212956952,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.8443417841229569,
+        "recall": 0.6576512455516014,
+        "map50": 0.719734660947275,
+        "map": 0.45096991851504004,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 15,
+    "timestamp": 1768921668.4480972,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6997783542133064,
+        "recall": 0.4319451956012259,
+        "map50": 0.4792259652133983,
+        "map": 0.25045990529056056,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7021684802960341,
+        "recall": 0.7231316725978648,
+        "map50": 0.7361287513647479,
+        "map": 0.4712655023760754,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 16,
+    "timestamp": 1768921701.7720215,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6421604399408937,
+        "recall": 0.5300162249864792,
+        "map50": 0.5273343056956536,
+        "map": 0.25905904645895395,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.8176751519018706,
+        "recall": 0.608540925266904,
+        "map50": 0.686884853131437,
+        "map": 0.4275893465698313,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 17,
+    "timestamp": 1768921734.1908767,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6807350384499554,
+        "recall": 0.49662799888146925,
+        "map50": 0.506528460027469,
+        "map": 0.26744956921738805,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7591821474216331,
+        "recall": 0.6886120996441281,
+        "map50": 0.73040846119676,
+        "map": 0.47190636034963085,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 18,
+    "timestamp": 1768921766.870513,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.658729027663565,
+        "recall": 0.5258698395529114,
+        "map50": 0.527650143217998,
+        "map": 0.2721159955807071,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.8387565461911493,
+        "recall": 0.6501779359430605,
+        "map50": 0.7284474214069266,
+        "map": 0.4744869757323533,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 19,
+    "timestamp": 1768921798.8146763,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6393061652655401,
+        "recall": 0.5387280453081787,
+        "map50": 0.5231808149764973,
+        "map": 0.264238356392953,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.8263811725200495,
+        "recall": 0.6882562277580071,
+        "map50": 0.7482615632773224,
+        "map": 0.49638788185133587,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 20,
+    "timestamp": 1768921831.2973337,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6792695260112329,
+        "recall": 0.5271317829457365,
+        "map50": 0.5309821790213584,
+        "map": 0.27972946024795764,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.8221196032975219,
+        "recall": 0.697375158585123,
+        "map50": 0.7548536541778638,
+        "map": 0.5021499538720487,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 21,
+    "timestamp": 1768921865.5302894,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6950392268465414,
+        "recall": 0.507661799170723,
+        "map50": 0.5353747149117596,
+        "map": 0.26958769383129744,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.8149489128985528,
+        "recall": 0.6779359430604982,
+        "map50": 0.7351618749769665,
+        "map": 0.4711088915497893,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 22,
+    "timestamp": 1768921898.171741,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7762752055055498,
+        "recall": 0.46726584422636347,
+        "map50": 0.5339479389409082,
+        "map": 0.27430678952869314,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7654355152436573,
+        "recall": 0.7245551601423488,
+        "map50": 0.7620677803609561,
+        "map": 0.5049831780545153,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 23,
+    "timestamp": 1768921932.7283332,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7839594158376977,
+        "recall": 0.44288273761412394,
+        "map50": 0.5306996707211287,
+        "map": 0.2821968039488758,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.6449667737894265,
+        "recall": 0.7768683274021352,
+        "map50": 0.7576813440743644,
+        "map": 0.49251479538451254,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 24,
+    "timestamp": 1768921966.0057096,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7081676529687642,
+        "recall": 0.4987114648192708,
+        "map50": 0.517686232669855,
+        "map": 0.2797198138872439,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7868857989765065,
+        "recall": 0.702135231316726,
+        "map50": 0.747071506495559,
+        "map": 0.49253770452739865,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 25,
+    "timestamp": 1768922000.164847,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7366784284578254,
+        "recall": 0.47088516315125295,
+        "map50": 0.5342077543632024,
+        "map": 0.2551799039015563,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7262059444033402,
+        "recall": 0.7302491103202847,
+        "map50": 0.7518041718538799,
+        "map": 0.47221548896247745,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 26,
+    "timestamp": 1768922033.1573455,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7866604598744942,
+        "recall": 0.4254394710797571,
+        "map50": 0.523623918454472,
+        "map": 0.26797420554796797,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.6491015288792642,
+        "recall": 0.7181494661921708,
+        "map50": 0.7094842114011212,
+        "map": 0.4521275117955475,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 27,
+    "timestamp": 1768922065.722739,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7538564107049865,
+        "recall": 0.5071209662880837,
+        "map50": 0.561640922779298,
+        "map": 0.28935324257954853,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7635942875532655,
+        "recall": 0.7224199288256228,
+        "map50": 0.7494271779290457,
+        "map": 0.5021437170790388,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 28,
+    "timestamp": 1768922098.7900467,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7538892889784615,
+        "recall": 0.5101856859563728,
+        "map50": 0.5576644698525406,
+        "map": 0.2932935948572281,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7591446259276476,
+        "recall": 0.7302017319810914,
+        "map50": 0.7576085253151018,
+        "map": 0.5059263935691214,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 29,
+    "timestamp": 1768922130.4711387,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6992882844526701,
+        "recall": 0.5280331710834686,
+        "map50": 0.5587048734197343,
+        "map": 0.2903323313328347,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7967082112000031,
+        "recall": 0.6576512455516014,
+        "map50": 0.7175877873386716,
+        "map": 0.4786177214938636,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 30,
+    "timestamp": 1768922163.8658512,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7345613017445949,
+        "recall": 0.507661799170723,
+        "map50": 0.5517781908497577,
+        "map": 0.2927299244479695,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7460472951576264,
+        "recall": 0.7345195729537367,
+        "map50": 0.7610638034990577,
+        "map": 0.5092971008045601,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 31,
+    "timestamp": 1768922196.4159806,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7223307821837102,
+        "recall": 0.5266595756950904,
+        "map50": 0.5634029925589982,
+        "map": 0.2881081271903422,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7108753349422818,
+        "recall": 0.7195729537366548,
+        "map50": 0.7376516033647248,
+        "map": 0.49062751218632367,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 32,
+    "timestamp": 1768922228.9974453,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7435231974732011,
+        "recall": 0.5136109608797548,
+        "map50": 0.5574386591805933,
+        "map": 0.2953230052606637,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7447006640089993,
+        "recall": 0.7160142348754448,
+        "map50": 0.7372927953172663,
+        "map": 0.49007336059272355,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 33,
+    "timestamp": 1768922261.7475276,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7204235778723619,
+        "recall": 0.5100720875914674,
+        "map50": 0.5566446265319266,
+        "map": 0.29097354573351913,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7567298947894662,
+        "recall": 0.7239750426583167,
+        "map50": 0.7622996921482048,
+        "map": 0.5156443490497307,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 34,
+    "timestamp": 1768922295.672975,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7349009326018181,
+        "recall": 0.5137543992781057,
+        "map50": 0.5554316434702392,
+        "map": 0.29646580603655825,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7480834811381982,
+        "recall": 0.7427046263345196,
+        "map50": 0.7564037130779495,
+        "map": 0.5161587417835516,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 35,
+    "timestamp": 1768922328.227228,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7534967819424154,
+        "recall": 0.5036956913647016,
+        "map50": 0.5519821655992883,
+        "map": 0.2957422223042606,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.790826103122849,
+        "recall": 0.7373665480427046,
+        "map50": 0.7813093981767556,
+        "map": 0.5346284244504634,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 36,
+    "timestamp": 1768922360.8790753,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7514658535531379,
+        "recall": 0.49792680728321614,
+        "map50": 0.55186615491324,
+        "map": 0.28805553364611053,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7508665402295766,
+        "recall": 0.7362989323843416,
+        "map50": 0.7630846729761179,
+        "map": 0.5196814035850057,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 37,
+    "timestamp": 1768922394.0657496,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7094109463223202,
+        "recall": 0.5345231656751397,
+        "map50": 0.5581773723133772,
+        "map": 0.29974641855551126,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.8325285056965201,
+        "recall": 0.7041010507202679,
+        "map50": 0.7709007839906163,
+        "map": 0.5219380475191816,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 38,
+    "timestamp": 1768922427.2277803,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6903123460392032,
+        "recall": 0.5343428880475933,
+        "map50": 0.5619874737892007,
+        "map": 0.2939366790379347,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7814047675200173,
+        "recall": 0.7276542938464647,
+        "map50": 0.7593301800792318,
+        "map": 0.5243863677300478,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 39,
+    "timestamp": 1768922460.2808864,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.737586853528851,
+        "recall": 0.5092842978186407,
+        "map50": 0.564856831740672,
+        "map": 0.30629186036512224,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7240528686397991,
+        "recall": 0.7526690391459074,
+        "map50": 0.753529881888277,
+        "map": 0.5145995749042799,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 40,
+    "timestamp": 1768922493.7421627,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7462067863492525,
+        "recall": 0.5040824130422111,
+        "map50": 0.5596624003509091,
+        "map": 0.2918288362012954,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7191453307057989,
+        "recall": 0.7619217081850533,
+        "map50": 0.7603539482599122,
+        "map": 0.5154072292552254,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 41,
+    "timestamp": 1768922529.5194232,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7171477907138065,
+        "recall": 0.5091856130255265,
+        "map50": 0.5535929515738091,
+        "map": 0.2921631127106411,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.6952158664507343,
+        "recall": 0.7455516014234875,
+        "map50": 0.7286699427283991,
+        "map": 0.5054462070360054,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 42,
+    "timestamp": 1768922560.1122804,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7088236895882231,
+        "recall": 0.5231656751397151,
+        "map50": 0.5610818034643885,
+        "map": 0.2994380880631836,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.727112567943968,
+        "recall": 0.7131672597864769,
+        "map50": 0.732987301549416,
+        "map": 0.5043988245157884,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 43,
+    "timestamp": 1768922591.9196079,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7563110344580998,
+        "recall": 0.49964077812965096,
+        "map50": 0.5603767547782255,
+        "map": 0.310383378187923,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.8226720957930148,
+        "recall": 0.7528496072189231,
+        "map50": 0.8023146744375509,
+        "map": 0.5574906839626256,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 44,
+    "timestamp": 1768922623.5853243,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7464997784884945,
+        "recall": 0.5063998557778979,
+        "map50": 0.5578278543728147,
+        "map": 0.30587896641798684,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7646967078542817,
+        "recall": 0.7355496956030764,
+        "map50": 0.7647935068773942,
+        "map": 0.5292180360944931,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 45,
+    "timestamp": 1768922654.9593573,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7284282927424379,
+        "recall": 0.5114476293491977,
+        "map50": 0.5653794208117194,
+        "map": 0.30103726528935393,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7618163361512904,
+        "recall": 0.7281138790035587,
+        "map50": 0.7638164766902023,
+        "map": 0.5313969136613288,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 46,
+    "timestamp": 1768922686.1327262,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7271652678363225,
+        "recall": 0.5107265188390121,
+        "map50": 0.5634120400825363,
+        "map": 0.29909769027984534,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.720622483386583,
+        "recall": 0.7067615658362989,
+        "map50": 0.7255393580486877,
+        "map": 0.5021742889632494,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 47,
+    "timestamp": 1768922717.3465717,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7396304876346467,
+        "recall": 0.5186587344510546,
+        "map50": 0.5688203331971522,
+        "map": 0.30435935215507504,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7854802188244615,
+        "recall": 0.7320284697508896,
+        "map50": 0.7645375397560827,
+        "map": 0.5273738366079368,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 48,
+    "timestamp": 1768922748.7572613,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7452781381111551,
+        "recall": 0.5105462412114656,
+        "map50": 0.570180694924322,
+        "map": 0.3038998201427985,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.767129727568905,
+        "recall": 0.7419928825622776,
+        "map50": 0.766354035696087,
+        "map": 0.535626271814182,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 49,
+    "timestamp": 1768922779.9569504,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.721068539807756,
+        "recall": 0.5273120605732828,
+        "map50": 0.5689436088114596,
+        "map": 0.3072310413452442,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.781442624875073,
+        "recall": 0.7220640569395018,
+        "map50": 0.7581751652161379,
+        "map": 0.5293682316915505,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": 50,
+    "timestamp": 1768922812.078441,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7068762664549568,
+        "recall": 0.5273120605732828,
+        "map50": 0.569912261609835,
+        "map": 0.30636155049095287,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.7714078919087202,
+        "recall": 0.7348754448398577,
+        "map50": 0.7623049458722146,
+        "map": 0.5301967261975652,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  },
+  {
+    "epoch": null,
+    "timestamp": 1768922822.6266062,
+    "training": false,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7572616309679129,
+        "recall": 0.4991887506760411,
+        "map50": 0.5602984550381546,
+        "map": 0.31027482743545864,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.8236129860810093,
+        "recall": 0.7537366548042704,
+        "map50": 0.802249775553421,
+        "map": 0.5570272076097156,
+        "num_targets": 2810
+      },
+      "plane": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 1720
+      },
+      "helicopter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 32
+      },
+      "ship": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 5740
+      }
+    }
+  }
+]
