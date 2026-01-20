@@ -324,6 +324,41 @@ class BaseTrainer:
             decay=weight_decay,
             iterations=iterations,
         )
+        if getattr(self.args.lora, "debug", False):
+            trainable = [(n, p.numel()) for n, p in self.model.named_parameters() if p.requires_grad]
+            LOGGER.info(f"[LoRA] Trainable parameter count: {sum(c for _, c in trainable):,}")
+            LOGGER.info(f"[LoRA] Top trainable params: {trainable[:20]}")
+
+            opt_param_ids = {id(p) for group in self.optimizer.param_groups for p in group["params"]}
+            missing = [n for n, p in self.model.named_parameters()
+                    if p.requires_grad and id(p) not in opt_param_ids]
+            if missing:
+                LOGGER.warning(f"[LoRA] Trainable but missing from optimizer: {missing[:20]}")
+            else:
+                LOGGER.info("[LoRA] All trainable params are in the optimizer.")
+
+        if RANK in {-1, 0}:
+            trainable = [(n, int(p.numel())) for n, p in self.model.named_parameters() if p.requires_grad]
+            total_tensors = len(trainable)
+            total_params = sum(n_params for _, n_params in trainable)
+            top_trainable = sorted(trainable, key=lambda t: -t[1])[:20]
+            LOGGER.info(
+                "Trainable params: %d tensors (%d weights). Top trainable=%s",
+                total_tensors,
+                total_params,
+                top_trainable,
+            )
+            optimizer_param_ids = {id(p) for group in self.optimizer.param_groups for p in group["params"]}
+            missing = [
+                name
+                for name, param in self.model.named_parameters()
+                if param.requires_grad and id(param) not in optimizer_param_ids
+            ]
+            if missing:
+                LOGGER.warning(
+                    "Trainable params missing from optimizer (showing up to 50): %s",
+                    missing[:50],
+                )
         # Scheduler
         self._setup_scheduler()
         self.stopper, self.stop = EarlyStopping(patience=self.args.patience), False
