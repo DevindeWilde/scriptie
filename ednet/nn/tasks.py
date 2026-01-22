@@ -53,7 +53,7 @@ from ednet.nn.modules import (
 )
 from ednet.nn.lora import (
     LoRAConfig,
-    freeze_model_except_lora,
+    freeze_blocks_except_lora,
     inject_lora_ednet,
     iter_lora_modules,
     load_lora_state_dict,
@@ -92,7 +92,7 @@ class BaseModel(nn.Module):
     _lora_registry: list = None
     _lora_config: LoRAConfig | None = None
 
-    def enable_lora(self, cfg: LoRAConfig | None = None, freeze_backbone: bool = True):
+    def enable_lora(self, cfg: LoRAConfig | None = None):
         """
         Inject LoRA adapters into the model and optionally freeze the backbone weights.
 
@@ -102,8 +102,7 @@ class BaseModel(nn.Module):
         """
         cfg = cfg or LoRAConfig()
         registry = inject_lora_ednet(self, cfg)
-        if freeze_backbone:
-            freeze_model_except_lora(self, registry)
+        freeze_blocks_except_lora(self,[6,8,10],False)
         self._lora_config = cfg
         self._lora_registry = registry
         return registry

@@ -255,13 +255,12 @@ class BaseTrainer:
         )
         always_freeze_names = [".dfl"]  # always freeze these layers
         freeze_layer_names = [f"model.{x}." for x in freeze_list] + always_freeze_names
-        skip_unfreeze = lora_backbone_frozen and len(freeze_list) == 0
         for k, v in self.model.named_parameters():
             # v.register_hook(lambda x: torch.nan_to_num(x))  # NaN to 0 (commented for erratic training results)
             if any(x in k for x in freeze_layer_names):
                 LOGGER.info(f"Freezing layer '{k}'")
                 v.requires_grad = False
-            elif skip_unfreeze:
+            elif getattr(v, "_lora_forced_frozen", False):
                 continue
             elif not v.requires_grad and v.dtype.is_floating_point:  # only floating point Tensor can require gradients
                 LOGGER.info(
@@ -269,6 +268,11 @@ class BaseTrainer:
                     "See ednet.engine.trainer for customization of frozen layers."
                 )
                 v.requires_grad = True
+
+        trainable_params = [(name, param.numel()) for name, param in self.model.named_parameters() if param.requires_grad]
+        LOGGER.info("Trainable parameters (name, count):")
+        for name, count in trainable_params:
+            LOGGER.info("%s: %d", name, count)
 
         # Check AMP
         self.amp = torch.tensor(self.args.amp).to(self.device)  # True or False

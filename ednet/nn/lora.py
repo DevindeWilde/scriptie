@@ -2,11 +2,12 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from typing import Dict, Iterable, Iterator, List, Optional, Sequence, Tuple
+import weakref
 
 import torch
 import torch.nn as nn
 
-from ednet.nn.modules import C2f, Detect, LoRAConv2d, v10Detect
+from ednet.nn.modules import C2f, Detect, LoRAConv2d, v10Detect, PSA, Attention
 
 
 @dataclass
@@ -38,10 +39,15 @@ def _wrap_conv_with_lora(module: nn.Module, attr: str, cfg: LoRAConfig, registry
     if isinstance(conv, nn.Conv2d) and getattr(conv, "groups", 1) == 1:
         lora = LoRAConv2d(conv, rank=cfg.rank, alpha=cfg.alpha, dropout=cfg.dropout)
         setattr(module, attr, lora)
+        setattr(lora, "_lora_parent_ref", weakref.ref(module))
         registry.append((f"{module.__class__.__name__}.{attr}", lora))
     elif isinstance(conv, LoRAConv2d):
         registry.append((f"{module.__class__.__name__}.{attr}", conv))
 
+def _wrap_ednet_conv(conv_module: nn.Module, cfg: LoRAConfig, registry):
+    # Conv wrapper in EDNet has attribute `.conv` which is nn.Conv2d
+    if hasattr(conv_module, "conv"):
+        _wrap_conv_with_lora(conv_module, "conv", cfg, registry)
 
 def inject_lora_ednet(model: nn.Module, cfg: Optional[LoRAConfig] = None) -> List[Tuple[str, LoRAConv2d]]:
     """
@@ -74,6 +80,22 @@ def inject_lora_ednet(model: nn.Module, cfg: Optional[LoRAConfig] = None) -> Lis
                     _wrap_conv_with_lora(bottleneck.cv1, "conv", cfg, registry)
                 if hasattr(bottleneck, "cv2"):
                     _wrap_conv_with_lora(bottleneck.cv2, "conv", cfg, registry)
+        if isinstance(m, PSA) and m.i in cfg.feature_pyramid_indices:
+            # Wrap PSA's cv1/cv2 (Conv wrappers)
+            _wrap_ednet_conv(m.cv1, cfg, registry)
+            _wrap_ednet_conv(m.cv2, cfg, registry)
+
+            # Wrap Attention internals (qkv/proj/pe are Conv wrappers)
+            if hasattr(m, "attn") and isinstance(m.attn, Attention):
+                _wrap_ednet_conv(m.attn.qkv, cfg, registry)
+                _wrap_ednet_conv(m.attn.proj, cfg, registry)
+                _wrap_ednet_conv(m.attn.pe, cfg, registry)
+
+            # Wrap FFN convs (these are Conv wrappers too)
+            if hasattr(m, "ffn"):
+                for layer in m.ffn:
+                    if hasattr(layer, "conv"):
+                        _wrap_ednet_conv(layer, cfg, registry)
 
     # Optionally inject adapters into the detection head convolutions.
     if cfg.include_detection_head and isinstance(getattr(model, "model", [])[-1], Detect):
@@ -99,15 +121,30 @@ def inject_lora_ednet(model: nn.Module, cfg: Optional[LoRAConfig] = None) -> Lis
     return registry
 
 
-def freeze_model_except_lora(model: nn.Module, adapters: Iterable[Tuple[str, LoRAConv2d]]) -> None:
-    """
-    Freeze all model parameters except the LoRA adapters.
-    """
-    for param in model.parameters():
-        param.requires_grad = False
-    for _, adapter in adapters:
-        for param in adapter.lora_parameters():
-            param.requires_grad = True
+def freeze_blocks_except_lora(model: nn.Module, block_indices: Sequence[int], train_bn: bool = False):
+    # Freeze everything in chosen blocks
+    for m in getattr(model, "model", []):
+        if getattr(m, "i", None) in block_indices:
+            for p in m.parameters():
+                p.requires_grad = False
+                setattr(p, "_lora_forced_frozen", True)
+
+            # Optional: allow BN within those blocks
+            if train_bn:
+                for mod in m.modules():
+                    if isinstance(mod, (nn.BatchNorm2d, nn.SyncBatchNorm)):
+                        for p in mod.parameters(recurse=False):
+                            p.requires_grad = True
+                            if hasattr(p, "_lora_forced_frozen"):
+                                delattr(p, "_lora_forced_frozen")
+
+    # Re-enable LoRA params globally
+    for _, lora in iter_lora_modules(model):
+        for p in lora.lora_parameters():
+            p.requires_grad = True
+            if hasattr(p, "_lora_forced_frozen"):
+                delattr(p, "_lora_forced_frozen")
+
 
 
 def iter_lora_modules(model: nn.Module) -> Iterator[Tuple[str, LoRAConv2d]]:

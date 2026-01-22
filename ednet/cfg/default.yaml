@@ -36,12 +36,12 @@ freeze: None # (int | list, optional) freeze first n layers, or freeze list of l
 multi_scale: False # (bool) Whether to use multiscale during training
 lora: # (dict) Low-Rank Adapter (LoRA) configuration for parameter-efficient fine-tuning
   enable: False # (bool) enable LoRA adapters on the detection model
-  rank: 8 # (int) intrinsic rank of the LoRA update
+  rank: 16 # (int) intrinsic rank of the LoRA update
   alpha: 16.0 # (float) scaling factor applied to LoRA updates
   dropout: 0.0 # (float) dropout probability between LoRA projections
   feature_pyramid_indices: [19, 22, 25] # (list[int]) layer indices (P2-P3–P4) to target with adapters
-  include_detection_head: True # (bool) apply LoRA to detection head convolutions
-  freeze_backbone: True # (bool) freeze backbone weights so only adapters update
+  include_detection_head: False # (bool) apply LoRA to detection head convolutions
+  #freeze_backbone: True # (bool) freeze backbone weights so only adapters update
   adapter_dir: adapters # (str) relative directory (under run folder) to store adapter checkpoints
   init_adapter: # (str, optional) path to existing adapter weights to warm-start from
 continual: # (dict) Continual-learning orchestration settings
