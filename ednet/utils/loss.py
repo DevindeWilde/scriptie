@@ -406,6 +406,11 @@ class v8DetectionLoss:
         self.last_replay_cells = None
         if not self.prev_classes:
             return
+        if hasattr(self, "set_replay_tap_config") and not getattr(self, "_replay_configured", False):
+            levels = getattr(self, "level_names", [])
+            strides = getattr(self, "replay_level_strides", {})
+            if levels and strides:
+                self.set_replay_tap_config(levels, strides)
         if not self._replay_configured:
             if not self._replay_warned_missing_config:
                 LOGGER.warning("Replay tap config not set; GT-driven replay skipped for this batch.")
@@ -977,6 +982,11 @@ class E2EDetectLoss:
         self.prev_classes = prev_class_ids
         self.one2many.set_active_classes(class_ids, prev_class_ids)
         self.one2one.set_active_classes(class_ids, prev_class_ids)
+    
+    def set_replay_tap_config(self, level_names, stride_map):
+        self.one2many.set_replay_tap_config(level_names, stride_map)
+        self.one2one.set_replay_tap_config(level_names, stride_map)
+
 
     def __call__(self, preds, batch):
         """Calculate the sum of the loss for box, cls and dfl multiplied by batch size."""

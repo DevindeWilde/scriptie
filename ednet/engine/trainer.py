@@ -269,10 +269,10 @@ class BaseTrainer:
                 )
                 v.requires_grad = True
 
-        trainable_params = [(name, param.numel()) for name, param in self.model.named_parameters() if param.requires_grad]
-        LOGGER.info("Trainable parameters (name, count):")
-        for name, count in trainable_params:
-            LOGGER.info("%s: %d", name, count)
+        #trainable_params = [(name, param.numel()) for name, param in self.model.named_parameters() if param.requires_grad]
+        # LOGGER.info("Trainable parameters (name, count):")
+        # for name, count in trainable_params:
+        #     LOGGER.info("%s: %d", name, count)
 
         # Check AMP
         self.amp = torch.tensor(self.args.amp).to(self.device)  # True or False
@@ -658,6 +658,7 @@ class BaseTrainer:
 
     def compute_auxiliary_loss(self, batch):
         """Optional hook for trainers needing to add auxiliary losses."""
+        print("BaseTrainer.compute_auxiliary_loss called - no auxiliary loss implemented.")
         return None
 
     def validate(self):

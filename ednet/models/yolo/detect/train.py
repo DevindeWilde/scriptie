@@ -257,17 +257,10 @@ class DetectionTrainer(BaseTrainer):
             else:
                 self.replay_memory_dir = None
                 self.replay_memory_ratio = 0.0
-
-        criterion = getattr(model, "criterion", None)
-        if (
-            criterion is not None
-            and self.replay_enabled
-            and self.replay_levels
-            and hasattr(criterion, "set_replay_tap_config")
-        ):
-            criterion.set_replay_tap_config(self.replay_levels, self.replay_strides)
-            if hasattr(criterion, "set_active_classes"):
-                criterion.set_active_classes(self.active_class_ids, self.prev_class_ids)
+        base_loss_names = ["box_loss", "cls_loss", "dfl_loss"]
+        if self.replay_enabled:
+            base_loss_names.append("replay_loss")
+        self.loss_names = tuple(base_loss_names)
         return model
 
     def _load_adapter_weights(self, model, adapter_path):
@@ -282,7 +275,10 @@ class DetectionTrainer(BaseTrainer):
 
     def get_validator(self):
         """Returns a DetectionValidator for YOLO model validation."""
-        self.loss_names = "box_loss", "cls_loss", "dfl_loss"
+        base_loss_names = ["box_loss", "cls_loss", "dfl_loss"]
+        if getattr(self, "replay_enabled", False):
+            base_loss_names.append("replay_loss")
+        self.loss_names = tuple(base_loss_names)
         return yolo.detect.DetectionValidator(
             self.test_loader, save_dir=self.save_dir, args=copy(self.args), _callbacks=self.callbacks
         )
@@ -455,34 +451,44 @@ class DetectionTrainer(BaseTrainer):
 
     def compute_auxiliary_loss(self, batch):
         """Compute replay-based feature consistency loss."""
-        if (
-            not self.replay_enabled
-            or self.feature_tapper is None
-            or self.replay_teacher_buffer is None
-            or len(self.replay_teacher_buffer) == 0
-        ):
+        print("DetectionTrainer.compute_auxiliary_loss called.")
+        teacher_ready = (
+            self.replay_enabled
+            and self.feature_tapper is not None
+            and self.replay_teacher_buffer is not None
+            and len(self.replay_teacher_buffer) > 0
+        )
+        student_ready = self.replay_student_buffer is not None and self.feature_tapper is not None
+        if not teacher_ready and not student_ready:
+            print("No replay auxiliary loss computed: teacher_ready =", teacher_ready, "student_ready =", student_ready)
             return None
+        criterion = self._ensure_replay_tap_config()
         features = self.feature_tapper.pop()
         if not features:
             return None
-        replay_items = self._gather_embeddings(features, attr="last_replay_cells")
-        if not replay_items:
-            return None
-        grouped = self._group_embeddings(replay_items)
-        self._log_embedding_stats(grouped)
-        replay_batch = build_replay_batch(
-            self.replay_teacher_buffer,
-            per_class=self.replay_samples_per_class,
-            balance_levels=self.replay_levels,
-            device=self.device,
-        )
-        aux_loss = self._compute_replay_consistency(grouped, replay_batch)
+        aux_loss = None
+        if teacher_ready:
+            print("Computing replay auxiliary loss with teacher buffer...")
+            replay_items = self._gather_embeddings(features, attr="last_replay_cells", criterion=criterion)
+            print(f"  Gathered {len(replay_items)} replay embeddings from tapped features.")
+            if replay_items:
+                grouped = self._group_embeddings(replay_items)
+                self._log_embedding_stats(grouped)
+                replay_batch = build_replay_batch(
+                    self.replay_teacher_buffer,
+                    per_class=self.replay_samples_per_class,
+                    balance_levels=self.replay_levels,
+                    device=self.device,
+                )
+                aux_loss = self._compute_replay_consistency(grouped, replay_batch)
         if self.replay_student_buffer is not None:
-            student_items = self._gather_embeddings(features, attr="last_positive_cells")
+            student_items = self._gather_embeddings(features, attr="last_positive_cells", criterion=criterion)
             for item in student_items:
                 self.replay_student_buffer.add(item)
         if aux_loss is None:
+            print("No replay auxiliary loss computed: aux_loss is None")
             return None
+        print("Replay auxiliary loss computed:", float(aux_loss))
         return aux_loss * self.replay_loss_weight
 
     def _group_embeddings(self, items):
@@ -492,13 +498,26 @@ class DetectionTrainer(BaseTrainer):
             level_map.setdefault(item.cls, []).append(item)
         return grouped
 
-    def _gather_embeddings(self, features, attr="last_positive_cells"):
-        """Collect TinyReplayItems from tapped features using stored cell indices."""
+    def _ensure_replay_tap_config(self):
         model_single = de_parallel(self.model)
         criterion = getattr(model_single, "criterion", None)
         if criterion is None and hasattr(model_single, "init_criterion"):
             criterion = model_single.init_criterion()
             model_single.criterion = criterion
+        if (
+            criterion is not None
+            and hasattr(criterion, "set_replay_tap_config")
+            and not getattr(criterion, "_replay_configured", False)
+            and self.replay_levels
+            and self.replay_strides
+        ):
+            criterion.set_replay_tap_config(self.replay_levels, self.replay_strides)
+        return criterion
+
+    def _gather_embeddings(self, features, attr="last_positive_cells", criterion=None):
+        """Collect TinyReplayItems from tapped features using stored cell indices."""
+        if criterion is None:
+            criterion = self._ensure_replay_tap_config()
         loss_module = criterion
         if loss_module is None:
             return []
