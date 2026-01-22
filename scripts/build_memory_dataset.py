@@ -20,7 +20,7 @@ def parse_args() -> argparse.Namespace:
                    help="Destination root for memory/ (will create memory/stageX/images and labels).")
     p.add_argument("--stages", type=int, nargs="+", default=[1, 2, 3],
                    help="Stage numbers to build memory for (default: 1 2 3).")
-    p.add_argument("--split", type=str, default="Train",
+    p.add_argument("--split", type=str, default="train",
                    help="Split folder name inside each stage (default: Train).")
     p.add_argument("--classes", type=int, nargs="+", required=True,
                    help="Class IDs to keep in memory labels (filtered).")
@@ -164,10 +164,10 @@ def main() -> None:
     prev_memory_stage_dir: Path | None = None
 
     for stage_num in stages:
-        stage_dir = root / f"Stage {stage_num}" / args.split
+        stage_dir = root / f"stage{stage_num}" / args.split
         stage_images = stage_dir / "images"
         stage_labels = stage_dir / "labels"
-
+        print(stage_images)
         if not stage_images.exists() or not stage_labels.exists():
             raise FileNotFoundError(f"Missing images/labels in: {stage_dir}")
 
