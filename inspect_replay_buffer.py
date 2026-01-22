@@ -14,7 +14,7 @@ from ednet.engine.replay import TinyReplayBuffer
 def main():
     parser = argparse.ArgumentParser(description="Inspect replay buffer prototypes")
     parser.add_argument("buffer", type=str, help="Path to replay buffer .pt file")
-    parser.add_argument("--min_samples", type=int, default=2, help="Skip classes with fewer samples")
+    parser.add_argument("--min_samples", type=int, default=0, help="Skip classes with fewer samples")
     parser.add_argument("--show-cos", action="store_true", help="Show pairwise cosine of prototypes")
     args = parser.parse_args()
 
