@@ -6,6 +6,7 @@ from collections import defaultdict
 from copy import copy
 from pathlib import Path
 from typing import Optional
+from collections import Counter
 
 import numpy as np
 import torch
@@ -288,6 +289,8 @@ class DetectionTrainer(BaseTrainer):
         if self.replay_enabled and getattr(self, "feature_tapper", None) and self._feature_tapper_needs_activation:
             self.feature_tapper.activate()
             self._feature_tapper_needs_activation = False
+        if self.replay_enabled:
+            self._ensure_replay_tap_config()
         if self.replay_memory_dir and self.replay_memory_ratio > 0:
             self._build_memory_loader()
         else:
@@ -451,27 +454,28 @@ class DetectionTrainer(BaseTrainer):
 
     def compute_auxiliary_loss(self, batch):
         """Compute replay-based feature consistency loss."""
-        print("DetectionTrainer.compute_auxiliary_loss called.")
+        #print("DetectionTrainer.compute_auxiliary_loss called.")
         teacher_ready = (
             self.replay_enabled
             and self.feature_tapper is not None
             and self.replay_teacher_buffer is not None
             and len(self.replay_teacher_buffer) > 0
         )
-        student_ready = self.replay_student_buffer is not None and self.feature_tapper is not None
-        if not teacher_ready and not student_ready:
-            print("No replay auxiliary loss computed: teacher_ready =", teacher_ready, "student_ready =", student_ready)
-            return None
+
+        if not teacher_ready:
+            print("No replay auxiliary loss computed: teacher_ready =", teacher_ready)
+    
         criterion = self._ensure_replay_tap_config()
         features = self.feature_tapper.pop()
         if not features:
             return None
         aux_loss = None
         if teacher_ready:
-            print("Computing replay auxiliary loss with teacher buffer...")
+            #print("Computing replay auxiliary loss with teacher buffer...")
             replay_items = self._gather_embeddings(features, attr="last_replay_cells", criterion=criterion)
-            print(f"  Gathered {len(replay_items)} replay embeddings from tapped features.")
+            #print(f"  Gathered {len(replay_items)} replay embeddings from tapped features.")
             if replay_items:
+                print("replay_items levels:", Counter([it.level for it in replay_items]))
                 grouped = self._group_embeddings(replay_items)
                 self._log_embedding_stats(grouped)
                 replay_batch = build_replay_batch(
@@ -481,14 +485,18 @@ class DetectionTrainer(BaseTrainer):
                     device=self.device,
                 )
                 aux_loss = self._compute_replay_consistency(grouped, replay_batch)
+                #print("  Computed replay consistency loss:", float(aux_loss) if aux_loss is not None else None)
         if self.replay_student_buffer is not None:
+            #print("Updating student replay buffer with new embeddings...")
             student_items = self._gather_embeddings(features, attr="last_positive_cells", criterion=criterion)
+            #print(f"  Gathered {len(student_items)} student embeddings from tapped features.")
             for item in student_items:
+                #print("    Student replay item:", item)
                 self.replay_student_buffer.add(item)
         if aux_loss is None:
             print("No replay auxiliary loss computed: aux_loss is None")
             return None
-        print("Replay auxiliary loss computed:", float(aux_loss))
+        #print("Replay auxiliary loss computed:", float(aux_loss))
         return aux_loss * self.replay_loss_weight
 
     def _group_embeddings(self, items):
@@ -519,20 +527,26 @@ class DetectionTrainer(BaseTrainer):
         if criterion is None:
             criterion = self._ensure_replay_tap_config()
         loss_module = criterion
+        #print("loss_module:", loss_module)
+        #print(loss_module.last_replay_cells)
         if loss_module is None:
+            print("No loss module available for gathering embeddings.")
             return []
         if hasattr(loss_module, "set_replay_tap_config") and not getattr(loss_module, "_replay_configured", False):
             if self.replay_levels and self.replay_strides:
                 loss_module.set_replay_tap_config(self.replay_levels, self.replay_strides)
         pos = getattr(loss_module, attr, None)
         if not pos:
+            print(f"No replay tap data found for attribute '{attr}'.")
             return []
         indices = pos.get("indices")
         classes = pos.get("classes")
         max_edge = pos.get("max_edge")
         if indices is None or classes is None or max_edge is None:
+            print("No indices, classes, or max_edge found in replay tap data.")
             return []
         if indices.numel() == 0:
+            print("No replay embeddings to gather: indices is empty.")
             return []
         size_mask = max_edge <= self.replay_max_edge
         if not size_mask.any():
@@ -543,6 +557,7 @@ class DetectionTrainer(BaseTrainer):
                     float(max_edge.max()),
                     float(self.replay_max_edge),
                 )
+            print("No replay embeddings to gather: all max_edge values exceed threshold.")
             return []
         if self.replay_debug:
             LOGGER.info(
@@ -559,20 +574,30 @@ class DetectionTrainer(BaseTrainer):
         items = []
         unique_levels = indices[:, 0].unique()
         for level_idx in unique_levels:
+
+            print("level_idx:", level_idx)
             level_mask = indices[:, 0] == level_idx
+            #print("level_mask:", level_mask)
             if not level_mask.any():
                 continue
             name = level_names[level_idx] if level_idx < len(level_names) else str(int(level_idx))
+            print("level name:", name)
             feat = features.get(name)
+            #print("feat:", feat)
             if feat is None:
                 continue
+            #print("feat shape:", feat.shape)
             sel_indices = indices[level_mask]
             sel_classes = classes[level_mask]
             sel_sizes = max_edge[level_mask]
+            #print("sel_indices shape:", sel_indices.shape)
+            #print("sel_classes shape:", sel_classes.shape)
+            #print("sel_sizes shape:", sel_sizes.shape)
             batch_idx = sel_indices[:, 1].long()
             gy = sel_indices[:, 2].long()
             gx = sel_indices[:, 3].long()
             vecs = feat[batch_idx, :, gy, gx]
+            #print("vecs shape:", vecs.shape) 
             for embedding, cls_id, size in zip(vecs, sel_classes, sel_sizes):
                 items.append(
                     TinyReplayItem(
@@ -582,10 +607,12 @@ class DetectionTrainer(BaseTrainer):
                         metadata={"max_edge": float(size.item())},
                     )
                 )
+                #print("Added TinyReplayItem:", items[-1])
         if attr == "last_positive_cells":
             loss_module.last_positive_cells = None
         if attr == "last_replay_cells" and hasattr(loss_module, "last_replay_cells"):
             loss_module.last_replay_cells = None
+        print(f"Total TinyReplayItems gathered: {len(items)}")
         return items
 
     def _log_embedding_stats(self, grouped):
@@ -758,12 +785,18 @@ class DetectionTrainer(BaseTrainer):
             dtype=base_buffer.dtype,
             device="cpu",
             carryover_growth=self.replay_capacity_growth,
+            num_fine=base_buffer.num_fine,
+            use_coarse=base_buffer.use_coarse,
+            ema_alpha=base_buffer.ema_alpha,
+            init_sim_thresh=base_buffer.init_sim_thresh,
+            gate_min_cos=base_buffer.gate_min_cos,
+            init_strategy=base_buffer.init_strategy,
+            weight_by_count=base_buffer.weight_by_count,
         )
         if has_teacher:
-            combined.load_state_dict(teacher.state_dict())
+            combined.merge_from(teacher)
         if has_student:
-            for item in student.iter_items():
-                combined.add(item)
+            combined.merge_from(student)
         try:
             saved = combined.save(self.replay_save_path)
         except Exception as exc:  # noqa: BLE001

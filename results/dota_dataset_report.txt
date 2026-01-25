@@ -1,0 +1,26 @@
+dota-filtered-full
+  train: images=0 labels=863 classes=[small-vehicle:20714, large-vehicle:16197, plane:6768, helicopter:474, ship:26535]
+  val: images=0 labels=186 classes=[small-vehicle:5547, large-vehicle:2810, plane:1720, helicopter:32, ship:5740]
+  test: images=0 labels=186 classes=[small-vehicle:5303, large-vehicle:2349, plane:2098, helicopter:197, ship:4753]
+  total: images=0 labels=1235 classes=[small-vehicle:31564, large-vehicle:21356, plane:10586, helicopter:703, ship:37028]
+
+dota_stages/stage1
+  train: images=0 labels=526 classes=[small-vehicle:20714, large-vehicle:16197]
+  val_seen: images=0 labels=186 classes=[small-vehicle:5547, large-vehicle:2810]
+  val: images=0 labels=186 classes=[small-vehicle:5547, large-vehicle:2810, 2:1720, 3:32, 4:5740]
+  test: images=0 labels=186 classes=[small-vehicle:5303, large-vehicle:2349, 2:2098, 3:197, 4:4753]
+  total: images=0 labels=1084 classes=[small-vehicle:37111, large-vehicle:24166, 2:3818, 3:229, 4:10493]
+
+dota_stages/stage2
+  train: images=0 labels=182 classes=[plane:6768, helicopter:474]
+  val_seen: images=0 labels=186 classes=[small-vehicle:5547, large-vehicle:2810, plane:1720, helicopter:32]
+  val: images=0 labels=186 classes=[small-vehicle:5547, large-vehicle:2810, plane:1720, helicopter:32, 4:5740]
+  test: images=0 labels=186 classes=[small-vehicle:5303, large-vehicle:2349, plane:2098, helicopter:197, 4:4753]
+  total: images=0 labels=740 classes=[small-vehicle:16397, large-vehicle:7969, plane:12306, helicopter:735, 4:10493]
+
+dota_stages/stage3
+  train: images=0 labels=308 classes=[ship:26535]
+  val_seen: images=0 labels=186 classes=[small-vehicle:5547, large-vehicle:2810, plane:1720, helicopter:32, ship:5740]
+  val: images=0 labels=186 classes=[small-vehicle:5547, large-vehicle:2810, plane:1720, helicopter:32, ship:5740]
+  test: images=0 labels=186 classes=[small-vehicle:5303, large-vehicle:2349, plane:2098, helicopter:197, ship:4753]
+  total: images=0 labels=866 classes=[small-vehicle:16397, large-vehicle:7969, plane:5538, helicopter:261, ship:42768]

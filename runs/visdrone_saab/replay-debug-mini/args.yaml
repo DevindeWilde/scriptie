@@ -52,6 +52,8 @@ replay:
   debug: true
   memory_dir: datasets/visdrone-mini
   loss_weight: 1.0
+  prototypes:
+    num_fine: 4
 stage:
   active_classes:
   - 0

@@ -22,16 +22,15 @@ cd $HOME/scriptie
 python train.py \
     --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
     --data /home/ddwilde/scriptie/yaml/DOTA-stage1.yaml \
-    --epochs 5 \
+    --epochs 50 \
     --imgsz 640 \
     --batch-size 4 \
-    --project /home/ddwilde/scriptie/runs/dota-replay \
+    --project /home/ddwilde/scriptie/runs/dota_replay \
     --name stage1-replay \
     --workers 8 \
     --weights /home/ddwilde/scriptie/pretrained/small.pt \
     --override replay.enable=True \
     --override replay.buffer_per_class=128 \
-    --override replay.sample_per_batch=32 \
     --override replay.loss_weight=1.0 \
     --override replay.tiny_max_pixels=320 \
     --override replay.debug=True \
@@ -42,29 +41,27 @@ python train.py \
 python train.py \
   --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
   --data /home/ddwilde/scriptie/yaml/DOTA-stage2.yaml \
-  --epochs 5 \
+  --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
-  --project /home/ddwilde/scriptie/runs/dota-replay \
+  --project /home/ddwilde/scriptie/runs/dota_replay \
   --name stage2-replay \
   --workers 8 \
-  --weights /home/ddwilde/scriptie/runs/dota-replay/stage1-replay/weights/best.pt \
+  --weights /home/ddwilde/scriptie/runs/dota_replay/stage1-replay/weights/best.pt \
   --override replay.enable=True \
   --override replay.buffer_per_class=128 \
-  --override replay.sample_per_batch=32 \
   --override replay.loss_weight=1.0 \
   --override replay.init_buffer=/home/ddwilde/scriptie/runs/dota_replay/stage1-replay/replay/buffer.pt \
   --override replay.memory_dir=/home/ddwilde/scriptie/datasets/memory/stage1 \
   --override replay.memory_ratio=0.25 \
   --override replay.tiny_max_pixels=320 \
-  --override replay.debug=True \
-  --override "stage.active_classes=[2,3]" \
+  --override "stage.active_classes=[0,1,2,3]" \
   --override "stage.prev_classes=[0,1]"
 
 python train.py \
   --cfg /home/ddwilde/scriptie/ednet/cfg/models/ednet/ednet-s.yaml \
   --data /home/ddwilde/scriptie/yaml/DOTA-stage3.yaml \
-  --epochs 5 \
+  --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
   --project /home/ddwilde/scriptie/runs/dota_replay \
@@ -73,12 +70,10 @@ python train.py \
   --weights /home/ddwilde/scriptie/runs/dota_replay/stage2-replay/weights/best.pt \
   --override replay.enable=True \
   --override replay.buffer_per_class=128 \
-  --override replay.sample_per_batch=32 \
   --override replay.loss_weight=1.0 \
   --override replay.init_buffer=/home/ddwilde/scriptie/runs/dota_replay/stage2-replay/replay/buffer.pt \
   --override replay.memory_dir=/home/ddwilde/scriptie/datasets/memory/stage2 \
   --override replay.memory_ratio=0.25 \
   --override replay.tiny_max_pixels=320 \
-  --override replay.debug=True \
-  --override "stage.active_classes=[4]" \
+  --override "stage.active_classes=[0,1,2,3,4]" \
   --override "stage.prev_classes=[0,1,2,3]"

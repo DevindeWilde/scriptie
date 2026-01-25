@@ -23,6 +23,7 @@ def main():
 
     any_printed = False
     proto_map = buffer.collect_prototypes()
+    
     for level, class_map in proto_map.items():
         for cls_id, data in class_map.items():
             counts = data["counts"]

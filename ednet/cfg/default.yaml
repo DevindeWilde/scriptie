@@ -68,7 +68,7 @@ replay: # (dict) Tiny object replay configuration (SA-AB)
   memory_dir: # (str, optional) path to exemplar dataset (expects images/ and labels/ subdirs)
   memory_ratio: 0.25 # (float) fraction of each batch drawn from memory dataset (0 disables)
   prototypes: # (dict) multi-prototype replay controls
-    num_fine: 0 # (int) number of fine prototypes per (level, class); 0 keeps single-prototype behavior
+    num_fine: 4 # (int) number of fine prototypes per (level, class); 0 keeps single-prototype behavior
     use_coarse: True # (bool) include coarse/global prototype when computing replay loss
     ema_alpha: 0.05 # (float) EMA factor once prototype counts saturate capacity
     init_sim_thresh: 0.9 # (float) cosine threshold required to seed a new fine slot

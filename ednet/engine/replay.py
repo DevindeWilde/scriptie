@@ -143,6 +143,7 @@ class DetectionPreLogitTapper:
             if isinstance(tensor, (list, tuple)):
                 tensor = tensor[0]
             if isinstance(tensor, torch.Tensor):
+                #print(f"[Replay tap] level={level} shape={tuple(tensor.shape)}")
                 if self.detach:
                     tensor = tensor.detach()
                 if self.clone:
@@ -266,12 +267,23 @@ class TinyReplayBuffer:
     def add(self, item: TinyReplayItem) -> None:
         """Insert a sample by updating prototypes for its level and class."""
         if item.embedding is None or item.embedding.numel() == 0:
+            print("Warning: Attempted to add an item with empty embedding to TinyReplayBuffer; skipping.")
             return
         embedding = self._normalize(item.embedding)
         entry, created = self._get_or_create_entry(item.level, item.cls, embedding)
         if not created:
             self._update_coarse(entry.coarse, embedding)
         self._update_fine(entry, embedding)
+
+    def merge_from(self, other: "TinyReplayBuffer" | None) -> int:
+        """Merge all entries from another buffer while preserving prototype counts."""
+        if other is None:
+            return 0
+        merged = 0
+        for level, class_map in other._storage.items():
+            for cls_id, entry in class_map.items():
+                merged += self._merge_entry(level, int(cls_id), entry)
+        return merged
 
     def sample_balanced(
         self,
@@ -385,6 +397,7 @@ class TinyReplayBuffer:
     def _update_coarse(self, coarse: PrototypeEntry, embedding: torch.Tensor) -> None:
         vec = coarse.vector.to(torch.float32)
         count = coarse.count
+        #print("Updating coarse prototype with count", count)
         if count < self.capacity:
             count += 1
             vec = vec + (embedding - vec) / count
@@ -396,19 +409,23 @@ class TinyReplayBuffer:
 
     def _update_fine(self, entry: MultiPrototypeEntry, embedding: torch.Tensor) -> None:
         if self.num_fine <= 0:
+            #print("No fine prototypes configured; skipping fine update.")
             return
         slots = entry.fine
         if len(slots) > self.num_fine:
             entry.fine = slots = slots[: self.num_fine]
         if len(slots) < self.num_fine:
             if self.init_strategy == "first_k" or not slots:
+                #print("Adding new fine prototype slot (first_k strategy)")
                 slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1))
                 return
             sims = [self._cosine(slot.vector, embedding) for slot in slots]
             if max(sims, default=-1.0) < self.init_sim_thresh:
+                #print("Adding new fine prototype slot (similarity threshold met)")
                 slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1))
                 return
         if not slots:
+            #print("Adding new fine prototype slot (no existing slots)")
             slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1))
             return
         sims = torch.tensor([self._cosine(slot.vector, embedding) for slot in slots], device=self.device)
@@ -416,14 +433,17 @@ class TinyReplayBuffer:
         best_sim = float(sims[best_idx])
         if best_sim < self.gate_min_cos:
             if len(slots) < self.num_fine:
+                #print("Adding new fine prototype slot (gate min cosine not met)")
                 slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1))
                 return
             replace_idx = min(range(len(slots)), key=lambda idx: slots[idx].count)
             slots[replace_idx] = PrototypeEntry(vector=embedding.to(self.dtype), count=1)
+            #print("Replacing fine prototype slot", replace_idx, "due to low similarity")
             return
         slot = slots[best_idx]
         vec = slot.vector.to(torch.float32)
         count = slot.count
+        #print("Updating fine prototype slot", best_idx, "with count", count)
         if count < self.capacity:
             count += 1
             vec = vec + (embedding - vec) / count
@@ -436,6 +456,98 @@ class TinyReplayBuffer:
     def _cosine(self, proto: torch.Tensor, embedding: torch.Tensor) -> float:
         v = proto.to(torch.float32)
         return float(torch.clamp(torch.dot(v, embedding), -1.0, 1.0))
+
+    def _merge_entry(self, level: str, cls_id: int, source_entry: MultiPrototypeEntry) -> int:
+        total = int(source_entry.coarse.count) + sum(int(slot.count) for slot in source_entry.fine)
+        bucket = self._storage[level]
+        target_entry = bucket.get(cls_id)
+        if target_entry is None:
+            bucket[cls_id] = self._clone_entry(source_entry)
+            return total
+        self._merge_prototype_entry(target_entry, source_entry)
+        return total
+
+    def _clone_entry(self, entry: MultiPrototypeEntry) -> MultiPrototypeEntry:
+        coarse_vec = entry.coarse.vector.to(self.device, dtype=self.dtype).clone()
+        clone = MultiPrototypeEntry(coarse=PrototypeEntry(vector=coarse_vec, count=int(entry.coarse.count)), fine=[])
+        if self.num_fine > 0:
+            for slot in entry.fine[: self.num_fine]:
+                if slot.vector is None or slot.vector.numel() == 0:
+                    continue
+                clone.fine.append(
+                    PrototypeEntry(
+                        vector=slot.vector.to(self.device, dtype=self.dtype).clone(),
+                        count=int(slot.count),
+                    )
+                )
+        return clone
+
+    def _merge_prototype_entry(self, target: MultiPrototypeEntry, source: MultiPrototypeEntry) -> None:
+        if self.use_coarse and source.coarse.vector is not None and source.coarse.vector.numel() > 0:
+            self._merge_single_prototype(target.coarse, source.coarse)
+        if self.num_fine <= 0:
+            return
+        for slot in source.fine:
+            if slot.vector is None or slot.vector.numel() == 0 or slot.count <= 0:
+                continue
+            vec = slot.vector.to(torch.float32)
+            count = int(slot.count)
+            if len(target.fine) < self.num_fine:
+                target.fine.append(
+                    PrototypeEntry(vector=F.normalize(vec, dim=0, eps=1e-6).to(self.dtype), count=count)
+                )
+                continue
+            sims = torch.tensor(
+                [self._cosine(existing.vector, vec) for existing in target.fine],
+                device=self.device,
+            )
+            best_idx = int(torch.argmax(sims)) if len(target.fine) else 0
+            best_sim = float(sims[best_idx]) if len(target.fine) else 1.0
+            if best_sim < self.gate_min_cos:
+                replace_idx = min(range(len(target.fine)), key=lambda idx: target.fine[idx].count)
+                target.fine[replace_idx] = PrototypeEntry(
+                    vector=F.normalize(vec, dim=0, eps=1e-6).to(self.dtype),
+                    count=count,
+                )
+                continue
+            merged_vec, merged_count = self._merge_vectors(
+                target.fine[best_idx].count,
+                target.fine[best_idx].vector,
+                count,
+                vec,
+            )
+            target.fine[best_idx].vector = merged_vec
+            target.fine[best_idx].count = merged_count
+
+    def _merge_single_prototype(self, target_proto: PrototypeEntry, source_proto: PrototypeEntry) -> None:
+        if source_proto.vector is None or source_proto.vector.numel() == 0 or source_proto.count <= 0:
+            return
+        if target_proto.vector is None or target_proto.vector.numel() == 0:
+            target_proto.vector = source_proto.vector.to(self.device, dtype=self.dtype).clone()
+            target_proto.count = int(source_proto.count)
+            return
+        merged_vec, merged_count = self._merge_vectors(
+            target_proto.count,
+            target_proto.vector,
+            source_proto.count,
+            source_proto.vector,
+        )
+        target_proto.vector = merged_vec
+        target_proto.count = merged_count
+
+    def _merge_vectors(
+        self,
+        count_a: int,
+        vec_a: torch.Tensor,
+        count_b: int,
+        vec_b: torch.Tensor,
+    ) -> Tuple[torch.Tensor, int]:
+        total = int(count_a) + int(count_b)
+        if total <= 0:
+            return vec_a.to(self.dtype), int(count_a)
+        merged = vec_a.to(torch.float32) * float(count_a) + vec_b.to(torch.float32) * float(count_b)
+        merged = F.normalize(merged, dim=0, eps=1e-6)
+        return merged.to(self.dtype), total
 
     # ------------------------------------------------------------------ Persistence helpers
     def state_dict(self) -> Dict:

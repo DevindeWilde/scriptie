@@ -354,6 +354,7 @@ class v8DetectionLoss:
         """Store (level, batch, gy, gx, cls, max_edge_px) tuples for positive anchors."""
         self.last_positive_cells = None
         if fg_mask is None or not fg_mask.any():
+            print("No positive cells found.")
             return None
         index_entries = []
         cls_entries = []
@@ -441,16 +442,17 @@ class v8DetectionLoss:
                 if level_idx is None:
                     continue
                 stride = self.replay_level_strides.get(level_name, 1)
-                cx = ((box[0] + box[2]) * 0.5) * img_w
-                cy = ((box[1] + box[3]) * 0.5) * img_h
+                # gt_bboxes are already in pixel coordinates after preprocess()
+                cx = (box[0] + box[2]) * 0.5
+                cy = (box[1] + box[3]) * 0.5
                 gx = int(cx / stride)
                 gy = int(cy / stride)
                 grid_w = max(1, int(round(img_w / stride)))
                 grid_h = max(1, int(round(img_h / stride)))
                 gx = min(max(gx, 0), grid_w - 1)
                 gy = min(max(gy, 0), grid_h - 1)
-                width = (box[2] - box[0]) * img_w
-                height = (box[3] - box[1]) * img_h
+                width = (box[2] - box[0])
+                height = (box[3] - box[1])
                 max_edge = float(max(width, height))
                 level_entries.append([level_idx, b_idx, gy, gx])
                 class_entries.append(int(cls_id.item()))
@@ -467,8 +469,8 @@ class v8DetectionLoss:
         if not self.replay_level_strides:
             return None
         img_h, img_w = image_hw
-        width = (box[2] - box[0]) * img_w
-        height = (box[3] - box[1]) * img_h
+        width = (box[2] - box[0])
+        height = (box[3] - box[1])
         max_edge = float(max(width, height))
         levels = sorted(self.replay_level_strides.items(), key=lambda kv: kv[1])
         for name, stride in levels:
@@ -976,6 +978,7 @@ class E2EDetectLoss:
         self.one2one = v8DetectionLoss(model, tal_topk=1)
         self.level_names = getattr(self.one2many, "level_names", [])
         self.last_positive_cells = None
+        self.last_replay_cells = None
         self.prev_classes: tuple[int, ...] | None = None
 
     def set_active_classes(self, class_ids, prev_class_ids: tuple[int, ...] | None = None):
@@ -998,6 +1001,9 @@ class E2EDetectLoss:
         self.last_positive_cells = (
             self.one2many.last_positive_cells or self.one2one.last_positive_cells
         )
+        self.last_replay_cells = self.one2many.last_replay_cells or self.one2one.last_replay_cells
         self.one2many.last_positive_cells = None
         self.one2one.last_positive_cells = None
+        self.one2many.last_replay_cells = None
+        self.one2one.last_replay_cells = None
         return loss_one2many[0] + loss_one2one[0], loss_one2many[1] + loss_one2one[1]
