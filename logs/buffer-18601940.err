@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/gpfs/home6/ddwilde/scriptie/inspect_replay_buffer.py", line 55, in <module>
+    main()
+  File "/gpfs/home6/ddwilde/scriptie/inspect_replay_buffer.py", line 22, in main
+    buffer.load(args.buffer)
+  File "/gpfs/home6/ddwilde/scriptie/ednet/engine/replay.py", line 511, in load
+    raise FileNotFoundError(source)
+FileNotFoundError: /home/ddwilde/scriptie/runs/dota-replay/stage3-replay/replay/buffer.pt
