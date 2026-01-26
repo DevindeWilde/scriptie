@@ -1,0 +1,82 @@
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,295,008 parameters, 0 gradients
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0001.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0019.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0020.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0288.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0332.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0346.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0349.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0407.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0418.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0424.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0425.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0432.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0524.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0526.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0543.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0622.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0627.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0631.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0716.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0760.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0790.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0828.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0839.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0857.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0860.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0873.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0885.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0887.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0890.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0896.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0936.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0941.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0973.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P0977.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P1209.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P1211.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P1224.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P1259.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P1275.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P1283.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P1288.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P1332.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P1333.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P1366.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P1392.png: ignoring corrupt image/label: Label class 3 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P1395.png: ignoring corrupt image/label: Label class 3 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P1401.png: ignoring corrupt image/label: Label class 3 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P1486.png: ignoring corrupt image/label: Label class 3 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P1487.png: ignoring corrupt image/label: Label class 3 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P1539.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P2236.png: ignoring corrupt image/label: Label class 3 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P2302.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P2305.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P2321.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P2328.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P2401.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P2708.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P2727.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P2741.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P2750.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P2751.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P2756.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P2761.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P2769.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P2789.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P2792.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+[34m[1mval: [0mWARNING ⚠️ /gpfs/home6/ddwilde/scriptie/datasets/dota_stages/stage1/test/images/P2794.png: ignoring corrupt image/label: Label class 4 exceeds dataset class count 2. Possible class labels are 0-1
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,048 parameters, 0 gradients
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,568 parameters, 0 gradients
+                   all        186      14700      0.743      0.371      0.383      0.206
+         small-vehicle         91       5303       0.68      0.362      0.431      0.225
+         large-vehicle         74       2349      0.512      0.554      0.454      0.307
+                 plane         42       2098      0.755      0.452      0.508      0.242
+            helicopter          6        197          1          0   0.000758   0.000303
+                  ship         61       4753      0.767      0.489      0.521      0.253
+Speed: 0.4ms preprocess, 26.7ms inference, 0.0ms loss, 0.2ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/results/test_stage3_replay/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/results/test_stage3_replay
