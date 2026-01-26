@@ -19,40 +19,17 @@ module load Python/3.11.3-GCCcore-12.3.0
 source $HOME/ednet_env/bin/activate
 cd $HOME/scriptie
 
-python val.py --weights /home/ddwilde/scriptie/runs/dota_saab/stage1-saab/weights/best.pt \
+python val.py --weights /home/ddwilde/scriptie/runs/dota_replay/stage1-replay/weights/best.pt \
               --data /home/ddwilde/scriptie/yaml/DOTA-stage1.yaml \
               --split test \
-              --outdir /home/ddwilde/scriptie/results/test_stage1_saab
+              --outdir /home/ddwilde/scriptie/results/test_stage1_replay
 
-python val.py --weights /home/ddwilde/scriptie/runs/dota_lower/stage1-lower/weights/best.pt \
-              --data /home/ddwilde/scriptie/yaml/DOTA-stage1.yaml \
-              --split test \
-              --outdir /home/ddwilde/scriptie/results/test_stage1_lower
-
-mv /home/ddwilde/scriptie/datasets/dota-yolo-stage1/test/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage2/test/
-mv /home/ddwilde/scriptie/datasets/dota-yolo-stage1/train/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage2/train/
-mv /home/ddwilde/scriptie/datasets/dota-yolo-stage1/val/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage2/val/
-
-python val.py --weights /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/weights/best.pt \
+python val.py --weights /home/ddwilde/scriptie/runs/dota_replay/stage2-replay/weights/best.pt \
               --data /home/ddwilde/scriptie/yaml/DOTA-stage2.yaml \
               --split test \
-              --outdir /home/ddwilde/scriptie/results/test_stage2_saab
+              --outdir /home/ddwilde/scriptie/results/test_stage2_replay
 
-python val.py --weights /home/ddwilde/scriptie/runs/dota_lower/stage2-lower/weights/best.pt \
-              --data /home/ddwilde/scriptie/yaml/DOTA-stage2.yaml \
-              --split test \
-              --outdir /home/ddwilde/scriptie/results/test_stage2_lower
-
-mv /home/ddwilde/scriptie/datasets/dota-yolo-stage2/test/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage3/test/
-mv /home/ddwilde/scriptie/datasets/dota-yolo-stage2/train/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage3/train/
-mv /home/ddwilde/scriptie/datasets/dota-yolo-stage2/val/images/ /home/ddwilde/scriptie/datasets/dota-yolo-stage3/val/
-
-python val.py --weights /home/ddwilde/scriptie/runs/dota_saab/stage3-saab/weights/best.pt \
+python val.py --weights /home/ddwilde/scriptie/runs/dota_replay/stage3-replay/weights/best.pt \
               --data /home/ddwilde/scriptie/yaml/DOTA-stage3.yaml \
               --split test \
-              --outdir /home/ddwilde/scriptie/results/test_stage3_saab
-
-python val.py --weights /home/ddwilde/scriptie/runs/dota_lower/stage3-lower/weights/best.pt \
-              --data /home/ddwilde/scriptie/yaml/DOTA-stage3.yaml \
-              --split test \
-              --outdir /home/ddwilde/scriptie/results/test_stage3_lower
+              --outdir /home/ddwilde/scriptie/results/test_stage3_replay
