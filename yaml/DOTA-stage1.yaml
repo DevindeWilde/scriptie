@@ -1,10 +1,7 @@
 path: /home/ddwilde/scriptie/datasets/dota_stages/stage1/
 train: train/images
 val: val_seen/images
-test: test/images
+test: test_seen/images
 names:
   0: small-vehicle
   1: large-vehicle
-  2: plane
-  3: helicopter
-  4: ship
