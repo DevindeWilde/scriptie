@@ -751,9 +751,44 @@ class DetectionTrainer(BaseTrainer):
         if isinstance(aux, dict):
             for key, value in aux.items():
                 metrics[key] = value
+                if isinstance(getattr(self, "metrics", None), dict):
+                    self.metrics[key] = value
+        self._maybe_update_per_class_tb_metrics()
         super().save_metrics(metrics)
         if getattr(self, "replay_enabled", False):
             self._write_replay_hits(self.epoch)
+
+    def _maybe_update_per_class_tb_metrics(self):
+        interval = int(getattr(self.args, "per_class_tb_interval", 1) or 1)
+        if interval <= 0:
+            interval = 1
+        epoch = int(self.epoch) + 1
+        if epoch % interval != 0:
+            return
+        metrics_file = Path(self.save_dir) / "per_class_metrics.json"
+        if not metrics_file.exists():
+            return
+        try:
+            import json
+
+            entries = json.loads(metrics_file.read_text())
+        except Exception:
+            return
+        if not entries:
+            return
+        entry = next((e for e in reversed(entries) if e.get("epoch") == epoch), entries[-1])
+        per_class = entry.get("metrics", {})
+        if not isinstance(per_class, dict):
+            return
+        self.metrics = self.metrics or {}
+        for name, vals in per_class.items():
+            if not isinstance(vals, dict):
+                continue
+            self.metrics[f"val/precision/{name}"] = float(vals.get("precision", 0.0))
+            self.metrics[f"val/recall/{name}"] = float(vals.get("recall", 0.0))
+            self.metrics[f"val/mAP50/{name}"] = float(vals.get("map50", 0.0))
+            self.metrics[f"val/mAP50-95/{name}"] = float(vals.get("map", 0.0))
+            self.metrics[f"val/targets/{name}"] = float(vals.get("num_targets", 0))
 
     def _load_teacher_buffer(self, path: Path):
         buffer = self.replay_teacher_buffer
