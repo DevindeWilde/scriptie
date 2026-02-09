@@ -16,7 +16,6 @@ module load 2024
 module load CUDA/12.8.0
 module load Python/3.11.3-GCCcore-12.3.0
 
-python -m venv $HOME/ednet_env
 source $HOME/ednet_env/bin/activate
 python -m pip install --upgrade pip
 pip install opencv-python-headless
