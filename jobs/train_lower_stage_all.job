@@ -5,7 +5,7 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=64G
-#SBATCH --partition=gpu_a100 
+#SBATCH --partition=gpu_h100 
 #SBATCH --gpus-per-node=1
 #SBATCH --gres=gpu:1
 #SBATCH --output=logs/lower-all-%j.out
@@ -24,8 +24,8 @@ python train.py \
   --data $HOME/scriptie/yaml/DOTA-stage1.yaml \
   --epochs 50 \
   --imgsz 640 \
-  --batch-size 4 \
-  --project $HOME/scriptie/runs/dota_lower \
+  --batch-size 8 \
+  --project $HOME/scriptie/runs/dota_lower2 \
   --name stage1-lower \
   --workers 8 \
   --weights pretrained/small.pt
@@ -35,19 +35,19 @@ python train.py \
   --data $HOME/scriptie/yaml/DOTA-stage2.yaml \
   --epochs 50 \
   --imgsz 640 \
-  --batch-size 4 \
-  --project $HOME/scriptie/runs/dota_lower \
+  --batch-size 8 \
+  --project $HOME/scriptie/runs/dota_lower2 \
   --name stage2-lower \
   --workers 8 \
-  --weights /home/ddwilde/scriptie/runs/dota_lower/stage1-lower/weights/best.pt
+  --weights /home/ddwilde/scriptie/runs/dota_lower2/stage1-lower/weights/best.pt
 
 python train.py \
   --cfg $HOME/scriptie/cfg/models/ednet/ednet-s.yaml \
   --data $HOME/scriptie/yaml/DOTA-stage3.yaml \
   --epochs 50 \
   --imgsz 640 \
-  --batch-size 4 \
-  --project $HOME/scriptie/runs/dota_lower \
+  --batch-size 8 \
+  --project $HOME/scriptie/runs/dota_lower2 \
   --name stage3-lower \
   --workers 8 \
-  --weights /home/ddwilde/scriptie/runs/dota_lower/stage2-lower/weights/best.pt
+  --weights /home/ddwilde/scriptie/runs/dota_lower2/stage2-lower/weights/best.pt
