@@ -12,15 +12,12 @@
 #SBATCH --error=logs/lower-all-%j.err
 
 module purge
-module load 2024
-module load CUDA/12.8.0
+module load 2023
+module load CUDA/12.4.0
+module spider Python/3.11.3-GCCcore-12.3.0
 module load Python/3.11.3-GCCcore-12.3.0
 
 source $HOME/ednet_env/bin/activate
-python -m pip install --upgrade pip
-pip install opencv-python-headless
-pip install -r $HOME/scriptie/requirements.txt   # if you have it
-
 cd $HOME/scriptie
 
 python train.py \
