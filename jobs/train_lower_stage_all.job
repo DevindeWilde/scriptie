@@ -13,11 +13,14 @@
 
 module purge
 module load 2023
-module load CUDA/12.4.0
+module load CUDA/12.8.0
 module load Python/3.11.3-GCCcore-12.3.0
 
-source $HOME/ednet_env/bin/activate
-pip install opencv-python
+python -m venv $HOME/ednet_env_py311
+source $HOME/ednet_env_py311/bin/activate
+python -m pip install -U pip
+pip install opencv-python-headless
+pip install -r $HOME/scriptie/requirements.txt
 
 cd $HOME/scriptie
 
