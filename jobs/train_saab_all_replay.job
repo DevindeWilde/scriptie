@@ -31,7 +31,7 @@ python train.py \
     --weights /home/ddwilde/scriptie/pretrained/small.pt \
     --override replay.enable=True \
     --override replay.buffer_per_class=128 \
-    --override replay.loss_weight=1.0 \
+    --override replay.loss_weight=0.0 \
     --override replay.tiny_max_pixels=320 \
     --override replay.debug=True \
     --override "stage.active_classes=[0,1]" \
@@ -50,7 +50,7 @@ python train.py \
   --weights /home/ddwilde/scriptie/runs/dota_replay/stage1-replay/weights/best.pt \
   --override replay.enable=True \
   --override replay.buffer_per_class=128 \
-  --override replay.loss_weight=1.0 \
+  --override replay.loss_weight=0.0 \
   --override replay.init_buffer=/home/ddwilde/scriptie/runs/dota_replay/stage1-replay/replay/buffer.pt \
   --override replay.memory_dir=/home/ddwilde/scriptie/datasets/memory/stage1 \
   --override replay.memory_ratio=0.25 \
@@ -70,7 +70,7 @@ python train.py \
   --weights /home/ddwilde/scriptie/runs/dota_replay/stage2-replay/weights/best.pt \
   --override replay.enable=True \
   --override replay.buffer_per_class=128 \
-  --override replay.loss_weight=1.0 \
+  --override replay.loss_weight=0.0 \
   --override replay.init_buffer=/home/ddwilde/scriptie/runs/dota_replay/stage2-replay/replay/buffer.pt \
   --override replay.memory_dir=/home/ddwilde/scriptie/datasets/memory/stage2 \
   --override replay.memory_ratio=0.25 \
