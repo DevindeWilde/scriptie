@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=replay-stage-all
+#SBATCH --job-name=replay-stage-all-proto
 #SBATCH --time=24:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
@@ -8,8 +8,8 @@
 #SBATCH --partition=gpu_a100 
 #SBATCH --gpus-per-node=1
 #SBATCH --gres=gpu:1
-#SBATCH --output=logs/replay-stage-all-%j.out
-#SBATCH --error=logs/replay-stage-all-%j.err
+#SBATCH --output=logs/replay-proto--stage-all-%j.out
+#SBATCH --error=logs/replay-proto-stage-all-%j.err
 
 module purge
 module load 2023
@@ -25,13 +25,13 @@ python train.py \
     --epochs 50 \
     --imgsz 640 \
     --batch-size 4 \
-    --project /home/ddwilde/scriptie/runs/dota_replay \
+    --project /home/ddwilde/scriptie/runs/dota_replay_prototype \
     --name stage1-replay \
     --workers 8 \
     --weights /home/ddwilde/scriptie/pretrained/small.pt \
     --override replay.enable=True \
     --override replay.buffer_per_class=128 \
-    --override replay.loss_weight=0.0 \
+    --override replay.loss_weight=1.0 \
     --override replay.tiny_max_pixels=320 \
     --override replay.debug=True \
     --override "stage.active_classes=[0,1]" \
@@ -44,14 +44,14 @@ python train.py \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
-  --project /home/ddwilde/scriptie/runs/dota_replay \
+  --project /home/ddwilde/scriptie/runs/dota_replay_prototype \
   --name stage2-replay \
   --workers 8 \
-  --weights /home/ddwilde/scriptie/runs/dota_replay/stage1-replay/weights/best.pt \
+  --weights /home/ddwilde/scriptie/runs/dota_replay_prototype/stage1-replay/weights/best.pt \
   --override replay.enable=True \
   --override replay.buffer_per_class=128 \
-  --override replay.loss_weight=0.0 \
-  --override replay.init_buffer=/home/ddwilde/scriptie/runs/dota_replay/stage1-replay/replay/buffer.pt \
+  --override replay.loss_weight=1.0 \
+  --override replay.init_buffer=/home/ddwilde/scriptie/runs/dota_replay_prototype/stage1-replay/replay/buffer.pt \
   --override replay.memory_dir=/home/ddwilde/scriptie/datasets/memory/stage1 \
   --override replay.memory_ratio=0.25 \
   --override replay.tiny_max_pixels=320 \
@@ -64,14 +64,14 @@ python train.py \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
-  --project /home/ddwilde/scriptie/runs/dota_replay \
+  --project /home/ddwilde/scriptie/runs/dota_replay_prototype \
   --name stage3-replay \
   --workers 8 \
-  --weights /home/ddwilde/scriptie/runs/dota_replay/stage2-replay/weights/best.pt \
+  --weights /home/ddwilde/scriptie/runs/dota_replay_prototype/stage2-replay/weights/best.pt \
   --override replay.enable=True \
   --override replay.buffer_per_class=128 \
-  --override replay.loss_weight=0.0 \
-  --override replay.init_buffer=/home/ddwilde/scriptie/runs/dota_replay/stage2-replay/replay/buffer.pt \
+  --override replay.loss_weight=1.0 \
+  --override replay.init_buffer=/home/ddwilde/scriptie/runs/dota_replay_prototype/stage2-replay/replay/buffer.pt \
   --override replay.memory_dir=/home/ddwilde/scriptie/datasets/memory/stage2 \
   --override replay.memory_ratio=0.25 \
   --override replay.tiny_max_pixels=320 \

@@ -1,7 +1,7 @@
 [
   {
     "epoch": 1,
-    "timestamp": 1769352217.4123266,
+    "timestamp": 1770716674.038554,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -22,7 +22,7 @@
   },
   {
     "epoch": 2,
-    "timestamp": 1769352283.1642573,
+    "timestamp": 1770716741.2146647,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -43,7 +43,7 @@
   },
   {
     "epoch": 3,
-    "timestamp": 1769352349.3100455,
+    "timestamp": 1770716809.7899382,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -64,7 +64,7 @@
   },
   {
     "epoch": 4,
-    "timestamp": 1769352414.2539697,
+    "timestamp": 1770716877.122381,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -85,7 +85,7 @@
   },
   {
     "epoch": 5,
-    "timestamp": 1769352477.6826122,
+    "timestamp": 1770716942.8969004,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -106,7 +106,7 @@
   },
   {
     "epoch": 6,
-    "timestamp": 1769352539.490726,
+    "timestamp": 1770717006.5438344,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -127,7 +127,7 @@
   },
   {
     "epoch": 7,
-    "timestamp": 1769352600.0906074,
+    "timestamp": 1770717069.064052,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -148,7 +148,7 @@
   },
   {
     "epoch": 8,
-    "timestamp": 1769352662.4043355,
+    "timestamp": 1770717133.6965988,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -169,7 +169,7 @@
   },
   {
     "epoch": 9,
-    "timestamp": 1769352723.5180337,
+    "timestamp": 1770717197.2391148,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -190,7 +190,7 @@
   },
   {
     "epoch": 10,
-    "timestamp": 1769352786.1358733,
+    "timestamp": 1770717262.1043313,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -211,7 +211,7 @@
   },
   {
     "epoch": 11,
-    "timestamp": 1769352850.1701462,
+    "timestamp": 1770717328.3302577,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -232,7 +232,7 @@
   },
   {
     "epoch": 12,
-    "timestamp": 1769352911.5500045,
+    "timestamp": 1770717392.1991928,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -253,7 +253,7 @@
   },
   {
     "epoch": 13,
-    "timestamp": 1769352974.7105715,
+    "timestamp": 1770717457.5244608,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -274,7 +274,7 @@
   },
   {
     "epoch": 14,
-    "timestamp": 1769353037.3046522,
+    "timestamp": 1770717522.9642017,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -295,7 +295,7 @@
   },
   {
     "epoch": 15,
-    "timestamp": 1769353101.8435287,
+    "timestamp": 1770717590.1128342,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -316,7 +316,7 @@
   },
   {
     "epoch": 16,
-    "timestamp": 1769353163.540648,
+    "timestamp": 1770717654.3836284,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -337,7 +337,7 @@
   },
   {
     "epoch": 17,
-    "timestamp": 1769353222.0018828,
+    "timestamp": 1770717715.3844879,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -358,7 +358,7 @@
   },
   {
     "epoch": 18,
-    "timestamp": 1769353282.6709573,
+    "timestamp": 1770717778.6907,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -379,7 +379,7 @@
   },
   {
     "epoch": 19,
-    "timestamp": 1769353345.7763064,
+    "timestamp": 1770717844.7320948,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -400,7 +400,7 @@
   },
   {
     "epoch": 20,
-    "timestamp": 1769353405.903743,
+    "timestamp": 1770717907.9146132,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -421,7 +421,7 @@
   },
   {
     "epoch": 21,
-    "timestamp": 1769353469.4722545,
+    "timestamp": 1770717974.4604168,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -442,7 +442,7 @@
   },
   {
     "epoch": 22,
-    "timestamp": 1769353532.6170983,
+    "timestamp": 1770718040.427122,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -463,7 +463,7 @@
   },
   {
     "epoch": 23,
-    "timestamp": 1769353592.830838,
+    "timestamp": 1770718103.6023526,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -484,7 +484,7 @@
   },
   {
     "epoch": 24,
-    "timestamp": 1769353656.9275799,
+    "timestamp": 1770718170.6544142,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -505,7 +505,7 @@
   },
   {
     "epoch": 25,
-    "timestamp": 1769353716.7905538,
+    "timestamp": 1770718233.483872,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -526,7 +526,7 @@
   },
   {
     "epoch": 26,
-    "timestamp": 1769353778.088788,
+    "timestamp": 1770718297.7002785,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -547,7 +547,7 @@
   },
   {
     "epoch": 27,
-    "timestamp": 1769353837.2165911,
+    "timestamp": 1770718359.8672447,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -568,7 +568,7 @@
   },
   {
     "epoch": 28,
-    "timestamp": 1769353899.140747,
+    "timestamp": 1770718424.8693383,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -589,7 +589,7 @@
   },
   {
     "epoch": 29,
-    "timestamp": 1769353959.8787868,
+    "timestamp": 1770718488.4925807,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -610,7 +610,7 @@
   },
   {
     "epoch": 30,
-    "timestamp": 1769354019.1532729,
+    "timestamp": 1770718550.917193,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -631,7 +631,7 @@
   },
   {
     "epoch": 31,
-    "timestamp": 1769354080.6558716,
+    "timestamp": 1770718615.6759627,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -652,7 +652,7 @@
   },
   {
     "epoch": 32,
-    "timestamp": 1769354141.998392,
+    "timestamp": 1770718680.3315015,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -673,7 +673,7 @@
   },
   {
     "epoch": 33,
-    "timestamp": 1769354202.1547356,
+    "timestamp": 1770718743.2334638,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -694,7 +694,7 @@
   },
   {
     "epoch": 34,
-    "timestamp": 1769354263.6336317,
+    "timestamp": 1770718808.1539934,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -715,7 +715,7 @@
   },
   {
     "epoch": 35,
-    "timestamp": 1769354322.3026834,
+    "timestamp": 1770718869.918313,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -736,7 +736,7 @@
   },
   {
     "epoch": 36,
-    "timestamp": 1769354385.528341,
+    "timestamp": 1770718936.423737,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -757,7 +757,7 @@
   },
   {
     "epoch": 37,
-    "timestamp": 1769354444.9710655,
+    "timestamp": 1770718999.0559447,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -778,7 +778,7 @@
   },
   {
     "epoch": 38,
-    "timestamp": 1769354508.387614,
+    "timestamp": 1770719065.658176,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -799,7 +799,7 @@
   },
   {
     "epoch": 39,
-    "timestamp": 1769354566.6947598,
+    "timestamp": 1770719127.1665306,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -820,7 +820,7 @@
   },
   {
     "epoch": 40,
-    "timestamp": 1769354626.4331663,
+    "timestamp": 1770719190.083726,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -841,7 +841,7 @@
   },
   {
     "epoch": 41,
-    "timestamp": 1769354674.711307,
+    "timestamp": 1770719241.3181806,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -862,7 +862,7 @@
   },
   {
     "epoch": 42,
-    "timestamp": 1769354722.4732769,
+    "timestamp": 1770719291.6822922,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -883,7 +883,7 @@
   },
   {
     "epoch": 43,
-    "timestamp": 1769354770.3371534,
+    "timestamp": 1770719342.215595,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -904,7 +904,7 @@
   },
   {
     "epoch": 44,
-    "timestamp": 1769354817.739598,
+    "timestamp": 1770719392.3895385,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -925,7 +925,7 @@
   },
   {
     "epoch": 45,
-    "timestamp": 1769354865.623707,
+    "timestamp": 1770719442.572238,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -946,7 +946,7 @@
   },
   {
     "epoch": 46,
-    "timestamp": 1769354913.1691391,
+    "timestamp": 1770719492.5274997,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -967,7 +967,7 @@
   },
   {
     "epoch": 47,
-    "timestamp": 1769354960.9838758,
+    "timestamp": 1770719542.6373687,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -988,7 +988,7 @@
   },
   {
     "epoch": 48,
-    "timestamp": 1769355007.5368366,
+    "timestamp": 1770719591.708142,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -1009,7 +1009,7 @@
   },
   {
     "epoch": 49,
-    "timestamp": 1769355055.6815143,
+    "timestamp": 1770719642.4275343,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -1030,7 +1030,7 @@
   },
   {
     "epoch": 50,
-    "timestamp": 1769355103.7356164,
+    "timestamp": 1770719692.859782,
     "training": true,
     "metrics": {
       "small-vehicle": {
@@ -1051,7 +1051,7 @@
   },
   {
     "epoch": null,
-    "timestamp": 1769355113.740872,
+    "timestamp": 1770719703.6817477,
     "training": false,
     "metrics": {
       "small-vehicle": {

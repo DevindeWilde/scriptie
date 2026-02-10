@@ -12,7 +12,7 @@ save_period: -1
 cache: false
 device: null
 workers: 8
-project: /home/ddwilde/scriptie/runs/dota_replay
+project: /home/ddwilde/scriptie/runs/dota_replay_prototype
 name: stage1-replay
 exist_ok: false
 pretrained: true
@@ -71,6 +71,7 @@ max_det: 300
 half: false
 dnn: false
 plots: true
+per_class_tb_interval: 1
 source: null
 vid_stride: 1
 stream_buffer: false
@@ -131,4 +132,4 @@ erasing: 0.4
 crop_fraction: 1.0
 cfg: null
 tracker: botsort.yaml
-save_dir: /home/ddwilde/scriptie/runs/dota_replay/stage1-replay
+save_dir: /home/ddwilde/scriptie/runs/dota_replay_prototype/stage1-replay

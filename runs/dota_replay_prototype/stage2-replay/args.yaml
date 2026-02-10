@@ -1,6 +1,6 @@
 task: detect
 mode: train
-model: /home/ddwilde/scriptie/runs/dota_replay/stage1-replay/weights/best.pt
+model: /home/ddwilde/scriptie/runs/dota_replay_prototype/stage1-replay/weights/best.pt
 data: /home/ddwilde/scriptie/yaml/DOTA-stage2.yaml
 epochs: 50
 time: null
@@ -12,7 +12,7 @@ save_period: -1
 cache: false
 device: null
 workers: 8
-project: /home/ddwilde/scriptie/runs/dota_replay
+project: /home/ddwilde/scriptie/runs/dota_replay_prototype
 name: stage2-replay
 exist_ok: false
 pretrained: true
@@ -51,7 +51,7 @@ replay:
   enable: true
   buffer_per_class: 128
   loss_weight: 1.0
-  init_buffer: /home/ddwilde/scriptie/runs/dota_replay/stage1-replay/replay/buffer.pt
+  init_buffer: /home/ddwilde/scriptie/runs/dota_replay_prototype/stage1-replay/replay/buffer.pt
   memory_dir: /home/ddwilde/scriptie/datasets/memory/stage1
   memory_ratio: 0.25
   tiny_max_pixels: 320
@@ -77,6 +77,7 @@ max_det: 300
 half: false
 dnn: false
 plots: true
+per_class_tb_interval: 1
 source: null
 vid_stride: 1
 stream_buffer: false
@@ -137,4 +138,4 @@ erasing: 0.4
 crop_fraction: 1.0
 cfg: null
 tracker: botsort.yaml
-save_dir: /home/ddwilde/scriptie/runs/dota_replay/stage2-replay
+save_dir: /home/ddwilde/scriptie/runs/dota_replay_prototype/stage2-replay
