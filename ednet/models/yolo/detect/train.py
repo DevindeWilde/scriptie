@@ -455,6 +455,9 @@ class DetectionTrainer(BaseTrainer):
     def compute_auxiliary_loss(self, batch):
         """Compute replay-based feature consistency loss."""
         #print("DetectionTrainer.compute_auxiliary_loss called.")
+        if self.replay_enabled == False:
+            return None
+            
         teacher_ready = (
             self.replay_enabled
             and self.feature_tapper is not None
@@ -475,7 +478,7 @@ class DetectionTrainer(BaseTrainer):
             replay_items = self._gather_embeddings(features, attr="last_replay_cells", criterion=criterion)
             #print(f"  Gathered {len(replay_items)} replay embeddings from tapped features.")
             if replay_items:
-                print("replay_items levels:", Counter([it.level for it in replay_items]))
+                #print("replay_items levels:", Counter([it.level for it in replay_items]))
                 grouped = self._group_embeddings(replay_items)
                 self._log_embedding_stats(grouped)
                 replay_batch = build_replay_batch(
@@ -494,7 +497,7 @@ class DetectionTrainer(BaseTrainer):
                 #print("    Student replay item:", item)
                 self.replay_student_buffer.add(item)
         if aux_loss is None:
-            print("No replay auxiliary loss computed: aux_loss is None")
+            #print("No replay auxiliary loss computed: aux_loss is None")
             return None
         #print("Replay auxiliary loss computed:", float(aux_loss))
         return aux_loss * self.replay_loss_weight
@@ -530,20 +533,20 @@ class DetectionTrainer(BaseTrainer):
         #print("loss_module:", loss_module)
         #print(loss_module.last_replay_cells)
         if loss_module is None:
-            print("No loss module available for gathering embeddings.")
+            #print("No loss module available for gathering embeddings.")
             return []
         if hasattr(loss_module, "set_replay_tap_config") and not getattr(loss_module, "_replay_configured", False):
             if self.replay_levels and self.replay_strides:
                 loss_module.set_replay_tap_config(self.replay_levels, self.replay_strides)
         pos = getattr(loss_module, attr, None)
         if not pos:
-            print(f"No replay tap data found for attribute '{attr}'.")
+            #print(f"No replay tap data found for attribute '{attr}'.")
             return []
         indices = pos.get("indices")
         classes = pos.get("classes")
         max_edge = pos.get("max_edge")
         if indices is None or classes is None or max_edge is None:
-            print("No indices, classes, or max_edge found in replay tap data.")
+            #print("No indices, classes, or max_edge found in replay tap data.")
             return []
         if indices.numel() == 0:
             print("No replay embeddings to gather: indices is empty.")
@@ -575,13 +578,13 @@ class DetectionTrainer(BaseTrainer):
         unique_levels = indices[:, 0].unique()
         for level_idx in unique_levels:
 
-            print("level_idx:", level_idx)
+            #print("level_idx:", level_idx)
             level_mask = indices[:, 0] == level_idx
             #print("level_mask:", level_mask)
             if not level_mask.any():
                 continue
             name = level_names[level_idx] if level_idx < len(level_names) else str(int(level_idx))
-            print("level name:", name)
+            #print("level name:", name)
             feat = features.get(name)
             #print("feat:", feat)
             if feat is None:
@@ -612,7 +615,7 @@ class DetectionTrainer(BaseTrainer):
             loss_module.last_positive_cells = None
         if attr == "last_replay_cells" and hasattr(loss_module, "last_replay_cells"):
             loss_module.last_replay_cells = None
-        print(f"Total TinyReplayItems gathered: {len(items)}")
+        #print(f"Total TinyReplayItems gathered: {len(items)}")
         return items
 
     def _log_embedding_stats(self, grouped):
