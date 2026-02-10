@@ -49,6 +49,7 @@ class LoRAConv2d(nn.Module):
         self.base.load_state_dict(base_layer.state_dict())
         for param in self.base.parameters():
             param.requires_grad_(False)
+            setattr(param, "_lora_forced_frozen", True)
 
         # LoRA decomposition: A projects to a low-rank space; B projects back to output channels.
         self.lora_A = nn.Conv2d(
@@ -102,4 +103,3 @@ class LoRAConv2d(nn.Module):
             self.lora_A.weight.data.copy_(state_dict["lora_A.weight"])
         if "lora_B.weight" in state_dict:
             self.lora_B.weight.data.copy_(state_dict["lora_B.weight"])
-

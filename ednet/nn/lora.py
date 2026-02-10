@@ -39,7 +39,6 @@ def _wrap_conv_with_lora(module: nn.Module, attr: str, cfg: LoRAConfig, registry
     if isinstance(conv, nn.Conv2d) and getattr(conv, "groups", 1) == 1:
         lora = LoRAConv2d(conv, rank=cfg.rank, alpha=cfg.alpha, dropout=cfg.dropout)
         setattr(module, attr, lora)
-        setattr(lora, "_lora_parent_ref", weakref.ref(module))
         registry.append((f"{module.__class__.__name__}.{attr}", lora))
     elif isinstance(conv, LoRAConv2d):
         registry.append((f"{module.__class__.__name__}.{attr}", conv))
@@ -101,14 +100,6 @@ def inject_lora_ednet(model: nn.Module, cfg: Optional[LoRAConfig] = None) -> Lis
     if cfg.include_detection_head and isinstance(getattr(model, "model", [])[-1], Detect):
         head = model.model[-1]
         if isinstance(head, v10Detect):
-            for name, seq in enumerate(head.cv2):
-                for block in seq:
-                    if isinstance(block, nn.Sequential):
-                        for layer in block:
-                            if hasattr(layer, "conv"):
-                                _wrap_conv_with_lora(layer, "conv", cfg, registry)
-                    elif hasattr(block, "conv"):
-                        _wrap_conv_with_lora(block, "conv", cfg, registry)
             for name, seq in enumerate(head.cv3):
                 for block in seq:
                     if isinstance(block, nn.Sequential):
@@ -117,6 +108,15 @@ def inject_lora_ednet(model: nn.Module, cfg: Optional[LoRAConfig] = None) -> Lis
                                 _wrap_conv_with_lora(layer, "conv", cfg, registry)
                     elif hasattr(block, "conv"):
                         _wrap_conv_with_lora(block, "conv", cfg, registry)
+            if getattr(head, "end2end", False) and hasattr(head, "one2one_cv3"):
+                for name, seq in enumerate(head.one2one_cv3):
+                    for block in seq:
+                        if isinstance(block, nn.Sequential):
+                            for layer in block:
+                                if hasattr(layer, "conv"):
+                                    _wrap_conv_with_lora(layer, "conv", cfg, registry)
+                        elif hasattr(block, "conv"):
+                            _wrap_conv_with_lora(block, "conv", cfg, registry)
 
     return registry
 

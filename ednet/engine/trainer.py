@@ -255,9 +255,10 @@ class BaseTrainer:
         )
         always_freeze_names = [".dfl"]  # always freeze these layers
         freeze_layer_names = [f"model.{x}." for x in freeze_list] + always_freeze_names
+        self._freeze_layer_names = freeze_layer_names
         for k, v in self.model.named_parameters():
             # v.register_hook(lambda x: torch.nan_to_num(x))  # NaN to 0 (commented for erratic training results)
-            if any(x in k for x in freeze_layer_names):
+            if any(x in k for x in freeze_layer_names) and "lora_A" not in k and "lora_B" not in k:
                 LOGGER.info(f"Freezing layer '{k}'")
                 v.requires_grad = False
             elif getattr(v, "_lora_forced_frozen", False):
@@ -371,6 +372,15 @@ class BaseTrainer:
         self.run_callbacks("on_pretrain_routine_end")
         self.auxiliary_info = {}
 
+    def _freeze_bn_stats(self):
+        bn = tuple(v for k, v in nn.__dict__.items() if "Norm" in k)
+        freeze_names = getattr(self, "_freeze_layer_names", [])
+        if not freeze_names:
+            return
+        for name, module in self.model.named_modules():
+            if isinstance(module, bn) and any(x in name for x in freeze_names):
+                module.eval()
+
     def _do_train(self, world_size=1):
         """Train completed, evaluate and plot if specified by arguments."""
         if world_size > 1:
@@ -400,9 +410,10 @@ class BaseTrainer:
             self.run_callbacks("on_train_epoch_start")
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")  # suppress 'Detected lr_scheduler.step() before optimizer.step()'
-                self.scheduler.step()
+            self.scheduler.step()
 
             self.model.train()
+            self._freeze_bn_stats()
             if RANK != -1:
                 self.train_loader.sampler.set_epoch(epoch)
             pbar = enumerate(self.train_loader)
@@ -844,6 +855,8 @@ class BaseTrainer:
 
         for module_name, module in model.named_modules():
             for param_name, param in module.named_parameters(recurse=False):
+                if not param.requires_grad:
+                    continue
                 fullname = f"{module_name}.{param_name}" if module_name else param_name
                 if "bias" in fullname:  # bias (no decay)
                     g[2].append(param)

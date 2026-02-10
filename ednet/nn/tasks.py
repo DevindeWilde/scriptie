@@ -102,7 +102,6 @@ class BaseModel(nn.Module):
         """
         cfg = cfg or LoRAConfig()
         registry = inject_lora_ednet(self, cfg)
-        freeze_blocks_except_lora(self,[6,8,10],False)
         self._lora_config = cfg
         self._lora_registry = registry
         return registry
