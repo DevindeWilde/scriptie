@@ -488,6 +488,8 @@ class DetectionTrainer(BaseTrainer):
                     device=self.device,
                 )
                 aux_loss = self._compute_replay_consistency(grouped, replay_batch)
+                if aux_loss is not None:
+                    print("aux loss = ", aux_loss.requires_grad)
                 #print("  Computed replay consistency loss:", float(aux_loss) if aux_loss is not None else None)
         if self.replay_student_buffer is not None:
             #print("Updating student replay buffer with new embeddings...")
@@ -601,12 +603,14 @@ class DetectionTrainer(BaseTrainer):
             gx = sel_indices[:, 3].long()
             vecs = feat[batch_idx, :, gy, gx]
             #print("vecs shape:", vecs.shape) 
+            detach_embedding = (attr == "last_positive_cells")
+            emb = embedding.detach() if detach_embedding else embedding
             for embedding, cls_id, size in zip(vecs, sel_classes, sel_sizes):
                 items.append(
                     TinyReplayItem(
                         cls=int(cls_id.item()),
                         level=name,
-                        embedding=embedding.detach(),
+                        embedding=emb,
                         metadata={"max_edge": float(size.item())},
                     )
                 )
