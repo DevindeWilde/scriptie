@@ -464,9 +464,6 @@ class DetectionTrainer(BaseTrainer):
             and self.replay_teacher_buffer is not None
             and len(self.replay_teacher_buffer) > 0
         )
-
-        if not teacher_ready:
-            print("No replay auxiliary loss computed: teacher_ready =", teacher_ready)
     
         criterion = self._ensure_replay_tap_config()
         features = self.feature_tapper.pop()
@@ -550,7 +547,7 @@ class DetectionTrainer(BaseTrainer):
             #print("No indices, classes, or max_edge found in replay tap data.")
             return []
         if indices.numel() == 0:
-            print("No replay embeddings to gather: indices is empty.")
+            #print("No replay embeddings to gather: indices is empty.")
             return []
         size_mask = max_edge <= self.replay_max_edge
         if not size_mask.any():

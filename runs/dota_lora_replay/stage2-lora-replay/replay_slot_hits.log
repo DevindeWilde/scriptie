@@ -1,0 +1,343 @@
+Epoch 1
+  level=P2 cls=0 hits=0:2039
+  level=P2 cls=1 hits=0:1054
+  level=P3 cls=0 hits=0:144
+  level=P3 cls=1 hits=0:946
+  level=P4 cls=0 hits=0:5
+  level=P4 cls=1 hits=0:134
+Epoch 2
+  level=P2 cls=0 hits=0:4202
+  level=P2 cls=1 hits=0:1473
+  level=P3 cls=0 hits=0:114
+  level=P3 cls=1 hits=0:987
+  level=P4 cls=0 hits=0:5
+  level=P4 cls=1 hits=0:192
+Epoch 3
+  level=P2 cls=0 hits=0:1923
+  level=P2 cls=1 hits=0:1183
+  level=P3 cls=0 hits=0:145
+  level=P3 cls=1 hits=0:826
+  level=P4 cls=0 hits=0:5
+  level=P4 cls=1 hits=0:137
+Epoch 4
+  level=P2 cls=0 hits=0:1940
+  level=P2 cls=1 hits=0:1504
+  level=P3 cls=0 hits=0:147
+  level=P3 cls=1 hits=0:1093
+  level=P4 cls=0 hits=0:2
+  level=P4 cls=1 hits=0:226
+Epoch 5
+  level=P2 cls=0 hits=0:2005
+  level=P2 cls=1 hits=0:993
+  level=P3 cls=0 hits=0:130
+  level=P3 cls=1 hits=0:814
+  level=P4 cls=0 hits=0:6
+  level=P4 cls=1 hits=0:140
+Epoch 6
+  level=P2 cls=0 hits=0:3616
+  level=P2 cls=1 hits=0:1403
+  level=P3 cls=0 hits=0:113
+  level=P3 cls=1 hits=0:707
+  level=P4 cls=0 hits=0:10
+  level=P4 cls=1 hits=0:130
+Epoch 7
+  level=P2 cls=0 hits=0:2150
+  level=P2 cls=1 hits=0:1021
+  level=P3 cls=0 hits=0:157
+  level=P3 cls=1 hits=0:816
+  level=P4 cls=0 hits=0:6
+  level=P4 cls=1 hits=0:162
+Epoch 8
+  level=P2 cls=0 hits=0:3043
+  level=P2 cls=1 hits=0:1360
+  level=P3 cls=0 hits=0:147
+  level=P3 cls=1 hits=0:696
+  level=P4 cls=0 hits=0:1
+  level=P4 cls=1 hits=0:123
+Epoch 9
+  level=P2 cls=0 hits=0:2506
+  level=P2 cls=1 hits=0:1872
+  level=P3 cls=0 hits=0:46
+  level=P3 cls=1 hits=0:1000
+  level=P4 cls=1 hits=0:122
+Epoch 10
+  level=P2 cls=0 hits=0:2807
+  level=P2 cls=1 hits=0:1143
+  level=P3 cls=0 hits=0:175
+  level=P3 cls=1 hits=0:618
+  level=P4 cls=0 hits=0:2
+  level=P4 cls=1 hits=0:247
+Epoch 11
+  level=P2 cls=0 hits=0:4421
+  level=P2 cls=1 hits=0:1042
+  level=P3 cls=0 hits=0:170
+  level=P3 cls=1 hits=0:506
+  level=P4 cls=0 hits=0:11
+  level=P4 cls=1 hits=0:160
+Epoch 12
+  level=P2 cls=0 hits=0:2024
+  level=P2 cls=1 hits=0:1135
+  level=P3 cls=0 hits=0:96
+  level=P3 cls=1 hits=0:879
+  level=P4 cls=1 hits=0:117
+Epoch 13
+  level=P2 cls=0 hits=0:2560
+  level=P2 cls=1 hits=0:1059
+  level=P3 cls=0 hits=0:139
+  level=P3 cls=1 hits=0:956
+  level=P4 cls=0 hits=0:6
+  level=P4 cls=1 hits=0:196
+Epoch 14
+  level=P2 cls=0 hits=0:1742
+  level=P2 cls=1 hits=0:998
+  level=P3 cls=0 hits=0:200
+  level=P3 cls=1 hits=0:544
+  level=P4 cls=0 hits=0:11
+  level=P4 cls=1 hits=0:256
+Epoch 15
+  level=P2 cls=0 hits=0:1959
+  level=P2 cls=1 hits=0:854
+  level=P3 cls=0 hits=0:148
+  level=P3 cls=1 hits=0:614
+  level=P4 cls=0 hits=0:3
+  level=P4 cls=1 hits=0:142
+Epoch 16
+  level=P2 cls=0 hits=0:2958
+  level=P2 cls=1 hits=0:1959
+  level=P3 cls=0 hits=0:100
+  level=P3 cls=1 hits=0:600
+  level=P4 cls=1 hits=0:57
+Epoch 17
+  level=P2 cls=0 hits=0:2403
+  level=P2 cls=1 hits=0:1167
+  level=P3 cls=0 hits=0:245
+  level=P3 cls=1 hits=0:623
+  level=P4 cls=0 hits=0:4
+  level=P4 cls=1 hits=0:131
+Epoch 18
+  level=P2 cls=0 hits=0:2718
+  level=P2 cls=1 hits=0:1009
+  level=P3 cls=0 hits=0:120
+  level=P3 cls=1 hits=0:639
+  level=P4 cls=0 hits=0:1
+  level=P4 cls=1 hits=0:179
+Epoch 19
+  level=P2 cls=0 hits=0:2396
+  level=P2 cls=1 hits=0:1190
+  level=P3 cls=0 hits=0:149
+  level=P3 cls=1 hits=0:597
+  level=P4 cls=0 hits=0:2
+  level=P4 cls=1 hits=0:175
+Epoch 20
+  level=P2 cls=0 hits=0:2139
+  level=P2 cls=1 hits=0:1380
+  level=P3 cls=0 hits=0:115
+  level=P3 cls=1 hits=0:814
+  level=P4 cls=0 hits=0:6
+  level=P4 cls=1 hits=0:299
+Epoch 21
+  level=P2 cls=0 hits=0:3201
+  level=P2 cls=1 hits=0:1257
+  level=P3 cls=0 hits=0:103
+  level=P3 cls=1 hits=0:409
+  level=P4 cls=0 hits=0:8
+  level=P4 cls=1 hits=0:101
+Epoch 22
+  level=P2 cls=0 hits=0:2638
+  level=P2 cls=1 hits=0:1327
+  level=P3 cls=0 hits=0:178
+  level=P3 cls=1 hits=0:765
+  level=P4 cls=1 hits=0:166
+Epoch 23
+  level=P2 cls=0 hits=0:3358
+  level=P2 cls=1 hits=0:1454
+  level=P3 cls=0 hits=0:161
+  level=P3 cls=1 hits=0:855
+  level=P4 cls=0 hits=0:5
+  level=P4 cls=1 hits=0:159
+Epoch 24
+  level=P2 cls=0 hits=0:2127
+  level=P2 cls=1 hits=0:889
+  level=P3 cls=0 hits=0:320
+  level=P3 cls=1 hits=0:764
+  level=P4 cls=0 hits=0:9
+  level=P4 cls=1 hits=0:193
+Epoch 25
+  level=P2 cls=0 hits=0:2037
+  level=P2 cls=1 hits=0:1802
+  level=P3 cls=0 hits=0:91
+  level=P3 cls=1 hits=0:614
+  level=P4 cls=0 hits=0:2
+  level=P4 cls=1 hits=0:69
+Epoch 26
+  level=P2 cls=0 hits=0:3250
+  level=P2 cls=1 hits=0:1405
+  level=P3 cls=0 hits=0:212
+  level=P3 cls=1 hits=0:988
+  level=P4 cls=0 hits=0:2
+  level=P4 cls=1 hits=0:96
+Epoch 27
+  level=P2 cls=0 hits=0:2647
+  level=P2 cls=1 hits=0:884
+  level=P3 cls=0 hits=0:120
+  level=P3 cls=1 hits=0:901
+  level=P4 cls=1 hits=0:54
+Epoch 28
+  level=P2 cls=0 hits=0:2689
+  level=P2 cls=1 hits=0:1724
+  level=P3 cls=0 hits=0:124
+  level=P3 cls=1 hits=0:860
+  level=P4 cls=0 hits=0:12
+  level=P4 cls=1 hits=0:189
+Epoch 29
+  level=P2 cls=0 hits=0:2964
+  level=P2 cls=1 hits=0:1224
+  level=P3 cls=0 hits=0:227
+  level=P3 cls=1 hits=0:806
+  level=P4 cls=0 hits=0:2
+  level=P4 cls=1 hits=0:99
+Epoch 30
+  level=P2 cls=0 hits=0:1168
+  level=P2 cls=1 hits=0:795
+  level=P3 cls=0 hits=0:186
+  level=P3 cls=1 hits=0:1207
+  level=P4 cls=0 hits=0:3
+  level=P4 cls=1 hits=0:150
+Epoch 31
+  level=P2 cls=0 hits=0:2934
+  level=P2 cls=1 hits=0:1864
+  level=P3 cls=0 hits=0:163
+  level=P3 cls=1 hits=0:956
+  level=P4 cls=0 hits=0:6
+  level=P4 cls=1 hits=0:101
+Epoch 32
+  level=P2 cls=0 hits=0:2745
+  level=P2 cls=1 hits=0:1558
+  level=P3 cls=0 hits=0:134
+  level=P3 cls=1 hits=0:775
+  level=P4 cls=0 hits=0:5
+  level=P4 cls=1 hits=0:263
+Epoch 33
+  level=P2 cls=0 hits=0:1432
+  level=P2 cls=1 hits=0:1234
+  level=P3 cls=0 hits=0:121
+  level=P3 cls=1 hits=0:559
+  level=P4 cls=0 hits=0:8
+  level=P4 cls=1 hits=0:270
+Epoch 34
+  level=P2 cls=0 hits=0:2938
+  level=P2 cls=1 hits=0:1727
+  level=P3 cls=0 hits=0:53
+  level=P3 cls=1 hits=0:859
+  level=P4 cls=0 hits=0:5
+  level=P4 cls=1 hits=0:66
+Epoch 35
+  level=P2 cls=0 hits=0:3895
+  level=P2 cls=1 hits=0:1719
+  level=P3 cls=0 hits=0:121
+  level=P3 cls=1 hits=0:679
+  level=P4 cls=1 hits=0:191
+Epoch 36
+  level=P2 cls=0 hits=0:2431
+  level=P2 cls=1 hits=0:1116
+  level=P3 cls=0 hits=0:179
+  level=P3 cls=1 hits=0:731
+  level=P4 cls=0 hits=0:1
+  level=P4 cls=1 hits=0:180
+Epoch 37
+  level=P2 cls=0 hits=0:2303
+  level=P2 cls=1 hits=0:907
+  level=P3 cls=0 hits=0:92
+  level=P3 cls=1 hits=0:867
+  level=P4 cls=0 hits=0:2
+  level=P4 cls=1 hits=0:224
+Epoch 38
+  level=P2 cls=0 hits=0:2312
+  level=P2 cls=1 hits=0:1250
+  level=P3 cls=0 hits=0:142
+  level=P3 cls=1 hits=0:714
+  level=P4 cls=0 hits=0:1
+  level=P4 cls=1 hits=0:129
+Epoch 39
+  level=P2 cls=0 hits=0:2116
+  level=P2 cls=1 hits=0:1088
+  level=P3 cls=0 hits=0:78
+  level=P3 cls=1 hits=0:929
+  level=P4 cls=0 hits=0:3
+  level=P4 cls=1 hits=0:121
+Epoch 40
+  level=P2 cls=0 hits=0:3038
+  level=P2 cls=1 hits=0:2213
+  level=P3 cls=0 hits=0:104
+  level=P3 cls=1 hits=0:881
+  level=P4 cls=0 hits=0:1
+  level=P4 cls=1 hits=0:70
+Epoch 41
+  level=P2 cls=0 hits=0:2164
+  level=P2 cls=1 hits=0:997
+  level=P3 cls=0 hits=0:110
+  level=P3 cls=1 hits=0:659
+  level=P4 cls=0 hits=0:1
+  level=P4 cls=1 hits=0:75
+Epoch 42
+  level=P2 cls=0 hits=0:3252
+  level=P2 cls=1 hits=0:1388
+  level=P3 cls=0 hits=0:316
+  level=P3 cls=1 hits=0:917
+  level=P4 cls=0 hits=0:2
+  level=P4 cls=1 hits=0:161
+Epoch 43
+  level=P2 cls=0 hits=0:1871
+  level=P2 cls=1 hits=0:1637
+  level=P3 cls=0 hits=0:72
+  level=P3 cls=1 hits=0:828
+  level=P4 cls=0 hits=0:1
+  level=P4 cls=1 hits=0:134
+Epoch 44
+  level=P2 cls=0 hits=0:3246
+  level=P2 cls=1 hits=0:1884
+  level=P3 cls=0 hits=0:109
+  level=P3 cls=1 hits=0:859
+  level=P4 cls=0 hits=0:3
+  level=P4 cls=1 hits=0:234
+Epoch 45
+  level=P2 cls=0 hits=0:2769
+  level=P2 cls=1 hits=0:1336
+  level=P3 cls=0 hits=0:189
+  level=P3 cls=1 hits=0:559
+  level=P4 cls=0 hits=0:9
+  level=P4 cls=1 hits=0:268
+Epoch 46
+  level=P2 cls=0 hits=0:2111
+  level=P2 cls=1 hits=0:1828
+  level=P3 cls=0 hits=0:90
+  level=P3 cls=1 hits=0:1056
+  level=P4 cls=0 hits=0:1
+  level=P4 cls=1 hits=0:223
+Epoch 47
+  level=P2 cls=0 hits=0:1889
+  level=P2 cls=1 hits=0:1159
+  level=P3 cls=0 hits=0:256
+  level=P3 cls=1 hits=0:617
+  level=P4 cls=1 hits=0:125
+Epoch 48
+  level=P2 cls=0 hits=0:1733
+  level=P2 cls=1 hits=0:1033
+  level=P3 cls=0 hits=0:147
+  level=P3 cls=1 hits=0:1123
+  level=P4 cls=0 hits=0:9
+  level=P4 cls=1 hits=0:142
+Epoch 49
+  level=P2 cls=0 hits=0:2609
+  level=P2 cls=1 hits=0:1329
+  level=P3 cls=0 hits=0:279
+  level=P3 cls=1 hits=0:477
+  level=P4 cls=0 hits=0:10
+  level=P4 cls=1 hits=0:174
+Epoch 50
+  level=P2 cls=0 hits=0:3236
+  level=P2 cls=1 hits=0:1623
+  level=P3 cls=0 hits=0:124
+  level=P3 cls=1 hits=0:653
+  level=P4 cls=0 hits=0:2
+  level=P4 cls=1 hits=0:135

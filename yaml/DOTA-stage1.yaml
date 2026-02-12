@@ -5,3 +5,6 @@ test: test_seen/images
 names:
   0: small-vehicle
   1: large-vehicle
+  2: plane
+  3: helicopter
+  4: ship

@@ -1,0 +1,97 @@
+#!/bin/bash
+#SBATCH --job-name=lora-replay-all
+#SBATCH --time=24:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --partition=gpu_a100
+#SBATCH --gpus-per-node=1
+#SBATCH --gres=gpu:1
+#SBATCH --output=logs/lora-replay-all-%j.out
+#SBATCH --error=logs/lora-replay-all-%j.err
+
+module purge
+module load 2023
+module load CUDA/12.4.0
+module load Python/3.11.3-GCCcore-12.3.0
+
+source $HOME/ednet_env/bin/activate
+cd $HOME/scriptie
+
+# NOTE:
+# - Replace MEMORY_STAGE1_DIR and MEMORY_STAGE2_DIR with your exemplar dirs (each with images/ and labels/).
+# - Adjust MEMORY_RATIO if needed.
+MEMORY_STAGE1_DIR=/home/ddwilde/scriptie/datasets/memory/stage1
+MEMORY_STAGE2_DIR=/home/ddwilde/scriptie/datasets/memory/stage2
+MEMORY_RATIO=0.25
+
+python train.py \
+  --cfg $HOME/scriptie/cfg/models/ednet/ednet-s.yaml \
+  --data $HOME/scriptie/yaml/DOTA-stage1.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project $HOME/scriptie/runs/dota_lora_replay \
+  --name stage1-lora-replay \
+  --workers 8 \
+  --weights pretrained/small.pt \
+  --override lora.enable=True \
+  --override "lora.feature_pyramid_indices=[19,22,25]" \
+  --override lora.include_detection_head=True \
+  --override "freeze=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]" \
+  --override replay.enable=True \
+  --override replay.buffer_per_class=128 \
+  --override replay.loss_weight=0.0 \
+  --override replay.tiny_max_pixels=320 \
+  --override replay.debug=True \
+  --override "stage.active_classes=[0,1]" \
+  --override "stage.prev_classes=[]"
+
+python train.py \
+  --cfg $HOME/scriptie/cfg/models/ednet/ednet-s.yaml \
+  --data $HOME/scriptie/yaml/DOTA-stage2.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project $HOME/scriptie/runs/dota_lora_replay \
+  --name stage2-lora-replay \
+  --workers 8 \
+  --weights $HOME/scriptie/runs/dota_lora_replay/stage1-lora-replay/weights/best.pt \
+  --override lora.enable=True \
+  --override "lora.feature_pyramid_indices=[19,22,25]" \
+  --override lora.include_detection_head=True \
+  --override "freeze=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]" \
+  --override replay.enable=True \
+  --override replay.buffer_per_class=128 \
+  --override replay.loss_weight=0.0 \
+  --override replay.init_buffer=$HOME/scriptie/runs/dota_lora_replay/stage1-lora-replay/replay/buffer.pt \
+  --override replay.memory_dir=$MEMORY_STAGE1_DIR \
+  --override replay.memory_ratio=$MEMORY_RATIO \
+  --override replay.tiny_max_pixels=320 \
+  --override "stage.active_classes=[0,1,2,3]" \
+  --override "stage.prev_classes=[0,1]"
+
+python train.py \
+  --cfg $HOME/scriptie/cfg/models/ednet/ednet-s.yaml \
+  --data $HOME/scriptie/yaml/DOTA-stage3.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project $HOME/scriptie/runs/dota_lora_replay \
+  --name stage3-lora-replay \
+  --workers 8 \
+  --weights $HOME/scriptie/runs/dota_lora_replay/stage2-lora-replay/weights/best.pt \
+  --override lora.enable=True \
+  --override "lora.feature_pyramid_indices=[19,22,25]" \
+  --override lora.include_detection_head=True \
+  --override "freeze=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]" \
+  --override replay.enable=True \
+  --override replay.buffer_per_class=128 \
+  --override replay.loss_weight=0.0 \
+  --override replay.init_buffer=$HOME/scriptie/runs/dota_lora_replay/stage2-lora-replay/replay/buffer.pt \
+  --override replay.memory_dir=$MEMORY_STAGE2_DIR \
+  --override replay.memory_ratio=$MEMORY_RATIO \
+  --override replay.tiny_max_pixels=320 \
+  --override "stage.active_classes=[0,1,2,3,4]" \
+  --override "stage.prev_classes=[0,1,2,3]"
