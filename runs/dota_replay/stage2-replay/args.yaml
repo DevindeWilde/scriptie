@@ -48,12 +48,9 @@ kd:
   teacher_nc: null
   debug_batches: 10
 stage:
-  active_classes:
-  - 2
-  - 3
-  prev_classes:
-  - 0
-  - 1
+  active_classes: null
+  prev_classes: null
+  pseudo_labels_dir: null
 overlap_mask: true
 mask_ratio: 4
 dropout: 0.0
