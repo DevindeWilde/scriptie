@@ -566,22 +566,7 @@ class DetectionTrainer(BaseTrainer):
         kd_active = getattr(self, "kd_enabled", False) and self.kd_teacher is not None
         if not self.replay_enabled and not kd_active:
             return None
-<<<<<<< HEAD
 
-=======
-            
-        teacher_ready = (
-            self.replay_enabled
-            and self.feature_tapper is not None
-            and self.replay_teacher_buffer is not None
-            and len(self.replay_teacher_buffer) > 0
-        )
-    
-        criterion = self._ensure_replay_tap_config()
-        features = self.feature_tapper.pop()
-        if not features:
-            return None
->>>>>>> fce9c12f74e5b3fdf0ad9da19263e6cf0252af95
         aux_loss = None
 
         # --- replay path ---
