@@ -1,0 +1,82 @@
+#!/bin/bash
+#SBATCH --job-name=dota-kd
+#SBATCH --time=24:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --partition=gpu_a100
+#SBATCH --gpus-per-node=1
+#SBATCH --gres=gpu:1
+#SBATCH --output=logs/dota-kd-%j.out
+#SBATCH --error=logs/dota-kd-%j.err
+
+module purge
+module load 2023
+module load CUDA/12.4.0
+module load Python/3.11.3-GCCcore-12.3.0
+
+source $HOME/ednet_env/bin/activate
+cd $HOME/scriptie
+
+RUNS=$HOME/scriptie/runs
+CFG=$HOME/scriptie/ednet/cfg/models/ednet/ednet-s.yaml
+PRETRAINED=$HOME/scriptie/pretrained/small.pt
+
+# ── Stage 1 ─────────────────────────────────────────────────────────────────
+# Train on classes {0: small-vehicle, 1: large-vehicle} — no KD yet (no prior teacher)
+python train.py \
+  --cfg $CFG \
+  --data $HOME/scriptie/yaml/DOTA-stage1.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project $RUNS/dota_kd \
+  --name stage1-kd \
+  --workers 8 \
+  --weights $PRETRAINED \
+  --override "stage.active_classes=[0,1]"
+
+# ── Stage 2 ─────────────────────────────────────────────────────────────────
+# Introduce {2: plane, 3: helicopter}.
+# Teacher = stage-1 model (nc=2); KD distills old-class knowledge to student.
+python train.py \
+  --cfg $CFG \
+  --data $HOME/scriptie/yaml/DOTA-stage2.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project $RUNS/dota_kd \
+  --name stage2-kd \
+  --workers 8 \
+  --weights $RUNS/dota_kd/stage1-kd/weights/best.pt \
+  --override "stage.active_classes=[2,3]" \
+  --override "stage.prev_classes=[0,1]" \
+  --override "kd.enable=True" \
+  --override "kd.teacher_weights=$RUNS/dota_kd/stage1-kd/weights/best.pt" \
+  --override "kd.teacher_nc=2" \
+  --override "kd.lambda_cls=1.0" \
+  --override "kd.lambda_bbox=1.0" \
+  --override "kd.top_k=10"
+
+# ── Stage 3 ─────────────────────────────────────────────────────────────────
+# Introduce {4: ship}.
+# Teacher = stage-2 model (nc=4); KD distills old-class knowledge to student.
+python train.py \
+  --cfg $CFG \
+  --data $HOME/scriptie/yaml/DOTA-stage3.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project $RUNS/dota_kd \
+  --name stage3-kd \
+  --workers 8 \
+  --weights $RUNS/dota_kd/stage2-kd/weights/best.pt \
+  --override "stage.active_classes=[4]" \
+  --override "stage.prev_classes=[0,1,2,3]" \
+  --override "kd.enable=True" \
+  --override "kd.teacher_weights=$RUNS/dota_kd/stage2-kd/weights/best.pt" \
+  --override "kd.teacher_nc=4" \
+  --override "kd.lambda_cls=1.0" \
+  --override "kd.lambda_bbox=1.0" \
+  --override "kd.top_k=10"

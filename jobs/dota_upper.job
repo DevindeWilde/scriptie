@@ -1,0 +1,38 @@
+#!/bin/bash
+#SBATCH --job-name=dota-upper
+#SBATCH --time=12:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --partition=gpu_a100
+#SBATCH --gpus-per-node=1
+#SBATCH --gres=gpu:1
+#SBATCH --output=logs/dota-upper-%j.out
+#SBATCH --error=logs/dota-upper-%j.err
+
+module purge
+module load 2023
+module load CUDA/12.4.0
+module load Python/3.11.3-GCCcore-12.3.0
+
+source $HOME/ednet_env/bin/activate
+cd $HOME/scriptie
+
+RUNS=$HOME/scriptie/runs
+CFG=$HOME/scriptie/ednet/cfg/models/ednet/ednet-s.yaml
+PRETRAINED=$HOME/scriptie/pretrained/small.pt
+
+# Single joint training run on all 5 classes — upper bound (oracle)
+# Uses DOTA-filtered.yaml: full dataset with all {0: small-vehicle, 1: large-vehicle,
+# 2: plane, 3: helicopter, 4: ship}
+python train.py \
+  --cfg $CFG \
+  --data $HOME/scriptie/yaml/DOTA-filtered.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project $RUNS/dota_upper \
+  --name upper \
+  --workers 8 \
+  --weights $PRETRAINED

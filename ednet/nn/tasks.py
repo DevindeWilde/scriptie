@@ -51,15 +51,6 @@ from ednet.nn.modules import (
     v10Detect,
     C2f_FCA,
 )
-from ednet.nn.lora import (
-    LoRAConfig,
-    freeze_blocks_except_lora,
-    inject_lora_ednet,
-    iter_lora_modules,
-    load_lora_state_dict,
-    lora_state_dict,
-)
-from ednet.nn.modules import LoRAConv2d
 from ednet.utils import DEFAULT_CFG_DICT, DEFAULT_CFG_KEYS, LOGGER, colorstr, emojis, yaml_load
 from ednet.utils.checks import check_requirements, check_suffix, check_yaml
 from ednet.utils.loss import (
@@ -88,37 +79,6 @@ except ImportError:
 
 class BaseModel(nn.Module):
     """The BaseModel class serves as a base class for all the models in the ednet YOLO family."""
-
-    _lora_registry: list = None
-    _lora_config: LoRAConfig | None = None
-
-    def enable_lora(self, cfg: LoRAConfig | None = None):
-        """
-        Inject LoRA adapters into the model and optionally freeze the backbone weights.
-
-        Args:
-            cfg (LoRAConfig | None): Configuration describing where adapters should be added.
-            freeze_backbone (bool): When True, freezes all non-LoRA parameters.
-        """
-        cfg = cfg or LoRAConfig()
-        registry = inject_lora_ednet(self, cfg)
-        self._lora_config = cfg
-        self._lora_registry = registry
-        return registry
-
-    def lora_adapters(self):
-        """Return a list of (name, module) tuples for registered LoRA adapters."""
-        if self._lora_registry is not None:
-            return self._lora_registry
-        return list(iter_lora_modules(self))
-
-    def lora_state_dict(self):
-        """Return a state dict containing only LoRA adapter weights."""
-        return lora_state_dict(self)
-
-    def load_lora_state_dict(self, state_dict):
-        """Load adapter weights produced by `lora_state_dict`."""
-        load_lora_state_dict(self, state_dict)
 
     def forward(self, x, *args, **kwargs):
         """
@@ -228,9 +188,6 @@ class BaseModel(nn.Module):
                     if isinstance(m, Conv2):
                         m.fuse_convs()
                     conv_layer = getattr(m, "conv", None)
-                    if isinstance(conv_layer, LoRAConv2d):
-                        LOGGER.warning(f"Skipping fusion for LoRA-wrapped layer {m.__class__.__name__}")
-                        continue
                     if conv_layer is None or not hasattr(conv_layer, "in_channels"):
                         LOGGER.warning("Skipping fusion for layer without standard Conv2d weights")
                         continue
@@ -642,10 +599,7 @@ def attempt_load_weights(weights, device=None, inplace=True, fuse=False):
             model.stride = torch.tensor([32.0])
 
         # Append
-        do_fuse = fuse and hasattr(model, "fuse") and not any(isinstance(m, LoRAConv2d) for m in model.modules())
-        if fuse and not do_fuse:
-            LOGGER.warning("Skipping layer fusion for LoRA-enabled model during weight loading.")
-        ensemble.append(model.fuse().eval() if do_fuse else model.eval())  # model in eval mode
+        ensemble.append(model.fuse().eval() if fuse and hasattr(model, "fuse") else model.eval())  # model in eval mode
 
     # Module updates
     for m in ensemble.modules():
@@ -680,10 +634,7 @@ def attempt_load_one_weight(weight, device=None, inplace=True, fuse=False):
     if not hasattr(model, "stride"):
         model.stride = torch.tensor([32.0])
 
-    do_fuse = fuse and hasattr(model, "fuse") and not any(isinstance(m, LoRAConv2d) for m in model.modules())
-    if fuse and not do_fuse:
-        LOGGER.warning("Skipping layer fusion for LoRA-enabled model during weight loading.")
-    model = model.fuse().eval() if do_fuse else model.eval()  # model in eval mode
+    model = model.fuse().eval() if fuse and hasattr(model, "fuse") else model.eval()  # model in eval mode
 
     # Module updates
     for m in model.modules():

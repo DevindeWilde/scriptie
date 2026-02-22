@@ -82,6 +82,11 @@ def seed_worker(worker_id):  # noqa
 def build_yolo_dataset(cfg, img_path, batch, data, mode="train", rect=False, stride=32, multi_modal=False):
     """Build YOLO Dataset."""
     dataset = YOLOMultiModalDataset if multi_modal else YOLODataset
+    pseudo_dir = None
+    if mode == "train":
+        stage_cfg = getattr(cfg, "stage", None) or {}
+        if isinstance(stage_cfg, dict):
+            pseudo_dir = stage_cfg.get("pseudo_labels_dir")
     return dataset(
         img_path=img_path,
         imgsz=cfg.imgsz,
@@ -98,6 +103,7 @@ def build_yolo_dataset(cfg, img_path, batch, data, mode="train", rect=False, str
         classes=cfg.classes,
         data=data,
         fraction=cfg.fraction if mode == "train" else 1.0,
+        pseudo_labels_dir=pseudo_dir,
     )
 
 

@@ -1,9 +1,8 @@
 import contextlib
-import itertools
 import math
 import random
 from collections import defaultdict
-from copy import copy
+from copy import copy, deepcopy
 from pathlib import Path
 from typing import Optional
 from collections import Counter
@@ -23,9 +22,9 @@ from ednet.engine.replay import (
 )
 from ednet.engine.trainer import BaseTrainer
 from ednet.models import yolo
-from ednet.nn.lora import LoRAConfig
 from ednet.nn.tasks import DetectionModel
 from ednet.utils import LOGGER, RANK
+from ednet.utils.tal import dist2bbox, make_anchors
 from ednet.utils.plotting import plot_images, plot_labels, plot_results
 from ednet.utils.torch_utils import de_parallel, torch_distributed_zero_first
 
@@ -122,40 +121,16 @@ class DetectionTrainer(BaseTrainer):
                     prev_ids = [] if prev_ids == "" else prev_ids.split(",")
                 self.prev_class_ids = tuple(sorted(int(x) for x in prev_ids))
                 LOGGER.info(f"Replay/previous classes for this stage: {self.prev_class_ids}")
+            # Pseudo-labels provide explicit supervision for old classes, so extend active_class_ids
+            # to include prev_class_ids — otherwise the loss would silently ignore old class annotations.
+            if stage_cfg.get("pseudo_labels_dir") and self.prev_class_ids and self.active_class_ids is not None:
+                combined = tuple(sorted(set(self.active_class_ids) | set(self.prev_class_ids)))
+                self.active_class_ids = combined
+                LOGGER.info(f"Pseudo-labels active: extended active_classes → {self.active_class_ids}")
         if weights:
             model.load(weights)
         model.active_class_ids = self.active_class_ids
         model.prev_class_ids = self.prev_class_ids
-        lora_args = getattr(self.args, "lora", None)
-        self.lora_enabled = bool(isinstance(lora_args, dict) and lora_args.get("enable"))
-        self.lora_freeze_backbone = False
-        if self.lora_enabled:
-            lora_config = LoRAConfig(
-                rank=int(lora_args.get("rank", 8)),
-                alpha=float(lora_args.get("alpha", 16.0)),
-                dropout=float(lora_args.get("dropout", 0.0)),
-                feature_pyramid_indices=tuple(int(idx) for idx in lora_args.get("feature_pyramid_indices", (19, 22, 25))),
-                include_detection_head=bool(lora_args.get("include_detection_head", False)),
-            )
-            freeze_backbone = bool(lora_args.get("freeze_backbone", True))
-            self.lora_freeze_backbone = freeze_backbone
-            adapters = model.enable_lora(lora_config)
-            LOGGER.info(
-                f"LoRA enabled: {len(adapters)} adapters (rank={lora_config.rank}, alpha={lora_config.alpha}, "
-            )
-            if adapters and RANK in {-1, 0}:
-                adapter_names = [name for name, _ in adapters]
-                LOGGER.info("LoRA adapter registry: %d modules -> %s", len(adapter_names), adapter_names)
-            trainable = [(n, p) for n, p in model.named_parameters() if p.requires_grad]
-            total_params = sum(p.numel() for _, p in trainable)
-            head = [(n, p.numel()) for n, p in itertools.islice(trainable, 20)]
-            LOGGER.info(
-                "Trainable params: %d tensors (%d weights) example=%s",
-                len(trainable), total_params, head,
-            )
-            adapter_path = lora_args.get("init_adapter")
-            if adapter_path:
-                self._load_adapter_weights(model, adapter_path)
         replay_args = getattr(self.args, "replay", None)
         self.replay_enabled = bool(isinstance(replay_args, dict) and replay_args.get("enable"))
         self.feature_tapper = None
@@ -178,6 +153,14 @@ class DetectionTrainer(BaseTrainer):
         self._memory_iter = None
         self._feature_tapper_needs_activation = False
         self.replay_slot_hits = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
+        # Box prototype replay defaults (populated inside if self.replay_enabled below)
+        self.replay_box_enabled = False
+        self.box_feature_tapper = None
+        self.replay_box_teacher_buffer = None
+        self.replay_box_student_buffer = None
+        self.replay_box_loss_weight = 1.0
+        self.replay_box_save_path: Optional[Path] = None
+        self._box_feature_tapper_needs_activation = False
         if self.replay_enabled:
             tap_layers = replay_args.get("tap_layers") or {}
             layer_map = {k: int(v) for k, v in tap_layers.items()} if tap_layers else FeatureTapConfig().layers.copy()
@@ -258,21 +241,118 @@ class DetectionTrainer(BaseTrainer):
             else:
                 self.replay_memory_dir = None
                 self.replay_memory_ratio = 0.0
+            # --- Box prototype replay (SA-AB box branch) ---
+            box_args = (replay_args.get("box") or {}) if isinstance(replay_args, dict) else {}
+            self.replay_box_enabled = bool(box_args.get("enable", False))
+            if self.replay_box_enabled:
+                self.replay_box_loss_weight = float(box_args.get("loss_weight", 1.0))
+                if detect_module is not None and level_indices:
+                    self.box_feature_tapper = DetectionPreLogitTapper(
+                        detect_module,
+                        level_to_indices=level_indices,
+                        detach=False,
+                        auto_activate=False,
+                        branch_attr="cv2",
+                    )
+                    self._box_feature_tapper_needs_activation = True
+                    LOGGER.info("Box replay feature tapper initialized (cv2) for levels: %s", list(level_indices.keys()))
+                else:
+                    LOGGER.warning("Box replay tapper skipped; detection head mapping unavailable.")
+                self.replay_box_teacher_buffer = TinyReplayBuffer(
+                    per_class_capacity=capacity,
+                    dtype=dtype,
+                    device="cpu",
+                    carryover_growth=self.replay_capacity_growth,
+                    **proto_kwargs,
+                )
+                self.replay_box_student_buffer = TinyReplayBuffer(
+                    per_class_capacity=capacity,
+                    dtype=dtype,
+                    device="cpu",
+                    carryover_growth=self.replay_capacity_growth,
+                    **proto_kwargs,
+                )
+                if store_dir:
+                    box_buffer_file = box_args.get("buffer_file", "box_buffer.pt") or "box_buffer.pt"
+                    self.replay_box_save_path = store_root / box_buffer_file
+                box_init = box_args.get("init_buffer")
+                if box_init:
+                    self._load_box_teacher_buffer(Path(box_init))
+                LOGGER.info(
+                    "Box prototype replay enabled | loss_weight=%.2f",
+                    self.replay_box_loss_weight,
+                )
+        kd_args = getattr(self.args, "kd", None)
+        self.kd_enabled = bool(isinstance(kd_args, dict) and kd_args.get("enable"))
+        self.kd_teacher = None
+        self._kd_student_raw = None
+        self._kd_hook_handle = None
+        self._kd_hook_pending = False
+        self._kd_dbg_left = 0
+        kd_dict = kd_args if isinstance(kd_args, dict) else {}
+        self.kd_lambda_cls = float(kd_dict.get("lambda_cls", 1.0))
+        self.kd_lambda_bbox = float(kd_dict.get("lambda_bbox", 1.0))
+        self.kd_top_k = int(kd_dict.get("top_k", 10))
+        self._kd_dbg_left = int(kd_dict.get("debug_batches", 10))
+        if self.kd_enabled and self.prev_class_ids and weights:
+            teacher_source = kd_dict.get("teacher_weights", None)
+            if teacher_source is None and isinstance(weights, (str, Path)):
+                teacher_source = weights
+
+            if teacher_source is not None:
+                # Preferred path: build teacher from previous checkpoint file.
+                teacher_source = Path(teacher_source)
+                if not teacher_source.exists():
+                    LOGGER.warning(f"KD teacher checkpoint not found: {teacher_source}. Falling back to in-memory copy.")
+                else:
+                    # Load checkpoint once — use it for both nc inference and weight extraction.
+                    ckpt = torch.load(str(teacher_source), map_location="cpu", weights_only=False)
+                    nc_prev = int(self.data["nc"])  # fallback
+                    if isinstance(ckpt, dict):
+                        nc_prev = int(ckpt.get("train_args", {}).get("nc", nc_prev))
+                    nc_prev = int(kd_dict.get("teacher_nc", nc_prev))  # explicit override wins
+                    teacher_module = (ckpt.get("ema") or ckpt.get("model")).float()
+                    teacher = DetectionModel(cfg, nc=nc_prev, verbose=False)
+                    # BaseModel.load() expects an nn.Module or {"model": module} dict, not a path.
+                    teacher.load(teacher_module)
+                    for p in teacher.parameters():
+                        p.requires_grad_(False)
+                    teacher.eval()
+                    self.kd_teacher = teacher
+                    LOGGER.info(
+                        "KD teacher initialized from checkpoint | nc_prev=%d | nc_curr=%d | prev_classes=%s",
+                        nc_prev,
+                        self.data["nc"],
+                        self.prev_class_ids,
+                    )
+
+            if self.kd_teacher is None and isinstance(weights, nn.Module):
+                # Fallback path: clone in-memory model (safe when checkpoint path is unavailable).
+                # With growing nc this may not preserve old-head semantics, so checkpoint path is preferred.
+                self.kd_teacher = deepcopy(weights)
+                for p in self.kd_teacher.parameters():
+                    p.requires_grad_(False)
+                self.kd_teacher.eval()
+                LOGGER.warning(
+                    "KD teacher initialized from in-memory model; provide kd.teacher_weights for strict growing-nc KD."
+                )
+
+            if self.kd_teacher is not None:
+                # Delay hook registration until after BaseTrainer._setup_train builds EMA.
+                # Otherwise deepcopy(model) inside EMA includes hook state and can fail.
+                self._kd_hook_pending = True
+                LOGGER.info(
+                    "KD active | prev_classes=%s | top_k=%d | lambda_cls=%.2f | lambda_bbox=%.2f",
+                    self.prev_class_ids,
+                    self.kd_top_k,
+                    self.kd_lambda_cls,
+                    self.kd_lambda_bbox,
+                )
         base_loss_names = ["box_loss", "cls_loss", "dfl_loss"]
         if self.replay_enabled:
             base_loss_names.append("replay_loss")
         self.loss_names = tuple(base_loss_names)
         return model
-
-    def _load_adapter_weights(self, model, adapter_path):
-        """Load LoRA adapter weights from disk if available."""
-        adapter_path = Path(adapter_path)
-        if not adapter_path.exists():
-            LOGGER.warning(f"LoRA adapter initialization skipped; file not found: {adapter_path}")
-            return
-        state = torch.load(adapter_path, map_location="cpu")
-        model.load_lora_state_dict(state)
-        LOGGER.info(f"Loaded LoRA adapter weights from {adapter_path}")
 
     def get_validator(self):
         """Returns a DetectionValidator for YOLO model validation."""
@@ -286,11 +366,19 @@ class DetectionTrainer(BaseTrainer):
 
     def _setup_train(self, world_size):
         super()._setup_train(world_size)
+        if self._kd_hook_pending and self._kd_hook_handle is None:
+            self._attach_kd_student_hook(self.model)
+            self._kd_hook_pending = False
         if self.replay_enabled and getattr(self, "feature_tapper", None) and self._feature_tapper_needs_activation:
             self.feature_tapper.activate()
             self._feature_tapper_needs_activation = False
+        if getattr(self, "replay_box_enabled", False) and getattr(self, "box_feature_tapper", None) and self._box_feature_tapper_needs_activation:
+            self.box_feature_tapper.activate()
+            self._box_feature_tapper_needs_activation = False
         if self.replay_enabled:
             self._ensure_replay_tap_config()
+        if getattr(self, "kd_teacher", None) is not None:
+            self.kd_teacher.to(self.device)
         if self.replay_memory_dir and self.replay_memory_ratio > 0:
             self._build_memory_loader()
         else:
@@ -440,68 +528,262 @@ class DetectionTrainer(BaseTrainer):
         cls = np.concatenate([lb["cls"] for lb in self.train_loader.dataset.labels], 0)
         plot_labels(boxes, cls.squeeze(), names=self.data["names"], save_dir=self.save_dir, on_plot=self.on_plot)
 
+    def _kd_student_hook(self, module, inp, out):
+        """Forward hook on the detect head; captures raw training-mode outputs for KD."""
+        self._kd_student_raw = out  # {"one2many": [...], "one2one": [...]}
+
+    def _attach_kd_student_hook(self, model):
+        """Attach the student detect-head forward hook used by KD."""
+        if getattr(self, "_kd_hook_handle", None) is not None:
+            self._kd_hook_handle.remove()
+            self._kd_hook_handle = None
+        detect_head = de_parallel(model).model[-1]
+        self._kd_hook_handle = detect_head.register_forward_hook(self._kd_student_hook)
+
     def _before_checkpoint(self):
         if getattr(self, "feature_tapper", None):
             self.feature_tapper.deactivate()
+        if getattr(self, "box_feature_tapper", None):
+            self.box_feature_tapper.deactivate()
+        if getattr(self, "_kd_hook_handle", None) is not None:
+            self._kd_hook_handle.remove()
+            self._kd_hook_handle = None
         return {}
 
     def _after_checkpoint(self, ctx):
         if getattr(self, "feature_tapper", None):
             self.feature_tapper.activate()
+        if getattr(self, "box_feature_tapper", None):
+            self.box_feature_tapper.activate()
+        if getattr(self, "kd_teacher", None) is not None and self._kd_hook_handle is None:
+            self._attach_kd_student_hook(self.model)
         if self.replay_enabled:
             self._maybe_save_replay_buffer(ctx)
         super()._after_checkpoint(ctx)
 
     def compute_auxiliary_loss(self, batch):
-        """Compute replay-based feature consistency loss."""
-        #print("DetectionTrainer.compute_auxiliary_loss called.")
-        if self.replay_enabled == False:
+        """Compute replay and/or knowledge-distillation auxiliary losses."""
+        kd_active = getattr(self, "kd_enabled", False) and self.kd_teacher is not None
+        if not self.replay_enabled and not kd_active:
             return None
-            
-        teacher_ready = (
-            self.replay_enabled
-            and self.feature_tapper is not None
-            and self.replay_teacher_buffer is not None
-            and len(self.replay_teacher_buffer) > 0
-        )
 
-        if not teacher_ready:
-            print("No replay auxiliary loss computed: teacher_ready =", teacher_ready)
-    
-        criterion = self._ensure_replay_tap_config()
-        features = self.feature_tapper.pop()
-        if not features:
-            return None
         aux_loss = None
-        if teacher_ready:
-            #print("Computing replay auxiliary loss with teacher buffer...")
-            replay_items = self._gather_embeddings(features, attr="last_replay_cells", criterion=criterion)
-            #print(f"  Gathered {len(replay_items)} replay embeddings from tapped features.")
-            if replay_items:
-                #print("replay_items levels:", Counter([it.level for it in replay_items]))
-                grouped = self._group_embeddings(replay_items)
-                self._log_embedding_stats(grouped)
-                replay_batch = build_replay_batch(
-                    self.replay_teacher_buffer,
-                    per_class=self.replay_samples_per_class,
-                    balance_levels=self.replay_levels,
-                    device=self.device,
-                )
-                aux_loss = self._compute_replay_consistency(grouped, replay_batch)
-                
-                #print("  Computed replay consistency loss:", float(aux_loss) if aux_loss is not None else None)
-        if self.replay_student_buffer is not None:
-            #print("Updating student replay buffer with new embeddings...")
-            student_items = self._gather_embeddings(features, attr="last_positive_cells", criterion=criterion)
-            #print(f"  Gathered {len(student_items)} student embeddings from tapped features.")
-            for item in student_items:
-                #print("    Student replay item:", item)
-                self.replay_student_buffer.add(item)
-        if aux_loss is None:
-            #print("No replay auxiliary loss computed: aux_loss is None")
+
+        # --- replay path ---
+        if self.replay_enabled:
+            teacher_ready = (
+                self.feature_tapper is not None
+                and self.replay_teacher_buffer is not None
+                and len(self.replay_teacher_buffer) > 0
+            )
+            if not teacher_ready:
+                print("No replay auxiliary loss computed: teacher_ready =", teacher_ready)
+            criterion = self._ensure_replay_tap_config()
+            # Snapshot index data before _gather_embeddings clears the criterion attributes.
+            # These refs remain valid even after the criterion attributes are set to None.
+            replay_index_raw = getattr(criterion, "last_replay_cells", None)
+            student_index_raw = getattr(criterion, "last_positive_cells", None)
+            features = self.feature_tapper.pop() if self.feature_tapper is not None else {}
+            box_features = self.box_feature_tapper.pop() if getattr(self, "box_feature_tapper", None) else {}
+            if features:
+                if teacher_ready:
+                    replay_items = self._gather_embeddings(features, attr="last_replay_cells", criterion=criterion)
+                    if replay_items:
+                        grouped = self._group_embeddings(replay_items)
+                        self._log_embedding_stats(grouped)
+                        replay_batch = build_replay_batch(
+                            self.replay_teacher_buffer,
+                            per_class=self.replay_samples_per_class,
+                            balance_levels=self.replay_levels,
+                            device=self.device,
+                        )
+                        replay_loss = self._compute_replay_consistency(grouped, replay_batch)
+                        if replay_loss is not None:
+                            aux_loss = replay_loss * self.replay_loss_weight
+                if self.replay_student_buffer is not None:
+                    student_items = self._gather_embeddings(features, attr="last_positive_cells", criterion=criterion)
+                    for item in student_items:
+                        self.replay_student_buffer.add(item)
+            # --- Box prototype replay path (uses same grid-cell positions as cls replay) ---
+            box_teacher_ready = (
+                getattr(self, "replay_box_enabled", False)
+                and getattr(self, "box_feature_tapper", None) is not None
+                and self.replay_box_teacher_buffer is not None
+                and len(self.replay_box_teacher_buffer) > 0
+            )
+            if box_features and getattr(self, "replay_box_enabled", False):
+                if box_teacher_ready and replay_index_raw is not None:
+                    box_replay_items = self._gather_embeddings_from_index(box_features, replay_index_raw, criterion)
+                    if box_replay_items:
+                        box_grouped = self._group_embeddings(box_replay_items)
+                        box_replay_batch = build_replay_batch(
+                            self.replay_box_teacher_buffer,
+                            per_class=self.replay_samples_per_class,
+                            balance_levels=self.replay_levels,
+                            device=self.device,
+                        )
+                        box_replay_loss = self._compute_replay_consistency(
+                            box_grouped, box_replay_batch, log_prefix="replay_box",
+                            teacher_buffer=self.replay_box_teacher_buffer,
+                        )
+                        if box_replay_loss is not None:
+                            box_aux = box_replay_loss * self.replay_box_loss_weight
+                            aux_loss = box_aux if aux_loss is None else aux_loss + box_aux
+                if self.replay_box_student_buffer is not None and student_index_raw is not None:
+                    box_student_items = self._gather_embeddings_from_index(
+                        box_features, student_index_raw, criterion, detach=True
+                    )
+                    for item in box_student_items:
+                        self.replay_box_student_buffer.add(item)
+
+        # --- KD path ---
+        if kd_active:
+            kd_loss = self._compute_kd_loss(batch)
+            if kd_loss is not None:
+                if self._kd_dbg_left > 0:
+                    LOGGER.info("[KD] aux kd_loss=%.6f", float(kd_loss.detach()))
+                aux_loss = kd_loss if aux_loss is None else aux_loss + kd_loss
+
+        return aux_loss
+
+    def _compute_kd_loss(self, batch):
+        """Compute ILOD/RILOD knowledge distillation loss (both heads)."""
+        if self._kd_student_raw is None:
             return None
-        #print("Replay auxiliary loss computed:", float(aux_loss))
-        return aux_loss * self.replay_loss_weight
+
+        if self._kd_dbg_left > 0:
+            LOGGER.info(
+                "[KD] start | prev=%s | top_k=%d | lambda_cls=%.3f | lambda_bbox=%.3f",
+                self.prev_class_ids,
+                self.kd_top_k,
+                self.kd_lambda_cls,
+                self.kd_lambda_bbox,
+            )
+
+        student_out = self._kd_student_raw  # captured by hook during main forward
+        self._kd_student_raw = None         # clear for next step
+        if self._kd_dbg_left > 0:
+            LOGGER.info(
+                "[KD] student_out type=%s keys=%s",
+                type(student_out),
+                list(student_out.keys()) if isinstance(student_out, dict) else None,
+            )
+
+        # Guard: only v10Detect (end2end) returns the required dict format
+        if not isinstance(student_out, dict):
+            return None
+
+        imgs = batch["img"]  # (B, 3, H, W) already on device and normalized
+
+        # Run teacher: backbone+neck stay in eval (frozen BN running stats).
+        # Only set detect_t.training = True directly (not .train()) so that
+        # forward_end2end returns the raw dict without recursively touching child BN.
+        t_raw = {}
+        detect_t = de_parallel(self.kd_teacher).model[-1]
+
+        def _teacher_hook(module, inp, out):
+            t_raw["out"] = out
+
+        handle = detect_t.register_forward_hook(_teacher_hook)
+        try:
+            with torch.no_grad():
+                self.kd_teacher.eval()
+                detect_t.training = True       # flag only; child BN stays in eval
+                self.kd_teacher.predict(imgs)  # triggers hook
+        finally:
+            detect_t.training = False          # restore eval
+            handle.remove()
+
+        if "out" not in t_raw or not isinstance(t_raw["out"], dict):
+            return None
+
+        teacher_out = t_raw["out"]
+        if self._kd_dbg_left > 0:
+            LOGGER.info(
+                "[KD] teacher_out keys=%s | teacher.training=%s | detect_head.training=%s",
+                list(teacher_out.keys()) if isinstance(teacher_out, dict) else None,
+                self.kd_teacher.training,
+                detect_t.training,
+            )
+        detect_s = de_parallel(self.model).model[-1]
+        nc_curr = de_parallel(self.model).nc
+        nc_prev = getattr(self, "kd_nc_prev", nc_curr)
+        prev_ids = list(self.prev_class_ids)
+
+        total_loss = None
+        for head_key in ("one2many", "one2one"):
+            head_loss = self._kd_head_loss(
+                student_out[head_key], teacher_out[head_key],
+                detect_s, nc_curr, nc_prev, prev_ids, imgs.device,
+            )
+            if head_loss is not None:
+                total_loss = head_loss if total_loss is None else total_loss + head_loss
+        if self._kd_dbg_left > 0:
+            self._kd_dbg_left -= 1
+        return total_loss
+
+    def _kd_head_loss(self, s_feats, t_feats, detect, nc_curr, nc_prev, prev_ids, device):
+        """KD loss for one head: L2 cls + Smooth L1 box on teacher top-k anchor positions.
+
+        nc_curr: student head nc (may be larger than teacher for growing-nc scenarios)
+        nc_prev: teacher head nc (always matches the saved checkpoint)
+        """
+        B = s_feats[0].shape[0]
+        reg4 = detect.reg_max * 4  # 64
+
+        # Flatten and cat across scales with correct nc per model
+        s_cat = torch.cat([f.view(B, nc_curr + reg4, -1) for f in s_feats], dim=2)
+        t_cat = torch.cat([f.view(B, nc_prev + reg4, -1) for f in t_feats], dim=2)
+
+        s_box_raw, s_cls_raw = s_cat.split((reg4, nc_curr), dim=1)
+        t_box_raw, t_cls_raw = t_cat.split((reg4, nc_prev), dim=1)
+
+        # Anchors from student feature shapes (same grid as teacher — identical architecture)
+        anchors, stride_t = (x.transpose(0, 1) for x in make_anchors(s_feats, detect.stride, 0.5))
+        # anchors: (2, sum_HW), stride_t: (1, sum_HW)
+
+        # Decode boxes via DFL (DFL weights are fixed/non-learnable, identical in both models)
+        s_boxes = dist2bbox(detect.dfl(s_box_raw), anchors.unsqueeze(0), xywh=True, dim=1) * stride_t
+        t_boxes = dist2bbox(detect.dfl(t_box_raw), anchors.unsqueeze(0), xywh=True, dim=1) * stride_t
+        # Both: (B, 4, sum_HW)
+
+        s_cls = s_cls_raw.sigmoid()  # (B, nc, sum_HW)
+        t_cls = t_cls_raw.sigmoid()
+
+        # Top-k anchor selection per image by teacher's max old-class confidence
+        t_old_conf = t_cls[:, prev_ids, :].max(dim=1).values  # (B, sum_HW)
+
+        cls_losses, box_losses = [], []
+        k = min(self.kd_top_k, t_old_conf.shape[1])
+
+        for b in range(B):
+            topk_idx = t_old_conf[b].topk(k).indices  # (k,)
+
+            # L2 on old-class sigmoid probabilities
+            s_sel = s_cls[b][:, topk_idx][prev_ids, :]  # (|prev|, k)
+            t_sel = t_cls[b][:, topk_idx][prev_ids, :]
+            cls_losses.append(F.mse_loss(s_sel, t_sel))
+
+            # Smooth L1 on decoded boxes
+            s_bsel = s_boxes[b, :, topk_idx]  # (4, k)
+            t_bsel = t_boxes[b, :, topk_idx]
+            box_losses.append(F.smooth_l1_loss(s_bsel, t_bsel))
+
+        if not cls_losses:
+            return None
+
+        cls_loss = torch.stack(cls_losses).mean()
+        box_loss = torch.stack(box_losses).mean()
+        total = self.kd_lambda_cls * cls_loss + self.kd_lambda_bbox * box_loss
+        if self._kd_dbg_left > 0:
+            LOGGER.info(
+                "[KD] head loss | k=%d | cls=%.6f | box=%.6f | total=%.6f",
+                k,
+                float(cls_loss.detach()),
+                float(box_loss.detach()),
+                float(total.detach()),
+            )
+        return total
 
     def _group_embeddings(self, items):
         grouped = {}
@@ -622,6 +904,60 @@ class DetectionTrainer(BaseTrainer):
         #print(f"Total TinyReplayItems gathered: {len(items)}")
         return items
 
+    def _gather_embeddings_from_index(self, features, index_info, criterion, detach=False):
+        """Extract TinyReplayItems using pre-captured index_info (does not clear criterion attrs).
+
+        Used to gather box-branch embeddings at the same grid positions already captured
+        for the classification branch, after criterion attributes have been cleared.
+        """
+        if not index_info or not features:
+            return []
+        indices = index_info.get("indices")
+        classes = index_info.get("classes")
+        max_edge = index_info.get("max_edge")
+        if indices is None or classes is None or max_edge is None:
+            return []
+        if indices.numel() == 0:
+            return []
+        size_mask = max_edge <= self.replay_max_edge
+        if not size_mask.any():
+            return []
+        indices = indices[size_mask]
+        classes = classes[size_mask]
+        max_edge = max_edge[size_mask]
+        level_names = getattr(criterion, "level_names", [])
+        replay_order = getattr(criterion, "replay_level_order", None)
+        if replay_order:
+            level_names = replay_order
+        items = []
+        unique_levels = indices[:, 0].unique()
+        for level_idx in unique_levels:
+            level_mask = indices[:, 0] == level_idx
+            if not level_mask.any():
+                continue
+            name = level_names[level_idx] if level_idx < len(level_names) else str(int(level_idx))
+            feat = features.get(name)
+            if feat is None:
+                continue
+            sel_indices = indices[level_mask]
+            sel_classes = classes[level_mask]
+            sel_sizes = max_edge[level_mask]
+            batch_idx = sel_indices[:, 1].long()
+            gy = sel_indices[:, 2].long()
+            gx = sel_indices[:, 3].long()
+            vecs = feat[batch_idx, :, gy, gx]
+            for embedding, cls_id, size in zip(vecs, sel_classes, sel_sizes):
+                emb = embedding.detach() if detach else embedding
+                items.append(
+                    TinyReplayItem(
+                        cls=int(cls_id.item()),
+                        level=name,
+                        embedding=emb,
+                        metadata={"max_edge": float(size.item())},
+                    )
+                )
+        return items
+
     def _log_embedding_stats(self, grouped):
         if not (self.replay_debug and RANK in {-1, 0}):
             return
@@ -661,10 +997,11 @@ class DetectionTrainer(BaseTrainer):
                                 float(vals.max()),
                             )
 
-    def _compute_replay_consistency(self, current_groups, replay_batch):
+    def _compute_replay_consistency(self, current_groups, replay_batch, log_prefix="replay", teacher_buffer=None):
         if not replay_batch:
             return None
-        apply_counts = getattr(self.replay_teacher_buffer, "weight_by_count", False)
+        buf = teacher_buffer if teacher_buffer is not None else self.replay_teacher_buffer
+        apply_counts = getattr(buf, "weight_by_count", False)
         total_loss = 0.0
         total_weight = 0.0
         for level, class_map in current_groups.items():
@@ -712,8 +1049,8 @@ class DetectionTrainer(BaseTrainer):
             self.auxiliary_info = self.auxiliary_info or {}
             self.auxiliary_info.update(
                 {
-                    "replay/loss": float(replay_loss.detach()),
-                    "replay/examples": float(total_weight),
+                    f"{log_prefix}/loss": float(replay_loss.detach()),
+                    f"{log_prefix}/examples": float(total_weight),
                 }
             )
         return replay_loss
@@ -812,11 +1149,44 @@ class DetectionTrainer(BaseTrainer):
         if count > 0:
             LOGGER.info(f"Loaded {count} replay embeddings from {path}")
 
-    def _maybe_save_replay_buffer(self, ctx=None):
-        if not self.replay_save_path:
+    def _load_box_teacher_buffer(self, path: Path):
+        buffer = self.replay_box_teacher_buffer
+        if buffer is None:
             return
-        teacher = self.replay_teacher_buffer
-        student = self.replay_student_buffer
+        try:
+            count = buffer.load(path, allow_growth=True)
+        except FileNotFoundError:
+            LOGGER.warning(f"Box replay init buffer not found at {path}")
+            return
+        except Exception as exc:  # noqa: BLE001
+            LOGGER.warning(f"Failed to load box replay buffer from {path}: {exc}")
+            return
+        if count > 0:
+            LOGGER.info(f"Loaded {count} box replay embeddings from {path}")
+
+    def _maybe_save_replay_buffer(self, ctx=None):
+        tag = ctx.get("type") if isinstance(ctx, dict) else None
+        suffix = f" ({tag})" if tag else ""
+        self._save_one_buffer(
+            self.replay_teacher_buffer,
+            self.replay_student_buffer,
+            self.replay_save_path,
+            label="replay",
+            suffix=suffix,
+        )
+        if getattr(self, "replay_box_enabled", False):
+            self._save_one_buffer(
+                self.replay_box_teacher_buffer,
+                self.replay_box_student_buffer,
+                getattr(self, "replay_box_save_path", None),
+                label="box replay",
+                suffix=suffix,
+            )
+
+    def _save_one_buffer(self, teacher, student, save_path, label="replay", suffix=""):
+        """Merge teacher+student buffers and persist to disk. Independent of other buffers."""
+        if not save_path:
+            return
         has_teacher = bool(teacher and len(teacher) > 0)
         has_student = bool(student and len(student) > 0)
         if not (has_teacher or has_student):
@@ -840,10 +1210,8 @@ class DetectionTrainer(BaseTrainer):
         if has_student:
             combined.merge_from(student)
         try:
-            saved = combined.save(self.replay_save_path)
+            saved = combined.save(save_path)
         except Exception as exc:  # noqa: BLE001
-            LOGGER.warning(f"Failed to save replay buffer to {self.replay_save_path}: {exc}")
+            LOGGER.warning(f"Failed to save {label} buffer to {save_path}: {exc}")
             return
-        tag = ctx.get("type") if isinstance(ctx, dict) else None
-        suffix = f" ({tag})" if tag else ""
-        LOGGER.info(f"Saved {saved} replay embeddings to {self.replay_save_path}{suffix}")
+        LOGGER.info(f"Saved {saved} {label} embeddings to {save_path}{suffix}")

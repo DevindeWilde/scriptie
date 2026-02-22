@@ -1,0 +1,80 @@
+#!/bin/bash
+#SBATCH --job-name=dota-replay
+#SBATCH --time=24:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --partition=gpu_a100
+#SBATCH --gpus-per-node=1
+#SBATCH --gres=gpu:1
+#SBATCH --output=logs/dota-replay-%j.out
+#SBATCH --error=logs/dota-replay-%j.err
+
+module purge
+module load 2023
+module load CUDA/12.4.0
+module load Python/3.11.3-GCCcore-12.3.0
+
+source $HOME/ednet_env/bin/activate
+cd $HOME/scriptie
+
+RUNS=$HOME/scriptie/runs
+CFG=$HOME/scriptie/ednet/cfg/models/ednet/ednet-s.yaml
+PRETRAINED=$HOME/scriptie/pretrained/small.pt
+MEM=$HOME/scriptie/datasets/memory  # exemplar dataset root
+
+# Memory exemplar replay: old-stage images mixed into new-stage batches.
+# No prototype consistency loss (no init_buffer → teacher buffer stays empty).
+
+# ── Stage 1 ─────────────────────────────────────────────────────────────────
+# Train on {0: small-vehicle, 1: large-vehicle} — no prior memory to replay
+python train.py \
+  --cfg $CFG \
+  --data $HOME/scriptie/yaml/DOTA-stage1.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project $RUNS/dota_replay \
+  --name stage1-replay \
+  --workers 8 \
+  --weights $PRETRAINED \
+  --override "stage.active_classes=[0,1]"
+
+# ── Stage 2 ─────────────────────────────────────────────────────────────────
+# Introduce {2: plane, 3: helicopter}.
+# Mix stage-1 exemplars (25% of each batch) alongside new-stage images.
+python train.py \
+  --cfg $CFG \
+  --data $HOME/scriptie/yaml/DOTA-stage2.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project $RUNS/dota_replay \
+  --name stage2-replay \
+  --workers 8 \
+  --weights $RUNS/dota_replay/stage1-replay/weights/best.pt \
+  --override "stage.active_classes=[2,3]" \
+  --override "stage.prev_classes=[0,1]" \
+  --override "replay.enable=True" \
+  --override "replay.memory_dir=$MEM/stage1" \
+  --override "replay.memory_ratio=0.25"
+
+# ── Stage 3 ─────────────────────────────────────────────────────────────────
+# Introduce {4: ship}.
+# Mix stage-2 exemplars (25% of each batch).
+python train.py \
+  --cfg $CFG \
+  --data $HOME/scriptie/yaml/DOTA-stage3.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project $RUNS/dota_replay \
+  --name stage3-replay \
+  --workers 8 \
+  --weights $RUNS/dota_replay/stage2-replay/weights/best.pt \
+  --override "stage.active_classes=[4]" \
+  --override "stage.prev_classes=[0,1,2,3]" \
+  --override "replay.enable=True" \
+  --override "replay.memory_dir=$MEM/stage2" \
+  --override "replay.memory_ratio=0.25"

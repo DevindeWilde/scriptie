@@ -110,7 +110,11 @@ class FeatureTapper:
 
 
 class DetectionPreLogitTapper:
-    """Tapper that records detection head classification pre-logit tensors via forward pre-hooks."""
+    """Tapper that records detection head pre-logit tensors via forward pre-hooks.
+
+    By default taps the classification branch (``cv3``).  Pass ``branch_attr="cv2"``
+    to tap the box-regression branch instead.
+    """
 
     def __init__(
         self,
@@ -119,18 +123,20 @@ class DetectionPreLogitTapper:
         detach: bool = False,
         clone: bool = False,
         auto_activate: bool = True,
+        branch_attr: str = "cv3",
     ) -> None:
         self.detect_module = detect_module
         self.level_to_indices = level_to_indices or {}
         self.detach = detach
         self.clone = clone
+        self.branch_attr = branch_attr
         self._features: Dict[str, torch.Tensor] = {}
         self._hooks: List[RemovableHandle] = []
         if auto_activate:
             self.activate()
 
     def _classification_branches(self) -> Optional[nn.ModuleList]:
-        branches = getattr(self.detect_module, "cv3", None)
+        branches = getattr(self.detect_module, self.branch_attr, None)
         if branches is None:
             return None
         return branches

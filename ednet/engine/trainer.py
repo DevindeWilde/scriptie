@@ -245,7 +245,6 @@ class BaseTrainer:
         self.set_model_attributes()
 
         # Freeze layers
-        lora_backbone_frozen = getattr(self, "lora_enabled", False) and getattr(self, "lora_freeze_backbone", False)
         freeze_list = (
             self.args.freeze
             if isinstance(self.args.freeze, list)
@@ -258,11 +257,9 @@ class BaseTrainer:
         self._freeze_layer_names = freeze_layer_names
         for k, v in self.model.named_parameters():
             # v.register_hook(lambda x: torch.nan_to_num(x))  # NaN to 0 (commented for erratic training results)
-            if any(x in k for x in freeze_layer_names) and "lora_A" not in k and "lora_B" not in k:
+            if any(x in k for x in freeze_layer_names):
                 LOGGER.info(f"Freezing layer '{k}'")
                 v.requires_grad = False
-            elif getattr(v, "_lora_forced_frozen", False):
-                continue
             elif not v.requires_grad and v.dtype.is_floating_point:  # only floating point Tensor can require gradients
                 LOGGER.info(
                     f"WARNING ⚠️ setting 'requires_grad=True' for frozen layer '{k}'. "
@@ -329,19 +326,6 @@ class BaseTrainer:
             decay=weight_decay,
             iterations=iterations,
         )
-        if getattr(self.args.lora, "debug", False):
-            trainable = [(n, p.numel()) for n, p in self.model.named_parameters() if p.requires_grad]
-            LOGGER.info(f"[LoRA] Trainable parameter count: {sum(c for _, c in trainable):,}")
-            LOGGER.info(f"[LoRA] Top trainable params: {trainable[:20]}")
-
-            opt_param_ids = {id(p) for group in self.optimizer.param_groups for p in group["params"]}
-            missing = [n for n, p in self.model.named_parameters()
-                    if p.requires_grad and id(p) not in opt_param_ids]
-            if missing:
-                LOGGER.warning(f"[LoRA] Trainable but missing from optimizer: {missing[:20]}")
-            else:
-                LOGGER.info("[LoRA] All trainable params are in the optimizer.")
-
         if RANK in {-1, 0}:
             trainable = [(n, int(p.numel())) for n, p in self.model.named_parameters() if p.requires_grad]
             total_tensors = len(trainable)
@@ -589,30 +573,6 @@ class BaseTrainer:
         if (self.save_period > 0) and (self.epoch % self.save_period == 0):
             (self.wdir / f"epoch{self.epoch}.pt").write_bytes(serialized_ckpt)  # save epoch, i.e. 'epoch3.pt'
 
-        lora_args = getattr(self.args, "lora", None)
-        if isinstance(lora_args, dict) and lora_args.get("enable"):
-            source_model = de_parallel(self.ema.ema if self.ema else self.model)
-            if hasattr(source_model, "lora_state_dict"):
-                adapter_state = source_model.lora_state_dict()
-                if adapter_state:
-                    adapter_state = {
-                        name: {k: tensor.detach().cpu() for k, tensor in weights.items()}
-                        for name, weights in adapter_state.items()
-                    }
-                    adapters_dir = lora_args.get("adapter_dir") or "adapters"
-                    adapters_dir = Path(adapters_dir)
-                    if not adapters_dir.is_absolute():
-                        adapters_dir = self.save_dir / adapters_dir
-                    adapters_dir.mkdir(parents=True, exist_ok=True)
-                    torch.save(adapter_state, adapters_dir / "last-adapter.pt")
-                    if self.best_fitness == self.fitness:
-                        torch.save(adapter_state, adapters_dir / "best-adapter.pt")
-                    continual_args = getattr(self.args, "continual", None)
-                    save_history = True
-                    if isinstance(continual_args, dict):
-                        save_history = continual_args.get("save_history", True)
-                    if self.save_period > 0 and (self.epoch % self.save_period == 0) and save_history:
-                        torch.save(adapter_state, adapters_dir / f"epoch{self.epoch}-adapter.pt")
         self._after_checkpoint(ctx)
 
     def get_dataset(self):

@@ -53,12 +53,13 @@ class YOLODataset(BaseDataset):
         (torch.utils.data.Dataset): A PyTorch dataset object that can be used for training an object detection model.
     """
 
-    def __init__(self, *args, data=None, task="detect", **kwargs):
+    def __init__(self, *args, data=None, task="detect", pseudo_labels_dir=None, **kwargs):
         """Initializes the YOLODataset with optional configurations for segments and keypoints."""
         self.use_segments = task == "segment"
         self.use_keypoints = task == "pose"
         self.use_obb = task == "obb"
         self.data = data
+        self.pseudo_labels_dir = Path(pseudo_labels_dir) if pseudo_labels_dir else None
         assert not (self.use_segments and self.use_keypoints), "Can not use both segments and keypoints."
         super().__init__(*args, **kwargs)
 
@@ -208,6 +209,16 @@ class YOLODataset(BaseDataset):
             cls is not with bboxes now, classification and semantic segmentation need an independent cls label
             Can also support classification and semantic segmentation by adding or removing dict keys there.
         """
+        # Merge pseudo-labels (old-class annotations generated offline) when provided.
+        # Cache stores GT-only labels; pseudo-labels are merged on-the-fly here, so no
+        # cache invalidation is needed when pseudo_labels_dir changes.
+        if self.pseudo_labels_dir is not None:
+            pseudo_file = self.pseudo_labels_dir / (Path(label["im_file"]).stem + ".txt")
+            if pseudo_file.exists() and pseudo_file.stat().st_size > 0:
+                pl = np.loadtxt(str(pseudo_file), dtype=np.float32).reshape(-1, 5)
+                if len(pl):
+                    label["cls"] = np.concatenate([label["cls"], pl[:, 0:1]], axis=0)
+                    label["bboxes"] = np.concatenate([label["bboxes"], pl[:, 1:5]], axis=0)
         bboxes = label.pop("bboxes")
         segments = label.pop("segments", [])
         keypoints = label.pop("keypoints", None)

@@ -1,0 +1,60 @@
+#!/bin/bash
+#SBATCH --job-name=dota-lower
+#SBATCH --time=24:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --partition=gpu_a100
+#SBATCH --gpus-per-node=1
+#SBATCH --gres=gpu:1
+#SBATCH --output=logs/dota-lower-%j.out
+#SBATCH --error=logs/dota-lower-%j.err
+
+module purge
+module load 2023
+module load CUDA/12.4.0
+module load Python/3.11.3-GCCcore-12.3.0
+
+source $HOME/ednet_env/bin/activate
+cd $HOME/scriptie
+
+RUNS=$HOME/scriptie/runs
+CFG=$HOME/scriptie/ednet/cfg/models/ednet/ednet-s.yaml
+PRETRAINED=$HOME/scriptie/pretrained/small.pt
+
+# Stage 1 — train on classes {0: small-vehicle, 1: large-vehicle}
+python train.py \
+  --cfg $CFG \
+  --data $HOME/scriptie/yaml/DOTA-stage1.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project $RUNS/dota_lower \
+  --name stage1-lower \
+  --workers 8 \
+  --weights $PRETRAINED
+
+# Stage 2 — naive finetune on {0,1,2: plane, 3: helicopter} (lower bound: no CL)
+python train.py \
+  --cfg $CFG \
+  --data $HOME/scriptie/yaml/DOTA-stage2.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project $RUNS/dota_lower \
+  --name stage2-lower \
+  --workers 8 \
+  --weights $RUNS/dota_lower/stage1-lower/weights/best.pt
+
+# Stage 3 — naive finetune on {0,1,2,3,4: ship} (lower bound: no CL)
+python train.py \
+  --cfg $CFG \
+  --data $HOME/scriptie/yaml/DOTA-stage3.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project $RUNS/dota_lower \
+  --name stage3-lower \
+  --workers 8 \
+  --weights $RUNS/dota_lower/stage2-lower/weights/best.pt
