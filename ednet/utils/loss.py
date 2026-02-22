@@ -354,7 +354,6 @@ class v8DetectionLoss:
         """Store (level, batch, gy, gx, cls, max_edge_px) tuples for positive anchors."""
         self.last_positive_cells = None
         if fg_mask is None or not fg_mask.any():
-            print("No positive cells found.")
             return None
         index_entries = []
         cls_entries = []

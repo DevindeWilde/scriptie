@@ -25,6 +25,8 @@ PRETRAINED=$HOME/scriptie/pretrained/small.pt
 MEM=$HOME/scriptie/datasets/memory  # exemplar dataset root
 
 # Memory exemplar replay: old-stage images mixed into new-stage batches.
+# No active_classes filtering — the YOLO loss must see all classes present
+# in the batch (new-class GT from stage data + old-class GT from exemplars).
 # No prototype consistency loss (no init_buffer → teacher buffer stays empty).
 
 # ── Stage 1 ─────────────────────────────────────────────────────────────────
@@ -38,12 +40,12 @@ python train.py \
   --project $RUNS/dota_replay \
   --name stage1-replay \
   --workers 8 \
-  --weights $PRETRAINED \
-  --override "stage.active_classes=[0,1]"
+  --weights $PRETRAINED
 
 # ── Stage 2 ─────────────────────────────────────────────────────────────────
 # Introduce {2: plane, 3: helicopter}.
 # Mix stage-1 exemplars (25% of each batch) alongside new-stage images.
+# No active_classes: loss covers classes 0-3 so old-class exemplars contribute.
 python train.py \
   --cfg $CFG \
   --data $HOME/scriptie/yaml/DOTA-stage2.yaml \
@@ -54,8 +56,6 @@ python train.py \
   --name stage2-replay \
   --workers 8 \
   --weights $RUNS/dota_replay/stage1-replay/weights/best.pt \
-  --override "stage.active_classes=[2,3]" \
-  --override "stage.prev_classes=[0,1]" \
   --override "replay.enable=True" \
   --override "replay.memory_dir=$MEM/stage1" \
   --override "replay.memory_ratio=0.25"
@@ -63,6 +63,7 @@ python train.py \
 # ── Stage 3 ─────────────────────────────────────────────────────────────────
 # Introduce {4: ship}.
 # Mix stage-2 exemplars (25% of each batch).
+# No active_classes: loss covers classes 0-4 so all exemplar classes contribute.
 python train.py \
   --cfg $CFG \
   --data $HOME/scriptie/yaml/DOTA-stage3.yaml \
@@ -73,8 +74,6 @@ python train.py \
   --name stage3-replay \
   --workers 8 \
   --weights $RUNS/dota_replay/stage2-replay/weights/best.pt \
-  --override "stage.active_classes=[4]" \
-  --override "stage.prev_classes=[0,1,2,3]" \
   --override "replay.enable=True" \
   --override "replay.memory_dir=$MEM/stage2" \
   --override "replay.memory_ratio=0.25"

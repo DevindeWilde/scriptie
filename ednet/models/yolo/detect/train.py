@@ -591,8 +591,6 @@ class DetectionTrainer(BaseTrainer):
                 and self.replay_teacher_buffer is not None
                 and len(self.replay_teacher_buffer) > 0
             )
-            if not teacher_ready:
-                print("No replay auxiliary loss computed: teacher_ready =", teacher_ready)
             criterion = self._ensure_replay_tap_config()
             # Snapshot index data before _gather_embeddings clears the criterion attributes.
             # These refs remain valid even after the criterion attributes are set to None.
