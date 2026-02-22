@@ -704,7 +704,7 @@ class DetectionTrainer(BaseTrainer):
             )
         detect_s = de_parallel(self.model).model[-1]
         nc_curr = de_parallel(self.model).nc
-        nc_prev = getattr(self, "kd_nc_prev", nc_curr)
+        nc_prev = de_parallel(self.kd_teacher).nc
         prev_ids = list(self.prev_class_ids)
 
         total_loss = None
