@@ -1,0 +1,254 @@
+[
+  {
+    "epoch": 1,
+    "timestamp": 1771793210.662195,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.3770519787995703,
+        "recall": 0.21110510185685957,
+        "map50": 0.17166360565980626,
+        "map": 0.08490474358181406,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.2803212369505472,
+        "recall": 0.5354707020187447,
+        "map50": 0.30753467932365597,
+        "map": 0.13258496461690372,
+        "num_targets": 2810
+      }
+    }
+  },
+  {
+    "epoch": 2,
+    "timestamp": 1771793321.1415253,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.37081583387416234,
+        "recall": 0.35442581575626464,
+        "map50": 0.2506480027431001,
+        "map": 0.12447383885632438,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.3977530510808838,
+        "recall": 0.3861209964412811,
+        "map50": 0.32244990041778665,
+        "map": 0.19805343460177952,
+        "num_targets": 2810
+      }
+    }
+  },
+  {
+    "epoch": 3,
+    "timestamp": 1771793434.6940892,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.4411352293101942,
+        "recall": 0.3969713358572201,
+        "map50": 0.3043573841054175,
+        "map": 0.14475790266505884,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.5073834173819485,
+        "recall": 0.5665480427046263,
+        "map50": 0.49566412006582794,
+        "map": 0.30750556622757336,
+        "num_targets": 2810
+      }
+    }
+  },
+  {
+    "epoch": 4,
+    "timestamp": 1771793545.2701032,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.5140241587498424,
+        "recall": 0.36801710670468557,
+        "map50": 0.33302806169620686,
+        "map": 0.1646059995847335,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.5298331090728716,
+        "recall": 0.6181494661921708,
+        "map50": 0.5131526703702939,
+        "map": 0.29959392666602874,
+        "num_targets": 2810
+      }
+    }
+  },
+  {
+    "epoch": 5,
+    "timestamp": 1771793653.40859,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.5612139148927764,
+        "recall": 0.3656030286641428,
+        "map50": 0.36847716468212055,
+        "map": 0.1725707781621662,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.6396325589681812,
+        "recall": 0.6572953736654804,
+        "map50": 0.6501706988215858,
+        "map": 0.41384627905210786,
+        "num_targets": 2810
+      }
+    }
+  },
+  {
+    "epoch": 6,
+    "timestamp": 1771793757.8591726,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6112198783636144,
+        "recall": 0.38236884802596,
+        "map50": 0.39406140205793005,
+        "map": 0.20340487194763912,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.5909759484414712,
+        "recall": 0.6540925266903914,
+        "map50": 0.6236988252423171,
+        "map": 0.38160806795330654,
+        "num_targets": 2810
+      }
+    }
+  },
+  {
+    "epoch": 7,
+    "timestamp": 1771793859.7910974,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.5488786767043895,
+        "recall": 0.365865028024754,
+        "map50": 0.36242918000836444,
+        "map": 0.1618015385589587,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.6884633499096253,
+        "recall": 0.651171990495834,
+        "map50": 0.6607471813119956,
+        "map": 0.4083811044782344,
+        "num_targets": 2810
+      }
+    }
+  },
+  {
+    "epoch": 8,
+    "timestamp": 1771793965.7557607,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6580856241932412,
+        "recall": 0.40249906778360595,
+        "map50": 0.4449511813001764,
+        "map": 0.22473850520438926,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.6316214280485828,
+        "recall": 0.7340435334504136,
+        "map50": 0.6852410726017811,
+        "map": 0.4328356139351678,
+        "num_targets": 2810
+      }
+    }
+  },
+  {
+    "epoch": 9,
+    "timestamp": 1771794069.6316652,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.629438052054353,
+        "recall": 0.4433026861366504,
+        "map50": 0.45353338869350324,
+        "map": 0.23020491563068948,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.6804104963110642,
+        "recall": 0.6793594306049822,
+        "map50": 0.6733676575498048,
+        "map": 0.4110697492113413,
+        "num_targets": 2810
+      }
+    }
+  },
+  {
+    "epoch": 10,
+    "timestamp": 1771794176.8946877,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6477323569360207,
+        "recall": 0.34072471606273663,
+        "map50": 0.37828673254241585,
+        "map": 0.1918289358206177,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.5751694632260621,
+        "recall": 0.7231316725978648,
+        "map50": 0.6695424715049674,
+        "map": 0.42342872275938054,
+        "num_targets": 2810
+      }
+    }
+  },
+  {
+    "epoch": 11,
+    "timestamp": 1771794286.5070505,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.6180240010190535,
+        "recall": 0.4413163614308377,
+        "map50": 0.45140864095455613,
+        "map": 0.23095464192587684,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.6990231504926161,
+        "recall": 0.6843416370106762,
+        "map50": 0.69673871147093,
+        "map": 0.43781684373485713,
+        "num_targets": 2810
+      }
+    }
+  },
+  {
+    "epoch": 12,
+    "timestamp": 1771794391.0612724,
+    "training": true,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.570592696851404,
+        "recall": 0.5035154137371552,
+        "map50": 0.4742164466012169,
+        "map": 0.23501886851875553,
+        "num_targets": 5547
+      },
+      "large-vehicle": {
+        "precision": 0.8379681215374015,
+        "recall": 0.605338078291815,
+        "map50": 0.6992998805572006,
+        "map": 0.43624599685363147,
+        "num_targets": 2810
+      }
+    }
+  }
+]
