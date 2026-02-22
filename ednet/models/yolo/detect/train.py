@@ -153,6 +153,8 @@ class DetectionTrainer(BaseTrainer):
         self._memory_iter = None
         self._feature_tapper_needs_activation = False
         self.replay_slot_hits = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
+        self._replay_fine_wins = 0    # embeddings whose nearest proto was a fine slot (not coarse)
+        self._replay_total_queries = 0  # total embeddings processed in loss
         # Box prototype replay defaults (populated inside if self.replay_enabled below)
         self.replay_box_enabled = False
         self.box_feature_tapper = None
@@ -1071,21 +1073,62 @@ class DetectionTrainer(BaseTrainer):
         for idx, count in enumerate(slot_counts):
             if count:
                 cls_map[idx] += int(count)
+        # Track how many embeddings preferred a fine proto over the coarse (slot 0).
+        # This is only meaningful when use_coarse=True and there are fine slots.
+        self._replay_total_queries += sum(slot_counts)
+        if len(slot_counts) > 1:
+            self._replay_fine_wins += sum(slot_counts[1:])
 
     def _write_replay_hits(self, epoch: int):
         if not self.replay_slot_hits:
             return
         log_path = Path(self.save_dir) / "replay_slot_hits.log"
         lines = [f"Epoch {epoch + 1}"]
+
+        # ── Loss-time hits (which prototype won each cosine race) ─────────────
+        # Slot 0 = coarse (global EMA mean), slots 1+ = fine prototypes.
+        lines.append("  [loss hits: which prototype was nearest each embedding]")
         for level in sorted(self.replay_slot_hits.keys()):
             class_map = self.replay_slot_hits[level]
             for cls_id in sorted(class_map.keys()):
                 slot_map = class_map[cls_id]
-                slot_str = ", ".join(f"{idx}:{count}" for idx, count in sorted(slot_map.items()))
-                lines.append(f"  level={level} cls={cls_id} hits={slot_str}")
+                parts = []
+                for idx, count in sorted(slot_map.items()):
+                    label = "coarse" if idx == 0 else f"fine_{idx - 1}"
+                    parts.append(f"{label}:{count}")
+                lines.append(f"    level={level} cls={cls_id} | {', '.join(parts)}")
+
+        # ── Fine-win summary across all classes/levels ────────────────────────
+        total_q = self._replay_total_queries
+        fine_w = self._replay_fine_wins
+        fine_pct = 100.0 * fine_w / total_q if total_q > 0 else 0.0
+        lines.append(
+            f"  [fine-win rate] {fine_w}/{total_q} embeddings preferred a fine proto "
+            f"over the coarse ({fine_pct:.1f}%)"
+        )
+
+        # ── Buffer state (how many times each prototype was updated) ──────────
+        # This is independent of the loss race — it shows whether fine slots
+        # are populated and how diverse their training coverage is.
+        buf = getattr(self, "replay_teacher_buffer", None)
+        if buf is not None and hasattr(buf, "_data"):
+            lines.append("  [buffer state: prototype update counts]")
+            for level, cls_map in sorted(buf._data.items()):
+                for cls_id, entry in sorted(cls_map.items()):
+                    coarse_count = int(entry.coarse.count) if entry.coarse.vector is not None else 0
+                    fine_info = ", ".join(
+                        f"fine_{i}:{int(slot.count)}" for i, slot in enumerate(entry.fine)
+                    ) if entry.fine else "no fine slots"
+                    lines.append(
+                        f"    level={level} cls={cls_id} | coarse:{coarse_count}, {fine_info}"
+                    )
+
         with log_path.open("a", encoding="utf-8") as handle:
-            handle.write("\n".join(lines) + "\n")
+            handle.write("\n".join(lines) + "\n\n")
+
         self.replay_slot_hits = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
+        self._replay_fine_wins = 0
+        self._replay_total_queries = 0
 
     def save_metrics(self, metrics):
         aux = getattr(self, "auxiliary_info", None)
