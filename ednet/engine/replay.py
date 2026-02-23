@@ -495,6 +495,7 @@ class TinyReplayBuffer:
                     PrototypeEntry(
                         vector=slot.vector.to(self.device, dtype=self.dtype).clone(),
                         count=int(slot.count),
+                        source=slot.source,
                     )
                 )
         return clone
@@ -511,7 +512,8 @@ class TinyReplayBuffer:
             count = int(slot.count)
             if len(target.fine) < self.num_fine:
                 target.fine.append(
-                    PrototypeEntry(vector=F.normalize(vec, dim=0, eps=1e-6).to(self.dtype), count=count)
+                    PrototypeEntry(vector=F.normalize(vec, dim=0, eps=1e-6).to(self.dtype), count=count,
+                                   source=slot.source)
                 )
                 continue
             sims = torch.tensor(
@@ -525,6 +527,7 @@ class TinyReplayBuffer:
                 target.fine[replace_idx] = PrototypeEntry(
                     vector=F.normalize(vec, dim=0, eps=1e-6).to(self.dtype),
                     count=count,
+                    source=slot.source,
                 )
                 continue
             merged_vec, merged_count = self._merge_vectors(
@@ -643,7 +646,7 @@ class TinyReplayBuffer:
             for cls_id, entry in class_map.items():
                 slots: list = []
                 for slot in entry.fine:
-                    slots.append(slot.source if slot.source else None)
+                    slots.append(slot.source)
                 if slots:
                     out[level][str(cls_id)] = slots
         target = Path(path)

@@ -614,6 +614,8 @@ class DetectionTrainer(BaseTrainer):
                             aux_loss = replay_loss * self.replay_loss_weight
                 if self.replay_student_buffer is not None:
                     self.replay_student_buffer.current_epoch = self.epoch
+                if self.replay_box_student_buffer is not None:
+                    self.replay_box_student_buffer.current_epoch = self.epoch
                     self._student_update_counter += 1
                     if self._student_update_counter % self.replay_student_update_freq == 0:
                         student_items = self._gather_embeddings(features, attr="last_positive_cells", criterion=criterion, batch=batch)
