@@ -87,6 +87,28 @@
         "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage2/train_replay/images/P2269.png",
         "epoch": 0
       }
+    ],
+    "4": [
+      {
+        "max_edge": 6.77239990234375,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage3/train_replay/images/P1089.png",
+        "epoch": 26
+      },
+      {
+        "max_edge": 23.10552978515625,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage3/train_replay/images/P2160.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 23.10552978515625,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage3/train_replay/images/P2160.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 23.10552978515625,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage3/train_replay/images/P2160.png",
+        "epoch": 0
+      }
     ]
   },
   "P3": {
@@ -175,6 +197,28 @@
       {
         "max_edge": 30.7723388671875,
         "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage2/train_replay/images/P1047.png",
+        "epoch": 0
+      }
+    ],
+    "4": [
+      {
+        "max_edge": 13.85211181640625,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage3/train_replay/images/P1251.png",
+        "epoch": 1
+      },
+      {
+        "max_edge": 22.28033447265625,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage3/train_replay/images/P2160.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 36.721435546875,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage3/train_replay/images/P2160.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 18.9798583984375,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage3/train_replay/images/P2160.png",
         "epoch": 0
       }
     ]
@@ -266,6 +310,28 @@
         "max_edge": 11.3177490234375,
         "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage2/train_replay/images/P2247.png",
         "epoch": 8
+      }
+    ],
+    "4": [
+      {
+        "max_edge": 10.030967712402344,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage3/train_replay/images/P0707.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 8.0250244140625,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage3/train_replay/images/P0707.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 12.897262573242188,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage3/train_replay/images/P0707.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 8.3115234375,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage3/train_replay/images/P0707.png",
+        "epoch": 0
       }
     ]
   }
