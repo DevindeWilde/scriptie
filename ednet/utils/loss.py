@@ -307,8 +307,8 @@ class v8DetectionLoss:
             gt_bboxes,
             assign_mask,
         )
-        self._record_positive_cells(fg_mask, target_labels, target_bboxes, feats)
         image_hw = (int(imgsz[0].item()), int(imgsz[1].item()))
+        self._record_positive_cells(fg_mask, target_labels, target_bboxes, feats, image_hw=image_hw)
         self._record_prev_replay_cells(gt_labels, gt_bboxes, mask_gt, image_hw)
 
         target_scores_sum = max(target_scores.sum(), 1)
@@ -350,7 +350,7 @@ class v8DetectionLoss:
         power = round(math.log2(stride_val))
         return f"P{power}"
 
-    def _record_positive_cells(self, fg_mask, target_labels, target_bboxes, feats):
+    def _record_positive_cells(self, fg_mask, target_labels, target_bboxes, feats, image_hw=None):
         """Store (level, batch, gy, gx, cls, max_edge_px) tuples for positive anchors."""
         self.last_positive_cells = None
         if fg_mask is None or not fg_mask.any():
@@ -358,9 +358,11 @@ class v8DetectionLoss:
         index_entries = []
         cls_entries = []
         size_entries = []
+        bbox_norm_entries = []
         offset = 0
         device = fg_mask.device
         dtype = torch.long
+        img_h, img_w = image_hw if image_hw else (None, None)
         for level_idx, feat in enumerate(feats):
             h, w = feat.shape[2], feat.shape[3]
             level_size = h * w
@@ -379,7 +381,7 @@ class v8DetectionLoss:
             cls = target_labels[:, offset : offset + level_size]
             cls_ids = cls[batch_idx, local_idx].long()
             boxes = target_bboxes[:, offset : offset + level_size, :]
-            box_vals = boxes[batch_idx, local_idx]
+            box_vals = boxes[batch_idx, local_idx]  # xyxy pixel coords
             widths = (box_vals[:, 2] - box_vals[:, 0]).abs()
             heights = (box_vals[:, 3] - box_vals[:, 1]).abs()
             max_edge = torch.max(widths, heights)
@@ -393,6 +395,12 @@ class v8DetectionLoss:
             index_entries.append(indices.detach())
             cls_entries.append(cls_ids.detach())
             size_entries.append(max_edge.detach())
+            if img_h and img_w:
+                cx_n = ((box_vals[:, 0] + box_vals[:, 2]) * 0.5 / img_w).detach()
+                cy_n = ((box_vals[:, 1] + box_vals[:, 3]) * 0.5 / img_h).detach()
+                w_n  = (widths / img_w).detach()
+                h_n  = (heights / img_h).detach()
+                bbox_norm_entries.append(torch.stack([cx_n, cy_n, w_n, h_n], dim=1))
             offset += level_size
         if index_entries:
             self.last_positive_cells = {
@@ -400,6 +408,8 @@ class v8DetectionLoss:
                 "classes": torch.cat(cls_entries, dim=0),
                 "max_edge": torch.cat(size_entries, dim=0),
             }
+            if bbox_norm_entries:
+                self.last_positive_cells["bboxes_norm"] = torch.cat(bbox_norm_entries, dim=0)
         return self.last_positive_cells
 
     def _record_prev_replay_cells(self, gt_labels, gt_bboxes, mask_gt, image_hw):
@@ -427,6 +437,7 @@ class v8DetectionLoss:
         level_entries = []
         class_entries = []
         size_entries = []
+        bbox_norm_entries = []
         for b_idx in range(class_ids.shape[0]):
             valid = mask[b_idx]
             if not valid.any():
@@ -456,12 +467,20 @@ class v8DetectionLoss:
                 level_entries.append([level_idx, b_idx, gy, gx])
                 class_entries.append(int(cls_id.item()))
                 size_entries.append(max_edge)
+                # Normalized xywh for provenance logging (source image visualization)
+                bbox_norm_entries.append([
+                    float(cx) / img_w,
+                    float(cy) / img_h,
+                    float(width) / img_w,
+                    float(height) / img_h,
+                ])
         if not level_entries:
             return
         self.last_replay_cells = {
             "indices": torch.tensor(level_entries, device=self.device, dtype=torch.long),
             "classes": torch.tensor(class_entries, device=self.device, dtype=torch.long),
             "max_edge": torch.tensor(size_entries, device=self.device, dtype=torch.float),
+            "bboxes_norm": torch.tensor(bbox_norm_entries, device=self.device, dtype=torch.float),
         }
 
     def _select_replay_level(self, box, image_hw):

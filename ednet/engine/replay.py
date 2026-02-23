@@ -210,6 +210,7 @@ class PrototypeEntry:
 
     vector: torch.Tensor
     count: int = 1
+    source: Optional[Dict] = None  # {"im_file": str, "bbox_xywh_norm": list, "epoch": int}
 
     def clone(self) -> torch.Tensor:
         return self.vector.clone()
@@ -279,7 +280,11 @@ class TinyReplayBuffer:
         entry, created = self._get_or_create_entry(item.level, item.cls, embedding)
         if not created:
             self._update_coarse(entry.coarse, embedding)
-        self._update_fine(entry, embedding)
+        meta = dict(item.metadata or {})
+        epoch = getattr(self, "current_epoch", None)
+        if epoch is not None:
+            meta["epoch"] = int(epoch)
+        self._update_fine(entry, embedding, metadata=meta)
 
     def merge_from(self, other: "TinyReplayBuffer" | None) -> int:
         """Merge all entries from another buffer while preserving prototype counts."""
@@ -413,43 +418,46 @@ class TinyReplayBuffer:
         coarse.vector = F.normalize(vec, dim=0, eps=1e-6).to(self.dtype)
         coarse.count = count
 
-    def _update_fine(self, entry: MultiPrototypeEntry, embedding: torch.Tensor) -> None:
+    def _update_fine(
+        self,
+        entry: MultiPrototypeEntry,
+        embedding: torch.Tensor,
+        metadata: Optional[Dict] = None,
+    ) -> Optional[tuple]:
+        """Update fine prototype slots. Returns (action, slot_idx) when a slot is created or
+        reinitialized (useful for provenance logging), or None on a plain EMA update."""
         if self.num_fine <= 0:
-            #print("No fine prototypes configured; skipping fine update.")
-            return
+            return None
         slots = entry.fine
         if len(slots) > self.num_fine:
             entry.fine = slots = slots[: self.num_fine]
         if len(slots) < self.num_fine:
             if self.init_strategy == "first_k" or not slots:
-                #print("Adding new fine prototype slot (first_k strategy)")
-                slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1))
-                return
+                slot_idx = len(slots)
+                slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1, source=metadata))
+                return ("opened", slot_idx)
             sims = [self._cosine(slot.vector, embedding) for slot in slots]
             if max(sims, default=-1.0) < self.init_sim_thresh:
-                #print("Adding new fine prototype slot (similarity threshold met)")
-                slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1))
-                return
+                slot_idx = len(slots)
+                slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1, source=metadata))
+                return ("opened", slot_idx)
         if not slots:
-            #print("Adding new fine prototype slot (no existing slots)")
-            slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1))
-            return
+            slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1, source=metadata))
+            return ("opened", 0)
         sims = torch.tensor([self._cosine(slot.vector, embedding) for slot in slots], device=self.device)
         best_idx = int(torch.argmax(sims))
         best_sim = float(sims[best_idx])
         if best_sim < self.gate_min_cos:
             if len(slots) < self.num_fine:
-                #print("Adding new fine prototype slot (gate min cosine not met)")
-                slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1))
-                return
+                slot_idx = len(slots)
+                slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1, source=metadata))
+                return ("opened", slot_idx)
             replace_idx = min(range(len(slots)), key=lambda idx: slots[idx].count)
-            slots[replace_idx] = PrototypeEntry(vector=embedding.to(self.dtype), count=1)
-            #print("Replacing fine prototype slot", replace_idx, "due to low similarity")
-            return
+            slots[replace_idx] = PrototypeEntry(vector=embedding.to(self.dtype), count=1, source=metadata)
+            return ("reinitialized", replace_idx)
         slot = slots[best_idx]
         vec = slot.vector.to(torch.float32)
         count = slot.count
-        #print("Updating fine prototype slot", best_idx, "with count", count)
         if count < self.capacity:
             count += 1
             vec = vec + (embedding - vec) / count
@@ -458,6 +466,7 @@ class TinyReplayBuffer:
             vec = vec * (1.0 - alpha) + embedding * alpha
         slot.vector = F.normalize(vec, dim=0, eps=1e-6).to(self.dtype)
         slot.count = count
+        return None
 
     def _cosine(self, proto: torch.Tensor, embedding: torch.Tensor) -> float:
         v = proto.to(torch.float32)
@@ -565,7 +574,8 @@ class TinyReplayBuffer:
                         "count": int(entry.coarse.count),
                     },
                     "fine": [
-                        {"prototype": slot.vector.cpu(), "count": int(slot.count)} for slot in entry.fine
+                        {"prototype": slot.vector.cpu(), "count": int(slot.count), "source": slot.source}
+                        for slot in entry.fine
                     ],
                 }
                 for cls, entry in class_map.items()
@@ -610,11 +620,34 @@ class TinyReplayBuffer:
                     vec = slot.get("prototype", torch.empty(0)).to(self.device, dtype=self.dtype)
                     if vec.numel() == 0:
                         continue
-                    entry.fine.append(PrototypeEntry(vector=vec, count=int(slot.get("count", 1))))
+                    entry.fine.append(PrototypeEntry(vector=vec, count=int(slot.get("count", 1)), source=slot.get("source")))
                     total += int(slot.get("count", 1))
                 total += count
                 self._storage[level][cls_id] = entry
         return total
+
+    def save_sources(self, path: str | Path) -> None:
+        """Persist fine prototype source metadata to a JSON file.
+
+        For each (level, class, slot_index) triple, records the image path and
+        bounding box of the sample that last opened or reinitialized that slot.
+        Slots that have never been opened appear as null in the output list.
+        """
+        import json
+
+        out: Dict[str, Dict[str, list]] = {}
+        for level, class_map in self._storage.items():
+            out[level] = {}
+            for cls_id, entry in class_map.items():
+                slots: list = []
+                for slot in entry.fine:
+                    slots.append(slot.source if slot.source else None)
+                if slots:
+                    out[level][str(cls_id)] = slots
+        target = Path(path)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with open(target, "w") as f:
+            json.dump(out, f, indent=2)
 
     def save(self, path: str | Path) -> int:
         target = Path(path)

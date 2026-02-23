@@ -597,7 +597,7 @@ class DetectionTrainer(BaseTrainer):
             box_features = self.box_feature_tapper.pop() if getattr(self, "box_feature_tapper", None) else {}
             if features:
                 if teacher_ready:
-                    replay_items = self._gather_embeddings(features, attr="last_replay_cells", criterion=criterion)
+                    replay_items = self._gather_embeddings(features, attr="last_replay_cells", criterion=criterion, batch=batch)
                     if replay_items:
                         grouped = self._group_embeddings(replay_items)
                         self._log_embedding_stats(grouped)
@@ -611,7 +611,8 @@ class DetectionTrainer(BaseTrainer):
                         if replay_loss is not None:
                             aux_loss = replay_loss * self.replay_loss_weight
                 if self.replay_student_buffer is not None:
-                    student_items = self._gather_embeddings(features, attr="last_positive_cells", criterion=criterion)
+                    self.replay_student_buffer.current_epoch = self.epoch
+                    student_items = self._gather_embeddings(features, attr="last_positive_cells", criterion=criterion, batch=batch)
                     for item in student_items:
                         self.replay_student_buffer.add(item)
             # --- Box prototype replay path (uses same grid-cell positions as cls replay) ---
@@ -818,7 +819,7 @@ class DetectionTrainer(BaseTrainer):
             criterion.set_replay_tap_config(self.replay_levels, self.replay_strides)
         return criterion
 
-    def _gather_embeddings(self, features, attr="last_positive_cells", criterion=None):
+    def _gather_embeddings(self, features, attr="last_positive_cells", criterion=None, batch=None):
         """Collect TinyReplayItems from tapped features using stored cell indices."""
         if criterion is None:
             criterion = self._ensure_replay_tap_config()
@@ -861,52 +862,55 @@ class DetectionTrainer(BaseTrainer):
                 int(size_mask.numel()),
                 int(size_mask.sum()),
             )
+        # Extract bboxes_norm and im_file lists for provenance metadata (replay cells only)
+        bboxes_norm_all = pos.get("bboxes_norm") if attr == "last_replay_cells" else None
+        im_files = (batch or {}).get("im_file", [])
+
         indices = indices[size_mask]
         classes = classes[size_mask]
         max_edge = max_edge[size_mask]
+        bboxes_norm_all = bboxes_norm_all[size_mask] if bboxes_norm_all is not None else None
         level_names = getattr(loss_module, "level_names", [])
         if attr == "last_replay_cells" and getattr(loss_module, "replay_level_order", None):
             level_names = loss_module.replay_level_order
         items = []
         unique_levels = indices[:, 0].unique()
         for level_idx in unique_levels:
-
-            #print("level_idx:", level_idx)
             level_mask = indices[:, 0] == level_idx
-            #print("level_mask:", level_mask)
             if not level_mask.any():
                 continue
             name = level_names[level_idx] if level_idx < len(level_names) else str(int(level_idx))
-            #print("level name:", name)
             feat = features.get(name)
-            #print("feat:", feat)
             if feat is None:
                 continue
-            #print("feat shape:", feat.shape)
             sel_indices = indices[level_mask]
             sel_classes = classes[level_mask]
             sel_sizes = max_edge[level_mask]
-            #print("sel_indices shape:", sel_indices.shape)
-            #print("sel_classes shape:", sel_classes.shape)
-            #print("sel_sizes shape:", sel_sizes.shape)
+            sel_bboxes = bboxes_norm_all[level_mask] if bboxes_norm_all is not None else None
             batch_idx = sel_indices[:, 1].long()
             gy = sel_indices[:, 2].long()
             gx = sel_indices[:, 3].long()
             vecs = feat[batch_idx, :, gy, gx]
-            #print("vecs shape:", vecs.shape) 
-            
-            for embedding, cls_id, size in zip(vecs, sel_classes, sel_sizes):
+
+            for i, (embedding, cls_id, size, bidx) in enumerate(
+                zip(vecs, sel_classes, sel_sizes, batch_idx)
+            ):
                 detach_embedding = (attr == "last_positive_cells")
                 emb = embedding.detach() if detach_embedding else embedding
+                meta: dict = {"max_edge": float(size.item())}
+                b = int(bidx.item())
+                if im_files and b < len(im_files):
+                    meta["im_file"] = im_files[b]
+                if sel_bboxes is not None:
+                    meta["bbox_xywh_norm"] = sel_bboxes[i].tolist()
                 items.append(
                     TinyReplayItem(
                         cls=int(cls_id.item()),
                         level=name,
                         embedding=emb,
-                        metadata={"max_edge": float(size.item())},
+                        metadata=meta,
                     )
                 )
-                #print("Added TinyReplayItem:", items[-1])
         if attr == "last_positive_cells":
             loss_module.last_positive_cells = None
         if attr == "last_replay_cells" and hasattr(loss_module, "last_replay_cells"):
@@ -1266,3 +1270,13 @@ class DetectionTrainer(BaseTrainer):
             LOGGER.warning(f"Failed to save {label} buffer to {save_path}: {exc}")
             return
         LOGGER.info(f"Saved {saved} {label} embeddings to {save_path}{suffix}")
+        # Persist fine prototype source metadata for visualization
+        if combined.num_fine > 0:
+            try:
+                sources_path = Path(save_path).with_name(
+                    Path(save_path).stem + "_sources.json"
+                )
+                combined.save_sources(sources_path)
+                LOGGER.info(f"Saved fine prototype sources to {sources_path}")
+            except Exception as exc:  # noqa: BLE001
+                LOGGER.warning(f"Failed to save fine prototype sources: {exc}")
