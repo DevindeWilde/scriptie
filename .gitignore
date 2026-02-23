@@ -5,3 +5,6 @@ __pycache__/
 datasets/**/**/images/
 # Ignore macOS .DS_Store file
 .DS_Store
+
+best.pt
+last.pt

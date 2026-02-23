@@ -252,7 +252,7 @@ def parse_args():
     p.add_argument(
         "--src",
         type=Path,
-        default=Path("/home/ddwilde/scriptie/datasets/dota_yolo_filtered"),
+        default=Path("/home/ddwilde/scriptie/datasets/dota-filtered-full"),
         help="Source dataset root (default: %(default)s)",
     )
     p.add_argument(
