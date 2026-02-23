@@ -528,3 +528,58 @@ Saved 2304 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saa
 Saved 2304 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/box_buffer.pt
 
       Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109        0.2      0.433      0.328      0.179
+Saved 2304 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/buffer.pt
+Saved 2304 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/box_buffer.pt
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.166      0.544      0.367      0.202
+Saved 2304 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/buffer.pt
+Saved 2304 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/box_buffer.pt
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.193      0.517      0.371      0.207
+Saved 2304 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/buffer.pt
+Saved 2304 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/box_buffer.pt
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.181      0.536      0.371      0.206
+Saved 2304 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/buffer.pt
+Saved 2304 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/box_buffer.pt
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.204      0.553       0.43       0.24
+Saved 2304 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/buffer.pt
+Saved 2304 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/box_buffer.pt
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.189      0.531      0.383      0.208
+Saved 2304 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/buffer.pt
+Saved 2304 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/box_buffer.pt
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.209      0.503      0.366      0.211
+Saved 2304 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/buffer.pt
+Saved 2304 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/box_buffer.pt
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.201      0.508      0.384      0.214
+Saved 2304 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/buffer.pt
+Saved 2304 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/box_buffer.pt
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109       0.17      0.516      0.355      0.197
+Saved 2304 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/buffer.pt
+Saved 2304 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/box_buffer.pt
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.163       0.56      0.354      0.197
+Saved 2304 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/buffer.pt
+Saved 2304 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/box_buffer.pt
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.192      0.516       0.37      0.209
+Saved 2304 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/buffer.pt
+Saved 2304 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/replay/box_buffer.pt
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
