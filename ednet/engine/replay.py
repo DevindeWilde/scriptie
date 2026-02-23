@@ -436,7 +436,8 @@ class TinyReplayBuffer:
                 slot_idx = len(slots)
                 slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1, source=metadata))
                 return ("opened", slot_idx)
-            sims = [self._cosine(slot.vector, embedding) for slot in slots]
+            slot_mat = torch.stack([s.vector for s in slots]).float()
+            sims = torch.clamp(torch.mv(slot_mat, embedding.float()), -1.0, 1.0).tolist()
             if max(sims, default=-1.0) < self.init_sim_thresh:
                 slot_idx = len(slots)
                 slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1, source=metadata))
@@ -444,7 +445,8 @@ class TinyReplayBuffer:
         if not slots:
             slots.append(PrototypeEntry(vector=embedding.to(self.dtype), count=1, source=metadata))
             return ("opened", 0)
-        sims = torch.tensor([self._cosine(slot.vector, embedding) for slot in slots], device=self.device)
+        slot_mat = torch.stack([s.vector for s in slots]).float()
+        sims = torch.clamp(torch.mv(slot_mat, embedding.float()), -1.0, 1.0)
         best_idx = int(torch.argmax(sims))
         best_sim = float(sims[best_idx])
         if best_sim < self.gate_min_cos:

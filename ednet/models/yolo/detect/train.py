@@ -891,12 +891,13 @@ class DetectionTrainer(BaseTrainer):
             gy = sel_indices[:, 2].long()
             gx = sel_indices[:, 3].long()
             vecs = feat[batch_idx, :, gy, gx]
+            if attr == "last_positive_cells":
+                vecs = vecs.detach().cpu()  # one batched GPU→CPU transfer; prototype ops run on CPU
 
             for i, (embedding, cls_id, size, bidx) in enumerate(
                 zip(vecs, sel_classes, sel_sizes, batch_idx)
             ):
-                detach_embedding = (attr == "last_positive_cells")
-                emb = embedding.detach() if detach_embedding else embedding
+                emb = embedding  # already detached+cpu for student; GPU with grad for teacher
                 meta: dict = {"max_edge": float(size.item())}
                 b = int(bidx.item())
                 if im_files and b < len(im_files):
@@ -960,8 +961,10 @@ class DetectionTrainer(BaseTrainer):
             gy = sel_indices[:, 2].long()
             gx = sel_indices[:, 3].long()
             vecs = feat[batch_idx, :, gy, gx]
+            if detach:
+                vecs = vecs.detach().cpu()  # one batched GPU→CPU transfer; prototype ops run on CPU
             for embedding, cls_id, size in zip(vecs, sel_classes, sel_sizes):
-                emb = embedding.detach() if detach else embedding
+                emb = embedding  # already detached+cpu if detach=True
                 items.append(
                     TinyReplayItem(
                         cls=int(cls_id.item()),
