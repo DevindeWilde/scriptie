@@ -232,6 +232,8 @@ class DetectionTrainer(BaseTrainer):
             self.replay_samples_per_class = max(1, int(replay_args.get("sample_per_batch", 16)))
             self.replay_loss_weight = float(replay_args.get("loss_weight", 1.0))
             self.replay_max_edge = float(replay_args.get("tiny_max_pixels", 32))
+            self.replay_student_update_freq = max(1, int(replay_args.get("student_update_freq", 1)))
+            self._student_update_counter = 0
             self.replay_scale_weight = replay_args.get("scale_weighting", "uniform")
             self.replay_debug = bool(replay_args.get("debug", False))
             store_dir = replay_args.get("store_dir", "replay")
@@ -612,9 +614,11 @@ class DetectionTrainer(BaseTrainer):
                             aux_loss = replay_loss * self.replay_loss_weight
                 if self.replay_student_buffer is not None:
                     self.replay_student_buffer.current_epoch = self.epoch
-                    student_items = self._gather_embeddings(features, attr="last_positive_cells", criterion=criterion, batch=batch)
-                    for item in student_items:
-                        self.replay_student_buffer.add(item)
+                    self._student_update_counter += 1
+                    if self._student_update_counter % self.replay_student_update_freq == 0:
+                        student_items = self._gather_embeddings(features, attr="last_positive_cells", criterion=criterion, batch=batch)
+                        for item in student_items:
+                            self.replay_student_buffer.add(item)
             # --- Box prototype replay path (uses same grid-cell positions as cls replay) ---
             box_teacher_ready = (
                 getattr(self, "replay_box_enabled", False)
@@ -640,7 +644,9 @@ class DetectionTrainer(BaseTrainer):
                         if box_replay_loss is not None:
                             box_aux = box_replay_loss * self.replay_box_loss_weight
                             aux_loss = box_aux if aux_loss is None else aux_loss + box_aux
-                if self.replay_box_student_buffer is not None and student_index_raw is not None:
+                if (self.replay_box_student_buffer is not None
+                        and student_index_raw is not None
+                        and self._student_update_counter % self.replay_student_update_freq == 0):
                     box_student_items = self._gather_embeddings_from_index(
                         box_features, student_index_raw, criterion, detach=True
                     )
@@ -892,7 +898,14 @@ class DetectionTrainer(BaseTrainer):
             gx = sel_indices[:, 3].long()
             vecs = feat[batch_idx, :, gy, gx]
             if attr == "last_positive_cells":
-                vecs = vecs.detach().cpu()  # one batched GPU→CPU transfer; prototype ops run on CPU
+                # Batch GPU→CPU transfer for all per-item tensors; avoids N×3 CUDA syncs from
+                # scalar .item() calls on GPU tensors in the inner loop below.
+                vecs        = vecs.detach().cpu()
+                sel_classes = sel_classes.cpu()
+                sel_sizes   = sel_sizes.cpu()
+                batch_idx   = batch_idx.cpu()
+                if sel_bboxes is not None:
+                    sel_bboxes = sel_bboxes.cpu()
 
             for i, (embedding, cls_id, size, bidx) in enumerate(
                 zip(vecs, sel_classes, sel_sizes, batch_idx)
@@ -962,7 +975,11 @@ class DetectionTrainer(BaseTrainer):
             gx = sel_indices[:, 3].long()
             vecs = feat[batch_idx, :, gy, gx]
             if detach:
-                vecs = vecs.detach().cpu()  # one batched GPU→CPU transfer; prototype ops run on CPU
+                # Batch GPU→CPU transfer for all per-item tensors; avoids N×2 CUDA syncs from
+                # scalar .item() calls on GPU tensors in the inner loop below.
+                vecs        = vecs.detach().cpu()
+                sel_classes = sel_classes.cpu()
+                sel_sizes   = sel_sizes.cpu()
             for embedding, cls_id, size in zip(vecs, sel_classes, sel_sizes):
                 emb = embedding  # already detached+cpu if detach=True
                 items.append(

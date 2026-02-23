@@ -51,7 +51,8 @@ python train.py \
   --override "replay.tiny_max_pixels=320" \
   --override "replay.prototypes.num_fine=4" \
   --override "replay.box.enable=True" \
-  --override "replay.box.loss_weight=1.0"
+  --override "replay.box.loss_weight=1.0" \
+  --override "replay.student_update_freq=10"
 
 # ── Stage 2 ─────────────────────────────────────────────────────────────────
 # Introduce {2: plane, 3: helicopter}.
@@ -79,7 +80,8 @@ python train.py \
   --override "replay.init_buffer=$RUNS/dota_saab/stage1-saab/replay/buffer.pt" \
   --override "replay.box.enable=True" \
   --override "replay.box.loss_weight=1.0" \
-  --override "replay.box.init_buffer=$RUNS/dota_saab/stage1-saab/replay/box_buffer.pt"
+  --override "replay.box.init_buffer=$RUNS/dota_saab/stage1-saab/replay/box_buffer.pt" \
+  --override "replay.student_update_freq=10"
 
 # ── Stage 3 ─────────────────────────────────────────────────────────────────
 # Introduce {4: ship}.
@@ -107,4 +109,5 @@ python train.py \
   --override "replay.init_buffer=$RUNS/dota_saab/stage2-saab/replay/buffer.pt" \
   --override "replay.box.enable=True" \
   --override "replay.box.loss_weight=1.0" \
-  --override "replay.box.init_buffer=$RUNS/dota_saab/stage2-saab/replay/box_buffer.pt"
+  --override "replay.box.init_buffer=$RUNS/dota_saab/stage2-saab/replay/box_buffer.pt" \
+  --override "replay.student_update_freq=10"
