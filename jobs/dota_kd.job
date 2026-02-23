@@ -47,7 +47,7 @@ python train.py \
 # Teacher = stage-1 model (nc=2); KD distills old-class knowledge to student.
 python train.py \
   --cfg $CFG \
-  --data $YAML/DOTA-shared-stage2.yaml \
+  --data $YAML/DOTA-shared-stage2-replay.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
@@ -69,7 +69,7 @@ python train.py \
 # Teacher = stage-2 model (nc=4); KD distills old-class knowledge to student.
 python train.py \
   --cfg $CFG \
-  --data $YAML/DOTA-shared-stage3.yaml \
+  --data $YAML/DOTA-shared-stage3-replay.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \

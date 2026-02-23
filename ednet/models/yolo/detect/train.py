@@ -133,23 +133,17 @@ class DetectionTrainer(BaseTrainer):
         model.prev_class_ids = self.prev_class_ids
         replay_args = getattr(self.args, "replay", None)
         self.replay_enabled = bool(isinstance(replay_args, dict) and replay_args.get("enable"))
-        # Memory exemplars supply old-class GT annotations that must reach the YOLO detection
-        # loss (cls/box/dfl), otherwise those heads receive zero gradient on memory images.
-        # Extend active_class_ids to cover prev_class_ids whenever memory_dir is active —
-        # same logic as the pseudo-labels extension above.
-        # Note: prototype consistency (replay aux loss) uses _record_prev_replay_cells which
-        # reads raw GT filtered by prev_classes and is unaffected by this extension.
-        if (
-            self.prev_class_ids
-            and self.active_class_ids is not None
-            and isinstance(replay_args, dict)
-            and replay_args.get("memory_dir")
-        ):
+        # Old-class GT annotations must reach the YOLO detection loss (cls/box/dfl); without
+        # this extension, active_classes filtering would zero-gradient those heads on images
+        # where old-class objects are present (baked-in replay labels or injected memory).
+        # Note: prototype consistency (_record_prev_replay_cells) filters by class ID and is
+        # unaffected by this extension.
+        if self.prev_class_ids and self.active_class_ids is not None:
             combined = tuple(sorted(set(self.active_class_ids) | set(self.prev_class_ids)))
             if combined != self.active_class_ids:
                 self.active_class_ids = combined
                 model.active_class_ids = combined
-                LOGGER.info(f"Memory replay active: extended active_classes → {self.active_class_ids}")
+                LOGGER.info(f"Replay active: extended active_classes → {self.active_class_ids}")
         self.feature_tapper = None
         self.replay_teacher_buffer = None
         self.replay_student_buffer = None

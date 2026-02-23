@@ -23,11 +23,9 @@ RUNS=$HOME/scriptie/runs
 CFG=$HOME/scriptie/ednet/cfg/models/ednet/ednet-s.yaml
 PRETRAINED=$HOME/scriptie/pretrained/small.pt
 YAML=$HOME/scriptie/yaml
-MEM=$HOME/scriptie/datasets/memory  # exemplar dataset root
 
-# SA-AB: memory exemplar mixing + classification prototype consistency
-#        + bounding-box prototype consistency (full implementation).
-# Shared image pool for training; external memory for exemplar replay mixing.
+# SA-AB: classification + bounding-box prototype consistency (full implementation).
+# Shared image pool for training; old-class GT baked into train_replay/ labels (25 images/class).
 # Cls prototypes stored in  replay/buffer.pt
 # Box prototypes stored in  replay/box_buffer.pt
 
@@ -57,11 +55,11 @@ python train.py \
 # ── Stage 2 ─────────────────────────────────────────────────────────────────
 # Introduce {2: plane, 3: helicopter}.
 # Load stage-1 cls + box prototype buffers as teacher.
-# Mix stage-1 exemplar images (25% of each batch).
-# active_classes is auto-extended to [0,1,2,3] by the trainer (memory_dir set).
+# Old-class GT is baked into train_replay/ labels (25 images/class) — no external memory needed.
+# active_classes is auto-extended to [0,1,2,3] by the trainer (prev_classes set).
 python train.py \
   --cfg $CFG \
-  --data $YAML/DOTA-shared-stage2.yaml \
+  --data $YAML/DOTA-shared-stage2-replay.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
@@ -77,8 +75,6 @@ python train.py \
   --override "replay.loss_weight=1.0" \
   --override "replay.tiny_max_pixels=320" \
   --override "replay.init_buffer=$RUNS/dota_saab/stage1-saab/replay/buffer.pt" \
-  --override "replay.memory_dir=$MEM/stage1" \
-  --override "replay.memory_ratio=0.25" \
   --override "replay.box.enable=True" \
   --override "replay.box.loss_weight=1.0" \
   --override "replay.box.init_buffer=$RUNS/dota_saab/stage1-saab/replay/box_buffer.pt"
@@ -86,11 +82,11 @@ python train.py \
 # ── Stage 3 ─────────────────────────────────────────────────────────────────
 # Introduce {4: ship}.
 # Load stage-2 cls + box prototype buffers as teacher.
-# Mix stage-2 exemplar images (25% of each batch).
-# active_classes is auto-extended to [0,1,2,3,4] by the trainer (memory_dir set).
+# Old-class GT is baked into train_replay/ labels (25 images/class) — no external memory needed.
+# active_classes is auto-extended to [0,1,2,3,4] by the trainer (prev_classes set).
 python train.py \
   --cfg $CFG \
-  --data $YAML/DOTA-shared-stage3.yaml \
+  --data $YAML/DOTA-shared-stage3-replay.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
@@ -106,8 +102,6 @@ python train.py \
   --override "replay.loss_weight=1.0" \
   --override "replay.tiny_max_pixels=320" \
   --override "replay.init_buffer=$RUNS/dota_saab/stage2-saab/replay/buffer.pt" \
-  --override "replay.memory_dir=$MEM/stage2" \
-  --override "replay.memory_ratio=0.25" \
   --override "replay.box.enable=True" \
   --override "replay.box.loss_weight=1.0" \
   --override "replay.box.init_buffer=$RUNS/dota_saab/stage2-saab/replay/box_buffer.pt"
