@@ -1,0 +1,115 @@
+#!/bin/bash
+#SBATCH --job-name=dota-kd-pseudo
+#SBATCH --time=24:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --partition=gpu_a100
+#SBATCH --gpus-per-node=1
+#SBATCH --gres=gpu:1
+#SBATCH --output=logs/dota-kd-pseudo-%j.out
+#SBATCH --error=logs/dota-kd-pseudo-%j.err
+
+module purge
+module load 2023
+module load CUDA/12.4.0
+module load Python/3.11.3-GCCcore-12.3.0
+
+source $HOME/ednet_env/bin/activate
+cd $HOME/scriptie
+
+RUNS=$HOME/scriptie/runs
+CFG=$HOME/scriptie/ednet/cfg/models/ednet/ednet-s.yaml
+PRETRAINED=$HOME/scriptie/pretrained/small.pt
+YAML=$HOME/scriptie/yaml
+PL=$RUNS/dota_kd_pseudo/pseudo_labels
+
+# KD + Pseudo: output-level distillation from prior teacher + pseudo-label GT
+# for old classes. Pseudo-labels are generated between stages by running the
+# frozen previous-stage model on the next stage's training images.
+
+# ── Stage 1 ──────────────────────────────────────────────────────────────────
+# Train on {0: small-vehicle, 1: large-vehicle} — no KD yet, no pseudo-labels.
+python train.py \
+  --cfg $CFG \
+  --data $YAML/DOTA-shared-stage1.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project $RUNS/dota_kd_pseudo \
+  --name stage1-kd-pseudo \
+  --workers 8 \
+  --weights $PRETRAINED \
+  --override "stage.active_classes=[0,1]"
+
+# ── Generate pseudo-labels for Stage 2 ───────────────────────────────────────
+# Run stage-1 model on stage-2 training images; keep confident predictions for
+# old classes {0,1}; conflict-remove against stage-2 GT boxes.
+python scripts/generate_pseudo_labels.py \
+  --weights $RUNS/dota_kd_pseudo/stage1-kd-pseudo/weights/best.pt \
+  --data $YAML/DOTA-shared-stage2.yaml \
+  --prev-classes 0 1 \
+  --outdir $PL/stage2 \
+  --conf 0.5 \
+  --conflict-iou 0.5
+
+# ── Stage 2 ──────────────────────────────────────────────────────────────────
+# Introduce {2: plane, 3: helicopter}.
+# Teacher = stage-1 model (nc=2); KD distills old-class knowledge to student.
+# active_classes=[2,3] is automatically extended to [0,1,2,3] by the trainer
+# when pseudo_labels_dir is set together with prev_classes.
+python train.py \
+  --cfg $CFG \
+  --data $YAML/DOTA-shared-stage2.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project $RUNS/dota_kd_pseudo \
+  --name stage2-kd-pseudo \
+  --workers 8 \
+  --weights $RUNS/dota_kd_pseudo/stage1-kd-pseudo/weights/best.pt \
+  --override "stage.active_classes=[2,3]" \
+  --override "stage.prev_classes=[0,1]" \
+  --override "stage.pseudo_labels_dir=$PL/stage2" \
+  --override "kd.enable=True" \
+  --override "kd.teacher_weights=$RUNS/dota_kd_pseudo/stage1-kd-pseudo/weights/best.pt" \
+  --override "kd.teacher_nc=2" \
+  --override "kd.lambda_cls=1.0" \
+  --override "kd.lambda_bbox=1.0" \
+  --override "kd.top_k=10"
+
+# ── Generate pseudo-labels for Stage 3 ───────────────────────────────────────
+# Run stage-2 model (nc=4) on stage-3 training images; keep predictions for
+# old classes {0,1,2,3}.
+python scripts/generate_pseudo_labels.py \
+  --weights $RUNS/dota_kd_pseudo/stage2-kd-pseudo/weights/best.pt \
+  --data $YAML/DOTA-shared-stage3.yaml \
+  --prev-classes 0 1 2 3 \
+  --outdir $PL/stage3 \
+  --conf 0.5 \
+  --conflict-iou 0.5
+
+# ── Stage 3 ──────────────────────────────────────────────────────────────────
+# Introduce {4: ship}.
+# Teacher = stage-2 model (nc=4); KD distills old-class knowledge to student.
+# active_classes=[4] is automatically extended to [0,1,2,3,4] by the trainer.
+python train.py \
+  --cfg $CFG \
+  --data $YAML/DOTA-shared-stage3.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project $RUNS/dota_kd_pseudo \
+  --name stage3-kd-pseudo \
+  --workers 8 \
+  --weights $RUNS/dota_kd_pseudo/stage2-kd-pseudo/weights/best.pt \
+  --override "stage.active_classes=[4]" \
+  --override "stage.prev_classes=[0,1,2,3]" \
+  --override "stage.pseudo_labels_dir=$PL/stage3" \
+  --override "kd.enable=True" \
+  --override "kd.teacher_weights=$RUNS/dota_kd_pseudo/stage2-kd-pseudo/weights/best.pt" \
+  --override "kd.teacher_nc=4" \
+  --override "kd.lambda_cls=1.0" \
+  --override "kd.lambda_bbox=1.0" \
+  --override "kd.top_k=10"
