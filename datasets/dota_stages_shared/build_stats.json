@@ -1,0 +1,116 @@
+{
+  "stage1": {
+    "train": {
+      "total_files": 863,
+      "with_annotations": 526,
+      "empty": 337,
+      "class_counts": {
+        "0": 20714,
+        "1": 16197
+      }
+    },
+    "val": {
+      "total_files": 186,
+      "with_annotations": 110,
+      "empty": 76,
+      "class_counts": {
+        "0": 5547,
+        "1": 2810
+      }
+    },
+    "test": {
+      "total_files": 186,
+      "with_annotations": 113,
+      "empty": 73,
+      "class_counts": {
+        "0": 5303,
+        "1": 2349
+      }
+    }
+  },
+  "stage2": {
+    "train": {
+      "total_files": 863,
+      "with_annotations": 182,
+      "empty": 681,
+      "class_counts": {
+        "2": 6768,
+        "3": 474
+      }
+    },
+    "val": {
+      "total_files": 186,
+      "with_annotations": 140,
+      "empty": 46,
+      "class_counts": {
+        "0": 5547,
+        "1": 2810,
+        "2": 1720,
+        "3": 32
+      }
+    },
+    "test": {
+      "total_files": 186,
+      "with_annotations": 150,
+      "empty": 36,
+      "class_counts": {
+        "0": 5303,
+        "1": 2349,
+        "2": 2098,
+        "3": 197
+      }
+    },
+    "replay_train": {
+      "replay_images": 43,
+      "old_class_annotations_restored": {
+        "0": 8783,
+        "1": 6260
+      },
+      "total_old_annotations": 15043
+    }
+  },
+  "stage3": {
+    "train": {
+      "total_files": 863,
+      "with_annotations": 308,
+      "empty": 555,
+      "class_counts": {
+        "4": 26535
+      }
+    },
+    "val": {
+      "total_files": 186,
+      "with_annotations": 186,
+      "empty": 0,
+      "class_counts": {
+        "0": 5547,
+        "1": 2810,
+        "4": 5740,
+        "2": 1720,
+        "3": 32
+      }
+    },
+    "test": {
+      "total_files": 186,
+      "with_annotations": 186,
+      "empty": 0,
+      "class_counts": {
+        "4": 4753,
+        "0": 5303,
+        "1": 2349,
+        "2": 2098,
+        "3": 197
+      }
+    },
+    "replay_train": {
+      "replay_images": 83,
+      "old_class_annotations_restored": {
+        "0": 8920,
+        "1": 6436,
+        "2": 3889,
+        "3": 469
+      },
+      "total_old_annotations": 19714
+    }
+  }
+}
