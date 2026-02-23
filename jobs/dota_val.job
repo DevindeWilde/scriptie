@@ -20,9 +20,13 @@ source $HOME/ednet_env/bin/activate
 cd $HOME/scriptie
 
 RUNS=$HOME/scriptie/runs
+YAML=$HOME/scriptie/yaml
 VALDIR=$RUNS/val
 
-# Helper: run validation and print a header so the log is easy to scan
+# Evaluate all methods on their test split.
+# Stage i model is evaluated against DOTA-shared-stage{i}.yaml whose test labels
+# contain ALL cumulative classes — this directly measures catastrophic forgetting.
+
 run_val() {
     local weights=$1
     local data=$2
@@ -42,70 +46,70 @@ run_val() {
 
 # ── Lower bound (naive finetuning) ───────────────────────────────────────────
 run_val $RUNS/dota_lower/stage1-lower/weights/best.pt \
-        $HOME/scriptie/yaml/DOTA-stage1.yaml \
+        $YAML/DOTA-shared-stage1.yaml \
         $VALDIR/lower/stage1
 
 run_val $RUNS/dota_lower/stage2-lower/weights/best.pt \
-        $HOME/scriptie/yaml/DOTA-stage2.yaml \
+        $YAML/DOTA-shared-stage2.yaml \
         $VALDIR/lower/stage2
 
 run_val $RUNS/dota_lower/stage3-lower/weights/best.pt \
-        $HOME/scriptie/yaml/DOTA-stage3.yaml \
+        $YAML/DOTA-shared-stage3.yaml \
         $VALDIR/lower/stage3
 
-# ── Replay (memory exemplar mixing) ──────────────────────────────────────────
+# ── Annotation replay (shared-pool label merging) ─────────────────────────────
 run_val $RUNS/dota_replay/stage1-replay/weights/best.pt \
-        $HOME/scriptie/yaml/DOTA-stage1.yaml \
+        $YAML/DOTA-shared-stage1.yaml \
         $VALDIR/replay/stage1
 
 run_val $RUNS/dota_replay/stage2-replay/weights/best.pt \
-        $HOME/scriptie/yaml/DOTA-stage2.yaml \
+        $YAML/DOTA-shared-stage2.yaml \
         $VALDIR/replay/stage2
 
 run_val $RUNS/dota_replay/stage3-replay/weights/best.pt \
-        $HOME/scriptie/yaml/DOTA-stage3.yaml \
+        $YAML/DOTA-shared-stage3.yaml \
         $VALDIR/replay/stage3
 
 # ── Knowledge distillation ────────────────────────────────────────────────────
 run_val $RUNS/dota_kd/stage1-kd/weights/best.pt \
-        $HOME/scriptie/yaml/DOTA-stage1.yaml \
+        $YAML/DOTA-shared-stage1.yaml \
         $VALDIR/kd/stage1
 
 run_val $RUNS/dota_kd/stage2-kd/weights/best.pt \
-        $HOME/scriptie/yaml/DOTA-stage2.yaml \
+        $YAML/DOTA-shared-stage2.yaml \
         $VALDIR/kd/stage2
 
 run_val $RUNS/dota_kd/stage3-kd/weights/best.pt \
-        $HOME/scriptie/yaml/DOTA-stage3.yaml \
+        $YAML/DOTA-shared-stage3.yaml \
         $VALDIR/kd/stage3
 
 # ── Pseudo-labeling ───────────────────────────────────────────────────────────
 run_val $RUNS/dota_pseudo/stage1-pseudo/weights/best.pt \
-        $HOME/scriptie/yaml/DOTA-stage1.yaml \
+        $YAML/DOTA-shared-stage1.yaml \
         $VALDIR/pseudo/stage1
 
 run_val $RUNS/dota_pseudo/stage2-pseudo/weights/best.pt \
-        $HOME/scriptie/yaml/DOTA-stage2.yaml \
+        $YAML/DOTA-shared-stage2.yaml \
         $VALDIR/pseudo/stage2
 
 run_val $RUNS/dota_pseudo/stage3-pseudo/weights/best.pt \
-        $HOME/scriptie/yaml/DOTA-stage3.yaml \
+        $YAML/DOTA-shared-stage3.yaml \
         $VALDIR/pseudo/stage3
 
 # ── SA-AB (cls + box prototype consistency + memory replay) ───────────────────
 run_val $RUNS/dota_saab/stage1-saab/weights/best.pt \
-        $HOME/scriptie/yaml/DOTA-stage1.yaml \
+        $YAML/DOTA-shared-stage1.yaml \
         $VALDIR/saab/stage1
 
 run_val $RUNS/dota_saab/stage2-saab/weights/best.pt \
-        $HOME/scriptie/yaml/DOTA-stage2.yaml \
+        $YAML/DOTA-shared-stage2.yaml \
         $VALDIR/saab/stage2
 
 run_val $RUNS/dota_saab/stage3-saab/weights/best.pt \
-        $HOME/scriptie/yaml/DOTA-stage3.yaml \
+        $YAML/DOTA-shared-stage3.yaml \
         $VALDIR/saab/stage3
 
 # ── Upper bound (joint training, oracle) ─────────────────────────────────────
 run_val $RUNS/dota_upper/upper/weights/best.pt \
-        $HOME/scriptie/yaml/DOTA-filtered.yaml \
+        $YAML/DOTA-filtered.yaml \
         $VALDIR/upper/final

@@ -22,18 +22,17 @@ cd $HOME/scriptie
 RUNS=$HOME/scriptie/runs
 CFG=$HOME/scriptie/ednet/cfg/models/ednet/ednet-s.yaml
 PRETRAINED=$HOME/scriptie/pretrained/small.pt
-MEM=$HOME/scriptie/datasets/memory  # exemplar dataset root
+YAML=$HOME/scriptie/yaml
 
-# Memory exemplar replay: old-stage images mixed into new-stage batches.
-# No active_classes filtering — the YOLO loss must see all classes present
-# in the batch (new-class GT from stage data + old-class GT from exemplars).
-# No prototype consistency loss (no init_buffer → teacher buffer stays empty).
+# Annotation replay: shared image pool, old-class labels merged back for 25 replay
+# images per old class (built by build_shared_stages.py into train_replay/labels/).
+# No active_classes filtering — YOLO loss sees all annotated classes in each batch.
 
 # ── Stage 1 ─────────────────────────────────────────────────────────────────
-# Train on {0: small-vehicle, 1: large-vehicle} — no prior memory to replay
+# Train on {0: small-vehicle, 1: large-vehicle} — no prior classes to replay
 python train.py \
   --cfg $CFG \
-  --data $HOME/scriptie/yaml/DOTA-stage1.yaml \
+  --data $YAML/DOTA-shared-stage1.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
@@ -44,36 +43,29 @@ python train.py \
 
 # ── Stage 2 ─────────────────────────────────────────────────────────────────
 # Introduce {2: plane, 3: helicopter}.
-# Mix stage-1 exemplars (25% of each batch) alongside new-stage images.
-# No active_classes: loss covers classes 0-3 so old-class exemplars contribute.
+# train_replay/labels merges old-class [0,1] annotations into 50 replay images.
+# No active_classes override: YOLO loss covers all annotated classes.
 python train.py \
   --cfg $CFG \
-  --data $HOME/scriptie/yaml/DOTA-stage2.yaml \
+  --data $YAML/DOTA-shared-stage2-replay.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
   --project $RUNS/dota_replay \
   --name stage2-replay \
   --workers 8 \
-  --weights $RUNS/dota_replay/stage1-replay/weights/best.pt \
-  --override "replay.enable=True" \
-  --override "replay.memory_dir=$MEM/stage1" \
-  --override "replay.memory_ratio=0.25"
+  --weights $RUNS/dota_replay/stage1-replay/weights/best.pt
 
 # ── Stage 3 ─────────────────────────────────────────────────────────────────
 # Introduce {4: ship}.
-# Mix stage-2 exemplars (25% of each batch).
-# No active_classes: loss covers classes 0-4 so all exemplar classes contribute.
+# train_replay/labels merges old-class [0,1,2,3] annotations into 100 replay images.
 python train.py \
   --cfg $CFG \
-  --data $HOME/scriptie/yaml/DOTA-stage3.yaml \
+  --data $YAML/DOTA-shared-stage3-replay.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
   --project $RUNS/dota_replay \
   --name stage3-replay \
   --workers 8 \
-  --weights $RUNS/dota_replay/stage2-replay/weights/best.pt \
-  --override "replay.enable=True" \
-  --override "replay.memory_dir=$MEM/stage2" \
-  --override "replay.memory_ratio=0.25"
+  --weights $RUNS/dota_replay/stage2-replay/weights/best.pt

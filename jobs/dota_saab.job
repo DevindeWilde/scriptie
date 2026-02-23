@@ -22,10 +22,12 @@ cd $HOME/scriptie
 RUNS=$HOME/scriptie/runs
 CFG=$HOME/scriptie/ednet/cfg/models/ednet/ednet-s.yaml
 PRETRAINED=$HOME/scriptie/pretrained/small.pt
+YAML=$HOME/scriptie/yaml
 MEM=$HOME/scriptie/datasets/memory  # exemplar dataset root
 
 # SA-AB: memory exemplar mixing + classification prototype consistency
 #        + bounding-box prototype consistency (full implementation).
+# Shared image pool for training; external memory for exemplar replay mixing.
 # Cls prototypes stored in  replay/buffer.pt
 # Box prototypes stored in  replay/box_buffer.pt
 
@@ -35,7 +37,7 @@ MEM=$HOME/scriptie/datasets/memory  # exemplar dataset root
 # Both cls and box student buffers accumulate and are saved for stage 2.
 python train.py \
   --cfg $CFG \
-  --data $HOME/scriptie/yaml/DOTA-stage1.yaml \
+  --data $YAML/DOTA-shared-stage1.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
@@ -56,9 +58,10 @@ python train.py \
 # Introduce {2: plane, 3: helicopter}.
 # Load stage-1 cls + box prototype buffers as teacher.
 # Mix stage-1 exemplar images (25% of each batch).
+# active_classes is auto-extended to [0,1,2,3] by the trainer (memory_dir set).
 python train.py \
   --cfg $CFG \
-  --data $HOME/scriptie/yaml/DOTA-stage2.yaml \
+  --data $YAML/DOTA-shared-stage2.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
@@ -84,9 +87,10 @@ python train.py \
 # Introduce {4: ship}.
 # Load stage-2 cls + box prototype buffers as teacher.
 # Mix stage-2 exemplar images (25% of each batch).
+# active_classes is auto-extended to [0,1,2,3,4] by the trainer (memory_dir set).
 python train.py \
   --cfg $CFG \
-  --data $HOME/scriptie/yaml/DOTA-stage3.yaml \
+  --data $YAML/DOTA-shared-stage3.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \

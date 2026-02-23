@@ -22,27 +22,32 @@ cd $HOME/scriptie
 RUNS=$HOME/scriptie/runs
 CFG=$HOME/scriptie/ednet/cfg/models/ednet/ednet-s.yaml
 PRETRAINED=$HOME/scriptie/pretrained/small.pt
+YAML=$HOME/scriptie/yaml
+
+# Knowledge distillation: shared image pool, new-class labels only per stage.
+# Teacher (stage t-1 model) distills old-class knowledge to the student via
+# output-level KD on teacher top-k anchor positions.
 
 # ── Stage 1 ─────────────────────────────────────────────────────────────────
-# Train on classes {0: small-vehicle, 1: large-vehicle} — no KD yet (no prior teacher)
-#python train.py \
-#  --cfg $CFG \
-#  --data $HOME/scriptie/yaml/DOTA-stage1.yaml \
-#  --epochs 50 \
-#  --imgsz 640 \
-#  --batch-size 4 \
-#  --project $RUNS/dota_kd \
-#  --name stage1-kd \
-#  --workers 8 \
-#  --weights $PRETRAINED \
-#  --override "stage.active_classes=[0,1]"
+# Train on {0: small-vehicle, 1: large-vehicle} — no KD yet (no prior teacher)
+python train.py \
+  --cfg $CFG \
+  --data $YAML/DOTA-shared-stage1.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project $RUNS/dota_kd \
+  --name stage1-kd \
+  --workers 8 \
+  --weights $PRETRAINED \
+  --override "stage.active_classes=[0,1]"
 
 # ── Stage 2 ─────────────────────────────────────────────────────────────────
 # Introduce {2: plane, 3: helicopter}.
 # Teacher = stage-1 model (nc=2); KD distills old-class knowledge to student.
 python train.py \
   --cfg $CFG \
-  --data $HOME/scriptie/yaml/DOTA-stage2.yaml \
+  --data $YAML/DOTA-shared-stage2.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
@@ -64,7 +69,7 @@ python train.py \
 # Teacher = stage-2 model (nc=4); KD distills old-class knowledge to student.
 python train.py \
   --cfg $CFG \
-  --data $HOME/scriptie/yaml/DOTA-stage3.yaml \
+  --data $YAML/DOTA-shared-stage3.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \

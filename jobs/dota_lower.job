@@ -22,11 +22,16 @@ cd $HOME/scriptie
 RUNS=$HOME/scriptie/runs
 CFG=$HOME/scriptie/ednet/cfg/models/ednet/ednet-s.yaml
 PRETRAINED=$HOME/scriptie/pretrained/small.pt
+YAML=$HOME/scriptie/yaml
 
-# Stage 1 — train on classes {0: small-vehicle, 1: large-vehicle}
+# Lower bound (naive finetuning): shared image pool, new-class labels only per stage.
+# No CL mechanism — model forgets old classes by design.
+
+# ── Stage 1 ─────────────────────────────────────────────────────────────────
+# Train on {0: small-vehicle, 1: large-vehicle}
 python train.py \
   --cfg $CFG \
-  --data $HOME/scriptie/yaml/DOTA-stage1.yaml \
+  --data $YAML/DOTA-shared-stage1.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
@@ -35,10 +40,11 @@ python train.py \
   --workers 8 \
   --weights $PRETRAINED
 
-# Stage 2 — naive finetune on {0,1,2: plane, 3: helicopter} (lower bound: no CL)
+# ── Stage 2 ─────────────────────────────────────────────────────────────────
+# Finetune on {2: plane, 3: helicopter} — forgets old classes (lower bound)
 python train.py \
   --cfg $CFG \
-  --data $HOME/scriptie/yaml/DOTA-stage2.yaml \
+  --data $YAML/DOTA-shared-stage2.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
@@ -47,10 +53,11 @@ python train.py \
   --workers 8 \
   --weights $RUNS/dota_lower/stage1-lower/weights/best.pt
 
-# Stage 3 — naive finetune on {0,1,2,3,4: ship} (lower bound: no CL)
+# ── Stage 3 ─────────────────────────────────────────────────────────────────
+# Finetune on {4: ship} — forgets all previous classes (lower bound)
 python train.py \
   --cfg $CFG \
-  --data $HOME/scriptie/yaml/DOTA-stage3.yaml \
+  --data $YAML/DOTA-shared-stage3.yaml \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
