@@ -88,16 +88,20 @@ def img_to_label(img_path: Path) -> Path:
     return Path(*parts).with_suffix(".txt")
 
 
-# ──────────────────────────────── Symlink helper ──────────────────────────────
+# ──────────────────────────────── Copy helper ─────────────────────────────────
 
-def make_dir_symlink(link: Path, target: Path) -> None:
-    """Create a directory symlink at `link` → `target` (absolute path)."""
-    link.parent.mkdir(parents=True, exist_ok=True)
-    if link.is_symlink():
-        link.unlink()
-    elif link.exists():
-        shutil.rmtree(link)
-    link.symlink_to(target.resolve())
+def copy_images(src: Path, dst: Path) -> None:
+    """Copy all image files from src/ into dst/, skipping existing files."""
+    dst.mkdir(parents=True, exist_ok=True)
+    copied = 0
+    for f in src.iterdir():
+        if f.suffix.lower() in IMG_EXTS:
+            dest_file = dst / f.name
+            if not dest_file.exists():
+                shutil.copy2(f, dest_file)
+                copied += 1
+    if copied:
+        print(f"    Copied {copied} images → {dst}")
 
 
 # ──────────────────────────────── YAML writer ─────────────────────────────────
@@ -298,10 +302,10 @@ def main() -> None:
         print(f"  {stage_name}  new={new_cls}  cumulative={cum_cls}")
         print(f"{'─'*60}")
 
-        # ── Symlink image directories ─────────────────────────────────────────
+        # ── Copy image directories ────────────────────────────────────────────
         for split in ("train", "val", "test"):
-            make_dir_symlink(stage_dir / split / "images",
-                             src / split / "images")
+            copy_images(src / split / "images",
+                        stage_dir / split / "images")
 
         # ── train/labels → new classes only ──────────────────────────────────
         print(f"  Building train/labels (new classes {new_cls}) ...")
@@ -348,9 +352,22 @@ def main() -> None:
                 json.dump({str(k): v for k, v in manifest.items()}, f, indent=2)
             print(f"  Saved {manifest_path.name}")
 
-            # Symlink train_replay/images → same shared pool
-            make_dir_symlink(stage_dir / "train_replay" / "images",
-                             src / "train" / "images")
+            # train_replay/images is the same pool — hardlink to avoid re-copying
+            # (falls back to copy if hardlinks unsupported)
+            replay_img_dst = stage_dir / "train_replay" / "images"
+            replay_img_dst.mkdir(parents=True, exist_ok=True)
+            train_img_dst = stage_dir / "train" / "images"
+            linked = 0
+            for f in train_img_dst.iterdir():
+                dest = replay_img_dst / f.name
+                if not dest.exists():
+                    try:
+                        os.link(f, dest)
+                    except OSError:
+                        shutil.copy2(f, dest)
+                    linked += 1
+            if linked:
+                print(f"    Linked/copied {linked} images → {replay_img_dst}")
 
             print(f"  Building train_replay/labels ...")
             build_replay_labels(
