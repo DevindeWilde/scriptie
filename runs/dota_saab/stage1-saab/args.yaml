@@ -46,6 +46,7 @@ replay:
   box:
     enable: true
     loss_weight: 1.0
+  student_update_freq: 10
 kd:
   enable: false
   lambda_cls: 1.0
