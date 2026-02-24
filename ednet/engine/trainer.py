@@ -434,7 +434,7 @@ class BaseTrainer:
                     aux_loss = self.compute_auxiliary_loss(batch)
                     if aux_loss is not None:
                         self.loss = self.loss + aux_loss
-                        self.auxiliary_info = {"replay_loss": float(aux_loss.detach())}
+                        self.auxiliary_info = {"train/replay_loss": float(aux_loss.detach())}
                     self.tloss = (
                         (self.tloss * i + self.loss_items) / (i + 1) if self.tloss is not None else self.loss_items
                     )

@@ -363,18 +363,12 @@ class DetectionTrainer(BaseTrainer):
                     self.kd_lambda_cls,
                     self.kd_lambda_bbox,
                 )
-        base_loss_names = ["box_loss", "cls_loss", "dfl_loss"]
-        if self.replay_enabled:
-            base_loss_names.append("replay_loss")
-        self.loss_names = tuple(base_loss_names)
+        self.loss_names = ("box_loss", "cls_loss", "dfl_loss")
         return model
 
     def get_validator(self):
         """Returns a DetectionValidator for YOLO model validation."""
-        base_loss_names = ["box_loss", "cls_loss", "dfl_loss"]
-        if getattr(self, "replay_enabled", False):
-            base_loss_names.append("replay_loss")
-        self.loss_names = tuple(base_loss_names)
+        self.loss_names = ("box_loss", "cls_loss", "dfl_loss")
         return yolo.detect.DetectionValidator(
             self.test_loader, save_dir=self.save_dir, args=copy(self.args), _callbacks=self.callbacks
         )
@@ -614,13 +608,13 @@ class DetectionTrainer(BaseTrainer):
                             aux_loss = replay_loss * self.replay_loss_weight
                 if self.replay_student_buffer is not None:
                     self.replay_student_buffer.current_epoch = self.epoch
-                if self.replay_box_student_buffer is not None:
-                    self.replay_box_student_buffer.current_epoch = self.epoch
                     self._student_update_counter += 1
                     if self._student_update_counter % self.replay_student_update_freq == 0:
                         student_items = self._gather_embeddings(features, attr="last_positive_cells", criterion=criterion, batch=batch)
                         for item in student_items:
                             self.replay_student_buffer.add(item)
+                if self.replay_box_student_buffer is not None:
+                    self.replay_box_student_buffer.current_epoch = self.epoch
             # --- Box prototype replay path (uses same grid-cell positions as cls replay) ---
             box_teacher_ready = (
                 getattr(self, "replay_box_enabled", False)
