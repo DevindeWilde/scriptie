@@ -1,0 +1,832 @@
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+[34m[1mengine/trainer: [0mtask=detect, mode=train, model=/home/ddwilde/scriptie/pretrained/small.pt, data=/home/ddwilde/scriptie/yaml/DOTA-shared-stage1.yaml, epochs=50, time=None, patience=100, batch=4, imgsz=640, save=True, save_period=-1, cache=False, device=None, workers=8, project=/home/ddwilde/scriptie/runs/dota_kd_pseudo, name=stage1-kd-pseudo, exist_ok=False, pretrained=True, optimizer=auto, verbose=True, seed=0, deterministic=True, single_cls=False, rect=False, cos_lr=False, close_mosaic=10, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, continual={'enable': False, 'batches': [], 'adapter_strategy': 'last', 'save_history': True}, replay={'enable': False, 'tap_layers': {'P2': 19, 'P3': 22, 'P4': 25}, 'tiny_max_pixels': 128, 'context_scale': 1.5, 'buffer_per_class': 64, 'sample_per_batch': 16, 'loss_weight': 1.0, 'scale_weighting': 'stride', 'store_dir': 'replay', 'buffer_file': 'buffer.pt', 'init_buffer': None, 'carryover_growth': 1.5, 'memory_dir': None, 'memory_ratio': 0.25, 'prototypes': {'num_fine': 4, 'use_coarse': True, 'ema_alpha': 0.05, 'init_sim_thresh': 0.9, 'gate_min_cos': 0.0, 'init_strategy': 'first_k', 'weight_by_count': False}, 'box': {'enable': False, 'loss_weight': 1.0, 'buffer_file': 'box_buffer.pt', 'init_buffer': None}}, kd={'enable': False, 'lambda_cls': 1.0, 'lambda_bbox': 1.0, 'top_k': 10, 'teacher_weights': None, 'teacher_nc': None, 'debug_batches': 10}, stage={'active_classes': [0, 1]}, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=None, iou=0.7, max_det=300, half=False, dnn=False, plots=True, per_class_tb_interval=1, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.0, copy_paste=0.0, auto_augment=randaugment, erasing=0.4, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=/home/ddwilde/scriptie/runs/dota_kd_pseudo/stage1-kd-pseudo
+Overriding model.yaml nc=10 with nc=2
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       928  ednet.nn.modules.conv.Conv                   [3, 32, 3, 2]                 
+  1                  -1  1     18560  ednet.nn.modules.conv.Conv                   [32, 64, 3, 2]                
+  2                  -1  1     29056  ednet.nn.modules.block.C2f                   [64, 64, 1, True]             
+  3                  -1  1     73984  ednet.nn.modules.conv.Conv                   [64, 128, 3, 2]               
+  4                  -1  2    197632  ednet.nn.modules.block.C2f                   [128, 128, 2, True]           
+  5                  -1  1    295424  ednet.nn.modules.conv.Conv                   [128, 256, 3, 2]              
+  6                  -1  2    420864  ednet.nn.modules.block.C2f_FCA               [256, 256, 2, True]           
+  7                  -1  1   1180672  ednet.nn.modules.conv.Conv                   [256, 512, 3, 2]              
+  8                  -1  1   1095680  ednet.nn.modules.block.C2f_FCA               [512, 512, 1, True]           
+  9                  -1  1    656896  ednet.nn.modules.block.SPPF                  [512, 512, 5]                 
+ 10                  -1  1    990976  ednet.nn.modules.block.PSA                   [512, 512]                    
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12             [-1, 6]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 13                  -1  1    591360  ednet.nn.modules.block.C2f                   [768, 256, 1]                 
+ 14                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 15             [-1, 4]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 16                  -1  1    148224  ednet.nn.modules.block.C2f                   [384, 128, 1]                 
+ 17                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 18             [-1, 2]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 19                  -1  1     37248  ednet.nn.modules.block.C2f                   [192, 64, 1]                  
+ 20                  -1  1     36992  ednet.nn.modules.conv.Conv                   [64, 64, 3, 2]                
+ 21            [-1, 16]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 22                  -1  1    123648  ednet.nn.modules.block.C2f                   [192, 128, 1]                 
+ 23                  -1  1    147712  ednet.nn.modules.conv.Conv                   [128, 128, 3, 2]              
+ 24            [-1, 13]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 25                  -1  1    493056  ednet.nn.modules.block.C2f                   [384, 256, 1]                 
+ 26                  -1  1     68864  ednet.nn.modules.block.SCDown                [256, 256, 3, 2]              
+ 27             [-1, 9]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 28                  -1  1   1089536  ednet.nn.modules.block.C2fCIB                [768, 512, 1, True, True]     
+ 29    [19, 22, 25, 28]  1   1621664  ednet.nn.modules.head.v10Detect              [2, [64, 128, 256, 512]]      
+ednet-s summary: 510 layers, 9,318,976 parameters, 9,318,960 gradients
+
+Active classes for this stage: (0, 1)
+Transferred 737/753 items from pretrained weights
+[34m[1mTensorBoard: [0mStart with 'tensorboard --logdir /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage1-kd-pseudo', view at http://localhost:6006/
+Freezing layer 'model.29.dfl.conv.weight'
+[34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks with YOLOv8n...
+[34m[1mAMP: [0mchecks passed ✅
+Plotting labels to /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage1-kd-pseudo/labels.jpg... 
+[34m[1moptimizer:[0m 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+[34m[1moptimizer:[0m AdamW(lr=0.001667, momentum=0.9) with parameter groups 117 weight(decay=0.0), 145 weight(decay=0.0005), 139 bias(decay=0.0)
+Trainable params: 401 tensors (9318960 weights). Top trainable=[('model.7.conv.weight', 1179648), ('model.9.cv2.conv.weight', 524288), ('model.8.cv2.conv.weight', 393216), ('model.28.cv1.conv.weight', 393216), ('model.28.cv2.conv.weight', 393216), ('model.5.conv.weight', 294912), ('model.29.cv2.3.0.conv.weight', 294912), ('model.29.one2one_cv2.3.0.conv.weight', 294912), ('model.8.cv1.conv.weight', 262144), ('model.10.cv1.conv.weight', 262144), ('model.10.cv2.conv.weight', 262144), ('model.13.cv1.conv.weight', 196608), ('model.13.m.0.cv1.conv.weight', 147456), ('model.13.m.0.cv2.conv.weight', 147456), ('model.23.conv.weight', 147456), ('model.25.m.0.cv1.conv.weight', 147456), ('model.25.m.0.cv2.conv.weight', 147456), ('model.29.cv2.2.0.conv.weight', 147456), ('model.29.one2one_cv2.2.0.conv.weight', 147456), ('model.6.cv2.conv.weight', 131072)]
+[34m[1mTensorBoard: [0mmodel graph visualization added ✅
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to [1m/home/ddwilde/scriptie/runs/dota_kd_pseudo/stage1-kd-pseudo[0m
+Starting training for 50 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+Limiting positives to classes (0, 1)
+Limiting positives to classes (0, 1)
+Limiting positives to classes (0, 1)
+Limiting positives to classes (0, 1)
+                   all        186       8357      0.379       0.39      0.289      0.124
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.397      0.473      0.356      0.189
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.431      0.453      0.341      0.184
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.493      0.539       0.48      0.272
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.609      0.518      0.513      0.281
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357        0.6      0.549      0.536      0.302
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357       0.58       0.55      0.528      0.306
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.664      0.553      0.577      0.312
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357       0.69      0.557      0.571      0.323
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.665      0.549      0.564      0.298
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357       0.73      0.556      0.601      0.332
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.696      0.548      0.581      0.326
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.707      0.595      0.624      0.357
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.726      0.589      0.625      0.359
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.668      0.584      0.593      0.347
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.716      0.577      0.605      0.324
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357       0.69      0.586      0.596      0.358
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.731      0.589      0.626      0.366
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.739      0.594      0.622      0.371
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.748      0.595      0.633      0.379
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.743      0.608      0.645      0.378
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.765      0.602      0.644      0.384
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.733      0.587      0.636      0.377
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.759      0.596      0.643      0.385
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.732      0.605      0.643      0.361
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.723      0.593      0.617      0.374
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.736      0.612      0.645      0.387
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.762      0.612      0.649      0.399
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.756      0.601      0.645      0.384
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.749      0.611      0.651      0.395
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.767      0.631       0.67      0.401
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.753      0.623       0.66      0.398
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.756      0.616      0.653      0.395
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357       0.77      0.628      0.665      0.406
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.782      0.613      0.658      0.412
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357       0.75      0.612      0.648      0.394
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.755      0.634      0.661      0.405
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357       0.75      0.612      0.642      0.397
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.766      0.637      0.669      0.415
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.769      0.645      0.681      0.421
+Closing dataloader mosaic
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.734      0.637      0.653      0.405
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.759       0.62      0.658      0.409
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.773      0.635      0.677      0.427
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.769       0.63       0.66      0.412
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.788      0.627      0.672      0.419
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.754      0.628       0.66      0.412
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.753       0.63      0.663      0.412
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.752      0.637      0.669      0.419
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357       0.76      0.628      0.665      0.419
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186       8357      0.747      0.629      0.661      0.414
+
+50 epochs completed in 0.457 hours.
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage1-kd-pseudo/weights/last.pt, 19.1MB
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage1-kd-pseudo/weights/best.pt, 19.1MB
+
+Validating /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage1-kd-pseudo/weights/best.pt...
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,295,008 parameters, 0 gradients
+                   all        186       8357      0.771      0.635      0.677      0.427
+         small-vehicle         89       5547      0.752        0.5      0.557      0.306
+         large-vehicle         73       2810       0.79      0.769      0.796      0.547
+Speed: 0.1ms preprocess, 2.2ms inference, 0.0ms loss, 0.1ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/dota_kd_pseudo/stage1-kd-pseudo[0m
+Training finished. Results saved in: /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage1-kd-pseudo
+Found 863 images in /home/ddwilde/scriptie/datasets/dota_stages_shared/stage2/train/images
+Loading model from /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage1-kd-pseudo/weights/best.pt ...
+Generating pseudo-labels | prev_classes=[0, 1] | conf=0.5 | conflict_iou=0.5
+
+Done.
+  Kept pseudo-detections : 16098
+  Dropped (low conf)     : 0
+  Dropped (GT conflict)  : 2
+  Output directory       : /home/ddwilde/scriptie/runs/dota_kd_pseudo/pseudo_labels/stage2
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+[34m[1mengine/trainer: [0mtask=detect, mode=train, model=/home/ddwilde/scriptie/runs/dota_kd_pseudo/stage1-kd-pseudo/weights/best.pt, data=/home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml, epochs=50, time=None, patience=100, batch=4, imgsz=640, save=True, save_period=-1, cache=False, device=None, workers=8, project=/home/ddwilde/scriptie/runs/dota_kd_pseudo, name=stage2-kd-pseudo, exist_ok=False, pretrained=True, optimizer=auto, verbose=True, seed=0, deterministic=True, single_cls=False, rect=False, cos_lr=False, close_mosaic=10, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, continual={'enable': False, 'batches': [], 'adapter_strategy': 'last', 'save_history': True}, replay={'enable': False, 'tap_layers': {'P2': 19, 'P3': 22, 'P4': 25}, 'tiny_max_pixels': 128, 'context_scale': 1.5, 'buffer_per_class': 64, 'sample_per_batch': 16, 'loss_weight': 1.0, 'scale_weighting': 'stride', 'store_dir': 'replay', 'buffer_file': 'buffer.pt', 'init_buffer': None, 'carryover_growth': 1.5, 'memory_dir': None, 'memory_ratio': 0.25, 'prototypes': {'num_fine': 4, 'use_coarse': True, 'ema_alpha': 0.05, 'init_sim_thresh': 0.9, 'gate_min_cos': 0.0, 'init_strategy': 'first_k', 'weight_by_count': False}, 'box': {'enable': False, 'loss_weight': 1.0, 'buffer_file': 'box_buffer.pt', 'init_buffer': None}}, kd={'enable': True, 'teacher_weights': '/home/ddwilde/scriptie/runs/dota_kd_pseudo/stage1-kd-pseudo/weights/best.pt', 'teacher_nc': 2, 'lambda_cls': 1.0, 'lambda_bbox': 1.0, 'top_k': 10}, stage={'active_classes': [2, 3], 'prev_classes': [0, 1], 'pseudo_labels_dir': '/home/ddwilde/scriptie/runs/dota_kd_pseudo/pseudo_labels/stage2'}, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=None, iou=0.7, max_det=300, half=False, dnn=False, plots=True, per_class_tb_interval=1, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.0, copy_paste=0.0, auto_augment=randaugment, erasing=0.4, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=/home/ddwilde/scriptie/runs/dota_kd_pseudo/stage2-kd-pseudo
+Overriding model.yaml nc=2 with nc=4
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       928  ednet.nn.modules.conv.Conv                   [3, 32, 3, 2]                 
+  1                  -1  1     18560  ednet.nn.modules.conv.Conv                   [32, 64, 3, 2]                
+  2                  -1  1     29056  ednet.nn.modules.block.C2f                   [64, 64, 1, True]             
+  3                  -1  1     73984  ednet.nn.modules.conv.Conv                   [64, 128, 3, 2]               
+  4                  -1  2    197632  ednet.nn.modules.block.C2f                   [128, 128, 2, True]           
+  5                  -1  1    295424  ednet.nn.modules.conv.Conv                   [128, 256, 3, 2]              
+  6                  -1  2    420864  ednet.nn.modules.block.C2f_FCA               [256, 256, 2, True]           
+  7                  -1  1   1180672  ednet.nn.modules.conv.Conv                   [256, 512, 3, 2]              
+  8                  -1  1   1095680  ednet.nn.modules.block.C2f_FCA               [512, 512, 1, True]           
+  9                  -1  1    656896  ednet.nn.modules.block.SPPF                  [512, 512, 5]                 
+ 10                  -1  1    990976  ednet.nn.modules.block.PSA                   [512, 512]                    
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12             [-1, 6]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 13                  -1  1    591360  ednet.nn.modules.block.C2f                   [768, 256, 1]                 
+ 14                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 15             [-1, 4]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 16                  -1  1    148224  ednet.nn.modules.block.C2f                   [384, 128, 1]                 
+ 17                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 18             [-1, 2]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 19                  -1  1     37248  ednet.nn.modules.block.C2f                   [192, 64, 1]                  
+ 20                  -1  1     36992  ednet.nn.modules.conv.Conv                   [64, 64, 3, 2]                
+ 21            [-1, 16]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 22                  -1  1    123648  ednet.nn.modules.block.C2f                   [192, 128, 1]                 
+ 23                  -1  1    147712  ednet.nn.modules.conv.Conv                   [128, 128, 3, 2]              
+ 24            [-1, 13]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 25                  -1  1    493056  ednet.nn.modules.block.C2f                   [384, 256, 1]                 
+ 26                  -1  1     68864  ednet.nn.modules.block.SCDown                [256, 256, 3, 2]              
+ 27             [-1, 9]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 28                  -1  1   1089536  ednet.nn.modules.block.C2fCIB                [768, 512, 1, True, True]     
+ 29    [19, 22, 25, 28]  1   1622704  ednet.nn.modules.head.v10Detect              [4, [64, 128, 256, 512]]      
+ednet-s summary: 510 layers, 9,320,016 parameters, 9,320,000 gradients
+
+Active classes for this stage: (2, 3)
+Replay/previous classes for this stage: (0, 1)
+Pseudo-labels active: extended active_classes → (0, 1, 2, 3)
+Transferred 737/753 items from pretrained weights
+Overriding model.yaml nc=4 with nc=2
+Transferred 753/753 items from pretrained weights
+KD teacher initialized from checkpoint | nc_prev=2 | nc_curr=4 | prev_classes=(0, 1)
+KD active | prev_classes=(0, 1) | top_k=10 | lambda_cls=1.00 | lambda_bbox=1.00
+[34m[1mTensorBoard: [0mStart with 'tensorboard --logdir /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage2-kd-pseudo', view at http://localhost:6006/
+Freezing layer 'model.29.dfl.conv.weight'
+[34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks with YOLOv8n...
+[34m[1mAMP: [0mchecks passed ✅
+Plotting labels to /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage2-kd-pseudo/labels.jpg... 
+[34m[1moptimizer:[0m 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+[34m[1moptimizer:[0m AdamW(lr=0.00125, momentum=0.9) with parameter groups 117 weight(decay=0.0), 145 weight(decay=0.0005), 139 bias(decay=0.0)
+Trainable params: 401 tensors (9320000 weights). Top trainable=[('model.7.conv.weight', 1179648), ('model.9.cv2.conv.weight', 524288), ('model.8.cv2.conv.weight', 393216), ('model.28.cv1.conv.weight', 393216), ('model.28.cv2.conv.weight', 393216), ('model.5.conv.weight', 294912), ('model.29.cv2.3.0.conv.weight', 294912), ('model.29.one2one_cv2.3.0.conv.weight', 294912), ('model.8.cv1.conv.weight', 262144), ('model.10.cv1.conv.weight', 262144), ('model.10.cv2.conv.weight', 262144), ('model.13.cv1.conv.weight', 196608), ('model.13.m.0.cv1.conv.weight', 147456), ('model.13.m.0.cv2.conv.weight', 147456), ('model.23.conv.weight', 147456), ('model.25.m.0.cv1.conv.weight', 147456), ('model.25.m.0.cv2.conv.weight', 147456), ('model.29.cv2.2.0.conv.weight', 147456), ('model.29.one2one_cv2.2.0.conv.weight', 147456), ('model.6.cv2.conv.weight', 131072)]
+[34m[1mTensorBoard: [0mWARNING ⚠️ TensorBoard graph visualization failure ('{} cannot be pickled', '_MultiProcessingDataLoaderIter')
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to [1m/home/ddwilde/scriptie/runs/dota_kd_pseudo/stage2-kd-pseudo[0m
+Starting training for 50 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+Limiting positives to classes (0, 1, 2, 3)
+Replay targets limited to previous classes (0, 1)
+Limiting positives to classes (0, 1, 2, 3)
+Replay targets limited to previous classes (0, 1)
+Replay tap config not set; GT-driven replay skipped for this batch.
+Replay tap config not set; GT-driven replay skipped for this batch.
+[KD] start | prev=(0, 1) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.028090 | box=4.699515 | total=4.727605
+[KD] head loss | k=10 | cls=0.025680 | box=4.965295 | total=4.990975
+[KD] aux kd_loss=9.718580
+[KD] start | prev=(0, 1) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.032830 | box=0.120508 | total=0.153338
+[KD] head loss | k=10 | cls=0.012977 | box=0.127165 | total=0.140142
+[KD] aux kd_loss=0.293480
+[KD] start | prev=(0, 1) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.132195 | box=0.171741 | total=0.303936
+[KD] head loss | k=10 | cls=0.166007 | box=0.121130 | total=0.287138
+[KD] aux kd_loss=0.591074
+[KD] start | prev=(0, 1) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.135931 | box=0.130466 | total=0.266397
+[KD] head loss | k=10 | cls=0.165741 | box=0.134985 | total=0.300727
+[KD] aux kd_loss=0.567123
+[KD] start | prev=(0, 1) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.034932 | box=0.377896 | total=0.412828
+[KD] head loss | k=10 | cls=0.049470 | box=0.242476 | total=0.291945
+[KD] aux kd_loss=0.704773
+[KD] start | prev=(0, 1) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.081965 | box=0.046448 | total=0.128413
+[KD] head loss | k=10 | cls=0.096676 | box=0.081202 | total=0.177878
+[KD] aux kd_loss=0.306291
+[KD] start | prev=(0, 1) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.140632 | box=0.154924 | total=0.295556
+[KD] head loss | k=10 | cls=0.135122 | box=0.092808 | total=0.227930
+[KD] aux kd_loss=0.523486
+[KD] start | prev=(0, 1) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.059261 | box=0.114669 | total=0.173930
+[KD] head loss | k=10 | cls=0.085004 | box=0.181691 | total=0.266695
+[KD] aux kd_loss=0.440625
+[KD] start | prev=(0, 1) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.000517 | box=0.137350 | total=0.137867
+[KD] head loss | k=10 | cls=0.000324 | box=0.203467 | total=0.203791
+[KD] aux kd_loss=0.341659
+[KD] start | prev=(0, 1) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.005038 | box=0.029382 | total=0.034419
+[KD] head loss | k=10 | cls=0.002782 | box=0.044644 | total=0.047426
+Limiting positives to classes (0, 1, 2, 3)
+Replay targets limited to previous classes (0, 1)
+Limiting positives to classes (0, 1, 2, 3)
+Replay targets limited to previous classes (0, 1)
+Replay tap config not set; GT-driven replay skipped for this batch.
+Replay tap config not set; GT-driven replay skipped for this batch.
+                   all        186      10109      0.543      0.251      0.253      0.147
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.625      0.312      0.304      0.181
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.705      0.306      0.343      0.191
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.459       0.36      0.364      0.207
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.494      0.399      0.417       0.24
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.497      0.411      0.431      0.247
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.758      0.434      0.462      0.266
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.785      0.427      0.467      0.263
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.802      0.433      0.474      0.278
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.804      0.425      0.475      0.271
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.804      0.431      0.472      0.267
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.805      0.449      0.492      0.285
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.805      0.452      0.485      0.281
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.814      0.453      0.505      0.286
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.823      0.434      0.489      0.297
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.805      0.445      0.487      0.276
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.822      0.461      0.518        0.3
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.817      0.462      0.506      0.293
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.828      0.476       0.52      0.309
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.842      0.458      0.518      0.303
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109       0.85      0.469      0.533      0.321
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.841      0.475      0.534      0.315
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.834      0.468       0.53       0.32
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.841      0.467      0.523      0.315
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.839      0.478      0.529      0.314
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.842       0.46      0.528      0.312
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.843      0.473       0.53      0.314
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.845       0.48      0.529      0.315
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.836      0.473      0.527      0.316
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.845      0.479      0.529      0.314
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.851       0.48      0.535      0.322
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109       0.86      0.475      0.545      0.326
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.576      0.497      0.544      0.324
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.865      0.475      0.547      0.333
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.857       0.48       0.55      0.337
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.856      0.476      0.542      0.331
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.869      0.483      0.547      0.337
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.863      0.482      0.548      0.328
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.862      0.481      0.541      0.327
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.855      0.482      0.549      0.336
+Closing dataloader mosaic
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.864      0.468       0.54      0.334
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.863      0.475      0.541      0.332
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.869      0.475      0.541      0.338
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.852      0.472      0.541      0.325
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.859      0.481       0.54      0.334
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.862      0.477      0.548      0.336
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109       0.86      0.472      0.542      0.331
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.864      0.482      0.548       0.34
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.864      0.478      0.551      0.341
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.617      0.517      0.556      0.346
+
+50 epochs completed in 0.531 hours.
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage2-kd-pseudo/weights/last.pt, 19.1MB
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage2-kd-pseudo/weights/best.pt, 19.1MB
+
+Validating /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage2-kd-pseudo/weights/best.pt...
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,048 parameters, 0 gradients
+                   all        186      10109      0.616      0.518      0.556      0.346
+         small-vehicle         89       5547      0.717      0.494      0.575      0.321
+         large-vehicle         73       2810      0.768      0.774      0.797      0.553
+                 plane         45       1720      0.689      0.772      0.782      0.459
+            helicopter          5         32       0.29     0.0312     0.0701     0.0492
+Speed: 0.4ms preprocess, 5.4ms inference, 0.0ms loss, 0.1ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/dota_kd_pseudo/stage2-kd-pseudo[0m
+Training finished. Results saved in: /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage2-kd-pseudo
+Found 863 images in /home/ddwilde/scriptie/datasets/dota_stages_shared/stage3/train/images
+Loading model from /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage2-kd-pseudo/weights/best.pt ...
+Generating pseudo-labels | prev_classes=[0, 1, 2, 3] | conf=0.5 | conflict_iou=0.5
+
+Done.
+  Kept pseudo-detections : 19564
+  Dropped (low conf)     : 0
+  Dropped (GT conflict)  : 8
+  Output directory       : /home/ddwilde/scriptie/runs/dota_kd_pseudo/pseudo_labels/stage3
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+[34m[1mengine/trainer: [0mtask=detect, mode=train, model=/home/ddwilde/scriptie/runs/dota_kd_pseudo/stage2-kd-pseudo/weights/best.pt, data=/home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml, epochs=50, time=None, patience=100, batch=4, imgsz=640, save=True, save_period=-1, cache=False, device=None, workers=8, project=/home/ddwilde/scriptie/runs/dota_kd_pseudo, name=stage3-kd-pseudo, exist_ok=False, pretrained=True, optimizer=auto, verbose=True, seed=0, deterministic=True, single_cls=False, rect=False, cos_lr=False, close_mosaic=10, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, continual={'enable': False, 'batches': [], 'adapter_strategy': 'last', 'save_history': True}, replay={'enable': False, 'tap_layers': {'P2': 19, 'P3': 22, 'P4': 25}, 'tiny_max_pixels': 128, 'context_scale': 1.5, 'buffer_per_class': 64, 'sample_per_batch': 16, 'loss_weight': 1.0, 'scale_weighting': 'stride', 'store_dir': 'replay', 'buffer_file': 'buffer.pt', 'init_buffer': None, 'carryover_growth': 1.5, 'memory_dir': None, 'memory_ratio': 0.25, 'prototypes': {'num_fine': 4, 'use_coarse': True, 'ema_alpha': 0.05, 'init_sim_thresh': 0.9, 'gate_min_cos': 0.0, 'init_strategy': 'first_k', 'weight_by_count': False}, 'box': {'enable': False, 'loss_weight': 1.0, 'buffer_file': 'box_buffer.pt', 'init_buffer': None}}, kd={'enable': True, 'teacher_weights': '/home/ddwilde/scriptie/runs/dota_kd_pseudo/stage2-kd-pseudo/weights/best.pt', 'teacher_nc': 4, 'lambda_cls': 1.0, 'lambda_bbox': 1.0, 'top_k': 10}, stage={'active_classes': [4], 'prev_classes': [0, 1, 2, 3], 'pseudo_labels_dir': '/home/ddwilde/scriptie/runs/dota_kd_pseudo/pseudo_labels/stage3'}, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=None, iou=0.7, max_det=300, half=False, dnn=False, plots=True, per_class_tb_interval=1, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.0, copy_paste=0.0, auto_augment=randaugment, erasing=0.4, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=/home/ddwilde/scriptie/runs/dota_kd_pseudo/stage3-kd-pseudo
+Overriding model.yaml nc=2 with nc=5
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       928  ednet.nn.modules.conv.Conv                   [3, 32, 3, 2]                 
+  1                  -1  1     18560  ednet.nn.modules.conv.Conv                   [32, 64, 3, 2]                
+  2                  -1  1     29056  ednet.nn.modules.block.C2f                   [64, 64, 1, True]             
+  3                  -1  1     73984  ednet.nn.modules.conv.Conv                   [64, 128, 3, 2]               
+  4                  -1  2    197632  ednet.nn.modules.block.C2f                   [128, 128, 2, True]           
+  5                  -1  1    295424  ednet.nn.modules.conv.Conv                   [128, 256, 3, 2]              
+  6                  -1  2    420864  ednet.nn.modules.block.C2f_FCA               [256, 256, 2, True]           
+  7                  -1  1   1180672  ednet.nn.modules.conv.Conv                   [256, 512, 3, 2]              
+  8                  -1  1   1095680  ednet.nn.modules.block.C2f_FCA               [512, 512, 1, True]           
+  9                  -1  1    656896  ednet.nn.modules.block.SPPF                  [512, 512, 5]                 
+ 10                  -1  1    990976  ednet.nn.modules.block.PSA                   [512, 512]                    
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12             [-1, 6]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 13                  -1  1    591360  ednet.nn.modules.block.C2f                   [768, 256, 1]                 
+ 14                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 15             [-1, 4]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 16                  -1  1    148224  ednet.nn.modules.block.C2f                   [384, 128, 1]                 
+ 17                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 18             [-1, 2]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 19                  -1  1     37248  ednet.nn.modules.block.C2f                   [192, 64, 1]                  
+ 20                  -1  1     36992  ednet.nn.modules.conv.Conv                   [64, 64, 3, 2]                
+ 21            [-1, 16]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 22                  -1  1    123648  ednet.nn.modules.block.C2f                   [192, 128, 1]                 
+ 23                  -1  1    147712  ednet.nn.modules.conv.Conv                   [128, 128, 3, 2]              
+ 24            [-1, 13]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 25                  -1  1    493056  ednet.nn.modules.block.C2f                   [384, 256, 1]                 
+ 26                  -1  1     68864  ednet.nn.modules.block.SCDown                [256, 256, 3, 2]              
+ 27             [-1, 9]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 28                  -1  1   1089536  ednet.nn.modules.block.C2fCIB                [768, 512, 1, True, True]     
+ 29    [19, 22, 25, 28]  1   1623224  ednet.nn.modules.head.v10Detect              [5, [64, 128, 256, 512]]      
+ednet-s summary: 510 layers, 9,320,536 parameters, 9,320,520 gradients
+
+Active classes for this stage: (4,)
+Replay/previous classes for this stage: (0, 1, 2, 3)
+Pseudo-labels active: extended active_classes → (0, 1, 2, 3, 4)
+Transferred 737/753 items from pretrained weights
+Overriding model.yaml nc=5 with nc=4
+Transferred 753/753 items from pretrained weights
+KD teacher initialized from checkpoint | nc_prev=4 | nc_curr=5 | prev_classes=(0, 1, 2, 3)
+KD active | prev_classes=(0, 1, 2, 3) | top_k=10 | lambda_cls=1.00 | lambda_bbox=1.00
+[34m[1mTensorBoard: [0mStart with 'tensorboard --logdir /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage3-kd-pseudo', view at http://localhost:6006/
+Freezing layer 'model.29.dfl.conv.weight'
+[34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks with YOLOv8n...
+[34m[1mAMP: [0mchecks passed ✅
+Plotting labels to /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage3-kd-pseudo/labels.jpg... 
+[34m[1moptimizer:[0m 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+[34m[1moptimizer:[0m AdamW(lr=0.001111, momentum=0.9) with parameter groups 117 weight(decay=0.0), 145 weight(decay=0.0005), 139 bias(decay=0.0)
+Trainable params: 401 tensors (9320520 weights). Top trainable=[('model.7.conv.weight', 1179648), ('model.9.cv2.conv.weight', 524288), ('model.8.cv2.conv.weight', 393216), ('model.28.cv1.conv.weight', 393216), ('model.28.cv2.conv.weight', 393216), ('model.5.conv.weight', 294912), ('model.29.cv2.3.0.conv.weight', 294912), ('model.29.one2one_cv2.3.0.conv.weight', 294912), ('model.8.cv1.conv.weight', 262144), ('model.10.cv1.conv.weight', 262144), ('model.10.cv2.conv.weight', 262144), ('model.13.cv1.conv.weight', 196608), ('model.13.m.0.cv1.conv.weight', 147456), ('model.13.m.0.cv2.conv.weight', 147456), ('model.23.conv.weight', 147456), ('model.25.m.0.cv1.conv.weight', 147456), ('model.25.m.0.cv2.conv.weight', 147456), ('model.29.cv2.2.0.conv.weight', 147456), ('model.29.one2one_cv2.2.0.conv.weight', 147456), ('model.6.cv2.conv.weight', 131072)]
+[34m[1mTensorBoard: [0mWARNING ⚠️ TensorBoard graph visualization failure ('{} cannot be pickled', '_MultiProcessingDataLoaderIter')
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to [1m/home/ddwilde/scriptie/runs/dota_kd_pseudo/stage3-kd-pseudo[0m
+Starting training for 50 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+Limiting positives to classes (0, 1, 2, 3, 4)
+Replay targets limited to previous classes (0, 1, 2, 3)
+Limiting positives to classes (0, 1, 2, 3, 4)
+Replay targets limited to previous classes (0, 1, 2, 3)
+Replay tap config not set; GT-driven replay skipped for this batch.
+Replay tap config not set; GT-driven replay skipped for this batch.
+[KD] start | prev=(0, 1, 2, 3) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.089859 | box=0.798068 | total=0.887927
+[KD] head loss | k=10 | cls=0.086504 | box=0.360896 | total=0.447399
+[KD] aux kd_loss=1.335326
+[KD] start | prev=(0, 1, 2, 3) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.054316 | box=0.050940 | total=0.105256
+[KD] head loss | k=10 | cls=0.042598 | box=0.105475 | total=0.148073
+[KD] aux kd_loss=0.253329
+[KD] start | prev=(0, 1, 2, 3) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.078652 | box=0.089021 | total=0.167673
+[KD] head loss | k=10 | cls=0.082650 | box=0.120209 | total=0.202859
+[KD] aux kd_loss=0.370532
+[KD] start | prev=(0, 1, 2, 3) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.083653 | box=0.079947 | total=0.163600
+[KD] head loss | k=10 | cls=0.077856 | box=0.084191 | total=0.162046
+[KD] aux kd_loss=0.325646
+[KD] start | prev=(0, 1, 2, 3) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.022409 | box=0.148253 | total=0.170662
+[KD] head loss | k=10 | cls=0.026343 | box=0.140015 | total=0.166357
+[KD] aux kd_loss=0.337019
+[KD] start | prev=(0, 1, 2, 3) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.111481 | box=0.086267 | total=0.197748
+[KD] head loss | k=10 | cls=0.108736 | box=0.102983 | total=0.211719
+[KD] aux kd_loss=0.409467
+[KD] start | prev=(0, 1, 2, 3) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.079198 | box=0.105844 | total=0.185042
+[KD] head loss | k=10 | cls=0.066379 | box=0.084927 | total=0.151306
+[KD] aux kd_loss=0.336348
+[KD] start | prev=(0, 1, 2, 3) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.034614 | box=0.132013 | total=0.166627
+[KD] head loss | k=10 | cls=0.039582 | box=0.112326 | total=0.151909
+[KD] aux kd_loss=0.318535
+[KD] start | prev=(0, 1, 2, 3) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.108142 | box=0.271338 | total=0.379480
+[KD] head loss | k=10 | cls=0.099687 | box=0.391183 | total=0.490869
+[KD] aux kd_loss=0.870349
+[KD] start | prev=(0, 1, 2, 3) | top_k=10 | lambda_cls=1.000 | lambda_bbox=1.000
+[KD] student_out type=<class 'dict'> keys=['one2many', 'one2one']
+[KD] teacher_out keys=['one2many', 'one2one'] | teacher.training=False | detect_head.training=False
+[KD] head loss | k=10 | cls=0.037138 | box=0.028201 | total=0.065340
+[KD] head loss | k=10 | cls=0.021030 | box=0.038428 | total=0.059457
+Limiting positives to classes (0, 1, 2, 3, 4)
+Replay targets limited to previous classes (0, 1, 2, 3)
+Limiting positives to classes (0, 1, 2, 3, 4)
+Replay targets limited to previous classes (0, 1, 2, 3)
+Replay tap config not set; GT-driven replay skipped for this batch.
+Replay tap config not set; GT-driven replay skipped for this batch.
+                   all        186      15849      0.141      0.336      0.259      0.159
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.531      0.416      0.434      0.248
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.534      0.412      0.442      0.245
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.577      0.434      0.471      0.269
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.578      0.439      0.472      0.268
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.569      0.427      0.464      0.264
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.587      0.452      0.485      0.277
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.611      0.461      0.512       0.29
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.609      0.445      0.492       0.28
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.615      0.465       0.51       0.29
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.602      0.461      0.501      0.287
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.624      0.458      0.513      0.296
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.603       0.47      0.506      0.298
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.624      0.458      0.512      0.289
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849       0.63      0.466      0.525      0.306
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.613      0.468      0.514      0.293
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.627      0.468      0.526      0.303
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.639      0.462      0.523       0.31
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849       0.62      0.472      0.517      0.299
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.623      0.462      0.513      0.297
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.631      0.474      0.529       0.31
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.624      0.467      0.521      0.301
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.629      0.465       0.52      0.299
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.642      0.474      0.532      0.315
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.639      0.469      0.525      0.306
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.636       0.47      0.525      0.303
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.635       0.47      0.526      0.298
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.639      0.458      0.521      0.305
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.638       0.47      0.528      0.304
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.621      0.471      0.524      0.305
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.637      0.478      0.532      0.314
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.646      0.475      0.536      0.309
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.644      0.474      0.534      0.306
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.649      0.476      0.539      0.315
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849       0.65      0.475      0.536      0.315
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849       0.65      0.478       0.54      0.317
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.648      0.477      0.538      0.318
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.648       0.48      0.539      0.314
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.652      0.479      0.542      0.323
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.639      0.475      0.535      0.314
+Closing dataloader mosaic
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.637      0.481      0.536      0.317
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849       0.65      0.477      0.537      0.318
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.653      0.478       0.54      0.321
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.647      0.478      0.539      0.322
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.646      0.477      0.538      0.321
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.638      0.478      0.536      0.319
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.642      0.482       0.54       0.32
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.639      0.483      0.539      0.319
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.642      0.481      0.541      0.323
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.642      0.482       0.54      0.321
+
+50 epochs completed in 0.561 hours.
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage3-kd-pseudo/weights/last.pt, 19.1MB
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage3-kd-pseudo/weights/best.pt, 19.1MB
+
+Validating /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage3-kd-pseudo/weights/best.pt...
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,568 parameters, 0 gradients
+                   all        186      15849      0.642      0.481      0.541      0.323
+         small-vehicle         89       5547       0.79      0.453      0.575       0.32
+         large-vehicle         73       2810      0.831      0.731      0.797      0.546
+                 plane         45       1720      0.861      0.714      0.794      0.466
+            helicopter          5         32          0          0          0          0
+                  ship         65       5740       0.73      0.505      0.538      0.282
+Speed: 0.1ms preprocess, 2.1ms inference, 0.0ms loss, 0.1ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/dota_kd_pseudo/stage3-kd-pseudo[0m
+Training finished. Results saved in: /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage3-kd-pseudo

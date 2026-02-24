@@ -1,0 +1,140 @@
+{
+  "P2": {
+    "0": [
+      {
+        "max_edge": 3.2825927734375,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P2682.png",
+        "epoch": 32
+      },
+      {
+        "max_edge": 16.4901123046875,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P2160.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 16.4901123046875,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P2160.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 16.4901123046875,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P2160.png",
+        "epoch": 0
+      }
+    ],
+    "1": [
+      {
+        "max_edge": 11.085693359375,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P1412.png",
+        "epoch": 35
+      },
+      {
+        "max_edge": 8.682220458984375,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P0188.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 47.59967041015625,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P0188.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 47.59967041015625,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P0188.png",
+        "epoch": 0
+      }
+    ]
+  },
+  "P3": {
+    "0": [
+      {
+        "max_edge": 16.4901123046875,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P2160.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 16.4901123046875,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P2160.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 23.10546875,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P2160.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 15.678955078125,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P2160.png",
+        "epoch": 0
+      }
+    ],
+    "1": [
+      {
+        "max_edge": 4.71246337890625,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P0697.png",
+        "epoch": 27
+      },
+      {
+        "max_edge": 47.59967041015625,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P0188.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 47.59967041015625,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P0188.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 47.59967041015625,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P0188.png",
+        "epoch": 0
+      }
+    ]
+  },
+  "P4": {
+    "0": [
+      {
+        "max_edge": 7.90814208984375,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P0707.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 7.5255126953125,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P1948.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 8.242828369140625,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P1948.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 7.525520324707031,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P1948.png",
+        "epoch": 0
+      }
+    ],
+    "1": [
+      {
+        "max_edge": 13.793792724609375,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P1948.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 9.0675048828125,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P1948.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 12.761474609375,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P1948.png",
+        "epoch": 0
+      },
+      {
+        "max_edge": 10.0750732421875,
+        "im_file": "/gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage1/train/images/P1948.png",
+        "epoch": 0
+      }
+    ]
+  }
+}

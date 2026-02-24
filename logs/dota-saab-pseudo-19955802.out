@@ -1,0 +1,1315 @@
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+[34m[1mengine/trainer: [0mtask=detect, mode=train, model=/home/ddwilde/scriptie/pretrained/small.pt, data=/home/ddwilde/scriptie/yaml/DOTA-shared-stage1.yaml, epochs=50, time=None, patience=100, batch=4, imgsz=640, save=True, save_period=-1, cache=False, device=None, workers=8, project=/home/ddwilde/scriptie/runs/dota_saab_pseudo, name=stage1-saab-pseudo, exist_ok=False, pretrained=True, optimizer=auto, verbose=True, seed=0, deterministic=True, single_cls=False, rect=False, cos_lr=False, close_mosaic=10, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, continual={'enable': False, 'batches': [], 'adapter_strategy': 'last', 'save_history': True}, replay={'enable': True, 'buffer_per_class': 128, 'sample_per_batch': 32, 'loss_weight': 1.0, 'tiny_max_pixels': 320, 'prototypes': {'num_fine': 4}, 'box': {'enable': True, 'loss_weight': 1.0}, 'student_update_freq': 10}, kd={'enable': False, 'lambda_cls': 1.0, 'lambda_bbox': 1.0, 'top_k': 10, 'teacher_weights': None, 'teacher_nc': None, 'debug_batches': 10}, stage={'active_classes': [0, 1]}, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=None, iou=0.7, max_det=300, half=False, dnn=False, plots=True, per_class_tb_interval=1, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.0, copy_paste=0.0, auto_augment=randaugment, erasing=0.4, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=/home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo
+Overriding model.yaml nc=10 with nc=2
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       928  ednet.nn.modules.conv.Conv                   [3, 32, 3, 2]                 
+  1                  -1  1     18560  ednet.nn.modules.conv.Conv                   [32, 64, 3, 2]                
+  2                  -1  1     29056  ednet.nn.modules.block.C2f                   [64, 64, 1, True]             
+  3                  -1  1     73984  ednet.nn.modules.conv.Conv                   [64, 128, 3, 2]               
+  4                  -1  2    197632  ednet.nn.modules.block.C2f                   [128, 128, 2, True]           
+  5                  -1  1    295424  ednet.nn.modules.conv.Conv                   [128, 256, 3, 2]              
+  6                  -1  2    420864  ednet.nn.modules.block.C2f_FCA               [256, 256, 2, True]           
+  7                  -1  1   1180672  ednet.nn.modules.conv.Conv                   [256, 512, 3, 2]              
+  8                  -1  1   1095680  ednet.nn.modules.block.C2f_FCA               [512, 512, 1, True]           
+  9                  -1  1    656896  ednet.nn.modules.block.SPPF                  [512, 512, 5]                 
+ 10                  -1  1    990976  ednet.nn.modules.block.PSA                   [512, 512]                    
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12             [-1, 6]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 13                  -1  1    591360  ednet.nn.modules.block.C2f                   [768, 256, 1]                 
+ 14                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 15             [-1, 4]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 16                  -1  1    148224  ednet.nn.modules.block.C2f                   [384, 128, 1]                 
+ 17                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 18             [-1, 2]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 19                  -1  1     37248  ednet.nn.modules.block.C2f                   [192, 64, 1]                  
+ 20                  -1  1     36992  ednet.nn.modules.conv.Conv                   [64, 64, 3, 2]                
+ 21            [-1, 16]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 22                  -1  1    123648  ednet.nn.modules.block.C2f                   [192, 128, 1]                 
+ 23                  -1  1    147712  ednet.nn.modules.conv.Conv                   [128, 128, 3, 2]              
+ 24            [-1, 13]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 25                  -1  1    493056  ednet.nn.modules.block.C2f                   [384, 256, 1]                 
+ 26                  -1  1     68864  ednet.nn.modules.block.SCDown                [256, 256, 3, 2]              
+ 27             [-1, 9]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 28                  -1  1   1089536  ednet.nn.modules.block.C2fCIB                [768, 512, 1, True, True]     
+ 29    [19, 22, 25, 28]  1   1621664  ednet.nn.modules.head.v10Detect              [2, [64, 128, 256, 512]]      
+ednet-s summary: 510 layers, 9,318,976 parameters, 9,318,960 gradients
+
+Active classes for this stage: (0, 1)
+Transferred 737/753 items from pretrained weights
+Replay feature tapper initialized for detection head levels: ['P2', 'P3', 'P4']
+Box replay feature tapper initialized (cv2) for levels: ['P2', 'P3', 'P4']
+Box prototype replay enabled | loss_weight=1.00
+[34m[1mTensorBoard: [0mStart with 'tensorboard --logdir /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo', view at http://localhost:6006/
+Freezing layer 'model.29.dfl.conv.weight'
+[34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks with YOLOv8n...
+[34m[1mAMP: [0mchecks passed ✅
+Plotting labels to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/labels.jpg... 
+[34m[1moptimizer:[0m 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+[34m[1moptimizer:[0m AdamW(lr=0.001667, momentum=0.9) with parameter groups 117 weight(decay=0.0), 145 weight(decay=0.0005), 139 bias(decay=0.0)
+Trainable params: 401 tensors (9318960 weights). Top trainable=[('model.7.conv.weight', 1179648), ('model.9.cv2.conv.weight', 524288), ('model.8.cv2.conv.weight', 393216), ('model.28.cv1.conv.weight', 393216), ('model.28.cv2.conv.weight', 393216), ('model.5.conv.weight', 294912), ('model.29.cv2.3.0.conv.weight', 294912), ('model.29.one2one_cv2.3.0.conv.weight', 294912), ('model.8.cv1.conv.weight', 262144), ('model.10.cv1.conv.weight', 262144), ('model.10.cv2.conv.weight', 262144), ('model.13.cv1.conv.weight', 196608), ('model.13.m.0.cv1.conv.weight', 147456), ('model.13.m.0.cv2.conv.weight', 147456), ('model.23.conv.weight', 147456), ('model.25.m.0.cv1.conv.weight', 147456), ('model.25.m.0.cv2.conv.weight', 147456), ('model.29.cv2.2.0.conv.weight', 147456), ('model.29.one2one_cv2.2.0.conv.weight', 147456), ('model.6.cv2.conv.weight', 131072)]
+Limiting positives to classes (0, 1)
+Limiting positives to classes (0, 1)
+[34m[1mTensorBoard: [0mmodel graph visualization added ✅
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to [1m/home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo[0m
+Starting training for 50 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+Limiting positives to classes (0, 1)
+Limiting positives to classes (0, 1)
+                   all        186       8357      0.379       0.39      0.289      0.124
+Saved 2885 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 2852 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.397      0.473      0.356      0.189
+Saved 3107 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3065 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.431      0.453      0.341      0.184
+Saved 3182 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3167 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.493      0.539       0.48      0.272
+Saved 3208 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3263 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.609      0.518      0.513      0.281
+Saved 3229 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3337 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357        0.6      0.549      0.536      0.302
+Saved 3152 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3371 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357       0.58       0.55      0.528      0.306
+Saved 3175 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3422 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.664      0.553      0.577      0.312
+Saved 3183 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3429 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357       0.69      0.557      0.571      0.323
+Saved 3190 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3442 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.665      0.549      0.564      0.298
+Saved 3205 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3469 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357       0.73      0.556      0.601      0.332
+Saved 3129 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3627 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.696      0.548      0.581      0.326
+Saved 3211 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3633 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.707      0.595      0.624      0.357
+Saved 3130 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3572 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.726      0.589      0.625      0.359
+Saved 3136 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3642 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.668      0.584      0.593      0.347
+Saved 3139 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3642 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.716      0.577      0.605      0.324
+Saved 3186 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3646 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357       0.69      0.586      0.596      0.358
+Saved 3244 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3631 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.731      0.589      0.626      0.366
+Saved 3259 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3634 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.739      0.594      0.622      0.371
+Saved 3274 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3636 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.748      0.595      0.633      0.379
+Saved 3294 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3641 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.743      0.608      0.645      0.378
+Saved 3327 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3642 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.765      0.602      0.644      0.384
+Saved 3330 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3646 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.733      0.587      0.636      0.377
+Saved 3332 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3648 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.759      0.596      0.643      0.385
+Saved 3206 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3650 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.732      0.605      0.643      0.361
+Saved 3228 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3659 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.723      0.593      0.617      0.374
+Saved 3267 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3670 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.736      0.612      0.645      0.387
+Saved 3321 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3674 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.762      0.612      0.649      0.399
+Saved 3236 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3557 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.756      0.601      0.645      0.384
+Saved 3240 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3438 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.749      0.611      0.651      0.395
+Saved 3265 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3513 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.767      0.631       0.67      0.401
+Saved 3312 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3566 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.753      0.623       0.66      0.398
+Saved 3232 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3572 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.756      0.616      0.653      0.395
+Saved 3152 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3582 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357       0.77      0.628      0.665      0.406
+Saved 3220 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3586 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.782      0.613      0.658      0.412
+Saved 3262 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3591 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357       0.75      0.612      0.648      0.394
+Saved 3145 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3596 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.755      0.634      0.661      0.405
+Saved 3155 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3598 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357       0.75      0.612      0.642      0.397
+Saved 3183 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3600 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.766      0.637      0.669      0.415
+Saved 3207 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3602 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.769      0.645      0.681      0.421
+Saved 3240 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3604 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+Closing dataloader mosaic
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.734      0.637      0.653      0.405
+Saved 3261 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3604 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.759       0.62      0.658      0.409
+Saved 3280 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3605 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.773      0.635      0.677      0.427
+Saved 3349 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3610 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.769       0.63       0.66      0.412
+Saved 3382 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3610 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.788      0.627      0.672      0.419
+Saved 3391 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3610 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.754      0.628       0.66      0.412
+Saved 3395 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3610 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.753       0.63      0.663      0.412
+Saved 3395 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3610 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.752      0.637      0.669      0.419
+Saved 3395 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3610 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357       0.76      0.628      0.665      0.419
+Saved 3396 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3611 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186       8357      0.747      0.629      0.661      0.414
+Saved 3397 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer_sources.json
+Saved 3612 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer_sources.json
+
+50 epochs completed in 0.583 hours.
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/weights/last.pt, 19.1MB
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/weights/best.pt, 19.1MB
+
+Validating /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/weights/best.pt...
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,295,008 parameters, 0 gradients
+                   all        186       8357      0.771      0.635      0.677      0.427
+         small-vehicle         89       5547      0.752        0.5      0.557      0.306
+         large-vehicle         73       2810       0.79      0.769      0.796      0.547
+Speed: 0.2ms preprocess, 2.5ms inference, 0.0ms loss, 0.1ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo[0m
+Training finished. Results saved in: /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo
+Found 863 images in /home/ddwilde/scriptie/datasets/dota_stages_shared/stage2/train/images
+Loading model from /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/weights/best.pt ...
+Generating pseudo-labels | prev_classes=[0, 1] | conf=0.5 | conflict_iou=0.5
+
+Done.
+  Kept pseudo-detections : 16098
+  Dropped (low conf)     : 0
+  Dropped (GT conflict)  : 2
+  Output directory       : /home/ddwilde/scriptie/runs/dota_saab_pseudo/pseudo_labels/stage2
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+[34m[1mengine/trainer: [0mtask=detect, mode=train, model=/home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/weights/best.pt, data=/home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml, epochs=50, time=None, patience=100, batch=4, imgsz=640, save=True, save_period=-1, cache=False, device=None, workers=8, project=/home/ddwilde/scriptie/runs/dota_saab_pseudo, name=stage2-saab-pseudo, exist_ok=False, pretrained=True, optimizer=auto, verbose=True, seed=0, deterministic=True, single_cls=False, rect=False, cos_lr=False, close_mosaic=10, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, continual={'enable': False, 'batches': [], 'adapter_strategy': 'last', 'save_history': True}, replay={'enable': True, 'buffer_per_class': 128, 'sample_per_batch': 32, 'loss_weight': 1.0, 'tiny_max_pixels': 320, 'prototypes': {'num_fine': 4}, 'init_buffer': '/home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt', 'box': {'enable': True, 'loss_weight': 1.0, 'init_buffer': '/home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt'}, 'student_update_freq': 10}, kd={'enable': False, 'lambda_cls': 1.0, 'lambda_bbox': 1.0, 'top_k': 10, 'teacher_weights': None, 'teacher_nc': None, 'debug_batches': 10}, stage={'active_classes': [2, 3], 'prev_classes': [0, 1], 'pseudo_labels_dir': '/home/ddwilde/scriptie/runs/dota_saab_pseudo/pseudo_labels/stage2'}, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=None, iou=0.7, max_det=300, half=False, dnn=False, plots=True, per_class_tb_interval=1, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.0, copy_paste=0.0, auto_augment=randaugment, erasing=0.4, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=/home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo
+Overriding model.yaml nc=2 with nc=4
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       928  ednet.nn.modules.conv.Conv                   [3, 32, 3, 2]                 
+  1                  -1  1     18560  ednet.nn.modules.conv.Conv                   [32, 64, 3, 2]                
+  2                  -1  1     29056  ednet.nn.modules.block.C2f                   [64, 64, 1, True]             
+  3                  -1  1     73984  ednet.nn.modules.conv.Conv                   [64, 128, 3, 2]               
+  4                  -1  2    197632  ednet.nn.modules.block.C2f                   [128, 128, 2, True]           
+  5                  -1  1    295424  ednet.nn.modules.conv.Conv                   [128, 256, 3, 2]              
+  6                  -1  2    420864  ednet.nn.modules.block.C2f_FCA               [256, 256, 2, True]           
+  7                  -1  1   1180672  ednet.nn.modules.conv.Conv                   [256, 512, 3, 2]              
+  8                  -1  1   1095680  ednet.nn.modules.block.C2f_FCA               [512, 512, 1, True]           
+  9                  -1  1    656896  ednet.nn.modules.block.SPPF                  [512, 512, 5]                 
+ 10                  -1  1    990976  ednet.nn.modules.block.PSA                   [512, 512]                    
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12             [-1, 6]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 13                  -1  1    591360  ednet.nn.modules.block.C2f                   [768, 256, 1]                 
+ 14                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 15             [-1, 4]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 16                  -1  1    148224  ednet.nn.modules.block.C2f                   [384, 128, 1]                 
+ 17                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 18             [-1, 2]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 19                  -1  1     37248  ednet.nn.modules.block.C2f                   [192, 64, 1]                  
+ 20                  -1  1     36992  ednet.nn.modules.conv.Conv                   [64, 64, 3, 2]                
+ 21            [-1, 16]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 22                  -1  1    123648  ednet.nn.modules.block.C2f                   [192, 128, 1]                 
+ 23                  -1  1    147712  ednet.nn.modules.conv.Conv                   [128, 128, 3, 2]              
+ 24            [-1, 13]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 25                  -1  1    493056  ednet.nn.modules.block.C2f                   [384, 256, 1]                 
+ 26                  -1  1     68864  ednet.nn.modules.block.SCDown                [256, 256, 3, 2]              
+ 27             [-1, 9]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 28                  -1  1   1089536  ednet.nn.modules.block.C2fCIB                [768, 512, 1, True, True]     
+ 29    [19, 22, 25, 28]  1   1622704  ednet.nn.modules.head.v10Detect              [4, [64, 128, 256, 512]]      
+ednet-s summary: 510 layers, 9,320,016 parameters, 9,320,000 gradients
+
+Active classes for this stage: (2, 3)
+Replay/previous classes for this stage: (0, 1)
+Pseudo-labels active: extended active_classes → (0, 1, 2, 3)
+Transferred 737/753 items from pretrained weights
+Replay feature tapper initialized for detection head levels: ['P2', 'P3', 'P4']
+Loaded 3397 replay embeddings from /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt
+Box replay feature tapper initialized (cv2) for levels: ['P2', 'P3', 'P4']
+Loaded 3612 box replay embeddings from /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt
+Box prototype replay enabled | loss_weight=1.00
+[34m[1mTensorBoard: [0mStart with 'tensorboard --logdir /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo', view at http://localhost:6006/
+Freezing layer 'model.29.dfl.conv.weight'
+[34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks with YOLOv8n...
+[34m[1mAMP: [0mchecks passed ✅
+Plotting labels to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/labels.jpg... 
+[34m[1moptimizer:[0m 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+[34m[1moptimizer:[0m AdamW(lr=0.00125, momentum=0.9) with parameter groups 117 weight(decay=0.0), 145 weight(decay=0.0005), 139 bias(decay=0.0)
+Trainable params: 401 tensors (9320000 weights). Top trainable=[('model.7.conv.weight', 1179648), ('model.9.cv2.conv.weight', 524288), ('model.8.cv2.conv.weight', 393216), ('model.28.cv1.conv.weight', 393216), ('model.28.cv2.conv.weight', 393216), ('model.5.conv.weight', 294912), ('model.29.cv2.3.0.conv.weight', 294912), ('model.29.one2one_cv2.3.0.conv.weight', 294912), ('model.8.cv1.conv.weight', 262144), ('model.10.cv1.conv.weight', 262144), ('model.10.cv2.conv.weight', 262144), ('model.13.cv1.conv.weight', 196608), ('model.13.m.0.cv1.conv.weight', 147456), ('model.13.m.0.cv2.conv.weight', 147456), ('model.23.conv.weight', 147456), ('model.25.m.0.cv1.conv.weight', 147456), ('model.25.m.0.cv2.conv.weight', 147456), ('model.29.cv2.2.0.conv.weight', 147456), ('model.29.one2one_cv2.2.0.conv.weight', 147456), ('model.6.cv2.conv.weight', 131072)]
+Limiting positives to classes (0, 1, 2, 3)
+Replay targets limited to previous classes (0, 1)
+Limiting positives to classes (0, 1, 2, 3)
+Replay targets limited to previous classes (0, 1)
+[34m[1mTensorBoard: [0mmodel graph visualization added ✅
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to [1m/home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo[0m
+Starting training for 50 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+Limiting positives to classes (0, 1, 2, 3)
+Replay targets limited to previous classes (0, 1)
+Limiting positives to classes (0, 1, 2, 3)
+Replay targets limited to previous classes (0, 1)
+Replay tap config not set; GT-driven replay skipped for this batch.
+Replay tap config not set; GT-driven replay skipped for this batch.
+                   all        186      10109      0.787      0.256      0.256      0.146
+Saved 7644 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 7926 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.636      0.315      0.317      0.188
+Saved 8178 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 8422 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.657      0.337      0.333      0.179
+Saved 8582 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 8684 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.677      0.377      0.373      0.214
+Saved 8923 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9068 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.499      0.414      0.426      0.241
+Saved 9049 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9316 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.492      0.418      0.428      0.237
+Saved 9131 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9539 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.753       0.43      0.455      0.262
+Saved 9204 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9694 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.792      0.439      0.483       0.27
+Saved 9302 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9871 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.806      0.434      0.479       0.28
+Saved 9123 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9931 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.798       0.43      0.485      0.279
+Saved 9175 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9981 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.798      0.453       0.49       0.28
+Saved 9249 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9887 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.802      0.456      0.492      0.284
+Saved 9327 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9899 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.812      0.457      0.501      0.287
+Saved 9497 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9921 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.807      0.455      0.501      0.282
+Saved 9438 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9950 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.812      0.438      0.499      0.299
+Saved 9531 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9967 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.819      0.455      0.497      0.282
+Saved 9579 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9992 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.822      0.462      0.503      0.283
+Saved 9620 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9882 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.832      0.471      0.517      0.301
+Saved 9700 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9945 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.844      0.477      0.522      0.306
+Saved 9749 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9968 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.833      0.457      0.515      0.301
+Saved 9770 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 10024 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109       0.84      0.477      0.529      0.318
+Saved 9807 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 10042 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.836      0.476       0.53      0.315
+Saved 9866 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 10065 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.838      0.471       0.53      0.314
+Saved 9877 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 10088 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.847      0.475       0.53       0.32
+Saved 9892 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 10128 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.835      0.481      0.526       0.31
+Saved 9651 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9880 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.846      0.467      0.528      0.312
+Saved 9668 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9919 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.553      0.508      0.532      0.315
+Saved 9681 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9956 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.844      0.481       0.53      0.315
+Saved 9687 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9978 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.843      0.472      0.524      0.314
+Saved 9697 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9529 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.848      0.483      0.542      0.323
+Saved 9711 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9546 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.842      0.486      0.542      0.324
+Saved 9850 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9547 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.851       0.47       0.55      0.328
+Saved 9659 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9427 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.615      0.524      0.547       0.33
+Saved 9693 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9429 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.856      0.478      0.548       0.33
+Saved 9746 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9431 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109       0.85      0.481      0.543      0.328
+Saved 9800 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9436 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.862      0.475      0.542      0.327
+Saved 9857 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9452 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.862      0.481       0.55      0.338
+Saved 9916 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9437 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.858      0.477      0.545      0.325
+Saved 9967 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9453 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.631      0.518      0.548      0.332
+Saved 10001 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9525 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.658      0.514      0.552      0.338
+Saved 10017 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9578 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+Closing dataloader mosaic
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.552      0.497      0.545      0.332
+Saved 10037 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9590 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.851      0.485      0.542      0.328
+Saved 10053 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9590 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.859       0.48      0.546      0.342
+Saved 10053 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9590 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.852      0.475      0.549      0.335
+Saved 10054 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9590 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.858      0.479      0.548      0.338
+Saved 10054 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9590 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.765      0.508      0.558      0.344
+Saved 10055 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9590 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.867      0.477      0.554      0.338
+Saved 10063 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9601 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.746      0.494      0.556      0.343
+Saved 10070 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9605 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.706       0.49      0.558      0.345
+Saved 10078 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9611 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      10109      0.719       0.49       0.56      0.347
+Saved 10080 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer_sources.json
+Saved 9611 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+50 epochs completed in 0.822 hours.
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/weights/last.pt, 19.1MB
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/weights/best.pt, 19.1MB
+
+Validating /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/weights/best.pt...
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,048 parameters, 0 gradients
+                   all        186      10109      0.715       0.49       0.56      0.347
+         small-vehicle         89       5547       0.83      0.431      0.577      0.321
+         large-vehicle         73       2810      0.854      0.743      0.807      0.561
+                 plane         45       1720      0.802      0.755      0.796      0.467
+            helicopter          5         32      0.373     0.0312     0.0587       0.04
+Speed: 0.3ms preprocess, 4.2ms inference, 0.0ms loss, 0.1ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo[0m
+Training finished. Results saved in: /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo
+Found 863 images in /home/ddwilde/scriptie/datasets/dota_stages_shared/stage3/train/images
+Loading model from /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/weights/best.pt ...
+Generating pseudo-labels | prev_classes=[0, 1, 2, 3] | conf=0.5 | conflict_iou=0.5
+
+Done.
+  Kept pseudo-detections : 19407
+  Dropped (low conf)     : 0
+  Dropped (GT conflict)  : 3
+  Output directory       : /home/ddwilde/scriptie/runs/dota_saab_pseudo/pseudo_labels/stage3
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+[34m[1mengine/trainer: [0mtask=detect, mode=train, model=/home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/weights/best.pt, data=/home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml, epochs=50, time=None, patience=100, batch=4, imgsz=640, save=True, save_period=-1, cache=False, device=None, workers=8, project=/home/ddwilde/scriptie/runs/dota_saab_pseudo, name=stage3-saab-pseudo, exist_ok=False, pretrained=True, optimizer=auto, verbose=True, seed=0, deterministic=True, single_cls=False, rect=False, cos_lr=False, close_mosaic=10, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, continual={'enable': False, 'batches': [], 'adapter_strategy': 'last', 'save_history': True}, replay={'enable': True, 'buffer_per_class': 128, 'sample_per_batch': 32, 'loss_weight': 1.0, 'tiny_max_pixels': 320, 'prototypes': {'num_fine': 4}, 'init_buffer': '/home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt', 'box': {'enable': True, 'loss_weight': 1.0, 'init_buffer': '/home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt'}, 'student_update_freq': 10}, kd={'enable': False, 'lambda_cls': 1.0, 'lambda_bbox': 1.0, 'top_k': 10, 'teacher_weights': None, 'teacher_nc': None, 'debug_batches': 10}, stage={'active_classes': [4], 'prev_classes': [0, 1, 2, 3], 'pseudo_labels_dir': '/home/ddwilde/scriptie/runs/dota_saab_pseudo/pseudo_labels/stage3'}, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=None, iou=0.7, max_det=300, half=False, dnn=False, plots=True, per_class_tb_interval=1, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.0, copy_paste=0.0, auto_augment=randaugment, erasing=0.4, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=/home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo
+Overriding model.yaml nc=4 with nc=5
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       928  ednet.nn.modules.conv.Conv                   [3, 32, 3, 2]                 
+  1                  -1  1     18560  ednet.nn.modules.conv.Conv                   [32, 64, 3, 2]                
+  2                  -1  1     29056  ednet.nn.modules.block.C2f                   [64, 64, 1, True]             
+  3                  -1  1     73984  ednet.nn.modules.conv.Conv                   [64, 128, 3, 2]               
+  4                  -1  2    197632  ednet.nn.modules.block.C2f                   [128, 128, 2, True]           
+  5                  -1  1    295424  ednet.nn.modules.conv.Conv                   [128, 256, 3, 2]              
+  6                  -1  2    420864  ednet.nn.modules.block.C2f_FCA               [256, 256, 2, True]           
+  7                  -1  1   1180672  ednet.nn.modules.conv.Conv                   [256, 512, 3, 2]              
+  8                  -1  1   1095680  ednet.nn.modules.block.C2f_FCA               [512, 512, 1, True]           
+  9                  -1  1    656896  ednet.nn.modules.block.SPPF                  [512, 512, 5]                 
+ 10                  -1  1    990976  ednet.nn.modules.block.PSA                   [512, 512]                    
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12             [-1, 6]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 13                  -1  1    591360  ednet.nn.modules.block.C2f                   [768, 256, 1]                 
+ 14                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 15             [-1, 4]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 16                  -1  1    148224  ednet.nn.modules.block.C2f                   [384, 128, 1]                 
+ 17                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 18             [-1, 2]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 19                  -1  1     37248  ednet.nn.modules.block.C2f                   [192, 64, 1]                  
+ 20                  -1  1     36992  ednet.nn.modules.conv.Conv                   [64, 64, 3, 2]                
+ 21            [-1, 16]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 22                  -1  1    123648  ednet.nn.modules.block.C2f                   [192, 128, 1]                 
+ 23                  -1  1    147712  ednet.nn.modules.conv.Conv                   [128, 128, 3, 2]              
+ 24            [-1, 13]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 25                  -1  1    493056  ednet.nn.modules.block.C2f                   [384, 256, 1]                 
+ 26                  -1  1     68864  ednet.nn.modules.block.SCDown                [256, 256, 3, 2]              
+ 27             [-1, 9]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 28                  -1  1   1089536  ednet.nn.modules.block.C2fCIB                [768, 512, 1, True, True]     
+ 29    [19, 22, 25, 28]  1   1623224  ednet.nn.modules.head.v10Detect              [5, [64, 128, 256, 512]]      
+ednet-s summary: 510 layers, 9,320,536 parameters, 9,320,520 gradients
+
+Active classes for this stage: (4,)
+Replay/previous classes for this stage: (0, 1, 2, 3)
+Pseudo-labels active: extended active_classes → (0, 1, 2, 3, 4)
+Transferred 737/753 items from pretrained weights
+Replay feature tapper initialized for detection head levels: ['P2', 'P3', 'P4']
+Loaded 10080 replay embeddings from /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt
+Box replay feature tapper initialized (cv2) for levels: ['P2', 'P3', 'P4']
+Loaded 9611 box replay embeddings from /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt
+Box prototype replay enabled | loss_weight=1.00
+[34m[1mTensorBoard: [0mStart with 'tensorboard --logdir /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo', view at http://localhost:6006/
+Freezing layer 'model.29.dfl.conv.weight'
+[34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks with YOLOv8n...
+[34m[1mAMP: [0mchecks passed ✅
+Plotting labels to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/labels.jpg... 
+[34m[1moptimizer:[0m 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+[34m[1moptimizer:[0m AdamW(lr=0.001111, momentum=0.9) with parameter groups 117 weight(decay=0.0), 145 weight(decay=0.0005), 139 bias(decay=0.0)
+Trainable params: 401 tensors (9320520 weights). Top trainable=[('model.7.conv.weight', 1179648), ('model.9.cv2.conv.weight', 524288), ('model.8.cv2.conv.weight', 393216), ('model.28.cv1.conv.weight', 393216), ('model.28.cv2.conv.weight', 393216), ('model.5.conv.weight', 294912), ('model.29.cv2.3.0.conv.weight', 294912), ('model.29.one2one_cv2.3.0.conv.weight', 294912), ('model.8.cv1.conv.weight', 262144), ('model.10.cv1.conv.weight', 262144), ('model.10.cv2.conv.weight', 262144), ('model.13.cv1.conv.weight', 196608), ('model.13.m.0.cv1.conv.weight', 147456), ('model.13.m.0.cv2.conv.weight', 147456), ('model.23.conv.weight', 147456), ('model.25.m.0.cv1.conv.weight', 147456), ('model.25.m.0.cv2.conv.weight', 147456), ('model.29.cv2.2.0.conv.weight', 147456), ('model.29.one2one_cv2.2.0.conv.weight', 147456), ('model.6.cv2.conv.weight', 131072)]
+Limiting positives to classes (0, 1, 2, 3, 4)
+Replay targets limited to previous classes (0, 1, 2, 3)
+Limiting positives to classes (0, 1, 2, 3, 4)
+Replay targets limited to previous classes (0, 1, 2, 3)
+[34m[1mTensorBoard: [0mmodel graph visualization added ✅
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to [1m/home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo[0m
+Starting training for 50 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+Limiting positives to classes (0, 1, 2, 3, 4)
+Replay targets limited to previous classes (0, 1, 2, 3)
+Limiting positives to classes (0, 1, 2, 3, 4)
+Replay targets limited to previous classes (0, 1, 2, 3)
+Replay tap config not set; GT-driven replay skipped for this batch.
+Replay tap config not set; GT-driven replay skipped for this batch.
+                   all        186      15849      0.165      0.352      0.282       0.17
+Saved 14944 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 14882 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.536      0.403      0.435      0.243
+Saved 15686 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 15443 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.516      0.408      0.431      0.244
+Saved 15976 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 15660 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.559      0.439      0.472      0.268
+Saved 16310 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 15804 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.583       0.44      0.482      0.274
+Saved 16469 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 15931 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.597      0.453      0.496       0.28
+Saved 16602 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16005 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.592      0.454      0.487      0.272
+Saved 16709 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16096 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.619      0.447      0.507      0.287
+Saved 16827 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16085 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849       0.61      0.451      0.499      0.279
+Saved 16654 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16159 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.626      0.466      0.518      0.296
+Saved 16710 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16215 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.609      0.466      0.512      0.294
+Saved 16889 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16363 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.621      0.461      0.513      0.298
+Saved 16925 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16441 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.628      0.467      0.517      0.301
+Saved 16954 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16450 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.627      0.472      0.524        0.3
+Saved 17015 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16465 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.629      0.462      0.527      0.304
+Saved 17081 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16471 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.624      0.467      0.514      0.295
+Saved 17122 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16334 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.637      0.463      0.525      0.299
+Saved 17177 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16281 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.642      0.467       0.53       0.31
+Saved 17123 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16178 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.614      0.461       0.51      0.294
+Saved 17140 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16217 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.638      0.471      0.529      0.303
+Saved 17181 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16284 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.641      0.472      0.536      0.313
+Saved 17082 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16320 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.639      0.466      0.526      0.305
+Saved 17127 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16463 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.639      0.466      0.529      0.307
+Saved 17177 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16343 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.636      0.471       0.53      0.315
+Saved 17223 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16346 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.638      0.478      0.534       0.31
+Saved 17259 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16353 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.638      0.469      0.527        0.3
+Saved 17305 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16359 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.631      0.469       0.53      0.303
+Saved 17329 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16370 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.633       0.47      0.525      0.307
+Saved 17346 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16261 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.636      0.474      0.531      0.308
+Saved 17118 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16261 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.632      0.474      0.531      0.311
+Saved 17046 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16296 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849       0.64      0.474      0.532      0.313
+Saved 17077 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16344 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.644      0.472      0.534      0.307
+Saved 17131 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16407 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.646      0.471      0.534      0.305
+Saved 17058 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16435 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.638      0.468      0.534      0.311
+Saved 17149 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16441 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.647      0.474      0.537      0.316
+Saved 17219 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16448 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.649      0.472      0.541      0.316
+Saved 17288 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16456 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849       0.64       0.48      0.539      0.318
+Saved 17360 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16468 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.658      0.468       0.54      0.314
+Saved 17410 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16474 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.653      0.481      0.544      0.322
+Saved 17309 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16352 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.634      0.477      0.536      0.313
+Saved 17344 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16393 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+Closing dataloader mosaic
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.641      0.473      0.536      0.318
+Saved 17372 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16480 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.645      0.475      0.539       0.32
+Saved 17380 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16480 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.646      0.474      0.537       0.32
+Saved 17394 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16481 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.648      0.477      0.542      0.323
+Saved 17407 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16488 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.645      0.477      0.542      0.325
+Saved 17423 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16488 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.639      0.474      0.537      0.318
+Saved 17438 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16493 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.643      0.471      0.537       0.32
+Saved 17450 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16495 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.644      0.472      0.539      0.319
+Saved 17480 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16495 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.646       0.47      0.538      0.321
+Saved 17481 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16496 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_lossreplay_loss  Instances       Size
+                   all        186      15849      0.648      0.471      0.538      0.322
+Saved 17481 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/buffer_sources.json
+Saved 16504 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+50 epochs completed in 0.989 hours.
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/weights/last.pt, 19.1MB
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/weights/best.pt, 19.1MB
+
+Validating /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/weights/best.pt...
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,568 parameters, 0 gradients
+                   all        186      15849      0.643      0.477      0.542      0.324
+         small-vehicle         89       5547      0.814      0.415       0.57      0.319
+         large-vehicle         73       2810      0.845      0.734      0.803       0.55
+                 plane         45       1720       0.82      0.744      0.797      0.466
+            helicopter          5         32          0          0          0          0
+                  ship         65       5740      0.738      0.494      0.539      0.287
+Speed: 0.1ms preprocess, 2.2ms inference, 0.0ms loss, 0.1ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo[0m
+Training finished. Results saved in: /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo
