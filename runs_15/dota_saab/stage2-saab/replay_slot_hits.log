@@ -1,0 +1,317 @@
+Epoch 1
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:2351, fine_0:115, fine_1:11285, fine_2:6626, fine_3:71
+    level=P2 cls=1 | coarse:1423, fine_0:41, fine_1:4831, fine_2:2370, fine_3:2615
+    level=P3 cls=0 | coarse:2, fine_0:12, fine_1:3, fine_2:9, fine_3:30
+    level=P3 cls=1 | coarse:738, fine_0:62, fine_1:373, fine_2:113, fine_3:334
+    level=P4 cls=1 | fine_1:2, fine_2:2
+  [fine-win rate] 28894/33408 embeddings preferred a fine proto over the coarse (86.5%)
+
+Epoch 2
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:9011, fine_0:126, fine_1:13581, fine_2:2162, fine_3:268
+    level=P2 cls=1 | coarse:520, fine_0:112, fine_1:5892, fine_2:1467, fine_3:3327
+    level=P3 cls=0 | coarse:17, fine_0:24, fine_1:2, fine_2:13, fine_3:40
+    level=P3 cls=1 | coarse:898, fine_0:51, fine_1:893, fine_2:345, fine_3:523
+    level=P4 cls=1 | coarse:19, fine_0:13, fine_1:24, fine_2:10
+  [fine-win rate] 28873/39338 embeddings preferred a fine proto over the coarse (73.4%)
+
+Epoch 3
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:17055, fine_0:189, fine_1:21129, fine_2:833, fine_3:2180
+    level=P2 cls=1 | coarse:274, fine_0:78, fine_1:6892, fine_2:3438, fine_3:3244
+    level=P3 cls=0 | fine_0:12, fine_2:12, fine_3:6
+    level=P3 cls=1 | coarse:1186, fine_0:27, fine_1:603, fine_2:603, fine_3:533
+    level=P4 cls=1 | coarse:13, fine_0:32, fine_1:25
+  [fine-win rate] 39836/58364 embeddings preferred a fine proto over the coarse (68.3%)
+
+Epoch 4
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:9115, fine_0:38, fine_1:10341, fine_2:195, fine_3:471
+    level=P2 cls=1 | coarse:653, fine_0:133, fine_1:4591, fine_2:2719, fine_3:2660
+    level=P3 cls=0 | fine_0:1, fine_2:5, fine_3:4
+    level=P3 cls=1 | coarse:655, fine_0:105, fine_1:1175, fine_2:60, fine_3:225
+  [fine-win rate] 22723/33146 embeddings preferred a fine proto over the coarse (68.6%)
+
+Epoch 5
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:11839, fine_0:69, fine_1:13858, fine_2:574, fine_3:540
+    level=P2 cls=1 | coarse:304, fine_0:116, fine_1:7615, fine_2:1991, fine_3:5460
+    level=P3 cls=0 | fine_0:5, fine_2:2, fine_3:1
+    level=P3 cls=1 | coarse:614, fine_0:113, fine_1:1147, fine_2:714, fine_3:102
+    level=P4 cls=1 | coarse:13, fine_0:1, fine_1:10
+  [fine-win rate] 32318/45088 embeddings preferred a fine proto over the coarse (71.7%)
+
+Epoch 6
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:10520, fine_0:40, fine_1:11476, fine_2:291, fine_3:551
+    level=P2 cls=1 | coarse:271, fine_0:38, fine_1:5433, fine_2:2481, fine_3:3541
+    level=P3 cls=1 | coarse:962, fine_0:32, fine_1:1125, fine_2:643, fine_3:144
+    level=P4 cls=1 | coarse:1, fine_1:1
+  [fine-win rate] 25796/37550 embeddings preferred a fine proto over the coarse (68.7%)
+
+Epoch 7
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:11780, fine_0:112, fine_1:14352, fine_2:283, fine_3:1433
+    level=P2 cls=1 | coarse:144, fine_0:106, fine_1:6437, fine_2:2552, fine_3:3199
+    level=P3 cls=0 | fine_0:30, fine_2:38, fine_3:8
+    level=P3 cls=1 | coarse:858, fine_0:64, fine_1:1413, fine_2:431, fine_3:248
+    level=P4 cls=1 | coarse:170, fine_0:1, fine_1:147
+  [fine-win rate] 30854/43806 embeddings preferred a fine proto over the coarse (70.4%)
+
+Epoch 8
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:11993, fine_0:90, fine_1:13997, fine_2:401, fine_3:1429
+    level=P2 cls=1 | coarse:97, fine_0:28, fine_1:3731, fine_2:2104, fine_3:3362
+    level=P3 cls=0 | coarse:2, fine_0:43, fine_1:3, fine_2:37, fine_3:13
+    level=P3 cls=1 | coarse:1014, fine_0:162, fine_1:1345, fine_2:504, fine_3:179
+    level=P4 cls=1 | coarse:120, fine_0:5, fine_1:125
+  [fine-win rate] 27558/40784 embeddings preferred a fine proto over the coarse (67.6%)
+
+Epoch 9
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:12180, fine_0:31, fine_1:13716, fine_2:295, fine_3:454
+    level=P2 cls=1 | coarse:39, fine_0:25, fine_1:5294, fine_2:1912, fine_3:4430
+    level=P3 cls=0 | fine_0:6, fine_2:6
+    level=P3 cls=1 | coarse:590, fine_0:42, fine_1:720, fine_2:286, fine_3:52
+    level=P4 cls=1 | coarse:54, fine_1:54
+  [fine-win rate] 27323/40186 embeddings preferred a fine proto over the coarse (68.0%)
+
+Epoch 10
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:14500, fine_0:26, fine_1:15260, fine_2:424, fine_3:378
+    level=P2 cls=1 | coarse:44, fine_0:19, fine_1:5222, fine_2:1970, fine_3:3709
+    level=P3 cls=0 | fine_0:2, fine_2:2
+    level=P3 cls=1 | coarse:287, fine_0:19, fine_1:540, fine_2:290, fine_3:32
+    level=P4 cls=1 | coarse:1, fine_1:1
+  [fine-win rate] 27894/42726 embeddings preferred a fine proto over the coarse (65.3%)
+
+Epoch 11
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:7824, fine_0:13, fine_1:8468, fine_2:430, fine_3:821
+    level=P2 cls=1 | coarse:49, fine_0:5, fine_1:6834, fine_2:3543, fine_3:3579
+    level=P3 cls=0 | fine_0:3, fine_2:3
+    level=P3 cls=1 | coarse:1107, fine_0:81, fine_1:1634, fine_2:589, fine_3:73
+    level=P4 cls=1 | coarse:2, fine_1:2
+  [fine-win rate] 26078/35060 embeddings preferred a fine proto over the coarse (74.4%)
+
+Epoch 12
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:10399, fine_0:22, fine_1:11365, fine_2:537, fine_3:689
+    level=P2 cls=1 | coarse:46, fine_0:24, fine_1:6349, fine_2:1841, fine_3:4354
+    level=P3 cls=0 | fine_0:8, fine_2:7, fine_3:1
+    level=P3 cls=1 | coarse:773, fine_0:11, fine_1:1244, fine_2:292, fine_3:52
+    level=P4 cls=1 | coarse:32, fine_1:32
+  [fine-win rate] 26828/38078 embeddings preferred a fine proto over the coarse (70.5%)
+
+Epoch 13
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:13824, fine_0:15, fine_1:14796, fine_2:440, fine_3:979
+    level=P2 cls=1 | coarse:61, fine_0:9, fine_1:5048, fine_2:2008, fine_3:3034
+    level=P3 cls=0 | coarse:2, fine_0:20, fine_1:1, fine_2:17
+    level=P3 cls=1 | coarse:645, fine_0:22, fine_1:1011, fine_2:452, fine_3:80
+    level=P4 cls=1 | coarse:1, fine_1:1
+  [fine-win rate] 27933/42466 embeddings preferred a fine proto over the coarse (65.8%)
+
+Epoch 14
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:11045, fine_0:20, fine_1:12199, fine_2:341, fine_3:749
+    level=P2 cls=1 | coarse:30, fine_0:12, fine_1:5184, fine_2:2941, fine_3:3393
+    level=P3 cls=1 | coarse:566, fine_0:53, fine_1:566, fine_2:437, fine_3:68
+  [fine-win rate] 25963/37604 embeddings preferred a fine proto over the coarse (69.0%)
+
+Epoch 15
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:15901, fine_0:26, fine_1:16647, fine_2:893, fine_3:547
+    level=P2 cls=1 | coarse:114, fine_0:26, fine_1:11126, fine_2:3702, fine_3:3926
+    level=P3 cls=0 | fine_0:20, fine_2:23, fine_3:3
+    level=P3 cls=1 | coarse:1109, fine_0:20, fine_1:1454, fine_2:835, fine_3:80
+    level=P4 cls=1 | coarse:11, fine_1:9, fine_2:2
+  [fine-win rate] 39339/56474 embeddings preferred a fine proto over the coarse (69.7%)
+
+Epoch 16
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:9335, fine_0:22, fine_1:9851, fine_2:483, fine_3:565
+    level=P2 cls=1 | coarse:43, fine_0:11, fine_1:5654, fine_2:2443, fine_3:4579
+    level=P3 cls=0 | fine_0:13, fine_2:14, fine_3:3
+    level=P3 cls=1 | coarse:1197, fine_0:31, fine_1:1760, fine_2:707, fine_3:103
+    level=P4 cls=1 | coarse:23, fine_1:23
+  [fine-win rate] 26262/36860 embeddings preferred a fine proto over the coarse (71.2%)
+
+Epoch 17
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:13234, fine_0:36, fine_1:14294, fine_2:712, fine_3:284
+    level=P2 cls=1 | coarse:63, fine_0:9, fine_1:6872, fine_2:2093, fine_3:3733
+    level=P3 cls=1 | coarse:775, fine_0:41, fine_1:1147, fine_2:560, fine_3:27
+    level=P4 cls=1 | coarse:42, fine_1:44
+  [fine-win rate] 29852/43966 embeddings preferred a fine proto over the coarse (67.9%)
+
+Epoch 18
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:11846, fine_0:18, fine_1:12393, fine_2:364, fine_3:295
+    level=P2 cls=1 | coarse:28, fine_0:11, fine_1:2890, fine_2:995, fine_3:2518
+    level=P3 cls=0 | coarse:1, fine_0:10, fine_2:7, fine_3:2
+    level=P3 cls=1 | coarse:661, fine_0:12, fine_1:970, fine_2:364, fine_3:25
+    level=P4 cls=1 | coarse:37, fine_1:36, fine_2:1
+  [fine-win rate] 20911/33484 embeddings preferred a fine proto over the coarse (62.5%)
+
+Epoch 19
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:9662, fine_0:48, fine_1:9926, fine_2:507, fine_3:109
+    level=P2 cls=1 | coarse:52, fine_0:8, fine_1:7227, fine_2:2897, fine_3:4938
+    level=P3 cls=1 | coarse:461, fine_0:21, fine_1:803, fine_2:333, fine_3:20
+    level=P4 cls=1 | coarse:6, fine_1:6
+  [fine-win rate] 26843/37024 embeddings preferred a fine proto over the coarse (72.5%)
+
+Epoch 20
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:9840, fine_0:78, fine_1:10665, fine_2:820, fine_3:219
+    level=P2 cls=1 | coarse:79, fine_0:9, fine_1:7958, fine_2:3047, fine_3:4421
+    level=P3 cls=0 | fine_0:35, fine_2:29, fine_3:2
+    level=P3 cls=1 | coarse:740, fine_0:22, fine_1:1644, fine_2:831, fine_3:41
+    level=P4 cls=1 | coarse:45, fine_1:45
+  [fine-win rate] 29866/40570 embeddings preferred a fine proto over the coarse (73.6%)
+
+Epoch 21
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:17651, fine_0:51, fine_1:18688, fine_2:746, fine_3:246
+    level=P2 cls=1 | coarse:35, fine_0:9, fine_1:6233, fine_2:2343, fine_3:3320
+    level=P3 cls=0 | fine_0:4, fine_2:5, fine_3:1
+    level=P3 cls=1 | coarse:256, fine_0:10, fine_1:714, fine_2:459, fine_3:17
+    level=P4 cls=1 | coarse:5, fine_1:5
+  [fine-win rate] 32851/50798 embeddings preferred a fine proto over the coarse (64.7%)
+
+Epoch 22
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:10776, fine_0:24, fine_1:12104, fine_2:402, fine_3:292
+    level=P2 cls=1 | coarse:23, fine_0:5, fine_1:5693, fine_2:1623, fine_3:3402
+    level=P3 cls=0 | fine_0:22, fine_2:25, fine_3:3
+    level=P3 cls=1 | coarse:443, fine_0:7, fine_1:861, fine_2:326, fine_3:15
+    level=P4 cls=1 | coarse:1, fine_1:1
+  [fine-win rate] 24805/36048 embeddings preferred a fine proto over the coarse (68.8%)
+
+Epoch 23
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:11305, fine_0:26, fine_1:11714, fine_2:308, fine_3:219
+    level=P2 cls=1 | coarse:50, fine_0:17, fine_1:3173, fine_2:1830, fine_3:2644
+    level=P3 cls=0 | fine_0:19, fine_2:24, fine_3:5
+    level=P3 cls=1 | coarse:1218, fine_0:43, fine_1:2153, fine_2:849, fine_3:23
+    level=P4 cls=1 | coarse:25, fine_0:1, fine_1:26, fine_2:2
+  [fine-win rate] 23076/35674 embeddings preferred a fine proto over the coarse (64.7%)
+
+Epoch 24
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:12620, fine_0:16, fine_1:13558, fine_2:632, fine_3:362
+    level=P2 cls=1 | coarse:96, fine_0:9, fine_1:8729, fine_2:3161, fine_3:3415
+    level=P3 cls=0 | fine_0:19, fine_2:30, fine_3:11
+    level=P3 cls=1 | coarse:1789, fine_0:30, fine_1:2818, fine_2:767, fine_3:46
+    level=P4 cls=1 | coarse:75, fine_1:76, fine_2:1
+  [fine-win rate] 33680/48260 embeddings preferred a fine proto over the coarse (69.8%)
+
+Epoch 25
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:11472, fine_0:30, fine_1:12467, fine_2:802, fine_3:385
+    level=P2 cls=1 | coarse:52, fine_0:15, fine_1:4351, fine_2:2046, fine_3:2246
+    level=P3 cls=0 | fine_0:44, fine_2:52, fine_3:12
+    level=P3 cls=1 | coarse:823, fine_0:93, fine_1:1440, fine_2:531, fine_3:55
+    level=P4 cls=1 | coarse:214, fine_0:2, fine_1:216
+  [fine-win rate] 24787/37348 embeddings preferred a fine proto over the coarse (66.4%)
+
+Epoch 26
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:13345, fine_0:28, fine_1:14494, fine_2:565, fine_3:272
+    level=P2 cls=1 | coarse:29, fine_0:16, fine_1:5613, fine_2:1491, fine_3:4805
+    level=P3 cls=1 | coarse:749, fine_0:72, fine_1:1284, fine_2:509, fine_3:92
+    level=P4 cls=1 | coarse:26, fine_0:3, fine_1:32, fine_2:1
+  [fine-win rate] 29277/43426 embeddings preferred a fine proto over the coarse (67.4%)
+
+Epoch 27
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:14540, fine_0:48, fine_1:15051, fine_2:364, fine_3:213
+    level=P2 cls=1 | coarse:21, fine_0:11, fine_1:4473, fine_2:1236, fine_3:3617
+    level=P3 cls=0 | coarse:1, fine_0:24, fine_2:29, fine_3:6
+    level=P3 cls=1 | coarse:813, fine_0:25, fine_1:1692, fine_2:937, fine_3:55
+    level=P4 cls=1 | coarse:7, fine_0:1, fine_1:8
+  [fine-win rate] 27790/43172 embeddings preferred a fine proto over the coarse (64.4%)
+
+Epoch 28
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:17904, fine_0:29, fine_1:18547, fine_2:470, fine_3:144
+    level=P2 cls=1 | coarse:65, fine_0:22, fine_1:5813, fine_2:3044, fine_3:3498
+    level=P3 cls=0 | fine_0:18, fine_2:22, fine_3:6
+    level=P3 cls=1 | coarse:396, fine_0:2, fine_1:735, fine_2:367, fine_3:14
+    level=P4 cls=1 | coarse:31, fine_1:31
+  [fine-win rate] 32762/51158 embeddings preferred a fine proto over the coarse (64.0%)
+
+Epoch 29
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:11932, fine_0:22, fine_1:12871, fine_2:622, fine_3:109
+    level=P2 cls=1 | coarse:27, fine_0:13, fine_1:4599, fine_2:2278, fine_3:2813
+    level=P3 cls=0 | coarse:1, fine_0:6, fine_2:6, fine_3:5
+    level=P3 cls=1 | coarse:531, fine_0:30, fine_1:1336, fine_2:873, fine_3:8
+    level=P4 cls=1 | coarse:62, fine_1:63, fine_2:1
+  [fine-win rate] 25655/38208 embeddings preferred a fine proto over the coarse (67.1%)
+
+Epoch 30
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:14285, fine_0:30, fine_1:16236, fine_2:973, fine_3:152
+    level=P2 cls=1 | coarse:22, fine_0:13, fine_1:5746, fine_2:2085, fine_3:3468
+    level=P3 cls=0 | fine_0:2, fine_2:7, fine_3:5
+    level=P3 cls=1 | coarse:262, fine_0:14, fine_1:1024, fine_2:755, fine_3:15
+    level=P4 cls=1 | coarse:31, fine_0:1, fine_1:32
+  [fine-win rate] 30558/45158 embeddings preferred a fine proto over the coarse (67.7%)
+
+Epoch 31
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:11990, fine_0:8, fine_1:12694, fine_2:737, fine_3:169
+    level=P2 cls=1 | coarse:24, fine_0:14, fine_1:5053, fine_2:2093, fine_3:2596
+    level=P3 cls=0 | fine_0:29, fine_2:30, fine_3:5
+    level=P3 cls=1 | coarse:428, fine_0:31, fine_1:1325, fine_2:979, fine_3:31
+    level=P4 cls=1 | coarse:95, fine_0:1, fine_1:97, fine_2:1
+  [fine-win rate] 25893/38430 embeddings preferred a fine proto over the coarse (67.4%)
+
+Epoch 32
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:8067, fine_0:6, fine_1:9115, fine_2:882, fine_3:214
+    level=P2 cls=1 | coarse:16, fine_0:2, fine_1:6463, fine_2:2371, fine_3:2746
+    level=P3 cls=0 | fine_0:12, fine_2:14, fine_3:2
+    level=P3 cls=1 | coarse:284, fine_0:7, fine_1:706, fine_2:532, fine_3:11
+    level=P4 cls=1 | coarse:13, fine_1:13
+  [fine-win rate] 23096/31476 embeddings preferred a fine proto over the coarse (73.4%)
+
+Epoch 33
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:11550, fine_0:19, fine_1:12458, fine_2:487, fine_3:266
+    level=P2 cls=1 | coarse:19, fine_0:4, fine_1:5982, fine_2:2525, fine_3:3128
+    level=P3 cls=0 | fine_0:23, fine_2:23, fine_3:2
+    level=P3 cls=1 | coarse:228, fine_0:26, fine_1:669, fine_2:497, fine_3:22
+    level=P4 cls=1 | coarse:31, fine_1:31
+  [fine-win rate] 26162/37990 embeddings preferred a fine proto over the coarse (68.9%)
+
+Epoch 34
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:12428, fine_0:55, fine_1:13285, fine_2:900, fine_3:184
+    level=P2 cls=1 | coarse:46, fine_0:12, fine_1:6857, fine_2:2938, fine_3:3599
+    level=P3 cls=0 | fine_0:21, fine_2:21
+    level=P3 cls=1 | coarse:545, fine_0:18, fine_1:1653, fine_2:1065, fine_3:25
+    level=P4 cls=1 | coarse:10, fine_1:10
+  [fine-win rate] 30643/43672 embeddings preferred a fine proto over the coarse (70.2%)
+
+Epoch 35
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:12512, fine_0:7, fine_1:13534, fine_2:813, fine_3:144
+    level=P2 cls=1 | coarse:18, fine_0:2, fine_1:5245, fine_2:1693, fine_3:2908
+    level=P3 cls=0 | fine_0:1, fine_2:1
+    level=P3 cls=1 | coarse:636, fine_0:21, fine_1:1198, fine_2:567, fine_3:38
+    level=P4 cls=1 | coarse:33, fine_1:33
+  [fine-win rate] 26205/39404 embeddings preferred a fine proto over the coarse (66.5%)
+
+Epoch 36
+  [loss hits: which prototype was nearest each embedding]
+    level=P2 cls=0 | coarse:15286, fine_0:15, fine_1:16392, fine_2:987, fine_3:234
+    level=P2 cls=1 | coarse:36, fine_0:16, fine_1:7887, fine_2:3162, fine_3:4725
+    level=P3 cls=0 | fine_0:14, fine_2:16, fine_3:4
+    level=P3 cls=1 | coarse:620, fine_0:6, fine_1:1259, fine_2:721, fine_3:34
+    level=P4 cls=1 | coarse:44, fine_1:44
+  [fine-win rate] 35516/51502 embeddings preferred a fine proto over the coarse (69.0%)
+
