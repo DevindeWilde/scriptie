@@ -1,0 +1,23 @@
+[
+  {
+    "epoch": null,
+    "timestamp": 1772010740.6911764,
+    "training": false,
+    "metrics": {
+      "small-vehicle": {
+        "precision": 0.7617606850554691,
+        "recall": 0.4056194606826325,
+        "map50": 0.4701825274712239,
+        "map": 0.2620828553872988,
+        "num_targets": 5303
+      },
+      "large-vehicle": {
+        "precision": 0.5901658135831165,
+        "recall": 0.6730523627075351,
+        "map50": 0.6179829632390295,
+        "map": 0.4400745072051241,
+        "num_targets": 2349
+      }
+    }
+  }
+]

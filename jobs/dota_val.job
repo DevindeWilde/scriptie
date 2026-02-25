@@ -128,14 +128,14 @@ run_val $RUNS/dota_saab_pseudo/stage3-saab-pseudo/weights/best.pt \
         $VALDIR/saab-pseudo/stage3
 
 # ── Knowledge distillation + pseudo ────────────────────────────────────────────────────
-run_val $RUNS/dota_kd_pseudo/stage1-kd/weights/best.pt \
+run_val $RUNS/dota_kd_pseudo/stage1-kd-pseudo/weights/best.pt \
         $YAML/DOTA-shared-stage1.yaml \
         $VALDIR/kd-pseudo/stage1
 
-run_val $RUNS/dota_kd_pseudo/stage2-kd/weights/best.pt \
+run_val $RUNS/dota_kd_pseudo/stage2-kd-pseudo/weights/best.pt \
         $YAML/DOTA-shared-stage2.yaml \
         $VALDIR/kd-pseudo/stage2
 
-run_val $RUNS/dota_kd_pseudo/stage3-kd/weights/best.pt \
+run_val $RUNS/dota_kd_pseudo/stage3-kd-pseudo/weights/best.pt \
         $YAML/DOTA-shared-stage3.yaml \
         $VALDIR/kd-pseudo/stage3

@@ -1,0 +1,324 @@
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_lower/stage1-lower/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage1.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/lower/stage1
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,295,008 parameters, 0 gradients
+                   all        186       7652      0.676      0.539      0.544      0.351
+         small-vehicle         91       5303      0.762      0.406       0.47      0.262
+         large-vehicle         74       2349       0.59      0.673      0.618       0.44
+Speed: 0.4ms preprocess, 10.8ms inference, 0.0ms loss, 1.6ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/lower/stage1/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/lower/stage1
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_lower/stage2-lower/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/lower/stage2
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,048 parameters, 0 gradients
+                   all        186       9947      0.462      0.146      0.169     0.0943
+         small-vehicle         91       5303          0          0          0          0
+         large-vehicle         74       2349          0          0          0          0
+                 plane         42       2098      0.848      0.582      0.675      0.377
+            helicopter          6        197          1          0   0.000578   0.000275
+Speed: 0.4ms preprocess, 10.3ms inference, 0.0ms loss, 0.8ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/lower/stage2/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/lower/stage2
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_lower/stage3-lower/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/lower/stage3
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,568 parameters, 0 gradients
+                   all        186      14700      0.155     0.0957      0.106     0.0511
+         small-vehicle         91       5303          0          0          0          0
+         large-vehicle         74       2349          0          0          0          0
+                 plane         42       2098          0          0          0          0
+            helicopter          6        197          0          0          0          0
+                  ship         61       4753      0.777      0.478      0.531      0.255
+Speed: 0.4ms preprocess, 8.9ms inference, 0.0ms loss, 2.2ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/lower/stage3/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/lower/stage3
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_replay/stage1-replay/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage1.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/replay/stage1
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,295,008 parameters, 0 gradients
+                   all        186       7652      0.676      0.539      0.544      0.351
+         small-vehicle         91       5303      0.762      0.406       0.47      0.262
+         large-vehicle         74       2349       0.59      0.673      0.618       0.44
+Speed: 0.4ms preprocess, 8.7ms inference, 0.0ms loss, 1.9ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/replay/stage1/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/replay/stage1
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_replay/stage2-replay/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/replay/stage2
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,048 parameters, 0 gradients
+                   all        186       9947      0.185      0.365      0.298      0.163
+         small-vehicle         91       5303      0.283      0.414      0.336      0.165
+         large-vehicle         74       2349      0.281      0.387      0.263       0.17
+                 plane         42       2098      0.172      0.644      0.593      0.318
+            helicopter          6        197    0.00217     0.0152    0.00111   0.000628
+Speed: 0.4ms preprocess, 9.9ms inference, 0.0ms loss, 0.8ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/replay/stage2/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/replay/stage2
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_replay/stage3-replay/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/replay/stage3
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,568 parameters, 0 gradients
+                   all        186      14700      0.658      0.235       0.31      0.148
+         small-vehicle         91       5303      0.673     0.0935      0.312      0.149
+         large-vehicle         74       2349      0.369     0.0639      0.196      0.132
+                 plane         42       2098      0.585      0.514      0.523       0.21
+            helicopter          6        197          1          0   0.000861   0.000603
+                  ship         61       4753      0.662      0.502       0.52      0.247
+Speed: 0.4ms preprocess, 8.2ms inference, 0.0ms loss, 2.6ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/replay/stage3/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/replay/stage3
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_kd/stage1-kd/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage1.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/kd/stage1
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,295,008 parameters, 0 gradients
+                   all        186       7652      0.676      0.539      0.544      0.351
+         small-vehicle         91       5303      0.762      0.406       0.47      0.262
+         large-vehicle         74       2349       0.59      0.673      0.618       0.44
+Speed: 0.4ms preprocess, 12.5ms inference, 0.0ms loss, 1.4ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/kd/stage1/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/kd/stage1
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_kd/stage2-kd/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/kd/stage2
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,048 parameters, 0 gradients
+                   all        186       9947      0.189      0.393      0.307       0.17
+         small-vehicle         91       5303      0.301      0.447      0.353      0.179
+         large-vehicle         74       2349      0.294      0.425      0.276      0.188
+                 plane         42       2098      0.157      0.674      0.598      0.313
+            helicopter          6        197    0.00543     0.0254    0.00282   0.000897
+Speed: 0.4ms preprocess, 9.9ms inference, 0.0ms loss, 1.1ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/kd/stage2/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/kd/stage2
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_kd/stage3-kd/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/kd/stage3
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,568 parameters, 0 gradients
+                   all        186      14700      0.209      0.391      0.314      0.158
+         small-vehicle         91       5303      0.351      0.355      0.327      0.175
+         large-vehicle         74       2349      0.175      0.479      0.198      0.129
+                 plane         42       2098       0.37      0.591      0.563      0.271
+            helicopter          6        197    0.00155    0.00508   0.000805   0.000402
+                  ship         61       4753      0.149      0.528       0.48      0.213
+Speed: 0.4ms preprocess, 9.4ms inference, 0.0ms loss, 2.2ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/kd/stage3/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/kd/stage3
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_pseudo/stage1-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage1.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/pseudo/stage1
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,295,008 parameters, 0 gradients
+                   all        186       7652      0.676      0.539      0.544      0.351
+         small-vehicle         91       5303      0.762      0.406       0.47      0.262
+         large-vehicle         74       2349       0.59      0.673      0.618       0.44
+Speed: 0.4ms preprocess, 8.6ms inference, 0.0ms loss, 1.2ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/pseudo/stage1/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/pseudo/stage1
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_pseudo/stage2-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/pseudo/stage2
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,048 parameters, 0 gradients
+                   all        186       9947      0.561      0.399      0.448      0.276
+         small-vehicle         91       5303      0.836      0.338      0.509      0.291
+         large-vehicle         74       2349      0.633      0.637      0.602      0.431
+                 plane         42       2098      0.774      0.621       0.68      0.382
+            helicopter          6        197          0          0    0.00189   0.000552
+Speed: 0.4ms preprocess, 14.4ms inference, 0.0ms loss, 1.6ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/pseudo/stage2/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/pseudo/stage2
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_pseudo/stage3-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/pseudo/stage3
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,568 parameters, 0 gradients
+                   all        186      14700      0.609      0.413      0.477      0.281
+         small-vehicle         91       5303       0.85       0.32      0.516      0.296
+         large-vehicle         74       2349      0.636      0.633      0.619      0.442
+                 plane         42       2098      0.832      0.595      0.707      0.388
+            helicopter          6        197          0          0          0          0
+                  ship         61       4753      0.728      0.515      0.542      0.281
+Speed: 0.4ms preprocess, 11.7ms inference, 0.0ms loss, 2.1ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/pseudo/stage3/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/pseudo/stage3
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab/stage1-saab/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage1.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/saab/stage1
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,295,008 parameters, 0 gradients
+                   all        186       7652      0.676      0.539      0.544      0.351
+         small-vehicle         91       5303      0.762      0.406       0.47      0.262
+         large-vehicle         74       2349       0.59      0.673      0.618       0.44
+Speed: 0.4ms preprocess, 9.6ms inference, 0.0ms loss, 2.1ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/saab/stage1/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/saab/stage1
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/saab/stage2
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,048 parameters, 0 gradients
+                   all        186       9947      0.213      0.338        0.3      0.154
+         small-vehicle         91       5303      0.296      0.369      0.317      0.149
+         large-vehicle         74       2349      0.405      0.308      0.296      0.193
+                 plane         42       2098      0.147      0.655      0.585      0.274
+            helicopter          6        197    0.00403     0.0203    0.00228   0.000558
+Speed: 0.4ms preprocess, 9.8ms inference, 0.0ms loss, 1.5ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/saab/stage2/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/saab/stage2
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab/stage3-saab/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/saab/stage3
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,568 parameters, 0 gradients
+                   all        186      14700      0.213      0.384      0.296      0.148
+         small-vehicle         91       5303      0.242      0.434      0.242      0.123
+         large-vehicle         74       2349      0.194      0.427      0.192      0.125
+                 plane         42       2098      0.399      0.504      0.508      0.234
+            helicopter          6        197          0          0          0          0
+                  ship         61       4753      0.231      0.554      0.536      0.259
+Speed: 0.4ms preprocess, 9.9ms inference, 0.0ms loss, 2.1ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/saab/stage3/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/saab/stage3
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_upper/upper/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-filtered.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/upper/final
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,568 parameters, 0 gradients
+                   all        186      14700      0.666      0.457      0.503      0.299
+         small-vehicle         91       5303       0.72      0.474      0.537      0.285
+         large-vehicle         74       2349      0.688       0.67      0.669      0.496
+                 plane         42       2098      0.867      0.626      0.707      0.402
+            helicopter          6        197      0.204     0.0152     0.0218    0.00807
+                  ship         61       4753      0.849        0.5      0.578      0.303
+Speed: 0.4ms preprocess, 10.7ms inference, 0.0ms loss, 2.6ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/upper/final/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/upper/final
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage1.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/saab-pseudo/stage1
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,295,008 parameters, 0 gradients
+                   all        186       7652      0.676      0.539      0.544      0.351
+         small-vehicle         91       5303      0.762      0.406       0.47      0.262
+         large-vehicle         74       2349       0.59      0.673      0.618       0.44
+Speed: 0.4ms preprocess, 9.2ms inference, 0.0ms loss, 2.1ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/saab-pseudo/stage1/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/saab-pseudo/stage1
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/saab-pseudo/stage2
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,048 parameters, 0 gradients
+                   all        186       9947      0.551      0.406      0.451      0.278
+         small-vehicle         91       5303      0.822      0.361      0.521      0.296
+         large-vehicle         74       2349      0.625      0.646      0.602      0.431
+                 plane         42       2098      0.758      0.616      0.677      0.384
+            helicopter          6        197          0          0    0.00203   0.000607
+Speed: 0.4ms preprocess, 12.0ms inference, 0.0ms loss, 1.9ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/saab-pseudo/stage2/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/saab-pseudo/stage2
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/saab-pseudo/stage3
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,568 parameters, 0 gradients
+                   all        186      14700      0.604      0.422      0.476      0.277
+         small-vehicle         91       5303      0.842      0.345      0.517      0.292
+         large-vehicle         74       2349      0.636      0.636      0.611      0.428
+                 plane         42       2098      0.796      0.615      0.706      0.382
+            helicopter          6        197          0          0          0          0
+                  ship         61       4753      0.743      0.512      0.544      0.281
+Speed: 0.4ms preprocess, 10.0ms inference, 0.0ms loss, 1.2ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/saab-pseudo/stage3/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/saab-pseudo/stage3
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage1-kd-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage1.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/kd-pseudo/stage1
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,295,008 parameters, 0 gradients
+                   all        186       7652      0.676      0.539      0.544      0.351
+         small-vehicle         91       5303      0.762      0.406       0.47      0.262
+         large-vehicle         74       2349       0.59      0.673      0.618       0.44
+Speed: 0.4ms preprocess, 10.5ms inference, 0.0ms loss, 2.8ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/kd-pseudo/stage1/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/kd-pseudo/stage1
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage2-kd-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/kd-pseudo/stage2
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,048 parameters, 0 gradients
+                   all        186       9947        0.8      0.402      0.444      0.271
+         small-vehicle         91       5303      0.831      0.359      0.518      0.293
+         large-vehicle         74       2349      0.634      0.646      0.598      0.424
+                 plane         42       2098      0.736      0.603      0.661      0.366
+            helicopter          6        197          1          0   0.000955   0.000287
+Speed: 0.4ms preprocess, 11.5ms inference, 0.0ms loss, 1.4ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/kd-pseudo/stage2/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/kd-pseudo/stage2
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage3-kd-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/kd-pseudo/stage3
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,568 parameters, 0 gradients
+                   all        186      14700      0.604      0.416      0.471      0.277
+         small-vehicle         91       5303      0.814      0.366      0.513      0.292
+         large-vehicle         74       2349      0.634      0.627      0.608      0.433
+                 plane         42       2098      0.834      0.582      0.696      0.385
+            helicopter          6        197          0          0          0          0
+                  ship         61       4753      0.739      0.505      0.535      0.276
+Speed: 0.4ms preprocess, 11.7ms inference, 0.0ms loss, 1.9ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/kd-pseudo/stage3/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/kd-pseudo/stage3
