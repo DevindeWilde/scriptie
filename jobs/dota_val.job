@@ -113,3 +113,29 @@ run_val $RUNS/dota_saab/stage3-saab/weights/best.pt \
 run_val $RUNS/dota_upper/upper/weights/best.pt \
         $YAML/DOTA-filtered.yaml \
         $VALDIR/upper/final
+
+# ── SA-AB (cls + box prototype consistency + memory replay) + pseudo ───────────────────
+run_val $RUNS/dota_saab_pseudo/stage1-saab-pseudo/weights/best.pt \
+        $YAML/DOTA-shared-stage1.yaml \
+        $VALDIR/saab-pseudo/stage1
+
+run_val $RUNS/dota_saab_pseudo/stage2-saab-pseudo/weights/best.pt \
+        $YAML/DOTA-shared-stage2.yaml \
+        $VALDIR/saab-pseudo/stage2
+
+run_val $RUNS/dota_saab_pseudo/stage3-saab-pseudo/weights/best.pt \
+        $YAML/DOTA-shared-stage3.yaml \
+        $VALDIR/saab-pseudo/stage3
+
+# ── Knowledge distillation + pseudo ────────────────────────────────────────────────────
+run_val $RUNS/dota_kd_pseudo/stage1-kd/weights/best.pt \
+        $YAML/DOTA-shared-stage1.yaml \
+        $VALDIR/kd-pseudo/stage1
+
+run_val $RUNS/dota_kd_pseudo/stage2-kd/weights/best.pt \
+        $YAML/DOTA-shared-stage2.yaml \
+        $VALDIR/kd-pseudo/stage2
+
+run_val $RUNS/dota_kd_pseudo/stage3-kd/weights/best.pt \
+        $YAML/DOTA-shared-stage3.yaml \
+        $VALDIR/kd-pseudo/stage3
