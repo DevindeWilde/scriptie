@@ -921,7 +921,7 @@ class DetectionTrainer(BaseTrainer):
                         by1 = int(round((cy - bh / 2) * imgsz_h))
                         bx2 = int(round((cx + bw / 2) * imgsz_w))
                         by2 = int(round((cy + bh / 2) * imgsz_h))
-                        pad = max(10, int(max(bx2 - bx1, by2 - by1) * 0.5))
+                        pad = max(20, int(max(bx2 - bx1, by2 - by1) * 1.5))
                         cx1 = max(0, bx1 - pad)
                         cy1 = max(0, by1 - pad)
                         cx2 = min(imgsz_w, bx2 + pad)

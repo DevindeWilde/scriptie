@@ -22,15 +22,7 @@ from pathlib import Path
 
 import numpy as np
 import torch
-from PIL import Image, ImageDraw, ImageFont
-
-
-def _get_font(size: int = 14):
-    """Try to load a TrueType font, fall back to default."""
-    try:
-        return ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", size)
-    except (IOError, OSError):
-        return ImageFont.load_default()
+from PIL import Image, ImageDraw
 
 
 def main():
@@ -56,8 +48,6 @@ def main():
     outdir = Path(args.outdir)
     total = 0
     skipped = 0
-    font = _get_font()
-
     print(f"{'Level':<6} {'Cls':<4} {'Slot':<5} {'Count':<6} {'Epoch':<6} {'Source'}")
     print("-" * 80)
 
@@ -78,8 +68,6 @@ def main():
                 im_file = source.get("im_file", "")
                 stem = Path(im_file).stem if im_file else "unknown"
 
-                label = f"{cls_name} | {level} slot{slot_idx} | count={count} epoch={epoch}"
-
                 # --- Preferred: use stored crop from augmented batch image ---
                 source_crop = source.get("source_crop")
                 bbox_in_crop = source.get("bbox_in_crop")
@@ -91,10 +79,6 @@ def main():
                     draw = ImageDraw.Draw(img)
                     if bbox_in_crop:
                         draw.rectangle(bbox_in_crop, outline=(0, 255, 0), width=2)
-                    # Text label
-                    bbox_text = draw.textbbox((2, 2), label, font=font)
-                    draw.rectangle(bbox_text, fill=(0, 0, 0))
-                    draw.text((2, 2), label, fill=(0, 255, 0), font=font)
 
                 # --- Fallback: load original image (no reliable bbox) ---
                 elif im_file:
@@ -105,10 +89,6 @@ def main():
                         skipped += 1
                         continue
                     img = Image.open(im_path).convert("RGB")
-                    draw = ImageDraw.Draw(img)
-                    bbox_text = draw.textbbox((2, 2), label, font=font)
-                    draw.rectangle(bbox_text, fill=(0, 0, 0))
-                    draw.text((2, 2), label, fill=(255, 255, 0), font=font)
                 else:
                     skipped += 1
                     continue
