@@ -1,0 +1,672 @@
+# ============================================================================
+# EO Continual-Learning Baselines — Training Commands
+# ============================================================================
+# 9 baselines × 3 stages each. Uses individual datastream (memory loader)
+# instead of baked-in replay labels.
+#
+# All paths are fully expanded — copy-paste directly into a terminal.
+# Run from: /home/jovyan/thesis_cl/ednet/Thesis
+#
+# Dataset: 9 classes, 3-3-3 split
+#   Stage 1: classes [0, 1, 2]
+#   Stage 2: classes [3, 4, 5]  — memory has old-class images (cls 0-2)
+#   Stage 3: classes [6, 7, 8]  — memory has old-class images (cls 0-5)
+#
+# Training params: epochs=50, imgsz=640, batch=4, workers=8
+# Memory ratio: 0.25 (1 old image per batch of 4)
+#
+# NOTE: baselines that only need memory (not prototypes) still require
+# replay.enable=True to unlock the memory_dir config path. The prototype
+# buffer is created but stays dormant (no teacher = no consistency loss).
+# student_update_freq=99999 minimises unused buffer overhead.
+# ============================================================================
+
+# cd /home/jovyan/thesis_cl/ednet/Thesis
+
+
+# ############################################################################
+# 1. FINE-TUNING (no continual-learning mechanism)
+# ############################################################################
+
+# ── Stage 1 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage1.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_finetune \
+  --name stage1-finetune \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/pretrained/small.pt \
+  --override "stage.active_classes=[0,1,2]"
+
+# ── Stage 2 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage2.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_finetune \
+  --name stage2-finetune \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_finetune/stage1-finetune/weights/best.pt \
+  --override "stage.active_classes=[3,4,5]"
+
+# ── Stage 3 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage3.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_finetune \
+  --name stage3-finetune \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_finetune/stage2-finetune/weights/best.pt \
+  --override "stage.active_classes=[6,7,8]"
+
+
+# ############################################################################
+# 2. REPLAY (memory streaming only — old images streamed into training)
+# ############################################################################
+
+# ── Stage 1 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage1.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_replay \
+  --name stage1-replay \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/pretrained/small.pt \
+  --override "stage.active_classes=[0,1,2]"
+
+# ── Stage 2 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage2.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_replay \
+  --name stage2-replay \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_replay/stage1-replay/weights/best.pt \
+  --override "stage.active_classes=[3,4,5]" \
+  --override "stage.prev_classes=[0,1,2]" \
+  --override "replay.enable=True" \
+  --override "replay.memory_dir=/home/jovyan/thesis_cl/ednet/Thesis/EO-memory/memory/stage2" \
+  --override "replay.memory_ratio=0.25" \
+  --override "replay.student_update_freq=99999"
+
+# ── Stage 3 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage3.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_replay \
+  --name stage3-replay \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_replay/stage2-replay/weights/best.pt \
+  --override "stage.active_classes=[6,7,8]" \
+  --override "stage.prev_classes=[0,1,2,3,4,5]" \
+  --override "replay.enable=True" \
+  --override "replay.memory_dir=/home/jovyan/thesis_cl/ednet/Thesis/EO-memory/memory/stage3" \
+  --override "replay.memory_ratio=0.25" \
+  --override "replay.student_update_freq=99999"
+
+
+# ############################################################################
+# 3. KD — Knowledge Distillation + memory streaming
+# ############################################################################
+
+# ── Stage 1 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage1.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd \
+  --name stage1-kd \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/pretrained/small.pt \
+  --override "stage.active_classes=[0,1,2]"
+
+# ── Stage 2 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage2.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd \
+  --name stage2-kd \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd/stage1-kd/weights/best.pt \
+  --override "stage.active_classes=[3,4,5]" \
+  --override "stage.prev_classes=[0,1,2]" \
+  --override "replay.enable=True" \
+  --override "replay.memory_dir=/home/jovyan/thesis_cl/ednet/Thesis/EO-memory/memory/stage2" \
+  --override "replay.memory_ratio=0.25" \
+  --override "replay.student_update_freq=99999" \
+  --override "kd.enable=True" \
+  --override "kd.teacher_weights=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd/stage1-kd/weights/best.pt" \
+  --override "kd.teacher_nc=9" \
+  --override "kd.lambda_cls=1.0" \
+  --override "kd.lambda_bbox=1.0" \
+  --override "kd.top_k=10"
+
+# ── Stage 3 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage3.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd \
+  --name stage3-kd \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd/stage2-kd/weights/best.pt \
+  --override "stage.active_classes=[6,7,8]" \
+  --override "stage.prev_classes=[0,1,2,3,4,5]" \
+  --override "replay.enable=True" \
+  --override "replay.memory_dir=/home/jovyan/thesis_cl/ednet/Thesis/EO-memory/memory/stage3" \
+  --override "replay.memory_ratio=0.25" \
+  --override "replay.student_update_freq=99999" \
+  --override "kd.enable=True" \
+  --override "kd.teacher_weights=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd/stage2-kd/weights/best.pt" \
+  --override "kd.teacher_nc=9" \
+  --override "kd.lambda_cls=1.0" \
+  --override "kd.lambda_bbox=1.0" \
+  --override "kd.top_k=10"
+
+
+# ############################################################################
+# 4. PSEUDO — Pseudo-labels only (no memory streaming)
+# ############################################################################
+
+# ── Stage 1 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage1.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_pseudo \
+  --name stage1-pseudo \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/pretrained/small.pt \
+  --override "stage.active_classes=[0,1,2]"
+
+# ── Generate pseudo-labels for Stage 2 ─────────────────────────────────────
+python scripts/generate_pseudo_labels.py \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_pseudo/stage1-pseudo/weights/best.pt \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage2.yaml \
+  --prev-classes 0 1 2 \
+  --outdir /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_pseudo/pseudo_labels/stage2 \
+  --conf 0.5 \
+  --conflict-iou 0.5
+
+# ── Stage 2 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage2.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_pseudo \
+  --name stage2-pseudo \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_pseudo/stage1-pseudo/weights/best.pt \
+  --override "stage.active_classes=[3,4,5]" \
+  --override "stage.prev_classes=[0,1,2]" \
+  --override "stage.pseudo_labels_dir=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_pseudo/pseudo_labels/stage2"
+
+# ── Generate pseudo-labels for Stage 3 ─────────────────────────────────────
+python scripts/generate_pseudo_labels.py \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_pseudo/stage2-pseudo/weights/best.pt \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage3.yaml \
+  --prev-classes 0 1 2 3 4 5 \
+  --outdir /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_pseudo/pseudo_labels/stage3 \
+  --conf 0.5 \
+  --conflict-iou 0.5
+
+# ── Stage 3 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage3.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_pseudo \
+  --name stage3-pseudo \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_pseudo/stage2-pseudo/weights/best.pt \
+  --override "stage.active_classes=[6,7,8]" \
+  --override "stage.prev_classes=[0,1,2,3,4,5]" \
+  --override "stage.pseudo_labels_dir=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_pseudo/pseudo_labels/stage3"
+
+
+# ############################################################################
+# 5. SA — Cls-only prototypes + memory streaming (loss_weight=5.0)
+# ############################################################################
+
+# ── Stage 1 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage1.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa \
+  --name stage1-sa \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/pretrained/small.pt \
+  --override "stage.active_classes=[0,1,2]" \
+  --override "replay.enable=True" \
+  --override "replay.buffer_per_class=128" \
+  --override "replay.sample_per_batch=32" \
+  --override "replay.loss_weight=5.0" \
+  --override "replay.tiny_max_pixels=320" \
+  --override "replay.prototypes.num_fine=4" \
+  --override "replay.student_update_freq=10"
+
+# ── Stage 2 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage2.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa \
+  --name stage2-sa \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa/stage1-sa/weights/best.pt \
+  --override "stage.active_classes=[3,4,5]" \
+  --override "stage.prev_classes=[0,1,2]" \
+  --override "replay.enable=True" \
+  --override "replay.buffer_per_class=128" \
+  --override "replay.sample_per_batch=32" \
+  --override "replay.loss_weight=5.0" \
+  --override "replay.tiny_max_pixels=320" \
+  --override "replay.prototypes.num_fine=4" \
+  --override "replay.init_buffer=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa/stage1-sa/replay/buffer.pt" \
+  --override "replay.memory_dir=/home/jovyan/thesis_cl/ednet/Thesis/EO-memory/memory/stage2" \
+  --override "replay.memory_ratio=0.25" \
+  --override "replay.student_update_freq=10"
+
+# ── Stage 3 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage3.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa \
+  --name stage3-sa \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa/stage2-sa/weights/best.pt \
+  --override "stage.active_classes=[6,7,8]" \
+  --override "stage.prev_classes=[0,1,2,3,4,5]" \
+  --override "replay.enable=True" \
+  --override "replay.buffer_per_class=128" \
+  --override "replay.sample_per_batch=32" \
+  --override "replay.loss_weight=5.0" \
+  --override "replay.tiny_max_pixels=320" \
+  --override "replay.prototypes.num_fine=4" \
+  --override "replay.init_buffer=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa/stage2-sa/replay/buffer.pt" \
+  --override "replay.memory_dir=/home/jovyan/thesis_cl/ednet/Thesis/EO-memory/memory/stage3" \
+  --override "replay.memory_ratio=0.25" \
+  --override "replay.student_update_freq=10"
+
+
+# ############################################################################
+# 6. SA-AB — Cls+box prototypes + memory streaming (loss_weight=1.0)
+# ############################################################################
+
+# ── Stage 1 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage1.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab \
+  --name stage1-saab \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/pretrained/small.pt \
+  --override "stage.active_classes=[0,1,2]" \
+  --override "replay.enable=True" \
+  --override "replay.buffer_per_class=128" \
+  --override "replay.sample_per_batch=32" \
+  --override "replay.loss_weight=1.0" \
+  --override "replay.tiny_max_pixels=320" \
+  --override "replay.prototypes.num_fine=4" \
+  --override "replay.box.enable=True" \
+  --override "replay.box.loss_weight=1.0" \
+  --override "replay.student_update_freq=10"
+
+# ── Stage 2 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage2.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab \
+  --name stage2-saab \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab/stage1-saab/weights/best.pt \
+  --override "stage.active_classes=[3,4,5]" \
+  --override "stage.prev_classes=[0,1,2]" \
+  --override "replay.enable=True" \
+  --override "replay.buffer_per_class=128" \
+  --override "replay.sample_per_batch=32" \
+  --override "replay.loss_weight=1.0" \
+  --override "replay.tiny_max_pixels=320" \
+  --override "replay.prototypes.num_fine=4" \
+  --override "replay.init_buffer=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab/stage1-saab/replay/buffer.pt" \
+  --override "replay.box.enable=True" \
+  --override "replay.box.loss_weight=1.0" \
+  --override "replay.box.init_buffer=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab/stage1-saab/replay/box_buffer.pt" \
+  --override "replay.memory_dir=/home/jovyan/thesis_cl/ednet/Thesis/EO-memory/memory/stage2" \
+  --override "replay.memory_ratio=0.25" \
+  --override "replay.student_update_freq=10"
+
+# ── Stage 3 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage3.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab \
+  --name stage3-saab \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab/stage2-saab/weights/best.pt \
+  --override "stage.active_classes=[6,7,8]" \
+  --override "stage.prev_classes=[0,1,2,3,4,5]" \
+  --override "replay.enable=True" \
+  --override "replay.buffer_per_class=128" \
+  --override "replay.sample_per_batch=32" \
+  --override "replay.loss_weight=1.0" \
+  --override "replay.tiny_max_pixels=320" \
+  --override "replay.prototypes.num_fine=4" \
+  --override "replay.init_buffer=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab/stage2-saab/replay/buffer.pt" \
+  --override "replay.box.enable=True" \
+  --override "replay.box.loss_weight=1.0" \
+  --override "replay.box.init_buffer=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab/stage2-saab/replay/box_buffer.pt" \
+  --override "replay.memory_dir=/home/jovyan/thesis_cl/ednet/Thesis/EO-memory/memory/stage3" \
+  --override "replay.memory_ratio=0.25" \
+  --override "replay.student_update_freq=10"
+
+
+# ############################################################################
+# 7. KD + PSEUDO — Knowledge distillation + pseudo-labels (no memory)
+# ############################################################################
+
+# ── Stage 1 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage1.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd_pseudo \
+  --name stage1-kd-pseudo \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/pretrained/small.pt \
+  --override "stage.active_classes=[0,1,2]"
+
+# ── Generate pseudo-labels for Stage 2 ─────────────────────────────────────
+python scripts/generate_pseudo_labels.py \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd_pseudo/stage1-kd-pseudo/weights/best.pt \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage2.yaml \
+  --prev-classes 0 1 2 \
+  --outdir /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd_pseudo/pseudo_labels/stage2 \
+  --conf 0.5 \
+  --conflict-iou 0.5
+
+# ── Stage 2 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage2.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd_pseudo \
+  --name stage2-kd-pseudo \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd_pseudo/stage1-kd-pseudo/weights/best.pt \
+  --override "stage.active_classes=[3,4,5]" \
+  --override "stage.prev_classes=[0,1,2]" \
+  --override "stage.pseudo_labels_dir=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd_pseudo/pseudo_labels/stage2" \
+  --override "kd.enable=True" \
+  --override "kd.teacher_weights=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd_pseudo/stage1-kd-pseudo/weights/best.pt" \
+  --override "kd.teacher_nc=9" \
+  --override "kd.lambda_cls=1.0" \
+  --override "kd.lambda_bbox=1.0" \
+  --override "kd.top_k=10"
+
+# ── Generate pseudo-labels for Stage 3 ─────────────────────────────────────
+python scripts/generate_pseudo_labels.py \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd_pseudo/stage2-kd-pseudo/weights/best.pt \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage3.yaml \
+  --prev-classes 0 1 2 3 4 5 \
+  --outdir /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd_pseudo/pseudo_labels/stage3 \
+  --conf 0.5 \
+  --conflict-iou 0.5
+
+# ── Stage 3 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage3.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd_pseudo \
+  --name stage3-kd-pseudo \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd_pseudo/stage2-kd-pseudo/weights/best.pt \
+  --override "stage.active_classes=[6,7,8]" \
+  --override "stage.prev_classes=[0,1,2,3,4,5]" \
+  --override "stage.pseudo_labels_dir=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd_pseudo/pseudo_labels/stage3" \
+  --override "kd.enable=True" \
+  --override "kd.teacher_weights=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_kd_pseudo/stage2-kd-pseudo/weights/best.pt" \
+  --override "kd.teacher_nc=9" \
+  --override "kd.lambda_cls=1.0" \
+  --override "kd.lambda_bbox=1.0" \
+  --override "kd.top_k=10"
+
+
+# ############################################################################
+# 8. SA + PSEUDO — Cls-only prototypes + pseudo-labels (loss_weight=5.0)
+# ############################################################################
+
+# ── Stage 1 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage1.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa_pseudo \
+  --name stage1-sa-pseudo \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/pretrained/small.pt \
+  --override "stage.active_classes=[0,1,2]" \
+  --override "replay.enable=True" \
+  --override "replay.buffer_per_class=128" \
+  --override "replay.sample_per_batch=32" \
+  --override "replay.loss_weight=5.0" \
+  --override "replay.tiny_max_pixels=320" \
+  --override "replay.prototypes.num_fine=4" \
+  --override "replay.student_update_freq=10"
+
+# ── Generate pseudo-labels for Stage 2 ─────────────────────────────────────
+python scripts/generate_pseudo_labels.py \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa_pseudo/stage1-sa-pseudo/weights/best.pt \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage2.yaml \
+  --prev-classes 0 1 2 \
+  --outdir /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa_pseudo/pseudo_labels/stage2 \
+  --conf 0.5 \
+  --conflict-iou 0.5
+
+# ── Stage 2 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage2.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa_pseudo \
+  --name stage2-sa-pseudo \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa_pseudo/stage1-sa-pseudo/weights/best.pt \
+  --override "stage.active_classes=[3,4,5]" \
+  --override "stage.prev_classes=[0,1,2]" \
+  --override "stage.pseudo_labels_dir=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa_pseudo/pseudo_labels/stage2" \
+  --override "replay.enable=True" \
+  --override "replay.buffer_per_class=128" \
+  --override "replay.sample_per_batch=32" \
+  --override "replay.loss_weight=5.0" \
+  --override "replay.tiny_max_pixels=320" \
+  --override "replay.prototypes.num_fine=4" \
+  --override "replay.init_buffer=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa_pseudo/stage1-sa-pseudo/replay/buffer.pt" \
+  --override "replay.student_update_freq=10"
+
+# ── Generate pseudo-labels for Stage 3 ─────────────────────────────────────
+python scripts/generate_pseudo_labels.py \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa_pseudo/stage2-sa-pseudo/weights/best.pt \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage3.yaml \
+  --prev-classes 0 1 2 3 4 5 \
+  --outdir /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa_pseudo/pseudo_labels/stage3 \
+  --conf 0.5 \
+  --conflict-iou 0.5
+
+# ── Stage 3 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage3.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa_pseudo \
+  --name stage3-sa-pseudo \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa_pseudo/stage2-sa-pseudo/weights/best.pt \
+  --override "stage.active_classes=[6,7,8]" \
+  --override "stage.prev_classes=[0,1,2,3,4,5]" \
+  --override "stage.pseudo_labels_dir=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa_pseudo/pseudo_labels/stage3" \
+  --override "replay.enable=True" \
+  --override "replay.buffer_per_class=128" \
+  --override "replay.sample_per_batch=32" \
+  --override "replay.loss_weight=5.0" \
+  --override "replay.tiny_max_pixels=320" \
+  --override "replay.prototypes.num_fine=4" \
+  --override "replay.init_buffer=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_sa_pseudo/stage2-sa-pseudo/replay/buffer.pt" \
+  --override "replay.student_update_freq=10"
+
+
+# ############################################################################
+# 9. SA-AB + PSEUDO — Cls+box prototypes + pseudo-labels (loss_weight=1.0)
+# ############################################################################
+
+# ── Stage 1 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage1.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab_pseudo \
+  --name stage1-saab-pseudo \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/pretrained/small.pt \
+  --override "stage.active_classes=[0,1,2]" \
+  --override "replay.enable=True" \
+  --override "replay.buffer_per_class=128" \
+  --override "replay.sample_per_batch=32" \
+  --override "replay.loss_weight=1.0" \
+  --override "replay.tiny_max_pixels=320" \
+  --override "replay.prototypes.num_fine=4" \
+  --override "replay.box.enable=True" \
+  --override "replay.box.loss_weight=1.0" \
+  --override "replay.student_update_freq=10"
+
+# ── Generate pseudo-labels for Stage 2 ─────────────────────────────────────
+python scripts/generate_pseudo_labels.py \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab_pseudo/stage1-saab-pseudo/weights/best.pt \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage2.yaml \
+  --prev-classes 0 1 2 \
+  --outdir /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab_pseudo/pseudo_labels/stage2 \
+  --conf 0.5 \
+  --conflict-iou 0.5
+
+# ── Stage 2 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage2.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab_pseudo \
+  --name stage2-saab-pseudo \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab_pseudo/stage1-saab-pseudo/weights/best.pt \
+  --override "stage.active_classes=[3,4,5]" \
+  --override "stage.prev_classes=[0,1,2]" \
+  --override "stage.pseudo_labels_dir=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab_pseudo/pseudo_labels/stage2" \
+  --override "replay.enable=True" \
+  --override "replay.buffer_per_class=128" \
+  --override "replay.sample_per_batch=32" \
+  --override "replay.loss_weight=1.0" \
+  --override "replay.tiny_max_pixels=320" \
+  --override "replay.prototypes.num_fine=4" \
+  --override "replay.init_buffer=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab_pseudo/stage1-saab-pseudo/replay/buffer.pt" \
+  --override "replay.box.enable=True" \
+  --override "replay.box.loss_weight=1.0" \
+  --override "replay.box.init_buffer=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab_pseudo/stage1-saab-pseudo/replay/box_buffer.pt" \
+  --override "replay.student_update_freq=10"
+
+# ── Generate pseudo-labels for Stage 3 ─────────────────────────────────────
+python scripts/generate_pseudo_labels.py \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab_pseudo/stage2-saab-pseudo/weights/best.pt \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage3.yaml \
+  --prev-classes 0 1 2 3 4 5 \
+  --outdir /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab_pseudo/pseudo_labels/stage3 \
+  --conf 0.5 \
+  --conflict-iou 0.5
+
+# ── Stage 3 ────────────────────────────────────────────────────────────────
+python train.py \
+  --cfg /home/jovyan/thesis_cl/ednet/Thesis/ednet/cfg/models/ednet/ednet-s.yaml \
+  --data /home/jovyan/thesis_cl/ednet/Thesis/yaml/EO-stage3.yaml \
+  --epochs 50 \
+  --imgsz 640 \
+  --batch-size 4 \
+  --project /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab_pseudo \
+  --name stage3-saab-pseudo \
+  --workers 8 \
+  --weights /home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab_pseudo/stage2-saab-pseudo/weights/best.pt \
+  --override "stage.active_classes=[6,7,8]" \
+  --override "stage.prev_classes=[0,1,2,3,4,5]" \
+  --override "stage.pseudo_labels_dir=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab_pseudo/pseudo_labels/stage3" \
+  --override "replay.enable=True" \
+  --override "replay.buffer_per_class=128" \
+  --override "replay.sample_per_batch=32" \
+  --override "replay.loss_weight=1.0" \
+  --override "replay.tiny_max_pixels=320" \
+  --override "replay.prototypes.num_fine=4" \
+  --override "replay.init_buffer=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab_pseudo/stage2-saab-pseudo/replay/buffer.pt" \
+  --override "replay.box.enable=True" \
+  --override "replay.box.loss_weight=1.0" \
+  --override "replay.box.init_buffer=/home/jovyan/thesis_cl/ednet/Thesis/runs/eo_saab_pseudo/stage2-saab-pseudo/replay/box_buffer.pt" \
+  --override "replay.student_update_freq=10"

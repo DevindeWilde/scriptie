@@ -469,10 +469,10 @@ class DetectionTrainer(BaseTrainer):
                     merged[key] = torch.cat((merged[key], mem_val), 0)
                 else:
                     mem_val = memory_batch[key]
-                    if isinstance(mem_val, list):
-                        merged[key] = merged[key] + mem_val
+                    if isinstance(mem_val, (list, tuple)):
+                        merged[key] = list(merged[key]) + list(mem_val)
                     else:
-                        merged[key].append(mem_val)
+                        merged[key] = list(merged[key]) + [mem_val]
         return merged
 
     def _resolve_detect_level_indices(self, detect_module, level_names):
