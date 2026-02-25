@@ -19,7 +19,7 @@ module load Python/3.11.3-GCCcore-12.3.0
 source $HOME/ednet_env/bin/activate
 cd $HOME/scriptie
 
-RUNS=$HOME/scriptie/runs
+RUNS=$HOME/scriptie/runs_15
 YAML=$HOME/scriptie/yaml
 VALDIR=$RUNS/val
 
