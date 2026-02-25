@@ -79,11 +79,14 @@ def parse_args() -> argparse.Namespace:
 def resolve_split_dir(root: Path, split: str, subdir: str) -> Path:
     """Return the existing directory that holds split data."""
     candidates = [
-        root / subdir / split,
-        root / split / subdir,
+        root / subdir / split,       # e.g. root/labelTxt/train
+        root / split / subdir,       # e.g. root/train/labelTxt
+        root / split,                # e.g. root/train  (flat layout)
+        root / subdir,               # e.g. root/labelTxt (no split subdir)
+        root,                        # e.g. root/ (everything flat)
     ]
     for candidate in candidates:
-        if candidate.exists():
+        if candidate.is_dir():
             return candidate
     raise FileNotFoundError(f"Could not find directory for split '{split}' under '{root}' (searched {candidates})")
 
