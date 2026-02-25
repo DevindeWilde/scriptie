@@ -52,7 +52,7 @@ python train.py \
   --override "replay.prototypes.num_fine=4" \
   --override "replay.box.enable=True" \
   --override "replay.box.loss_weight=3.0" \
-  --override "replay.student_update_freq=10"
+  --override "replay.student_update_freq=10" 
 
 # ── Stage 2 ─────────────────────────────────────────────────────────────────
 # Introduce {2: plane, 3: helicopter}.
@@ -81,7 +81,7 @@ python train.py \
   --override "replay.box.enable=True" \
   --override "replay.box.loss_weight=3.0" \
   --override "replay.box.init_buffer=$RUNS/dota_saab2/stage1-saab/replay/box_buffer.pt" \
-  --override "replay.student_update_freq=10"
+  --override "replay.student_update_freq=10" \
 
 # ── Stage 3 ─────────────────────────────────────────────────────────────────
 # Introduce {4: ship}.

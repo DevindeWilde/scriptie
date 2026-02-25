@@ -1,0 +1,3 @@
+imagesource:GoogleEarth
+gsd:null
+695.0 536.0 1084.0 468.0 1143.0 698.0 750.0 766.0 plane 0
