@@ -62,7 +62,7 @@ replay: # (dict) Tiny object replay configuration (SA-AB)
     use_coarse: True # (bool) include coarse/global prototype when computing replay loss
     ema_alpha: 0.05 # (float) EMA factor once prototype counts saturate capacity
     init_sim_thresh: 0.9 # (float) cosine threshold required to seed a new fine slot
-    gate_min_cos: 0.0 # (float) minimum cosine to accept an update; below may trigger slot replacement
+    gate_min_cos: 0.5 # (float) minimum cosine to accept an update; below triggers slot replacement
     init_strategy: first_k # (str) fine-slot seeding strategy, choices=[first_k, threshold]
     weight_by_count: False # (bool) weight replay loss by prototype sample counts
   box: # (dict) bounding-box prototype regularization (SA-AB box branch)
