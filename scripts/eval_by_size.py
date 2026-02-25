@@ -5,7 +5,8 @@ Evaluates a trained model and reports mAP broken down by object size:
   small  : 256 ≤ area < 1024 px²  (roughly 16×16 – 32×32)
   medium+: area ≥ 1024 px²   (roughly > 32×32)
 
-All areas are in absolute pixels at inference resolution.
+Size bins use areas in imgsz space (w_norm * imgsz * h_norm * imgsz),
+matching dataset_stats.py.  AP matching still uses original-pixel xyxy IoU.
 
 Usage:
     python scripts/eval_by_size.py \\
@@ -181,8 +182,13 @@ def main():
         gt = load_gt_xyxy(lbl_path, img_w, img_h)  # (M, 5): cls x1 y1 x2 y2
         gt_cls_all   = gt[:, 0].astype(int)   if len(gt) else np.array([], dtype=int)
         gt_boxes_all = gt[:, 1:]              if len(gt) else np.zeros((0, 4), dtype=np.float32)
-        gt_areas     = ((gt_boxes_all[:, 2] - gt_boxes_all[:, 0]) *
-                        (gt_boxes_all[:, 3] - gt_boxes_all[:, 1])) if len(gt) else np.array([])
+
+        # Bin areas in imgsz space (w_norm*imgsz * h_norm*imgsz), matching dataset_stats.py
+        if lbl_path.exists() and lbl_path.stat().st_size > 0:
+            _raw = np.loadtxt(str(lbl_path), dtype=np.float32).reshape(-1, 5)
+            gt_areas = (_raw[:, 3] * opt.imgsz) * (_raw[:, 4] * opt.imgsz)
+        else:
+            gt_areas = np.array([])
 
         # ── "all" bucket (no size filter) ────────────────────────────────────
         tp = match_to_gt(pred_boxes, pred_cls, pred_conf, gt_boxes_all, gt_cls_all)

@@ -1,0 +1,67 @@
+% ─────────────────────────────────────────────────────────────────
+% Table A: Instance and image counts per class and split
+% ─────────────────────────────────────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Instance and image counts per class in the dota15-yolo-temp dataset.}
+\label{tab:dota15_yolo_temp_counts}
+\begin{tabular}{lrr}
+\toprule
+\textbf{Class} & \multicolumn{2}{c}{Train} \\
+\cmidrule(lr){2-3}
+ & \textbf{Images} & \textbf{Instances} \\
+\midrule
+plane & 198 & 8,072 \\
+ship & 435 & 32,973 \\
+storage-tank & 202 & 5,346 \\
+baseball-diamond & 121 & 412 \\
+tennis-court & 308 & 2,425 \\
+basketball-court & 116 & 529 \\
+ground-track-field & 180 & 331 \\
+harbor & 340 & 6,016 \\
+bridge & 213 & 2,075 \\
+large-vehicle & 544 & 22,216 \\
+small-vehicle & 903 & 126,477 \\
+helicopter & 32 & 635 \\
+roundabout & 182 & 437 \\
+soccer-ball-field & 130 & 338 \\
+swimming-pool & 226 & 2,181 \\
+class\_15 & 7 & 142 \\
+\midrule
+\textbf{Total} & \textbf{1,409} & \textbf{210,605} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ─────────────────────────────────────────────────────────────────
+% Table B: Object size statistics per class (training split)
+% ─────────────────────────────────────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Object size statistics per class (training split, 640$\times$640~px images). Tiny: $<$32\,$\times$\,32\,px; Small: 32--96\,px; Medium+: $>$96\,$\times$\,96\,px.}
+\label{tab:dota15_yolo_temp_sizes}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\textbf{Class} & \textbf{N} & \textbf{Mean (px\textsuperscript{2})} & \textbf{Median} & \textbf{Min} & \textbf{Max} & \textbf{Tiny (\%)} & \textbf{Small (\%)} & \textbf{Med+ (\%)} \\
+\midrule
+plane & 8,072 & 639 & 184 & 1 & 29,874 & 58.9 & 27.8 & 13.3 \\
+ship & 32,973 & 179 & 79 & 1 & 225,969 & 86.9 & 11.2 & 1.9 \\
+storage-tank & 5,346 & 88 & 26 & 0 & 3,889 & 93.3 & 5.0 & 1.7 \\
+baseball-diamond & 412 & 4,128 & 283 & 19 & 66,930 & 49.3 & 4.9 & 45.9 \\
+tennis-court & 2,425 & 5,808 & 3,867 & 19 & 39,143 & 7.5 & 15.9 & 76.7 \\
+basketball-court & 529 & 3,675 & 1,119 & 13 & 64,073 & 28.7 & 19.3 & 52.0 \\
+ground-track-field & 331 & 12,274 & 901 & 8 & 167,845 & 28.4 & 26.6 & 45.0 \\
+harbor & 6,016 & 2,953 & 726 & 6 & 110,345 & 33.3 & 22.1 & 44.6 \\
+bridge & 2,075 & 493 & 23 & 1 & 183,924 & 89.7 & 6.6 & 3.8 \\
+large-vehicle & 22,216 & 561 & 280 & 1 & 10,338 & 48.5 & 34.3 & 17.2 \\
+small-vehicle & 126,477 & 50 & 10 & 0 & 3,464 & 95.4 & 4.4 & 0.2 \\
+helicopter & 635 & 224 & 34 & 7 & 10,414 & 89.6 & 5.2 & 5.2 \\
+roundabout & 437 & 1,628 & 69 & 3 & 71,840 & 78.7 & 12.8 & 8.5 \\
+soccer-ball-field & 338 & 11,732 & 3,082 & 2 & 143,031 & 18.6 & 14.2 & 67.2 \\
+swimming-pool & 2,181 & 279 & 83 & 1 & 28,286 & 85.1 & 10.9 & 4.1 \\
+class\_15 & 142 & 251 & 212 & 18 & 1,382 & 68.3 & 31.0 & 0.7 \\
+\midrule
+\textbf{Total} & \textbf{210,605} & \textbf{363} & \textbf{27} & \textbf{0} & \textbf{225,969} & \textbf{84.1} & \textbf{10.4} & \textbf{5.4} \\
+\bottomrule
+\end{tabular}
+\end{table}
