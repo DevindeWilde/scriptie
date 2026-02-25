@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
+from types import SimpleNamespace
 
 import torch
 import torch.nn.functional as F
@@ -29,7 +30,7 @@ from PIL import Image, ImageDraw
 
 from ednet import EDNet
 from ednet.engine.replay import DetectionPreLogitTapper
-from ednet.data.build import build_dataloader
+from ednet.data.build import build_dataloader, build_yolo_dataset
 from ednet.utils import ops, yaml_load
 from ednet.utils.torch_utils import de_parallel
 
@@ -136,13 +137,14 @@ def main():
     data_cfg = yaml_load(args.data)
     val_path = data_cfg.get(args.split, data_cfg.get("val", data_cfg.get("test", "")))
     print(f"Loading validation data from: {val_path}")
-    dataloader = build_dataloader(
-        cfg={"imgsz": args.imgsz, "rect": True, "cache": False},
-        batch=args.batch,
-        img_path=val_path,
-        stride=max(int(s) for s in detect_module.stride.tolist()),
-        mode="val",
-    )[0]
+    stride = max(int(s) for s in detect_module.stride.tolist())
+    cfg = SimpleNamespace(
+        imgsz=args.imgsz, rect=True, cache=False, single_cls=False,
+        task="detect", classes=None, fraction=1.0,
+    )
+    dataset = build_yolo_dataset(cfg, img_path=val_path, batch=args.batch,
+                                 data=data_cfg, mode="val", stride=stride)
+    dataloader = build_dataloader(dataset, batch=args.batch, workers=4, shuffle=False)
 
     # --- Best matches per prototype slot ---
     # (level, cls, slot) → {"sim": float, "im_file": str, "bbox_xyxy_orig": list, "ori_shape": tuple}
