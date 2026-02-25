@@ -37,8 +37,8 @@ METHODS = [
     ("Pseudo-labeling",         "pseudo"),
     ("Replay + KD",             "kd"),
     ("SA-AB",                   "saab"),
-    ("KD + Pseudo",             "pseudo_kd"),
-    ("SA-AB + Pseudo",          "pseudo_saab"),
+    ("KD + Pseudo",             "kd-pseudo"),
+    ("SA-AB + Pseudo",          "saab-pseudo"),
 ]
 
 

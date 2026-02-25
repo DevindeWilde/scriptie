@@ -865,7 +865,7 @@ class DetectionTrainer(BaseTrainer):
                 int(size_mask.sum()),
             )
         # Extract bboxes_norm and im_file lists for provenance metadata (replay cells only)
-        bboxes_norm_all = pos.get("bboxes_norm") if attr == "last_replay_cells" else None
+        bboxes_norm_all = pos.get("bboxes_norm")
         im_files = (batch or {}).get("im_file", [])
 
         indices = indices[size_mask]

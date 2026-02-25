@@ -177,13 +177,18 @@ def main():
 
                 image = Image.open(im_path).convert("RGB")
 
-                # Load labels and match bbox
-                label_path = get_label_path(im_file)
-                boxes = parse_yolo_labels(label_path, cls_id)
-                match_idx = match_by_max_edge(boxes, max_edge, args.imgsz)
-
-                if not boxes:
-                    print(f"  WARNING: no labels found for cls={cls_id} in {label_path}")
+                # Try stored bbox first (available after train.py bbox fix)
+                bbox_stored = source.get("bbox_xywh_norm")
+                if bbox_stored:
+                    boxes = [tuple(bbox_stored)]
+                    match_idx = 0
+                else:
+                    # Fallback: label file lookup (won't work for mosaic images)
+                    label_path = get_label_path(im_file)
+                    boxes = parse_yolo_labels(label_path, cls_id)
+                    match_idx = match_by_max_edge(boxes, max_edge, args.imgsz)
+                    if not boxes:
+                        print(f"  WARNING: no bbox in source and no labels for cls={cls_id}")
 
                 # Draw and save
                 annotated = draw_annotated(
