@@ -39,7 +39,7 @@ python train.py \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
-  --project $RUNS/dota_saab \
+  --project $RUNS/dota_saab2 \
   --name stage1-saab \
   --workers 8 \
   --weights $PRETRAINED \
@@ -47,7 +47,7 @@ python train.py \
   --override "replay.enable=True" \
   --override "replay.buffer_per_class=128" \
   --override "replay.sample_per_batch=32" \
-  --override "replay.loss_weight=1.0" \
+  --override "replay.loss_weight=10.0" \
   --override "replay.tiny_max_pixels=320" \
   --override "replay.prototypes.num_fine=4" \
   --override "replay.box.enable=True" \
@@ -65,22 +65,22 @@ python train.py \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
-  --project $RUNS/dota_saab \
+  --project $RUNS/dota_saab2 \
   --name stage2-saab \
   --workers 8 \
-  --weights $RUNS/dota_saab/stage1-saab/weights/best.pt \
+  --weights $RUNS/dota_saab2/stage1-saab/weights/best.pt \
   --override "stage.active_classes=[2,3]" \
   --override "stage.prev_classes=[0,1]" \
   --override "replay.enable=True" \
   --override "replay.buffer_per_class=128" \
   --override "replay.sample_per_batch=32" \
-  --override "replay.loss_weight=1.0" \
+  --override "replay.loss_weight=10.0" \
   --override "replay.tiny_max_pixels=320" \
   --override "replay.prototypes.num_fine=4" \
-  --override "replay.init_buffer=$RUNS/dota_saab/stage1-saab/replay/buffer.pt" \
+  --override "replay.init_buffer=$RUNS/dota_saab2/stage1-saab/replay/buffer.pt" \
   --override "replay.box.enable=True" \
   --override "replay.box.loss_weight=1.0" \
-  --override "replay.box.init_buffer=$RUNS/dota_saab/stage1-saab/replay/box_buffer.pt" \
+  --override "replay.box.init_buffer=$RUNS/dota_saab2/stage1-saab/replay/box_buffer.pt" \
   --override "replay.student_update_freq=10"
 
 # ── Stage 3 ─────────────────────────────────────────────────────────────────
@@ -94,20 +94,20 @@ python train.py \
   --epochs 50 \
   --imgsz 640 \
   --batch-size 4 \
-  --project $RUNS/dota_saab \
+  --project $RUNS/dota_saab2 \
   --name stage3-saab \
   --workers 8 \
-  --weights $RUNS/dota_saab/stage2-saab/weights/best.pt \
+  --weights $RUNS/dota_saab2/stage2-saab/weights/best.pt \
   --override "stage.active_classes=[4]" \
   --override "stage.prev_classes=[0,1,2,3]" \
   --override "replay.enable=True" \
   --override "replay.buffer_per_class=128" \
   --override "replay.sample_per_batch=32" \
-  --override "replay.loss_weight=1.0" \
+  --override "replay.loss_weight=10.0" \
   --override "replay.tiny_max_pixels=320" \
   --override "replay.prototypes.num_fine=4" \
-  --override "replay.init_buffer=$RUNS/dota_saab/stage2-saab/replay/buffer.pt" \
+  --override "replay.init_buffer=$RUNS/dota_saab2/stage2-saab/replay/buffer.pt" \
   --override "replay.box.enable=True" \
   --override "replay.box.loss_weight=1.0" \
-  --override "replay.box.init_buffer=$RUNS/dota_saab/stage2-saab/replay/box_buffer.pt" \
+  --override "replay.box.init_buffer=$RUNS/dota_saab2/stage2-saab/replay/box_buffer.pt" \
   --override "replay.student_update_freq=10"
