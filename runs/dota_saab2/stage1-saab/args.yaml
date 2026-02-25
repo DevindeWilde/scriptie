@@ -45,7 +45,7 @@ replay:
     num_fine: 4
   box:
     enable: true
-    loss_weight: 1.0
+    loss_weight: 3.0
   student_update_freq: 10
 kd:
   enable: false

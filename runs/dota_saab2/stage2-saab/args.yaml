@@ -46,7 +46,7 @@ replay:
   init_buffer: /home/ddwilde/scriptie/runs/dota_saab2/stage1-saab/replay/buffer.pt
   box:
     enable: true
-    loss_weight: 1.0
+    loss_weight: 3.0
     init_buffer: /home/ddwilde/scriptie/runs/dota_saab2/stage1-saab/replay/box_buffer.pt
   student_update_freq: 10
 kd:
