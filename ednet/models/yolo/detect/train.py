@@ -913,28 +913,22 @@ class DetectionTrainer(BaseTrainer):
                     meta["im_file"] = im_files[b]
                 if sel_bboxes is not None:
                     bbox_norm = sel_bboxes[i]
-                    # Inverse-transform bbox from augmented (640x640) to original image space
-                    ratio_pad_all = (batch or {}).get("ratio_pad")
-                    ori_shapes = (batch or {}).get("ori_shape")
-                    if ratio_pad_all is not None and ori_shapes is not None:
-                        rp = ratio_pad_all[b]
-                        ori_h, ori_w = int(ori_shapes[b][0]), int(ori_shapes[b][1])
-                        imgsz_h, imgsz_w = batch["img"].shape[2], batch["img"].shape[3]
-                        gain = float(rp[0][0])
-                        pad_left, pad_top = float(rp[1][0]), float(rp[1][1])
+                    batch_imgs = (batch or {}).get("img")
+                    if batch_imgs is not None:
+                        imgsz_h, imgsz_w = batch_imgs.shape[2], batch_imgs.shape[3]
                         cx, cy, bw, bh = [float(x.item()) if hasattr(x, "item") else float(x) for x in bbox_norm]
-                        x1 = (cx * imgsz_w - bw * imgsz_w / 2 - pad_left) / gain
-                        y1 = (cy * imgsz_h - bh * imgsz_h / 2 - pad_top) / gain
-                        x2 = (cx * imgsz_w + bw * imgsz_w / 2 - pad_left) / gain
-                        y2 = (cy * imgsz_h + bh * imgsz_h / 2 - pad_top) / gain
-                        x1 = max(0.0, min(x1, ori_w)); y1 = max(0.0, min(y1, ori_h))
-                        x2 = max(0.0, min(x2, ori_w)); y2 = max(0.0, min(y2, ori_h))
-                        meta["bbox_xywh_norm"] = [
-                            (x1 + x2) / 2 / ori_w,
-                            (y1 + y2) / 2 / ori_h,
-                            (x2 - x1) / ori_w,
-                            (y2 - y1) / ori_h,
-                        ]
+                        bx1 = int(round((cx - bw / 2) * imgsz_w))
+                        by1 = int(round((cy - bh / 2) * imgsz_h))
+                        bx2 = int(round((cx + bw / 2) * imgsz_w))
+                        by2 = int(round((cy + bh / 2) * imgsz_h))
+                        pad = max(10, int(max(bx2 - bx1, by2 - by1) * 0.5))
+                        cx1 = max(0, bx1 - pad)
+                        cy1 = max(0, by1 - pad)
+                        cx2 = min(imgsz_w, bx2 + pad)
+                        cy2 = min(imgsz_h, by2 + pad)
+                        crop = (batch_imgs[b, :, cy1:cy2, cx1:cx2] * 255).byte().detach().cpu()
+                        meta["source_crop"] = crop
+                        meta["bbox_in_crop"] = [bx1 - cx1, by1 - cy1, bx2 - cx1, by2 - cy1]
                     else:
                         meta["bbox_xywh_norm"] = bbox_norm.tolist()
                 items.append(
