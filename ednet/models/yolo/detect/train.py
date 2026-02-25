@@ -912,7 +912,31 @@ class DetectionTrainer(BaseTrainer):
                 if im_files and b < len(im_files):
                     meta["im_file"] = im_files[b]
                 if sel_bboxes is not None:
-                    meta["bbox_xywh_norm"] = sel_bboxes[i].tolist()
+                    bbox_norm = sel_bboxes[i]
+                    # Inverse-transform bbox from augmented (640x640) to original image space
+                    ratio_pad_all = (batch or {}).get("ratio_pad")
+                    ori_shapes = (batch or {}).get("ori_shape")
+                    if ratio_pad_all is not None and ori_shapes is not None:
+                        rp = ratio_pad_all[b]
+                        ori_h, ori_w = int(ori_shapes[b][0]), int(ori_shapes[b][1])
+                        imgsz_h, imgsz_w = batch["img"].shape[2], batch["img"].shape[3]
+                        gain = float(rp[0][0])
+                        pad_left, pad_top = float(rp[1][0]), float(rp[1][1])
+                        cx, cy, bw, bh = [float(x.item()) if hasattr(x, "item") else float(x) for x in bbox_norm]
+                        x1 = (cx * imgsz_w - bw * imgsz_w / 2 - pad_left) / gain
+                        y1 = (cy * imgsz_h - bh * imgsz_h / 2 - pad_top) / gain
+                        x2 = (cx * imgsz_w + bw * imgsz_w / 2 - pad_left) / gain
+                        y2 = (cy * imgsz_h + bh * imgsz_h / 2 - pad_top) / gain
+                        x1 = max(0.0, min(x1, ori_w)); y1 = max(0.0, min(y1, ori_h))
+                        x2 = max(0.0, min(x2, ori_w)); y2 = max(0.0, min(y2, ori_h))
+                        meta["bbox_xywh_norm"] = [
+                            (x1 + x2) / 2 / ori_w,
+                            (y1 + y2) / 2 / ori_h,
+                            (x2 - x1) / ori_w,
+                            (y2 - y1) / ori_h,
+                        ]
+                    else:
+                        meta["bbox_xywh_norm"] = bbox_norm.tolist()
                 items.append(
                     TinyReplayItem(
                         cls=int(cls_id.item()),
