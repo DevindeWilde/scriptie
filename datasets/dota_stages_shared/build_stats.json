@@ -1,116 +1,116 @@
 {
   "stage1": {
     "train": {
-      "total_files": 809,
-      "with_annotations": 662,
-      "empty": 147,
+      "total_files": 863,
+      "with_annotations": 526,
+      "empty": 337,
       "class_counts": {
-        "0": 96701,
-        "1": 16227
+        "0": 20714,
+        "1": 16197
       }
     },
     "val": {
-      "total_files": 174,
-      "with_annotations": 138,
-      "empty": 36,
+      "total_files": 186,
+      "with_annotations": 110,
+      "empty": 76,
       "class_counts": {
-        "1": 3219,
-        "0": 15096
+        "0": 5547,
+        "1": 2810
       }
     },
     "test": {
-      "total_files": 175,
-      "with_annotations": 145,
-      "empty": 30,
+      "total_files": 186,
+      "with_annotations": 113,
+      "empty": 73,
       "class_counts": {
-        "0": 14680,
-        "1": 2770
+        "0": 5303,
+        "1": 2349
       }
     }
   },
   "stage2": {
     "train": {
-      "total_files": 809,
-      "with_annotations": 139,
-      "empty": 670,
+      "total_files": 863,
+      "with_annotations": 182,
+      "empty": 681,
       "class_counts": {
-        "2": 6324,
-        "3": 613
+        "2": 6768,
+        "3": 474
       }
     },
     "val": {
-      "total_files": 174,
-      "with_annotations": 149,
-      "empty": 25,
+      "total_files": 186,
+      "with_annotations": 140,
+      "empty": 46,
       "class_counts": {
-        "1": 3219,
-        "0": 15096,
-        "2": 854,
-        "3": 8
+        "0": 5547,
+        "1": 2810,
+        "2": 1720,
+        "3": 32
       }
     },
     "test": {
-      "total_files": 175,
-      "with_annotations": 156,
-      "empty": 19,
+      "total_files": 186,
+      "with_annotations": 150,
+      "empty": 36,
       "class_counts": {
-        "0": 14680,
-        "1": 2770,
-        "2": 894,
-        "3": 14
+        "0": 5303,
+        "1": 2349,
+        "2": 2098,
+        "3": 197
       }
     },
     "replay_train": {
-      "replay_images": 44,
+      "replay_images": 43,
       "old_class_annotations_restored": {
-        "0": 47297,
-        "1": 7017
+        "0": 8783,
+        "1": 6260
       },
-      "total_old_annotations": 54314
+      "total_old_annotations": 15043
     }
   },
   "stage3": {
     "train": {
-      "total_files": 809,
-      "with_annotations": 309,
-      "empty": 500,
+      "total_files": 863,
+      "with_annotations": 308,
+      "empty": 555,
       "class_counts": {
-        "4": 24980
+        "4": 26535
       }
     },
     "val": {
-      "total_files": 174,
-      "with_annotations": 174,
+      "total_files": 186,
+      "with_annotations": 186,
       "empty": 0,
       "class_counts": {
-        "1": 3219,
-        "0": 15096,
-        "2": 854,
-        "4": 4093,
-        "3": 8
+        "0": 5547,
+        "1": 2810,
+        "4": 5740,
+        "2": 1720,
+        "3": 32
       }
     },
     "test": {
-      "total_files": 175,
-      "with_annotations": 175,
+      "total_files": 186,
+      "with_annotations": 186,
       "empty": 0,
       "class_counts": {
-        "4": 3900,
-        "0": 14680,
-        "1": 2770,
-        "2": 894,
-        "3": 14
+        "4": 4753,
+        "0": 5303,
+        "1": 2349,
+        "2": 2098,
+        "3": 197
       }
     },
     "replay_train": {
-      "replay_images": 75,
+      "replay_images": 83,
       "old_class_annotations_restored": {
-        "0": 51532,
-        "2": 4436,
-        "1": 7236,
-        "3": 613
+        "0": 8920,
+        "1": 6436,
+        "2": 3889,
+        "3": 469
       },
-      "total_old_annotations": 63817
+      "total_old_annotations": 19714
     }
   }
 }

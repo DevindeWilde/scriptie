@@ -1,3 +1,0 @@
-imagesource:GoogleEarth
-gsd:0.961454038287
-260.0 2164.0 243.0 2094.0 352.0 2062.0 372.0 2132.0 soccer-ball-field 1
