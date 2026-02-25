@@ -133,14 +133,15 @@ def ensure_image(dest: Path, src: Path, copy: bool) -> None:
 
 def convert_split(split: str, args: argparse.Namespace) -> None:
     src_img_dir = resolve_split_dir(args.src, split, args.image_subdir)
-    src_label_dir = resolve_split_dir(args.src, split, args.label_subdir)
+    src_label_dir = "datasets/dota1.5/train/labelsTxt" 
+    src_label_dir = Path(src_label_dir)
     print(f"[{split}] image dir : {src_img_dir}")
     print(f"[{split}] label dir : {src_label_dir}")
     print(f"[{split}] # images  : {sum(1 for p in src_img_dir.iterdir() if p.suffix.lower() in {'.png', '.jpg', '.jpeg', '.tif'})}")
     print(f"[{split}] # labels  : {sum(1 for p in src_label_dir.iterdir() if p.suffix.lower() == '.txt')}")
 
-    dst_img_dir = args.dst / "images" / split
-    dst_lbl_dir = args.dst / "labels" / split
+    dst_img_dir = args.dst / split / "images"
+    dst_lbl_dir = args.dst / split / "labels"
     dst_img_dir.mkdir(parents=True, exist_ok=True)
     dst_lbl_dir.mkdir(parents=True, exist_ok=True)
 
