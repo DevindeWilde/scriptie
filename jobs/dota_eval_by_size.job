@@ -19,7 +19,7 @@ module load Python/3.11.3-GCCcore-12.3.0
 source $HOME/ednet_env/bin/activate
 cd $HOME/scriptie
 
-RUNS=$HOME/scriptie/runs_15
+RUNS=$HOME/scriptie/runs
 YAML=$HOME/scriptie/yaml
 OUTDIR=$RUNS/val_by_size
 
@@ -104,6 +104,32 @@ run_eval $RUNS/dota_saab/stage2-saab/weights/best.pt \
 run_eval $RUNS/dota_saab/stage3-saab/weights/best.pt \
          $YAML/DOTA-shared-stage3.yaml \
          $OUTDIR/saab/stage3.json
+
+# ── SA-AB + Pseudo ────────────────────────────────────────────────────────────
+run_eval $RUNS/dota_saab_pseudo/stage1-saab-pseudo/weights/best.pt \
+         $YAML/DOTA-shared-stage1.yaml \
+         $OUTDIR/saab-pseudo/stage1.json
+
+run_eval $RUNS/dota_saab_pseudo/stage2-saab-pseudo/weights/best.pt \
+         $YAML/DOTA-shared-stage2.yaml \
+         $OUTDIR/saab-pseudo/stage2.json
+
+run_eval $RUNS/dota_saab_pseudo/stage3-saab-pseudo/weights/best.pt \
+         $YAML/DOTA-shared-stage3.yaml \
+         $OUTDIR/saab-pseudo/stage3.json
+
+# ── Knowledge distillation + Pseudo ──────────────────────────────────────────
+run_eval $RUNS/dota_kd_pseudo/stage1-kd-pseudo/weights/best.pt \
+         $YAML/DOTA-shared-stage1.yaml \
+         $OUTDIR/kd-pseudo/stage1.json
+
+run_eval $RUNS/dota_kd_pseudo/stage2-kd-pseudo/weights/best.pt \
+         $YAML/DOTA-shared-stage2.yaml \
+         $OUTDIR/kd-pseudo/stage2.json
+
+run_eval $RUNS/dota_kd_pseudo/stage3-kd-pseudo/weights/best.pt \
+         $YAML/DOTA-shared-stage3.yaml \
+         $OUTDIR/kd-pseudo/stage3.json
 
 # ── Upper bound (joint training, oracle) ─────────────────────────────────────
 run_eval $RUNS/dota_upper/upper/weights/best.pt \
