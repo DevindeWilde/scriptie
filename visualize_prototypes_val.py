@@ -33,6 +33,7 @@ from ednet import EDNet
 from ednet.engine.replay import DetectionPreLogitTapper
 from ednet.data.build import build_dataloader, build_yolo_dataset
 from ednet.utils import ops, yaml_load
+from ednet.utils.metrics import box_iou
 from ednet.utils.torch_utils import de_parallel
 
 
@@ -195,6 +196,20 @@ def main():
 
         imgsz_h, imgsz_w = imgs.shape[2], imgs.shape[3]
 
+        # Extract GT bboxes for correct-prediction filtering
+        gt_bboxes_norm = batch_data.get("bboxes", torch.empty(0, 4))  # normalized xywh
+        gt_cls_all = batch_data.get("cls", torch.empty(0))
+        gt_batch_idx = batch_data.get("batch_idx", torch.empty(0))
+        if gt_cls_all.dim() == 2:
+            gt_cls_all = gt_cls_all.squeeze(-1)
+        # Convert GT from normalized xywh to pixel xyxy in augmented space
+        gt_bboxes_xyxy = ops.xywh2xyxy(gt_bboxes_norm.clone())
+        gt_bboxes_xyxy[:, [0, 2]] *= imgsz_w
+        gt_bboxes_xyxy[:, [1, 3]] *= imgsz_h
+        gt_bboxes_xyxy = gt_bboxes_xyxy.to(device)
+        gt_cls_all = gt_cls_all.to(device)
+        gt_batch_idx = gt_batch_idx.to(device)
+
         for b in range(imgs.shape[0]):
             dets = nms_preds[b] if b < len(nms_preds) else torch.empty(0, 6)
             if dets is None or len(dets) == 0:
@@ -203,6 +218,11 @@ def main():
             im_file = im_files[b] if b < len(im_files) else ""
             ori_shape = ori_shapes[b] if b < len(ori_shapes) else (imgsz_h, imgsz_w)
             rp = ratio_pads[b] if b < len(ratio_pads) else None
+
+            # GT boxes for this image
+            gt_mask = (gt_batch_idx == b)
+            gt_boxes_b = gt_bboxes_xyxy[gt_mask]
+            gt_cls_b = gt_cls_all[gt_mask].int()
 
             # Scale detections to original image space
             dets_orig = dets.clone()
@@ -216,6 +236,14 @@ def main():
                 conf = float(det[4].item())
 
                 if cls_id not in classes_in_buffer:
+                    continue
+
+                # Only keep detections that match a GT box of the same class (IoU >= 0.5)
+                same_cls = (gt_cls_b == cls_id)
+                if not same_cls.any():
+                    continue
+                ious = box_iou(det[:4].unsqueeze(0), gt_boxes_b[same_cls])
+                if ious.max() < 0.5:
                     continue
 
                 # Detection center in augmented pixel space
