@@ -1,0 +1,25 @@
+\begin{table}[t]
+\centering
+\caption{Size-stratified forgetting (RSD) on the Military-UAV dataset,
+following Eq.~4.1 applied per size category. RSD is computed over old
+classes only, relative to joint training. Size categories:
+Tiny ($< 16 \times 16$\,px), Small ($16$--$32$\,px),
+Medium+ ($> 32 \times 32$\,px).}
+\label{tab:military-size}
+\begin{tabular}{l ccc}
+\toprule
+Method & Tiny (\%) $\downarrow$ & Small (\%) $\downarrow$ & Medium+ (\%) $\downarrow$ \\
+\midrule
+  Naive fine-tuning          & 100.0 & 100.0 & 100.0 \\
+  Joint training (upper)     & 0.0 & 0.0 & 0.0 \\
+  \midrule
+  Exemplar Replay            & 65.5 & \textbf{50.4} & 74.9 \\
+  Pseudo-labeling            & \textbf{48.5} & 62.6 & 76.7 \\
+  Replay + KD                & 58.3 & 60.5 & \textbf{57.9} \\
+  SA-AB                      & 62.3 & 58.5 & 66.9 \\
+  \midrule
+  KD + Pseudo                & 64.5 & 63.6 & 74.9 \\
+  SA-AB + Pseudo             & 53.4 & 59.1 & 78.6 \\
+\bottomrule
+\end{tabular}
+\end{table}

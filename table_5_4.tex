@@ -1,0 +1,24 @@
+\begin{table}[t]
+\centering
+\caption{Continual learning performance on the Military-UAV dataset
+(individual datastreams). Only relative metrics are shown due to dataset
+restrictions. RSD and RPD follow Eq.~4.1; $\Omega_{\text{all}}$ aggregates
+all stages (perfect $= 3$).}
+\label{tab:military-overall}
+\begin{tabular}{l ccc}
+\toprule
+Method & RSD (\%) $\downarrow$ & RPD (\%) $\downarrow$ & $\Omega_{\text{all}}$ $\uparrow$ \\
+\midrule
+  Naive fine-tuning          & 100.0 & 55.0 & 1.52 \\
+  Joint training (upper)     & 0.0 & 0.0 & 3.00 \\
+  \midrule
+  Exemplar Replay            & 64.0 & \textbf{44.2} & 2.10 \\
+  Pseudo-labeling            & 58.0 & 52.8 & 2.19 \\
+  Replay + KD                & \textbf{48.9} & 49.8 & \textbf{2.22} \\
+  SA-AB                      & 60.0 & 49.4 & 2.11 \\
+  \midrule
+  KD + Pseudo                & 61.1 & 71.9 & 2.08 \\
+  SA-AB + Pseudo             & 60.1 & 59.2 & 2.15 \\
+\bottomrule
+\end{tabular}
+\end{table}

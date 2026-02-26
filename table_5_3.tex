@@ -1,0 +1,23 @@
+\begin{table}[t]
+\centering
+\caption{Size-stratified detection performance and forgetting on the DOTA dataset (shared datalake). mAP@0.5 reports final performance on all classes after Stage~3. RSD~(\%) measures the average relative deficit on old classes (small-vehicle, large-vehicle, plane, helicopter) compared to joint training per size category, following Eq.~4.1. Size categories: Tiny ($< 16 \times 16$\,px), Small ($16$--$32$\,px), Medium+ ($> 32 \times 32$\,px).}
+\label{tab:dota-size}
+\begin{tabular}{l cc cc cc}
+\toprule
+           & \multicolumn{2}{c}{Tiny} & \multicolumn{2}{c}{Small} & \multicolumn{2}{c}{Medium+} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+Method     & mAP & RSD & mAP & RSD & mAP & RSD \\
+\midrule
+Naive fine-tuning         & 0.06 & 100.0 & 0.07 & 100.0 & 0.01 & 100.0 \\
+Joint training (upper)    & 0.20 & 0.0 & 0.28 & 0.0 & 0.25 & 0.0 \\
+\midrule
+Exemplar Replay           & \textbf{0.20} & 28.1 & 0.13 & 73.3 & 0.03 & 93.5 \\
+Pseudo-labeling           & 0.19 & \textbf{26.1} & \textbf{0.27} & 30.8 & \textbf{0.21} & \textbf{25.3} \\
+Replay + KD               & 0.19 & 28.5 & 0.13 & 60.1 & 0.04 & 91.9 \\
+SA-AB                     & 0.19 & 31.6 & 0.12 & 77.2 & 0.04 & 93.3 \\
+\midrule
+KD + Pseudo               & 0.18 & 28.5 & 0.26 & \textbf{30.2} & 0.18 & 43.5 \\
+SA-AB + Pseudo            & 0.19 & 27.1 & 0.26 & 31.1 & 0.20 & 35.3 \\
+\bottomrule
+\end{tabular}
+\end{table}
