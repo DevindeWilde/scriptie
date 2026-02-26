@@ -1,0 +1,72 @@
+[
+  {
+    "epoch": null,
+    "timestamp": 1772089421.5099735,
+    "training": false,
+    "metrics": {
+      "person": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 307
+      },
+      "howitzer": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 178
+      },
+      "boxer": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 91
+      },
+      "fennek": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 84
+      },
+      "truck": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 22
+      },
+      "other": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.0,
+        "map": 0.0,
+        "num_targets": 312
+      },
+      "buffel": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "map50": 0.028533116480793062,
+        "map": 0.017852250760392024,
+        "num_targets": 3
+      },
+      "cv90": {
+        "precision": 0.7476435414827061,
+        "recall": 0.49,
+        "map50": 0.6197793752672226,
+        "map": 0.43970557164075236,
+        "num_targets": 100
+      },
+      "leopard": {
+        "precision": 0.45333084242925925,
+        "recall": 0.6219775733900186,
+        "map50": 0.507898977046299,
+        "map": 0.3221345086039221,
+        "num_targets": 68
+      }
+    }
+  }
+]

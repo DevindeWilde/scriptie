@@ -4,7 +4,7 @@ For each (class, FPN level, slot) prototype in a saved buffer, this script:
   1. Runs inference on the validation set with feature tapping
   2. Extracts pre-logit embeddings at each detection's grid cell
   3. Finds the val detection with highest cosine similarity to each prototype
-  4. Saves the original val image with the matched bbox drawn
+  4. Saves a cropped+resized patch around the matched bbox (thesis-ready)
 
 No augmentation issues — val uses only letterbox/resize, and bboxes are
 mapped back to original image space with ops.scale_boxes().
@@ -26,7 +26,7 @@ from types import SimpleNamespace
 
 import torch
 import torch.nn.functional as F
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
 from ednet import EDNet
 from ednet.engine.replay import DetectionPreLogitTapper
@@ -83,6 +83,7 @@ def main():
     parser.add_argument("--split", type=str, default="test", help="Dataset split to use")
     parser.add_argument("--batch", type=int, default=16, help="Batch size")
     parser.add_argument("--device", type=str, default="", help="Device (e.g. 'cuda:0' or 'cpu')")
+    parser.add_argument("--crop-size", type=int, default=224, help="Output crop resolution (square)")
     args = parser.parse_args()
 
     # --- Device ---
@@ -276,17 +277,52 @@ def main():
             print(f"  WARNING: image not found: {im_path}")
             continue
 
-        # Load original image and draw bbox
+        # Load original image and crop around matched bbox
         img = Image.open(im_path).convert("RGB")
-        draw = ImageDraw.Draw(img)
+        img_w, img_h = img.size
         x1, y1, x2, y2 = bbox
-        draw.rectangle([x1, y1, x2, y2], outline=(0, 255, 0), width=3)
+        bbox_w, bbox_h = x2 - x1, y2 - y1
+        cx_box, cy_box = (x1 + x2) / 2, (y1 + y2) / 2
+
+        # Context padding: 2× bbox size on each side, minimum 64px
+        pad = max(2 * max(bbox_w, bbox_h), 64)
+        crop_x1 = max(0, int(cx_box - pad))
+        crop_y1 = max(0, int(cy_box - pad))
+        crop_x2 = min(img_w, int(cx_box + pad))
+        crop_y2 = min(img_h, int(cy_box + pad))
+        crop = img.crop((crop_x1, crop_y1, crop_x2, crop_y2))
+
+        # Resize to consistent output resolution
+        cw, ch = crop.size
+        out_sz = args.crop_size
+        crop = crop.resize((out_sz, out_sz), Image.LANCZOS)
+        sx, sy = out_sz / cw, out_sz / ch
+
+        # Draw bbox in resized crop space (2px green outline)
+        bx1 = (x1 - crop_x1) * sx
+        by1 = (y1 - crop_y1) * sy
+        bx2 = (x2 - crop_x1) * sx
+        by2 = (y2 - crop_y1) * sy
+        draw = ImageDraw.Draw(crop)
+        draw.rectangle([bx1, by1, bx2, by2], outline=(0, 255, 0), width=2)
+
+        # Text overlay: sim + conf, top-left with dark background
+        try:
+            font = ImageFont.load_default(size=12)
+        except TypeError:
+            font = ImageFont.load_default()
+        text = f"sim={sim:.2f} conf={conf:.2f}"
+        tb = draw.textbbox((0, 0), text, font=font)
+        tw, th = tb[2] - tb[0], tb[3] - tb[1]
+        pad_t = 3
+        draw.rectangle([2, 2, 2 + tw + 2 * pad_t, 2 + th + 2 * pad_t], fill=(0, 0, 0))
+        draw.text((2 + pad_t, 2 + pad_t), text, fill=(255, 255, 255), font=font)
 
         # Save
         save_dir = outdir / cls_name / level
         save_dir.mkdir(parents=True, exist_ok=True)
         save_path = save_dir / f"slot{slot_idx}_{im_path.stem}_sim{sim:.3f}.png"
-        img.save(save_path)
+        crop.save(save_path)
         total += 1
 
     print("-" * 80)
