@@ -1,0 +1,724 @@
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_lower/stage1-lower/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage1.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/lower/stage1.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage1/test/images  (186 images, 2 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.470      0.264     5303
+all          large-vehicle           0.621      0.447     2349
+all          mAP (mean)              0.545      0.355     7652
+
+tiny         small-vehicle           0.246      0.127     4349
+tiny         large-vehicle           0.026      0.013      723
+tiny         mAP (mean)              0.136      0.070     5072
+
+small        small-vehicle           0.363      0.227      887
+small        large-vehicle           0.328      0.230      920
+small        mAP (mean)              0.345      0.228     1807
+
+medium+      small-vehicle           0.135      0.096       67
+medium+      large-vehicle           0.549      0.423      706
+medium+      mAP (mean)              0.342      0.259      773
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/lower/stage1.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_lower/stage2-lower/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/lower/stage2.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage2/test/images  (186 images, 4 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.000      0.000     5303
+all          large-vehicle           0.000      0.000     2349
+all          plane                   0.670      0.363     2098
+all          helicopter              0.001      0.000      197
+all          mAP (mean)              0.168      0.091     9947
+
+tiny         small-vehicle           0.000      0.000     4349
+tiny         large-vehicle           0.000      0.000      723
+tiny         plane                   0.266      0.120     1434
+tiny         helicopter              0.000      0.000      188
+tiny         mAP (mean)              0.067      0.030     6694
+
+small        small-vehicle           0.000      0.000      887
+small        large-vehicle           0.000      0.000      920
+small        plane                   0.322      0.192      410
+small        helicopter              0.007      0.003        3
+small        mAP (mean)              0.082      0.049     2220
+
+medium+      small-vehicle           0.000      0.000       67
+medium+      large-vehicle           0.000      0.000      706
+medium+      plane                   0.436      0.305      254
+medium+      helicopter              0.000      0.000        6
+medium+      mAP (mean)              0.109      0.076     1033
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/lower/stage2.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_lower/stage3-lower/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/lower/stage3.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage3/test/images  (186 images, 5 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.000      0.000     5303
+all          large-vehicle           0.000      0.000     2349
+all          plane                   0.000      0.000     2098
+all          helicopter              0.000      0.000      197
+all          ship                    0.532      0.257     4753
+all          mAP (mean)              0.106      0.051    14700
+
+tiny         small-vehicle           0.000      0.000     4349
+tiny         large-vehicle           0.000      0.000      723
+tiny         plane                   0.000      0.000     1434
+tiny         helicopter              0.000      0.000      188
+tiny         ship                    0.316      0.134     3744
+tiny         mAP (mean)              0.063      0.027    10438
+
+small        small-vehicle           0.000      0.000      887
+small        large-vehicle           0.000      0.000      920
+small        plane                   0.000      0.000      410
+small        helicopter              0.000      0.000        3
+small        ship                    0.349      0.199      884
+small        mAP (mean)              0.070      0.040     3104
+
+medium+      small-vehicle           0.000      0.000       67
+medium+      large-vehicle           0.000      0.000      706
+medium+      plane                   0.000      0.000      254
+medium+      helicopter              0.000      0.000        6
+medium+      ship                    0.060      0.041      125
+medium+      mAP (mean)              0.012      0.008     1158
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/lower/stage3.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_replay/stage1-replay/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage1.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/replay/stage1.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage1/test/images  (186 images, 2 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.470      0.264     5303
+all          large-vehicle           0.621      0.447     2349
+all          mAP (mean)              0.545      0.355     7652
+
+tiny         small-vehicle           0.246      0.127     4349
+tiny         large-vehicle           0.026      0.013      723
+tiny         mAP (mean)              0.136      0.070     5072
+
+small        small-vehicle           0.363      0.227      887
+small        large-vehicle           0.328      0.230      920
+small        mAP (mean)              0.345      0.228     1807
+
+medium+      small-vehicle           0.135      0.096       67
+medium+      large-vehicle           0.549      0.423      706
+medium+      mAP (mean)              0.342      0.259      773
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/replay/stage1.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_replay/stage2-replay/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/replay/stage2.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage2/test/images  (186 images, 4 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.328      0.158     5303
+all          large-vehicle           0.253      0.165     2349
+all          plane                   0.592      0.306     2098
+all          helicopter              0.001      0.001      197
+all          mAP (mean)              0.294      0.157     9947
+
+tiny         small-vehicle           0.265      0.120     4349
+tiny         large-vehicle           0.019      0.008      723
+tiny         plane                   0.209      0.087     1434
+tiny         helicopter              0.000      0.000      188
+tiny         mAP (mean)              0.123      0.054     6694
+
+small        small-vehicle           0.069      0.043      887
+small        large-vehicle           0.167      0.111      920
+small        plane                   0.305      0.178      410
+small        helicopter              0.001      0.001        3
+small        mAP (mean)              0.136      0.083     2220
+
+medium+      small-vehicle           0.002      0.001       67
+medium+      large-vehicle           0.101      0.070      706
+medium+      plane                   0.383      0.255      254
+medium+      helicopter              0.001      0.001        6
+medium+      mAP (mean)              0.122      0.081     1033
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/replay/stage2.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_replay/stage3-replay/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/replay/stage3.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage3/test/images  (186 images, 5 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.314      0.150     5303
+all          large-vehicle           0.180      0.121     2349
+all          plane                   0.499      0.193     2098
+all          helicopter              0.001      0.001      197
+all          ship                    0.513      0.253     4753
+all          mAP (mean)              0.302      0.143    14700
+
+tiny         small-vehicle           0.295      0.134     4349
+tiny         large-vehicle           0.016      0.007      723
+tiny         plane                   0.394      0.136     1434
+tiny         helicopter              0.000      0.000      188
+tiny         ship                    0.316      0.137     3744
+tiny         mAP (mean)              0.204      0.083    10438
+
+small        small-vehicle           0.043      0.027      887
+small        large-vehicle           0.132      0.091      920
+small        plane                   0.134      0.060      410
+small        helicopter              0.001      0.001        3
+small        ship                    0.321      0.190      884
+small        mAP (mean)              0.126      0.074     3104
+
+medium+      small-vehicle           0.002      0.001       67
+medium+      large-vehicle           0.060      0.044      706
+medium+      plane                   0.063      0.034      254
+medium+      helicopter              0.000      0.000        6
+medium+      ship                    0.038      0.023      125
+medium+      mAP (mean)              0.033      0.020     1158
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/replay/stage3.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_kd/stage1-kd/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage1.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/kd/stage1.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage1/test/images  (186 images, 2 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.470      0.264     5303
+all          large-vehicle           0.621      0.447     2349
+all          mAP (mean)              0.545      0.355     7652
+
+tiny         small-vehicle           0.246      0.127     4349
+tiny         large-vehicle           0.026      0.013      723
+tiny         mAP (mean)              0.136      0.070     5072
+
+small        small-vehicle           0.363      0.227      887
+small        large-vehicle           0.328      0.230      920
+small        mAP (mean)              0.345      0.228     1807
+
+medium+      small-vehicle           0.135      0.096       67
+medium+      large-vehicle           0.549      0.423      706
+medium+      mAP (mean)              0.342      0.259      773
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/kd/stage1.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_kd/stage2-kd/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/kd/stage2.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage2/test/images  (186 images, 4 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.347      0.176     5303
+all          large-vehicle           0.280      0.189     2349
+all          plane                   0.596      0.302     2098
+all          helicopter              0.003      0.001      197
+all          mAP (mean)              0.306      0.167     9947
+
+tiny         small-vehicle           0.260      0.122     4349
+tiny         large-vehicle           0.014      0.007      723
+tiny         plane                   0.206      0.085     1434
+tiny         helicopter              0.000      0.000      188
+tiny         mAP (mean)              0.120      0.053     6694
+
+small        small-vehicle           0.096      0.061      887
+small        large-vehicle           0.197      0.132      920
+small        plane                   0.338      0.191      410
+small        helicopter              0.001      0.000        3
+small        mAP (mean)              0.158      0.096     2220
+
+medium+      small-vehicle           0.004      0.003       67
+medium+      large-vehicle           0.116      0.083      706
+medium+      plane                   0.383      0.243      254
+medium+      helicopter              0.004      0.001        6
+medium+      mAP (mean)              0.127      0.082     1033
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/kd/stage2.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_kd/stage3-kd/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/kd/stage3.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage3/test/images  (186 images, 5 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.332      0.173     5303
+all          large-vehicle           0.203      0.131     2349
+all          plane                   0.557      0.259     2098
+all          helicopter              0.001      0.001      197
+all          ship                    0.477      0.218     4753
+all          mAP (mean)              0.314      0.156    14700
+
+tiny         small-vehicle           0.260      0.126     4349
+tiny         large-vehicle           0.019      0.008      723
+tiny         plane                   0.394      0.155     1434
+tiny         helicopter              0.000      0.000      188
+tiny         ship                    0.300      0.122     3744
+tiny         mAP (mean)              0.195      0.082    10438
+
+small        small-vehicle           0.080      0.052      887
+small        large-vehicle           0.154      0.100      920
+small        plane                   0.189      0.103      410
+small        helicopter              0.003      0.002        3
+small        ship                    0.234      0.127      884
+small        mAP (mean)              0.132      0.077     3104
+
+medium+      small-vehicle           0.001      0.001       67
+medium+      large-vehicle           0.061      0.045      706
+medium+      plane                   0.097      0.062      254
+medium+      helicopter              0.000      0.000        6
+medium+      ship                    0.037      0.024      125
+medium+      mAP (mean)              0.039      0.026     1158
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/kd/stage3.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_pseudo/stage1-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage1.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/pseudo/stage1.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage1/test/images  (186 images, 2 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.470      0.264     5303
+all          large-vehicle           0.621      0.447     2349
+all          mAP (mean)              0.545      0.355     7652
+
+tiny         small-vehicle           0.246      0.127     4349
+tiny         large-vehicle           0.026      0.013      723
+tiny         mAP (mean)              0.136      0.070     5072
+
+small        small-vehicle           0.363      0.227      887
+small        large-vehicle           0.328      0.230      920
+small        mAP (mean)              0.345      0.228     1807
+
+medium+      small-vehicle           0.135      0.096       67
+medium+      large-vehicle           0.549      0.423      706
+medium+      mAP (mean)              0.342      0.259      773
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/pseudo/stage1.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_pseudo/stage2-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/pseudo/stage2.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage2/test/images  (186 images, 4 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.505      0.290     5303
+all          large-vehicle           0.603      0.434     2349
+all          plane                   0.679      0.370     2098
+all          helicopter              0.002      0.001      197
+all          mAP (mean)              0.447      0.274     9947
+
+tiny         small-vehicle           0.271      0.144     4349
+tiny         large-vehicle           0.025      0.012      723
+tiny         plane                   0.278      0.129     1434
+tiny         helicopter              0.000      0.000      188
+tiny         mAP (mean)              0.143      0.071     6694
+
+small        small-vehicle           0.402      0.253      887
+small        large-vehicle           0.317      0.219      920
+small        plane                   0.329      0.194      410
+small        helicopter              0.003      0.001        3
+small        mAP (mean)              0.263      0.167     2220
+
+medium+      small-vehicle           0.145      0.098       67
+medium+      large-vehicle           0.531      0.414      706
+medium+      plane                   0.457      0.302      254
+medium+      helicopter              0.003      0.001        6
+medium+      mAP (mean)              0.284      0.204     1033
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/pseudo/stage2.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_pseudo/stage3-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/pseudo/stage3.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage3/test/images  (186 images, 5 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.513      0.296     5303
+all          large-vehicle           0.617      0.442     2349
+all          plane                   0.702      0.375     2098
+all          helicopter              0.000      0.000      197
+all          ship                    0.534      0.285     4753
+all          mAP (mean)              0.473      0.279    14700
+
+tiny         small-vehicle           0.293      0.160     4349
+tiny         large-vehicle           0.028      0.014      723
+tiny         plane                   0.299      0.140     1434
+tiny         helicopter              0.000      0.000      188
+tiny         ship                    0.318      0.150     3744
+tiny         mAP (mean)              0.188      0.093    10438
+
+small        small-vehicle           0.334      0.207      887
+small        large-vehicle           0.335      0.231      920
+small        plane                   0.293      0.172      410
+small        helicopter              0.000      0.000        3
+small        ship                    0.368      0.226      884
+small        mAP (mean)              0.266      0.167     3104
+
+medium+      small-vehicle           0.130      0.078       67
+medium+      large-vehicle           0.515      0.401      706
+medium+      plane                   0.355      0.235      254
+medium+      helicopter              0.000      0.000        6
+medium+      ship                    0.055      0.037      125
+medium+      mAP (mean)              0.211      0.150     1158
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/pseudo/stage3.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab/stage1-saab/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage1.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/saab/stage1.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage1/test/images  (186 images, 2 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.470      0.264     5303
+all          large-vehicle           0.621      0.447     2349
+all          mAP (mean)              0.545      0.355     7652
+
+tiny         small-vehicle           0.246      0.127     4349
+tiny         large-vehicle           0.026      0.013      723
+tiny         mAP (mean)              0.136      0.070     5072
+
+small        small-vehicle           0.363      0.227      887
+small        large-vehicle           0.328      0.230      920
+small        mAP (mean)              0.345      0.228     1807
+
+medium+      small-vehicle           0.135      0.096       67
+medium+      large-vehicle           0.549      0.423      706
+medium+      mAP (mean)              0.342      0.259      773
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/saab/stage1.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab/stage2-saab/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/saab/stage2.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage2/test/images  (186 images, 4 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.311      0.147     5303
+all          large-vehicle           0.302      0.198     2349
+all          plane                   0.571      0.265     2098
+all          helicopter              0.003      0.001      197
+all          mAP (mean)              0.297      0.153     9947
+
+tiny         small-vehicle           0.286      0.127     4349
+tiny         large-vehicle           0.016      0.006      723
+tiny         plane                   0.194      0.071     1434
+tiny         helicopter              0.000      0.000      188
+tiny         mAP (mean)              0.124      0.051     6694
+
+small        small-vehicle           0.038      0.025      887
+small        large-vehicle           0.193      0.131      920
+small        plane                   0.347      0.190      410
+small        helicopter              0.005      0.001        3
+small        mAP (mean)              0.146      0.087     2220
+
+medium+      small-vehicle           0.000      0.000       67
+medium+      large-vehicle           0.123      0.082      706
+medium+      plane                   0.342      0.191      254
+medium+      helicopter              0.011      0.002        6
+medium+      mAP (mean)              0.119      0.069     1033
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/saab/stage2.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab/stage3-saab/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/saab/stage3.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage3/test/images  (186 images, 5 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.239      0.121     5303
+all          large-vehicle           0.176      0.115     2349
+all          plane                   0.500      0.218     2098
+all          helicopter              0.001      0.000      197
+all          ship                    0.525      0.260     4753
+all          mAP (mean)              0.288      0.143    14700
+
+tiny         small-vehicle           0.208      0.099     4349
+tiny         large-vehicle           0.020      0.009      723
+tiny         plane                   0.395      0.148     1434
+tiny         helicopter              0.000      0.000      188
+tiny         ship                    0.326      0.144     3744
+tiny         mAP (mean)              0.190      0.080    10438
+
+small        small-vehicle           0.044      0.029      887
+small        large-vehicle           0.112      0.076      920
+small        plane                   0.120      0.066      410
+small        helicopter              0.001      0.000        3
+small        ship                    0.304      0.180      884
+small        mAP (mean)              0.116      0.070     3104
+
+medium+      small-vehicle           0.001      0.001       67
+medium+      large-vehicle           0.064      0.045      706
+medium+      plane                   0.066      0.040      254
+medium+      helicopter              0.000      0.000        6
+medium+      ship                    0.050      0.032      125
+medium+      mAP (mean)              0.036      0.024     1158
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/saab/stage3.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage1-saab-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage1.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/saab-pseudo/stage1.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage1/test/images  (186 images, 2 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.470      0.264     5303
+all          large-vehicle           0.621      0.447     2349
+all          mAP (mean)              0.545      0.355     7652
+
+tiny         small-vehicle           0.246      0.127     4349
+tiny         large-vehicle           0.026      0.013      723
+tiny         mAP (mean)              0.136      0.070     5072
+
+small        small-vehicle           0.363      0.227      887
+small        large-vehicle           0.328      0.230      920
+small        mAP (mean)              0.345      0.228     1807
+
+medium+      small-vehicle           0.135      0.096       67
+medium+      large-vehicle           0.549      0.423      706
+medium+      mAP (mean)              0.342      0.259      773
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/saab-pseudo/stage1.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage2-saab-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/saab-pseudo/stage2.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage2/test/images  (186 images, 4 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.519      0.299     5303
+all          large-vehicle           0.608      0.437     2349
+all          plane                   0.677      0.370     2098
+all          helicopter              0.002      0.001      197
+all          mAP (mean)              0.451      0.276     9947
+
+tiny         small-vehicle           0.280      0.150     4349
+tiny         large-vehicle           0.026      0.013      723
+tiny         plane                   0.280      0.132     1434
+tiny         helicopter              0.000      0.000      188
+tiny         mAP (mean)              0.146      0.074     6694
+
+small        small-vehicle           0.409      0.260      887
+small        large-vehicle           0.320      0.222      920
+small        plane                   0.308      0.182      410
+small        helicopter              0.004      0.002        3
+small        mAP (mean)              0.261      0.167     2220
+
+medium+      small-vehicle           0.077      0.051       67
+medium+      large-vehicle           0.540      0.418      706
+medium+      plane                   0.450      0.306      254
+medium+      helicopter              0.004      0.001        6
+medium+      mAP (mean)              0.268      0.194     1033
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/saab-pseudo/stage2.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab_pseudo/stage3-saab-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/saab-pseudo/stage3.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage3/test/images  (186 images, 5 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.514      0.293     5303
+all          large-vehicle           0.610      0.430     2349
+all          plane                   0.704      0.370     2098
+all          helicopter              0.000      0.000      197
+all          ship                    0.541      0.288     4753
+all          mAP (mean)              0.474      0.276    14700
+
+tiny         small-vehicle           0.302      0.161     4349
+tiny         large-vehicle           0.026      0.013      723
+tiny         plane                   0.297      0.136     1434
+tiny         helicopter              0.000      0.000      188
+tiny         ship                    0.324      0.152     3744
+tiny         mAP (mean)              0.190      0.092    10438
+
+small        small-vehicle           0.326      0.204      887
+small        large-vehicle           0.335      0.229      920
+small        plane                   0.296      0.171      410
+small        helicopter              0.000      0.000        3
+small        ship                    0.363      0.226      884
+small        mAP (mean)              0.264      0.166     3104
+
+medium+      small-vehicle           0.086      0.055       67
+medium+      large-vehicle           0.503      0.385      706
+medium+      plane                   0.382      0.252      254
+medium+      helicopter              0.000      0.000        6
+medium+      ship                    0.044      0.031      125
+medium+      mAP (mean)              0.203      0.145     1158
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/saab-pseudo/stage3.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage1-kd-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage1.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/kd-pseudo/stage1.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage1/test/images  (186 images, 2 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.470      0.264     5303
+all          large-vehicle           0.621      0.447     2349
+all          mAP (mean)              0.545      0.355     7652
+
+tiny         small-vehicle           0.246      0.127     4349
+tiny         large-vehicle           0.026      0.013      723
+tiny         mAP (mean)              0.136      0.070     5072
+
+small        small-vehicle           0.363      0.227      887
+small        large-vehicle           0.328      0.230      920
+small        mAP (mean)              0.345      0.228     1807
+
+medium+      small-vehicle           0.135      0.096       67
+medium+      large-vehicle           0.549      0.423      706
+medium+      mAP (mean)              0.342      0.259      773
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/kd-pseudo/stage1.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage2-kd-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/kd-pseudo/stage2.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage2/test/images  (186 images, 4 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.514      0.292     5303
+all          large-vehicle           0.597      0.427     2349
+all          plane                   0.656      0.355     2098
+all          helicopter              0.001      0.000      197
+all          mAP (mean)              0.442      0.269     9947
+
+tiny         small-vehicle           0.282      0.148     4349
+tiny         large-vehicle           0.025      0.012      723
+tiny         plane                   0.270      0.124     1434
+tiny         helicopter              0.000      0.000      188
+tiny         mAP (mean)              0.144      0.071     6694
+
+small        small-vehicle           0.406      0.255      887
+small        large-vehicle           0.328      0.227      920
+small        plane                   0.309      0.184      410
+small        helicopter              0.001      0.000        3
+small        mAP (mean)              0.261      0.167     2220
+
+medium+      small-vehicle           0.083      0.057       67
+medium+      large-vehicle           0.489      0.378      706
+medium+      plane                   0.495      0.324      254
+medium+      helicopter              0.001      0.000        6
+medium+      mAP (mean)              0.267      0.190     1033
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/kd-pseudo/stage2.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_kd_pseudo/stage3-kd-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/kd-pseudo/stage3.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage3/test/images  (186 images, 5 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.508      0.290     5303
+all          large-vehicle           0.605      0.434     2349
+all          plane                   0.684      0.368     2098
+all          helicopter              0.000      0.000      197
+all          ship                    0.536      0.282     4753
+all          mAP (mean)              0.467      0.275    14700
+
+tiny         small-vehicle           0.287      0.153     4349
+tiny         large-vehicle           0.027      0.014      723
+tiny         plane                   0.288      0.136     1434
+tiny         helicopter              0.000      0.000      188
+tiny         ship                    0.320      0.152     3744
+tiny         mAP (mean)              0.184      0.091    10438
+
+small        small-vehicle           0.363      0.226      887
+small        large-vehicle           0.329      0.229      920
+small        plane                   0.276      0.162      410
+small        helicopter              0.000      0.000        3
+small        ship                    0.356      0.213      884
+small        mAP (mean)              0.265      0.166     3104
+
+medium+      small-vehicle           0.071      0.044       67
+medium+      large-vehicle           0.476      0.369      706
+medium+      plane                   0.322      0.213      254
+medium+      helicopter              0.000      0.000        6
+medium+      ship                    0.042      0.026      125
+medium+      mAP (mean)              0.182      0.130     1158
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/kd-pseudo/stage3.json
+────────────────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_upper/upper/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-filtered.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/upper/final.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota-filtered-full/test/images  (186 images, 5 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.540      0.295     5303
+all          large-vehicle           0.661      0.497     2349
+all          plane                   0.701      0.389     2098
+all          helicopter              0.019      0.007      197
+all          ship                    0.575      0.316     4753
+all          mAP (mean)              0.499      0.301    14700
+
+tiny         small-vehicle           0.300      0.148     4349
+tiny         large-vehicle           0.029      0.015      723
+tiny         plane                   0.296      0.135     1434
+tiny         helicopter              0.009      0.003      188
+tiny         ship                    0.347      0.172     3744
+tiny         mAP (mean)              0.196      0.095    10438
+
+small        small-vehicle           0.328      0.211      887
+small        large-vehicle           0.374      0.272      920
+small        plane                   0.343      0.210      410
+small        helicopter              0.008      0.003        3
+small        ship                    0.357      0.218      884
+small        mAP (mean)              0.282      0.183     3104
+
+medium+      small-vehicle           0.101      0.071       67
+medium+      large-vehicle           0.518      0.421      706
+medium+      plane                   0.503      0.362      254
+medium+      helicopter              0.044      0.016        6
+medium+      ship                    0.106      0.080      125
+medium+      mAP (mean)              0.254      0.190     1158
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/upper/final.json
