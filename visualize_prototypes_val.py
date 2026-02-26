@@ -21,6 +21,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import heapq
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -150,9 +151,10 @@ def main():
                                  data=data_cfg, mode="val", stride=stride)
     dataloader = build_dataloader(dataset, batch=args.batch, workers=4, shuffle=False)
 
-    # --- Best matches per prototype slot ---
-    # (level, cls, slot) → {"sim": float, "im_file": str, "bbox_xyxy_orig": list, "ori_shape": tuple}
-    best: dict[tuple, dict] = {key: {"sim": -1.0} for key in protos}
+    # --- Candidate matches per prototype slot (top-K for uniqueness dedup) ---
+    MAX_CANDS = 8  # keep top-K per slot so greedy dedup has fallbacks
+    candidates: dict[tuple, list] = {key: [] for key in protos}
+    _counter = 0   # tiebreaker for heap ordering
 
     # Move prototype vectors to device
     proto_vecs = {k: v.to(device) for k, v in protos.items()}
@@ -240,18 +242,51 @@ def main():
                         if key not in proto_vecs:
                             continue
                         sim = float(torch.dot(embedding, proto_vecs[key]).item())
-                        if sim > best[key]["sim"]:
+                        cands = candidates[key]
+                        if len(cands) < MAX_CANDS or sim > cands[0][0]:
                             det_orig = dets_orig[det_idx]
-                            best[key] = {
-                                "sim": sim,
+                            entry = (sim, _counter, {
                                 "im_file": im_file,
+                                "det_idx": det_idx,
                                 "bbox_xyxy_orig": det_orig[:4].cpu().tolist(),
                                 "ori_shape": tuple(int(x) for x in ori_shape),
                                 "conf": conf,
-                            }
+                            })
+                            _counter += 1
+                            if len(cands) < MAX_CANDS:
+                                heapq.heappush(cands, entry)
+                            else:
+                                heapq.heapreplace(cands, entry)
 
         if (batch_i + 1) % 10 == 0:
             print(f"  Processed {batch_i + 1}/{len(dataloader)} batches")
+
+    # --- Greedy dedup: each detection assigned to at most one slot ---
+    all_cands = []
+    for key, heap in candidates.items():
+        for sim, _, match in heap:
+            all_cands.append((sim, key, match))
+    all_cands.sort(key=lambda x: x[0], reverse=True)  # highest sim first
+
+    best: dict[tuple, dict] = {}
+    used_dets: set[tuple] = set()
+    for sim, key, match in all_cands:
+        if key in best:
+            continue  # slot already assigned
+        det_id = (match["im_file"], match["det_idx"])
+        if det_id in used_dets:
+            continue  # detection already claimed by another slot
+        used_dets.add(det_id)
+        best[key] = {**match, "sim": sim}
+
+    # Fill unmatched slots
+    for key in protos:
+        if key not in best:
+            best[key] = {"sim": -1.0}
+
+    n_unique = len(used_dets)
+    n_slots = sum(1 for v in best.values() if v["sim"] >= 0)
+    print(f"\nAssigned {n_slots} slots to {n_unique} unique detections")
 
     # --- Save results ---
     outdir = Path(args.outdir)
