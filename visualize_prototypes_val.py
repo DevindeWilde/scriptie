@@ -27,7 +27,7 @@ from types import SimpleNamespace
 
 import torch
 import torch.nn.functional as F
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 
 from ednet import EDNet
 from ednet.engine.replay import DetectionPreLogitTapper
@@ -333,25 +333,13 @@ def main():
         crop = crop.resize((out_sz, out_sz), Image.LANCZOS)
         sx, sy = out_sz / cw, out_sz / ch
 
-        # Draw bbox in resized crop space (2px green outline)
+        # Draw bbox in resized crop space (green outline, no text)
         bx1 = (x1 - crop_x1) * sx
         by1 = (y1 - crop_y1) * sy
         bx2 = (x2 - crop_x1) * sx
         by2 = (y2 - crop_y1) * sy
         draw = ImageDraw.Draw(crop)
-        draw.rectangle([bx1, by1, bx2, by2], outline=(0, 255, 0), width=2)
-
-        # Text overlay: sim + conf, top-left with dark background
-        try:
-            font = ImageFont.load_default(size=12)
-        except TypeError:
-            font = ImageFont.load_default()
-        text = f"sim={sim:.2f} conf={conf:.2f}"
-        tb = draw.textbbox((0, 0), text, font=font)
-        tw, th = tb[2] - tb[0], tb[3] - tb[1]
-        pad_t = 3
-        draw.rectangle([2, 2, 2 + tw + 2 * pad_t, 2 + th + 2 * pad_t], fill=(0, 0, 0))
-        draw.text((2 + pad_t, 2 + pad_t), text, fill=(255, 255, 255), font=font)
+        draw.rectangle([bx1, by1, bx2, by2], outline=(0, 255, 0), width=3)
 
         # Save
         save_dir = outdir / cls_name / level
