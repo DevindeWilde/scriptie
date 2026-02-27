@@ -1,0 +1,138 @@
+──── val ──────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab_lw8/stage2-saab/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/saab-lw8/stage2
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,048 parameters, 0 gradients
+                   all        186       9947      0.175      0.378       0.29      0.157
+         small-vehicle         91       5303      0.252      0.423      0.295      0.141
+         large-vehicle         74       2349      0.262      0.417      0.254      0.168
+                 plane         42       2098      0.184      0.663      0.611       0.32
+            helicopter          6        197    0.00131     0.0102   0.000718   0.000524
+Speed: 0.4ms preprocess, 13.0ms inference, 0.0ms loss, 0.7ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/saab-lw8/stage2/val2[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/saab-lw8/stage2
+──── val ──────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab_lw8/stage3-saab/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/saab-lw8/stage3
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,568 parameters, 0 gradients
+                   all        186      14700      0.678      0.248      0.321      0.157
+         small-vehicle         91       5303      0.742      0.115      0.338      0.168
+         large-vehicle         74       2349      0.455      0.122      0.213       0.14
+                 plane         42       2098      0.618      0.496      0.549      0.244
+            helicopter          6        197          1          0   0.000956   0.000382
+                  ship         61       4753      0.575      0.507      0.502      0.233
+Speed: 0.4ms preprocess, 17.8ms inference, 0.0ms loss, 0.3ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/saab-lw8/stage3/val2[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/saab-lw8/stage3
+──── eval_by_size ────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab_lw8/stage3-saab/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/saab-lw8/stage3.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage3/test/images  (186 images, 5 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.335      0.165     5303
+all          large-vehicle           0.212      0.139     2349
+all          plane                   0.548      0.232     2098
+all          helicopter              0.001      0.000      197
+all          ship                    0.499      0.242     4753
+all          mAP (mean)              0.319      0.156    14700
+
+tiny         small-vehicle           0.277      0.128     4349
+tiny         large-vehicle           0.015      0.007      723
+tiny         plane                   0.415      0.157     1434
+tiny         helicopter              0.000      0.000      188
+tiny         ship                    0.301      0.131     3744
+tiny         mAP (mean)              0.202      0.085    10438
+
+small        small-vehicle           0.067      0.043      887
+small        large-vehicle           0.146      0.096      920
+small        plane                   0.162      0.076      410
+small        helicopter              0.003      0.001        3
+small        ship                    0.281      0.160      884
+small        mAP (mean)              0.132      0.075     3104
+
+medium+      small-vehicle           0.003      0.001       67
+medium+      large-vehicle           0.084      0.060      706
+medium+      plane                   0.067      0.039      254
+medium+      helicopter              0.000      0.000        6
+medium+      ship                    0.029      0.017      125
+medium+      mAP (mean)              0.037      0.024     1158
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/saab-lw8/stage3.json
+──── val ──────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/saab-pseudo-lw8/stage2
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,048 parameters, 0 gradients
+                   all        186       9947      0.809      0.404       0.45      0.277
+         small-vehicle         91       5303      0.817      0.367      0.515      0.292
+         large-vehicle         74       2349       0.65      0.638       0.61      0.435
+                 plane         42       2098      0.769       0.61      0.677      0.382
+            helicopter          6        197          1          0   0.000449    0.00018
+Speed: 0.4ms preprocess, 14.1ms inference, 0.0ms loss, 2.7ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/saab-pseudo-lw8/stage2/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/saab-pseudo-lw8/stage2
+──── val ──────────────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  outdir  : /home/ddwilde/scriptie/runs/val/saab-pseudo-lw8/stage3
+────────────────────────────────────────────────────────────────
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,568 parameters, 0 gradients
+                   all        186      14700      0.611      0.418      0.476      0.277
+         small-vehicle         91       5303       0.83      0.348      0.511      0.288
+         large-vehicle         74       2349      0.659      0.614      0.614      0.434
+                 plane         42       2098      0.795      0.617      0.706      0.378
+            helicopter          6        197          0          0          0          0
+                  ship         61       4753       0.77       0.51      0.552      0.287
+Speed: 0.4ms preprocess, 7.3ms inference, 0.0ms loss, 0.2ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/val/saab-pseudo-lw8/stage3/val[0m
+✅ Validation finished. Results saved to /home/ddwilde/scriptie/runs/val/saab-pseudo-lw8/stage3
+──── eval_by_size ────────────────────────────────────────────
+  weights : /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/weights/best.pt
+  data    : /home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml
+  out     : /home/ddwilde/scriptie/runs/val_by_size/saab-pseudo-lw8/stage3.json
+────────────────────────────────────────────────────────────────
+Dataset : /home/ddwilde/scriptie/datasets/dota_stages_shared/stage3/test/images  (186 images, 5 classes)
+
+Bucket       Class                    AP50    AP50-95     N_GT
+---------------------------------------------------------------
+all          small-vehicle           0.506      0.289     5303
+all          large-vehicle           0.615      0.436     2349
+all          plane                   0.702      0.366     2098
+all          helicopter              0.000      0.000      197
+all          ship                    0.551      0.294     4753
+all          mAP (mean)              0.475      0.277    14700
+
+tiny         small-vehicle           0.292      0.154     4349
+tiny         large-vehicle           0.026      0.013      723
+tiny         plane                   0.304      0.139     1434
+tiny         helicopter              0.000      0.000      188
+tiny         ship                    0.333      0.156     3744
+tiny         mAP (mean)              0.191      0.092    10438
+
+small        small-vehicle           0.344      0.216      887
+small        large-vehicle           0.313      0.215      920
+small        plane                   0.301      0.173      410
+small        helicopter              0.000      0.000        3
+small        ship                    0.346      0.216      884
+small        mAP (mean)              0.261      0.164     3104
+
+medium+      small-vehicle           0.119      0.080       67
+medium+      large-vehicle           0.567      0.428      706
+medium+      plane                   0.330      0.209      254
+medium+      helicopter              0.000      0.000        6
+medium+      ship                    0.063      0.044      125
+medium+      mAP (mean)              0.216      0.152     1158
+
+Saved to /home/ddwilde/scriptie/runs/val_by_size/saab-pseudo-lw8/stage3.json
