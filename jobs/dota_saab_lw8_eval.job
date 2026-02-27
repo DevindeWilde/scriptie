@@ -1,0 +1,95 @@
+#!/bin/bash
+#SBATCH --job-name=saab-lw8-eval
+#SBATCH --time=04:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=32G
+#SBATCH --partition=gpu_a100
+#SBATCH --gpus-per-node=1
+#SBATCH --gres=gpu:1
+#SBATCH --output=logs/saab-lw8-eval-%j.out
+#SBATCH --error=logs/saab-lw8-eval-%j.err
+
+module purge
+module load 2023
+module load CUDA/12.4.0
+module load Python/3.11.3-GCCcore-12.3.0
+
+source $HOME/ednet_env/bin/activate
+cd $HOME/scriptie
+
+RUNS=$HOME/scriptie/runs
+YAML=$HOME/scriptie/yaml
+VALDIR=$RUNS/val
+SIZEDIR=$RUNS/val_by_size
+
+run_val() {
+    local weights=$1
+    local data=$2
+    local outdir=$3
+    echo "──── val ──────────────────────────────────────────────────────"
+    echo "  weights : $weights"
+    echo "  data    : $data"
+    echo "  outdir  : $outdir"
+    echo "────────────────────────────────────────────────────────────────"
+    python val.py \
+        --weights "$weights" \
+        --data "$data" \
+        --imgsz 640 \
+        --split test \
+        --outdir "$outdir"
+}
+
+run_eval() {
+    local weights=$1
+    local data=$2
+    local out=$3
+    echo "──── eval_by_size ────────────────────────────────────────────"
+    echo "  weights : $weights"
+    echo "  data    : $data"
+    echo "  out     : $out"
+    echo "────────────────────────────────────────────────────────────────"
+    python scripts/eval_by_size.py \
+        --weights "$weights" \
+        --data "$data" \
+        --split test \
+        --imgsz 640 \
+        --out "$out"
+}
+
+# ══════════════════════════════════════════════════════════════════════════
+# SA-AB λ=8.0 (replay annotations)
+# ══════════════════════════════════════════════════════════════════════════
+
+# -- val (stage 2+3 already done via dota_saab_lw_val.job, but include for completeness) --
+run_val $RUNS/dota_saab_lw8/stage2-saab/weights/best.pt \
+        $YAML/DOTA-shared-stage2.yaml \
+        $VALDIR/saab-lw8/stage2
+
+run_val $RUNS/dota_saab_lw8/stage3-saab/weights/best.pt \
+        $YAML/DOTA-shared-stage3.yaml \
+        $VALDIR/saab-lw8/stage3
+
+# -- eval_by_size (stage 1 shared with original saab, stage 3 is new) --
+run_eval $RUNS/dota_saab_lw8/stage3-saab/weights/best.pt \
+         $YAML/DOTA-shared-stage3.yaml \
+         $SIZEDIR/saab-lw8/stage3.json
+
+# ══════════════════════════════════════════════════════════════════════════
+# SA-AB + Pseudo λ=8.0
+# ══════════════════════════════════════════════════════════════════════════
+
+# -- val --
+run_val $RUNS/dota_saab_pseudo_lw8/stage2-saab-pseudo/weights/best.pt \
+        $YAML/DOTA-shared-stage2.yaml \
+        $VALDIR/saab-pseudo-lw8/stage2
+
+run_val $RUNS/dota_saab_pseudo_lw8/stage3-saab-pseudo/weights/best.pt \
+        $YAML/DOTA-shared-stage3.yaml \
+        $VALDIR/saab-pseudo-lw8/stage3
+
+# -- eval_by_size --
+run_eval $RUNS/dota_saab_pseudo_lw8/stage3-saab-pseudo/weights/best.pt \
+         $YAML/DOTA-shared-stage3.yaml \
+         $SIZEDIR/saab-pseudo-lw8/stage3.json
