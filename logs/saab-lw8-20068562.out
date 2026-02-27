@@ -849,3 +849,25 @@ Saved 18083 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_lw8/s
 Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_lw8/stage3-saab/replay/box_buffer_sources.json
 
       Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.254      0.484       0.39      0.208
+Saved 18269 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_lw8/stage3-saab/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 18122 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_lw8/stage3-saab/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_lw8/stage3-saab/replay/box_buffer_sources.json
+
+50 epochs completed in 0.918 hours.
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_saab_lw8/stage3-saab/weights/last.pt, 19.1MB
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_saab_lw8/stage3-saab/weights/best.pt, 19.1MB
+
+Validating /home/ddwilde/scriptie/runs/dota_saab_lw8/stage3-saab/weights/best.pt...
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,568 parameters, 0 gradients
+                   all        186      15849      0.719      0.331      0.429      0.232
+         small-vehicle         89       5547       0.72      0.234      0.425      0.201
+         large-vehicle         73       2810      0.803      0.285      0.499      0.313
+                 plane         45       1720      0.534      0.615      0.596      0.304
+            helicopter          5         32          1          0      0.111     0.0839
+                  ship         65       5740      0.538       0.52      0.516      0.259
+Speed: 0.1ms preprocess, 5.6ms inference, 0.0ms loss, 0.1ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/dota_saab_lw8/stage3-saab[0m
+Training finished. Results saved in: /home/ddwilde/scriptie/runs/dota_saab_lw8/stage3-saab

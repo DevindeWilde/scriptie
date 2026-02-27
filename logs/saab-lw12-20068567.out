@@ -862,3 +862,12 @@ Optimizer stripped from /home/ddwilde/scriptie/runs/dota_saab_lw12/stage3-saab/w
 Validating /home/ddwilde/scriptie/runs/dota_saab_lw12/stage3-saab/weights/best.pt...
 EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
 ednet-s summary (fused): 394 layers, 9,296,568 parameters, 0 gradients
+                   all        186      15849      0.322      0.458       0.41      0.229
+         small-vehicle         89       5547      0.411      0.372      0.363       0.18
+         large-vehicle         73       2810       0.45      0.508      0.451      0.297
+                 plane         45       1720      0.465      0.575      0.557      0.322
+            helicopter          5         32     0.0192      0.281      0.135      0.061
+                  ship         65       5740      0.264      0.555      0.547      0.283
+Speed: 0.1ms preprocess, 4.8ms inference, 0.0ms loss, 0.1ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/dota_saab_lw12/stage3-saab[0m
+Training finished. Results saved in: /home/ddwilde/scriptie/runs/dota_saab_lw12/stage3-saab

@@ -1,0 +1,893 @@
+Found 863 images in /home/ddwilde/scriptie/datasets/dota_stages_shared/stage2/train/images
+Loading model from /home/ddwilde/scriptie/runs/dota_saab/stage1-saab/weights/best.pt ...
+Generating pseudo-labels | prev_classes=[0, 1] | conf=0.5 | conflict_iou=0.5
+
+Done.
+  Kept pseudo-detections : 16098
+  Dropped (low conf)     : 0
+  Dropped (GT conflict)  : 2
+  Output directory       : /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/pseudo_labels/stage2
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+[34m[1mengine/trainer: [0mtask=detect, mode=train, model=/home/ddwilde/scriptie/runs/dota_saab/stage1-saab/weights/best.pt, data=/home/ddwilde/scriptie/yaml/DOTA-shared-stage2.yaml, epochs=50, time=None, patience=100, batch=4, imgsz=640, save=True, save_period=-1, cache=False, device=None, workers=8, project=/home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8, name=stage2-saab-pseudo, exist_ok=False, pretrained=True, optimizer=auto, verbose=True, seed=0, deterministic=True, single_cls=False, rect=False, cos_lr=False, close_mosaic=10, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, continual={'enable': False, 'batches': [], 'adapter_strategy': 'last', 'save_history': True}, replay={'enable': True, 'buffer_per_class': 128, 'sample_per_batch': 32, 'loss_weight': 8.0, 'tiny_max_pixels': 320, 'prototypes': {'num_fine': 4}, 'init_buffer': '/home/ddwilde/scriptie/runs/dota_saab/stage1-saab/replay/buffer.pt', 'box': {'enable': True, 'loss_weight': 8.0, 'init_buffer': '/home/ddwilde/scriptie/runs/dota_saab/stage1-saab/replay/box_buffer.pt'}, 'student_update_freq': 10}, kd={'enable': False, 'lambda_cls': 1.0, 'lambda_bbox': 1.0, 'top_k': 10, 'teacher_weights': None, 'teacher_nc': None, 'debug_batches': 10}, stage={'active_classes': [2, 3], 'prev_classes': [0, 1], 'pseudo_labels_dir': '/home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/pseudo_labels/stage2'}, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=None, iou=0.7, max_det=300, half=False, dnn=False, plots=True, per_class_tb_interval=1, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.0, copy_paste=0.0, auto_augment=randaugment, erasing=0.4, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=/home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo
+Overriding model.yaml nc=2 with nc=4
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       928  ednet.nn.modules.conv.Conv                   [3, 32, 3, 2]                 
+  1                  -1  1     18560  ednet.nn.modules.conv.Conv                   [32, 64, 3, 2]                
+  2                  -1  1     29056  ednet.nn.modules.block.C2f                   [64, 64, 1, True]             
+  3                  -1  1     73984  ednet.nn.modules.conv.Conv                   [64, 128, 3, 2]               
+  4                  -1  2    197632  ednet.nn.modules.block.C2f                   [128, 128, 2, True]           
+  5                  -1  1    295424  ednet.nn.modules.conv.Conv                   [128, 256, 3, 2]              
+  6                  -1  2    420864  ednet.nn.modules.block.C2f_FCA               [256, 256, 2, True]           
+  7                  -1  1   1180672  ednet.nn.modules.conv.Conv                   [256, 512, 3, 2]              
+  8                  -1  1   1095680  ednet.nn.modules.block.C2f_FCA               [512, 512, 1, True]           
+  9                  -1  1    656896  ednet.nn.modules.block.SPPF                  [512, 512, 5]                 
+ 10                  -1  1    990976  ednet.nn.modules.block.PSA                   [512, 512]                    
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12             [-1, 6]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 13                  -1  1    591360  ednet.nn.modules.block.C2f                   [768, 256, 1]                 
+ 14                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 15             [-1, 4]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 16                  -1  1    148224  ednet.nn.modules.block.C2f                   [384, 128, 1]                 
+ 17                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 18             [-1, 2]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 19                  -1  1     37248  ednet.nn.modules.block.C2f                   [192, 64, 1]                  
+ 20                  -1  1     36992  ednet.nn.modules.conv.Conv                   [64, 64, 3, 2]                
+ 21            [-1, 16]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 22                  -1  1    123648  ednet.nn.modules.block.C2f                   [192, 128, 1]                 
+ 23                  -1  1    147712  ednet.nn.modules.conv.Conv                   [128, 128, 3, 2]              
+ 24            [-1, 13]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 25                  -1  1    493056  ednet.nn.modules.block.C2f                   [384, 256, 1]                 
+ 26                  -1  1     68864  ednet.nn.modules.block.SCDown                [256, 256, 3, 2]              
+ 27             [-1, 9]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 28                  -1  1   1089536  ednet.nn.modules.block.C2fCIB                [768, 512, 1, True, True]     
+ 29    [19, 22, 25, 28]  1   1622704  ednet.nn.modules.head.v10Detect              [4, [64, 128, 256, 512]]      
+ednet-s summary: 510 layers, 9,320,016 parameters, 9,320,000 gradients
+
+Active classes for this stage: (2, 3)
+Replay/previous classes for this stage: (0, 1)
+Pseudo-labels active: extended active_classes → (0, 1, 2, 3)
+Transferred 737/753 items from pretrained weights
+Replay feature tapper initialized for detection head levels: ['P2', 'P3', 'P4']
+Loaded 3397 replay embeddings from /home/ddwilde/scriptie/runs/dota_saab/stage1-saab/replay/buffer.pt
+Box replay feature tapper initialized (cv2) for levels: ['P2', 'P3', 'P4']
+Loaded 3612 box replay embeddings from /home/ddwilde/scriptie/runs/dota_saab/stage1-saab/replay/box_buffer.pt
+Box prototype replay enabled | loss_weight=8.00
+[34m[1mTensorBoard: [0mStart with 'tensorboard --logdir /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo', view at http://localhost:6006/
+Freezing layer 'model.29.dfl.conv.weight'
+[34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks with YOLOv8n...
+[34m[1mAMP: [0mchecks passed ✅
+[34m[1mtrain: [0mNew cache created: /gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage2/train/labels.cache
+Plotting labels to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/labels.jpg... 
+[34m[1moptimizer:[0m 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+[34m[1moptimizer:[0m AdamW(lr=0.00125, momentum=0.9) with parameter groups 117 weight(decay=0.0), 145 weight(decay=0.0005), 139 bias(decay=0.0)
+Trainable params: 401 tensors (9320000 weights). Top trainable=[('model.7.conv.weight', 1179648), ('model.9.cv2.conv.weight', 524288), ('model.8.cv2.conv.weight', 393216), ('model.28.cv1.conv.weight', 393216), ('model.28.cv2.conv.weight', 393216), ('model.5.conv.weight', 294912), ('model.29.cv2.3.0.conv.weight', 294912), ('model.29.one2one_cv2.3.0.conv.weight', 294912), ('model.8.cv1.conv.weight', 262144), ('model.10.cv1.conv.weight', 262144), ('model.10.cv2.conv.weight', 262144), ('model.13.cv1.conv.weight', 196608), ('model.13.m.0.cv1.conv.weight', 147456), ('model.13.m.0.cv2.conv.weight', 147456), ('model.23.conv.weight', 147456), ('model.25.m.0.cv1.conv.weight', 147456), ('model.25.m.0.cv2.conv.weight', 147456), ('model.29.cv2.2.0.conv.weight', 147456), ('model.29.one2one_cv2.2.0.conv.weight', 147456), ('model.6.cv2.conv.weight', 131072)]
+Limiting positives to classes (0, 1, 2, 3)
+Replay targets limited to previous classes (0, 1)
+Limiting positives to classes (0, 1, 2, 3)
+Replay targets limited to previous classes (0, 1)
+[34m[1mTensorBoard: [0mmodel graph visualization added ✅
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to [1m/home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo[0m
+Starting training for 50 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+Limiting positives to classes (0, 1, 2, 3)
+Replay targets limited to previous classes (0, 1)
+Limiting positives to classes (0, 1, 2, 3)
+Replay targets limited to previous classes (0, 1)
+Replay tap config not set; GT-driven replay skipped for this batch.
+Replay tap config not set; GT-driven replay skipped for this batch.
+                   all        186      10109      0.782      0.258      0.247      0.142
+Saved 7542 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 7866 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.624      0.327      0.323      0.189
+Saved 8009 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 8317 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.652      0.356      0.367      0.197
+Saved 8390 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 8670 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.664      0.337      0.338      0.193
+Saved 8744 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9076 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.465      0.401      0.396      0.227
+Saved 8963 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9240 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.738       0.41      0.425      0.238
+Saved 9115 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9393 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.749      0.408      0.431      0.245
+Saved 9220 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9451 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.779      0.445      0.479      0.265
+Saved 9381 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9579 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.795       0.43       0.47      0.272
+Saved 9504 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9680 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.818      0.417      0.486      0.283
+Saved 9578 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9594 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.794      0.448      0.498      0.289
+Saved 9661 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9735 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.813      0.454      0.499       0.29
+Saved 9704 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9748 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.818      0.459      0.507      0.287
+Saved 9719 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9755 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.824      0.468      0.516      0.297
+Saved 9777 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9809 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.824      0.439      0.499      0.298
+Saved 9840 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9876 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.839      0.463      0.514      0.295
+Saved 9870 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9773 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.831      0.466      0.521      0.301
+Saved 9770 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9930 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.828       0.47      0.513      0.303
+Saved 9804 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9943 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.841      0.474      0.522      0.311
+Saved 9807 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9947 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.838      0.452      0.516      0.304
+Saved 9817 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9958 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.847      0.477      0.529      0.316
+Saved 9731 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9971 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.838      0.468      0.533      0.314
+Saved 9758 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9981 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.824      0.467      0.518      0.308
+Saved 9808 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9998 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.844      0.472      0.528      0.318
+Saved 9883 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 10035 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109       0.84      0.477      0.531      0.315
+Saved 9636 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9787 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.848       0.47      0.531      0.314
+Saved 9641 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9795 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.621      0.501      0.535      0.319
+Saved 9660 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9813 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109       0.86      0.482       0.54      0.321
+Saved 9666 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9824 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.846      0.478      0.528      0.316
+Saved 9801 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9863 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.861       0.48      0.542       0.32
+Saved 9823 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9892 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.851      0.484       0.54      0.323
+Saved 9852 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9897 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.859      0.479      0.562       0.33
+Saved 9919 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9901 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109       0.58      0.535      0.551       0.33
+Saved 9941 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9901 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.834      0.498      0.556      0.338
+Saved 9948 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9904 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.858      0.482      0.555      0.337
+Saved 9949 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9904 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.868      0.482      0.556      0.338
+Saved 9953 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9908 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.869      0.486      0.567      0.345
+Saved 9962 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9783 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.616      0.508      0.546      0.328
+Saved 9974 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9792 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.859      0.493       0.55      0.334
+Saved 9990 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9797 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.759      0.516      0.559      0.335
+Saved 10000 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9811 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+Closing dataloader mosaic
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.687      0.499      0.557       0.34
+Saved 10006 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9815 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.752      0.511      0.558      0.342
+Saved 10006 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9815 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.791      0.517      0.564      0.351
+Saved 10006 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9815 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109       0.77      0.493      0.565       0.34
+Saved 10007 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9815 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.858      0.481      0.564      0.348
+Saved 10013 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9815 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.824      0.505      0.567      0.351
+Saved 10015 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9815 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.863      0.483      0.559      0.343
+Saved 10027 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9820 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109       0.61      0.531      0.564      0.349
+Saved 10041 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9822 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109      0.636      0.539       0.57      0.353
+Saved 10047 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9828 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      10109       0.68      0.535      0.565      0.351
+Saved 10047 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 9828 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer_sources.json
+
+50 epochs completed in 0.904 hours.
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/weights/last.pt, 19.1MB
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/weights/best.pt, 19.1MB
+
+Validating /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/weights/best.pt...
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,048 parameters, 0 gradients
+                   all        186      10109      0.635      0.539       0.57      0.353
+         small-vehicle         89       5547      0.714      0.526      0.585      0.323
+         large-vehicle         73       2810      0.777       0.77      0.806      0.562
+                 plane         45       1720      0.676      0.785      0.796      0.466
+            helicopter          5         32      0.373     0.0756     0.0949     0.0597
+Speed: 0.2ms preprocess, 6.2ms inference, 0.0ms loss, 0.1ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo[0m
+Training finished. Results saved in: /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo
+Found 863 images in /home/ddwilde/scriptie/datasets/dota_stages_shared/stage3/train/images
+Loading model from /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/weights/best.pt ...
+Generating pseudo-labels | prev_classes=[0, 1, 2, 3] | conf=0.5 | conflict_iou=0.5
+
+Done.
+  Kept pseudo-detections : 19228
+  Dropped (low conf)     : 0
+  Dropped (GT conflict)  : 3
+  Output directory       : /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/pseudo_labels/stage3
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+[34m[1mengine/trainer: [0mtask=detect, mode=train, model=/home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/weights/best.pt, data=/home/ddwilde/scriptie/yaml/DOTA-shared-stage3.yaml, epochs=50, time=None, patience=100, batch=4, imgsz=640, save=True, save_period=-1, cache=False, device=None, workers=8, project=/home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8, name=stage3-saab-pseudo, exist_ok=False, pretrained=True, optimizer=auto, verbose=True, seed=0, deterministic=True, single_cls=False, rect=False, cos_lr=False, close_mosaic=10, resume=False, amp=True, fraction=1.0, profile=False, freeze=None, multi_scale=False, continual={'enable': False, 'batches': [], 'adapter_strategy': 'last', 'save_history': True}, replay={'enable': True, 'buffer_per_class': 128, 'sample_per_batch': 32, 'loss_weight': 8.0, 'tiny_max_pixels': 320, 'prototypes': {'num_fine': 4}, 'init_buffer': '/home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt', 'box': {'enable': True, 'loss_weight': 8.0, 'init_buffer': '/home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt'}, 'student_update_freq': 10}, kd={'enable': False, 'lambda_cls': 1.0, 'lambda_bbox': 1.0, 'top_k': 10, 'teacher_weights': None, 'teacher_nc': None, 'debug_batches': 10}, stage={'active_classes': [4], 'prev_classes': [0, 1, 2, 3], 'pseudo_labels_dir': '/home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/pseudo_labels/stage3'}, overlap_mask=True, mask_ratio=4, dropout=0.0, val=True, split=val, save_json=False, save_hybrid=False, conf=None, iou=0.7, max_det=300, half=False, dnn=False, plots=True, per_class_tb_interval=1, source=None, vid_stride=1, stream_buffer=False, visualize=False, augment=False, agnostic_nms=False, classes=None, retina_masks=False, embed=None, show=False, save_frames=False, save_txt=False, save_conf=False, save_crop=False, show_labels=True, show_conf=True, show_boxes=True, line_width=None, format=torchscript, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=None, workspace=4, nms=False, lr0=0.01, lrf=0.01, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=7.5, cls=0.5, dfl=1.5, pose=12.0, kobj=1.0, label_smoothing=0.0, nbs=64, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, bgr=0.0, mosaic=1.0, mixup=0.0, copy_paste=0.0, auto_augment=randaugment, erasing=0.4, crop_fraction=1.0, cfg=None, tracker=botsort.yaml, save_dir=/home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo
+Overriding model.yaml nc=4 with nc=5
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       928  ednet.nn.modules.conv.Conv                   [3, 32, 3, 2]                 
+  1                  -1  1     18560  ednet.nn.modules.conv.Conv                   [32, 64, 3, 2]                
+  2                  -1  1     29056  ednet.nn.modules.block.C2f                   [64, 64, 1, True]             
+  3                  -1  1     73984  ednet.nn.modules.conv.Conv                   [64, 128, 3, 2]               
+  4                  -1  2    197632  ednet.nn.modules.block.C2f                   [128, 128, 2, True]           
+  5                  -1  1    295424  ednet.nn.modules.conv.Conv                   [128, 256, 3, 2]              
+  6                  -1  2    420864  ednet.nn.modules.block.C2f_FCA               [256, 256, 2, True]           
+  7                  -1  1   1180672  ednet.nn.modules.conv.Conv                   [256, 512, 3, 2]              
+  8                  -1  1   1095680  ednet.nn.modules.block.C2f_FCA               [512, 512, 1, True]           
+  9                  -1  1    656896  ednet.nn.modules.block.SPPF                  [512, 512, 5]                 
+ 10                  -1  1    990976  ednet.nn.modules.block.PSA                   [512, 512]                    
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12             [-1, 6]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 13                  -1  1    591360  ednet.nn.modules.block.C2f                   [768, 256, 1]                 
+ 14                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 15             [-1, 4]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 16                  -1  1    148224  ednet.nn.modules.block.C2f                   [384, 128, 1]                 
+ 17                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 18             [-1, 2]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 19                  -1  1     37248  ednet.nn.modules.block.C2f                   [192, 64, 1]                  
+ 20                  -1  1     36992  ednet.nn.modules.conv.Conv                   [64, 64, 3, 2]                
+ 21            [-1, 16]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 22                  -1  1    123648  ednet.nn.modules.block.C2f                   [192, 128, 1]                 
+ 23                  -1  1    147712  ednet.nn.modules.conv.Conv                   [128, 128, 3, 2]              
+ 24            [-1, 13]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 25                  -1  1    493056  ednet.nn.modules.block.C2f                   [384, 256, 1]                 
+ 26                  -1  1     68864  ednet.nn.modules.block.SCDown                [256, 256, 3, 2]              
+ 27             [-1, 9]  1         0  ednet.nn.modules.conv.Concat                 [1]                           
+ 28                  -1  1   1089536  ednet.nn.modules.block.C2fCIB                [768, 512, 1, True, True]     
+ 29    [19, 22, 25, 28]  1   1623224  ednet.nn.modules.head.v10Detect              [5, [64, 128, 256, 512]]      
+ednet-s summary: 510 layers, 9,320,536 parameters, 9,320,520 gradients
+
+Active classes for this stage: (4,)
+Replay/previous classes for this stage: (0, 1, 2, 3)
+Pseudo-labels active: extended active_classes → (0, 1, 2, 3, 4)
+Transferred 737/753 items from pretrained weights
+Replay feature tapper initialized for detection head levels: ['P2', 'P3', 'P4']
+Loaded 10047 replay embeddings from /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/buffer.pt
+Box replay feature tapper initialized (cv2) for levels: ['P2', 'P3', 'P4']
+Loaded 9828 box replay embeddings from /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage2-saab-pseudo/replay/box_buffer.pt
+Box prototype replay enabled | loss_weight=8.00
+[34m[1mTensorBoard: [0mStart with 'tensorboard --logdir /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo', view at http://localhost:6006/
+Freezing layer 'model.29.dfl.conv.weight'
+[34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks with YOLOv8n...
+[34m[1mAMP: [0mchecks passed ✅
+[34m[1mtrain: [0mNew cache created: /gpfs/home6/ddwilde/scriptie/datasets/dota_stages_shared/stage3/train/labels.cache
+Plotting labels to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/labels.jpg... 
+[34m[1moptimizer:[0m 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+[34m[1moptimizer:[0m AdamW(lr=0.001111, momentum=0.9) with parameter groups 117 weight(decay=0.0), 145 weight(decay=0.0005), 139 bias(decay=0.0)
+Trainable params: 401 tensors (9320520 weights). Top trainable=[('model.7.conv.weight', 1179648), ('model.9.cv2.conv.weight', 524288), ('model.8.cv2.conv.weight', 393216), ('model.28.cv1.conv.weight', 393216), ('model.28.cv2.conv.weight', 393216), ('model.5.conv.weight', 294912), ('model.29.cv2.3.0.conv.weight', 294912), ('model.29.one2one_cv2.3.0.conv.weight', 294912), ('model.8.cv1.conv.weight', 262144), ('model.10.cv1.conv.weight', 262144), ('model.10.cv2.conv.weight', 262144), ('model.13.cv1.conv.weight', 196608), ('model.13.m.0.cv1.conv.weight', 147456), ('model.13.m.0.cv2.conv.weight', 147456), ('model.23.conv.weight', 147456), ('model.25.m.0.cv1.conv.weight', 147456), ('model.25.m.0.cv2.conv.weight', 147456), ('model.29.cv2.2.0.conv.weight', 147456), ('model.29.one2one_cv2.2.0.conv.weight', 147456), ('model.6.cv2.conv.weight', 131072)]
+Limiting positives to classes (0, 1, 2, 3, 4)
+Replay targets limited to previous classes (0, 1, 2, 3)
+Limiting positives to classes (0, 1, 2, 3, 4)
+Replay targets limited to previous classes (0, 1, 2, 3)
+[34m[1mTensorBoard: [0mmodel graph visualization added ✅
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to [1m/home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo[0m
+Starting training for 50 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+Limiting positives to classes (0, 1, 2, 3, 4)
+Replay targets limited to previous classes (0, 1, 2, 3)
+Limiting positives to classes (0, 1, 2, 3, 4)
+Replay targets limited to previous classes (0, 1, 2, 3)
+Replay tap config not set; GT-driven replay skipped for this batch.
+Replay tap config not set; GT-driven replay skipped for this batch.
+                   all        186      15849      0.595      0.273      0.324      0.192
+Saved 14896 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 14993 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.742      0.413      0.444      0.241
+Saved 15499 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 15412 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.532      0.416      0.441      0.247
+Saved 15944 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 15828 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.575      0.438       0.47      0.268
+Saved 16170 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 15922 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.577      0.431      0.468      0.267
+Saved 16426 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16237 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.586      0.442      0.492      0.282
+Saved 16552 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16362 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.588      0.441       0.48      0.272
+Saved 16668 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16453 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.614      0.452      0.506      0.291
+Saved 16633 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16564 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.625      0.453      0.508      0.281
+Saved 16634 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16745 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.616      0.471      0.518      0.297
+Saved 16713 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16569 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849       0.62      0.461       0.51      0.292
+Saved 16769 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16861 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.633      0.463      0.519      0.299
+Saved 16823 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16911 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.618      0.476       0.52      0.295
+Saved 16771 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16981 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.627      0.457      0.514      0.285
+Saved 17076 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16987 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.641      0.469      0.529      0.304
+Saved 17106 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 17019 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.619      0.471      0.517      0.291
+Saved 16891 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 17107 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.619      0.462      0.517      0.292
+Saved 16905 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 17139 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.627      0.472      0.524      0.307
+Saved 16789 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16806 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.621      0.474      0.522        0.3
+Saved 16821 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16822 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.639      0.481      0.533      0.307
+Saved 16874 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16831 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.646       0.47      0.531      0.308
+Saved 16920 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16852 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.627      0.467      0.528      0.302
+Saved 16961 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16919 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.639      0.465       0.53      0.308
+Saved 17033 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16945 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.642      0.476      0.536      0.318
+Saved 17102 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16946 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.628      0.474      0.525      0.304
+Saved 17155 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16949 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.642      0.469      0.527      0.303
+Saved 17227 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16951 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.641      0.469      0.529        0.3
+Saved 17271 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16960 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.638      0.466      0.524      0.305
+Saved 17286 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16850 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.644      0.477      0.534      0.309
+Saved 17174 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16851 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.641      0.472      0.532      0.308
+Saved 17210 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16856 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.634       0.48      0.534      0.314
+Saved 17290 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16861 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.639       0.47       0.53      0.303
+Saved 17358 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16950 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.647      0.473      0.534      0.302
+Saved 17364 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16855 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.653      0.477      0.543       0.32
+Saved 17398 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16855 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849       0.65      0.478      0.539      0.316
+Saved 17400 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16857 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.655      0.481      0.546       0.32
+Saved 17400 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16857 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.647      0.479      0.538      0.315
+Saved 17402 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16862 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.646      0.481      0.541      0.317
+Saved 17403 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16862 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.658      0.479      0.542       0.32
+Saved 17022 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16864 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.637      0.477      0.535       0.31
+Saved 17163 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16905 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+Closing dataloader mosaic
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.648      0.469      0.533      0.316
+Saved 17182 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16992 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.653      0.479      0.543      0.321
+Saved 17199 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16992 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.654      0.477      0.544      0.325
+Saved 17314 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16992 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.654      0.476      0.544      0.324
+Saved 17384 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16994 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849       0.66      0.477      0.545      0.326
+Saved 17405 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16994 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.644      0.478       0.54      0.319
+Saved 17405 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16995 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.652      0.475      0.542      0.322
+Saved 17279 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16869 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849       0.65      0.478      0.543       0.32
+Saved 17285 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 16872 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849      0.647      0.477      0.543      0.324
+Saved 17285 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 17057 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+                   all        186      15849       0.66      0.471      0.542      0.322
+Saved 17289 replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/buffer.pt
+Failed to save fine prototype sources: Object of type Tensor is not JSON serializable
+Saved 17088 box replay embeddings to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer.pt
+Saved fine prototype sources to /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/replay/box_buffer_sources.json
+
+50 epochs completed in 1.088 hours.
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/weights/last.pt, 19.1MB
+Optimizer stripped from /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/weights/best.pt, 19.1MB
+
+Validating /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo/weights/best.pt...
+EDNet 1.0 ✅ Python-3.10.4 ✅ torch-2.8.0+cu128 ✅CUDA:0 (NVIDIA A100-SXM4-40GB, 40441MiB)
+ednet-s summary (fused): 394 layers, 9,296,568 parameters, 0 gradients
+                   all        186      15849       0.66      0.477      0.546      0.326
+         small-vehicle         89       5547       0.82      0.432      0.582      0.326
+         large-vehicle         73       2810      0.859      0.728        0.8      0.549
+                 plane         45       1720      0.843      0.725      0.791      0.457
+            helicopter          5         32          0          0          0          0
+                  ship         65       5740      0.779        0.5      0.555      0.296
+Speed: 0.2ms preprocess, 2.2ms inference, 0.0ms loss, 0.1ms postprocess per image
+Results saved to [1m/home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo[0m
+Training finished. Results saved in: /home/ddwilde/scriptie/runs/dota_saab_pseudo_lw8/stage3-saab-pseudo
